@@ -1,0 +1,26 @@
+openapi: 3.1.0
+info:
+  title: BarberHub API
+  version: 0.1.0
+  description: >-
+    Contrato entre o frontend e o backend do BarberHub. Endpoints e schemas
+    devem ser acordados aqui antes da implementação.
+servers:
+  - url: /api/v1
+    description: Prefixo versionado da API
+paths: {}
+components:
+  parameters:
+    TenantSubdomain:
+      name: X-Tenant-Subdomain
+      in: header
+      required: true
+      description: Subdomínio usado para resolver o tenant em rotas públicas.
+      schema:
+        type: string
+        minLength: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
