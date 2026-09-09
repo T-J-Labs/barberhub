@@ -24,7 +24,7 @@ export function PublicMobileMenu({ isOpen, navigation, onClose }: PublicMobileMe
       <nav
         id="public-navigation"
         aria-label="Navegação principal"
-        className={`${ isOpen ? "flex" : "hidden" } fixed inset-y-0 left-0 z-50 h-dvh w-[85%] max-w-sm flex-col bg-[#0D1722] p-4 lg:hidden`}
+        className={`${ isOpen ? "flex" : "hidden" } fixed inset-y-0 left-0 z-50 h-dvh w-[85%] max-w-sm flex-col bg-[#07111C] p-4 lg:hidden`}
       >
        <div className="mb-8 flex items-center justify-between">
          <HeaderBrand />
@@ -32,7 +32,7 @@ export function PublicMobileMenu({ isOpen, navigation, onClose }: PublicMobileMe
          <button
            type="button"
            aria-label="Fechar menu"
-           className="text-white"
+           className="inline-grid size-11 place-items-center rounded-md text-white"
            onClick={onClose}
          >
           <FiX size={24}/>
@@ -42,7 +42,11 @@ export function PublicMobileMenu({ isOpen, navigation, onClose }: PublicMobileMe
        <ul className="flex min-h-0 flex-1 flex-col gap-4 font-medium text-white">
          {navigation.map((item) => (
            <li key={item.href}>
-             <Link href={item.href} onClick={onClose}>
+             <Link
+               href={item.href}
+               className="flex min-h-11 items-center rounded-md px-2"
+               onClick={onClose}
+             >
                {item.label}
              </Link>
            </li>
@@ -52,7 +56,7 @@ export function PublicMobileMenu({ isOpen, navigation, onClose }: PublicMobileMe
        <div className="mt-auto flex flex-col gap-3 border-t border-slate-600 pt-6">
          <Link
            href="/login"
-           className="rounded-md bg-sky-500 px-4 py-3 text-center font-semibold text-white"
+           className="flex min-h-11 items-center justify-center rounded-md bg-sky-500 px-4 py-3 text-center font-semibold text-white"
            onClick={onClose}
          >
            Entrar
@@ -60,7 +64,7 @@ export function PublicMobileMenu({ isOpen, navigation, onClose }: PublicMobileMe
 
          <Link
            href="/register"
-           className="rounded-md bg-sky-500 px-4 py-3 text-center font-semibold text-white"
+           className="flex min-h-11 items-center justify-center rounded-md bg-sky-500 px-4 py-3 text-center font-semibold text-white"
            onClick={onClose}
          >
            Registrar
