@@ -1,0 +1,241 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="5520" viewBox="0 0 390 5520" fill="none">
+  <title>BarberHub — landing page pública — mobile</title>
+  <desc>Mockup mobile-first vetorial e editável da landing page pública do BarberHub.</desc>
+  <defs>
+    <style>
+      .font { font-family: Geist, Inter, Arial, sans-serif; }
+      .eyebrow { font-family: Geist, Inter, Arial, sans-serif; font-size: 11px; font-weight: 650; letter-spacing: 1.2px; }
+      .h1 { font-family: Geist, Inter, Arial, sans-serif; font-size: 38px; font-weight: 720; letter-spacing: -1.5px; }
+      .h2 { font-family: Geist, Inter, Arial, sans-serif; font-size: 29px; font-weight: 700; letter-spacing: -0.9px; }
+      .h3 { font-family: Geist, Inter, Arial, sans-serif; font-size: 18px; font-weight: 650; }
+      .body { font-family: Geist, Inter, Arial, sans-serif; font-size: 16px; font-weight: 400; }
+      .small { font-family: Geist, Inter, Arial, sans-serif; font-size: 13px; font-weight: 400; }
+      .micro { font-family: Geist, Inter, Arial, sans-serif; font-size: 10px; font-weight: 500; }
+      .button { font-family: Geist, Inter, Arial, sans-serif; font-size: 15px; font-weight: 650; }
+    </style>
+  </defs>
+
+  <rect width="390" height="5520" fill="#07111C"/>
+
+  <g id="header" data-name="Header público fechado">
+    <rect width="390" height="68" fill="#07111C"/>
+    <line y1="67.5" x2="390" y2="67.5" stroke="#334155" stroke-opacity="0.55"/>
+    <g id="header-menu-button" data-name="Abrir menu — área 44x44">
+      <rect x="8" y="12" width="44" height="44" rx="8" fill="#07111C"/>
+      <path d="M18 27H42M18 34H42M18 41H42" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g id="header-brand" data-name="BARBERHUB">
+      <text x="132" y="43" class="font" font-size="24" font-weight="700" letter-spacing="1.2" fill="white">BARBER<tspan fill="#0EA5E9">HUB</tspan></text>
+    </g>
+  </g>
+
+  <g id="inicio" data-name="Início">
+    <rect y="68" width="390" height="772" fill="#07111C"/>
+    <circle cx="330" cy="150" r="60" fill="#0EA5E9" fill-opacity="0.045"/>
+    <rect x="24" y="104" width="202" height="30" rx="15" fill="#0EA5E9" fill-opacity="0.12" stroke="#0EA5E9" stroke-opacity="0.55"/>
+    <circle cx="41" cy="119" r="4" fill="#38BDF8"/>
+    <text x="54" y="123" class="eyebrow" fill="#7DD3FC">GESTÃO PARA BARBEARIAS</text>
+    <text x="24" y="194" class="h1" fill="white">Organize sua</text>
+    <text x="24" y="239" class="h1" fill="white">barbearia e receba</text>
+    <text x="24" y="284" class="h1" fill="#38BDF8">agendamentos</text>
+    <text x="24" y="329" class="h1" fill="#38BDF8">online.</text>
+    <text x="24" y="373" class="body" fill="#B6C2D1">Divulgue seus serviços, organize sua equipe</text>
+    <text x="24" y="397" class="body" fill="#B6C2D1">e acompanhe os horários em um só lugar.</text>
+    <g id="inicio-acao-registrar" data-name="Registrar — /register">
+      <rect x="24" y="435" width="342" height="52" rx="10" fill="#0EA5E9"/>
+      <text x="195" y="467" text-anchor="middle" class="button" fill="white">Registrar</text>
+    </g>
+    <g id="inicio-acao-como-funciona" data-name="Como funciona — #como-funciona">
+      <rect x="24" y="499" width="342" height="48" rx="10" stroke="#64748B"/>
+      <text x="195" y="529" text-anchor="middle" class="button" fill="#E2E8F0">Como funciona</text>
+    </g>
+    <g id="inicio-painel-exemplo" data-name="Exemplo de visualização do painel">
+      <rect x="24" y="585" width="342" height="230" rx="18" fill="#0D1722" stroke="#334155"/>
+      <rect x="24" y="585" width="342" height="38" rx="18" fill="#172535"/>
+      <path d="M24 605H366V623H24V605Z" fill="#172535"/>
+      <circle cx="44" cy="604" r="4" fill="#64748B"/><circle cx="58" cy="604" r="4" fill="#64748B"/><circle cx="72" cy="604" r="4" fill="#64748B"/>
+      <text x="344" y="608" text-anchor="end" class="micro" fill="#94A3B8">EXEMPLO DE VISUALIZAÇÃO</text>
+      <text x="44" y="653" class="eyebrow" fill="#94A3B8">RESUMO DA OPERAÇÃO</text>
+      <rect x="44" y="671" width="136" height="68" rx="10" fill="#172535"/>
+      <text x="58" y="693" class="micro" fill="#AAB8C8">Horários hoje</text><text x="58" y="724" class="font" font-size="24" font-weight="700" fill="white">8</text>
+      <rect x="190" y="671" width="156" height="68" rx="10" fill="#0EA5E9"/>
+      <text x="204" y="693" class="micro" fill="#E0F2FE">Ocupação ilustrativa</text><text x="204" y="724" class="font" font-size="24" font-weight="700" fill="white">68%</text>
+      <rect x="44" y="751" width="302" height="48" rx="9" fill="#172535"/>
+      <circle cx="63" cy="775" r="9" fill="#0EA5E9" fill-opacity="0.55"/>
+      <text x="81" y="771" class="micro" fill="white">Corte tradicional</text><text x="81" y="786" class="micro" fill="#94A3B8">Cliente exemplo • 09:30</text>
+      <text x="346" y="830" text-anchor="end" class="micro" fill="#8291A5">Dados demonstrativos</text>
+    </g>
+  </g>
+
+  <g id="para-quem" data-name="Para quem é o BarberHub">
+    <rect y="840" width="390" height="260" fill="#0A1521"/>
+    <text x="24" y="896" class="eyebrow" fill="#38BDF8">PARA QUEM É O BARBERHUB</text>
+    <g id="para-quem-itens" class="font" font-size="15" font-weight="600" fill="#E2E8F0">
+      <rect x="24" y="922" width="342" height="48" rx="10" fill="#0D1722" stroke="#26384A"/><circle cx="47" cy="946" r="6" fill="#0EA5E9"/><text x="64" y="951">Barbearias de bairro</text>
+      <rect x="24" y="980" width="342" height="48" rx="10" fill="#0D1722" stroke="#26384A"/><circle cx="47" cy="1004" r="6" fill="#0EA5E9"/><text x="64" y="1009">Profissionais independentes</text>
+      <rect x="24" y="1038" width="342" height="48" rx="10" fill="#0D1722" stroke="#26384A"/><circle cx="47" cy="1062" r="6" fill="#0EA5E9"/><text x="64" y="1067">Barbearias com pequenas equipes</text>
+    </g>
+  </g>
+
+  <g id="produto" data-name="Produto">
+    <rect y="1100" width="390" height="740" fill="#07111C"/>
+    <text x="24" y="1160" class="eyebrow" fill="#38BDF8">PRODUTO</text>
+    <text x="24" y="1202" class="h2" fill="white">Administração em</text>
+    <text x="24" y="1238" class="h2" fill="white">um único lugar.</text>
+    <text x="24" y="1274" class="body" fill="#AAB8C8">Equipe, agenda e experiência do cliente</text>
+    <text x="24" y="1298" class="body" fill="#AAB8C8">reunidas em uma plataforma simples.</text>
+    <g id="produto-composicao-interface" data-name="Composição conceitual do produto">
+      <rect x="24" y="1338" width="342" height="378" rx="18" fill="#0D1722" stroke="#334155"/>
+      <rect x="44" y="1358" width="302" height="48" rx="10" fill="#172535"/>
+      <text x="58" y="1388" class="font" font-size="14" font-weight="700" fill="white">BARBER<tspan fill="#0EA5E9">HUB</tspan></text>
+      <text x="332" y="1388" text-anchor="end" class="micro" fill="#94A3B8">CONCEITUAL</text>
+      <rect x="44" y="1420" width="302" height="168" rx="10" fill="#111D2A"/>
+      <text x="58" y="1446" class="eyebrow" fill="#94A3B8">AGENDA DA EQUIPE</text>
+      <line x1="104" y1="1476" x2="328" y2="1476" stroke="#334155"/><line x1="104" y1="1518" x2="328" y2="1518" stroke="#334155"/><line x1="104" y1="1560" x2="328" y2="1560" stroke="#334155"/>
+      <text x="60" y="1481" class="micro" fill="#94A3B8">09:00</text><text x="60" y="1523" class="micro" fill="#94A3B8">10:00</text><text x="60" y="1565" class="micro" fill="#94A3B8">11:00</text>
+      <rect x="116" y="1485" width="94" height="58" rx="7" fill="#075985"/><text x="128" y="1508" class="micro" fill="white">Corte • Equipe A</text><text x="128" y="1526" class="micro" fill="#BAE6FD">09:15–10:00</text>
+      <rect x="220" y="1527" width="96" height="46" rx="7" fill="#0EA5E9"/><text x="232" y="1555" class="micro" fill="white">Barba • Equipe B</text>
+      <rect x="44" y="1602" width="144" height="92" rx="10" fill="#172535"/>
+      <text x="58" y="1628" class="eyebrow" fill="#94A3B8">SERVIÇOS</text><text x="58" y="1658" class="small" fill="white">Corte tradicional</text><text x="58" y="1678" class="small" fill="white">Barba completa</text>
+      <rect x="202" y="1602" width="144" height="92" rx="10" fill="#172535"/>
+      <text x="216" y="1628" class="eyebrow" fill="#94A3B8">EQUIPE</text><circle cx="225" cy="1653" r="7" fill="#0EA5E9"/><text x="240" y="1658" class="small" fill="white">Profissional A</text><circle cx="225" cy="1676" r="7" fill="#38BDF8" fill-opacity="0.6"/><text x="240" y="1681" class="small" fill="white">Profissional B</text>
+    </g>
+    <g id="produto-resumo">
+      <rect x="24" y="1734" width="342" height="74" rx="12" fill="#0D1722" stroke="#26384A"/>
+      <text x="44" y="1763" class="h3" font-size="16" fill="white">Simples para proprietário e cliente</text>
+      <text x="44" y="1788" class="small" fill="#94A3B8">Visão conceitual do produto em desenvolvimento.</text>
+    </g>
+  </g>
+
+  <g id="servicos" data-name="Serviços">
+    <rect y="1840" width="390" height="870" fill="#0A1521"/>
+    <text x="24" y="1900" class="eyebrow" fill="#38BDF8">SERVIÇOS</text>
+    <text x="24" y="1942" class="h2" fill="white">Funcionalidades</text>
+    <text x="24" y="1978" class="h2" fill="white">planejadas para o MVP</text>
+    <text x="24" y="2012" class="small" fill="#94A3B8">Escopo em desenvolvimento, não recursos concluídos.</text>
+    <g id="servico-pagina-institucional">
+      <rect x="24" y="2044" width="342" height="154" rx="14" fill="#0D1722" stroke="#26384A"/>
+      <rect x="44" y="2064" width="40" height="40" rx="10" fill="#0EA5E9" fill-opacity="0.16"/><circle cx="64" cy="2084" r="10" stroke="#38BDF8" stroke-width="1.6"/><path d="M54 2084H74M64 2074C68 2079 68 2089 64 2094M64 2074C60 2079 60 2089 64 2094" stroke="#38BDF8"/>
+      <text x="98" y="2080" class="h3" fill="white">Página institucional</text>
+      <text x="98" y="2103" class="h3" fill="white">da barbearia</text>
+      <text x="44" y="2138" class="small" fill="#94A3B8">Marca, informações e contato em uma página.</text>
+      <text x="44" y="2172" class="eyebrow" fill="#7DD3FC">PLANEJADO MVP</text>
+    </g>
+    <g id="servico-catalogo">
+      <rect x="24" y="2210" width="342" height="154" rx="14" fill="#0D1722" stroke="#26384A"/>
+      <rect x="44" y="2230" width="40" height="40" rx="10" fill="#0EA5E9" fill-opacity="0.16"/><path d="M54 2240H74V2260H54V2240ZM59 2246H69M59 2252H69" stroke="#38BDF8" stroke-width="1.6"/>
+      <text x="98" y="2246" class="h3" fill="white">Catálogo de serviços</text>
+      <text x="98" y="2269" class="h3" fill="white">e profissionais</text>
+      <text x="44" y="2304" class="small" fill="#94A3B8">O que é oferecido e quem realiza o atendimento.</text>
+      <text x="44" y="2338" class="eyebrow" fill="#7DD3FC">PLANEJADO MVP</text>
+    </g>
+    <g id="servico-agenda">
+      <rect x="24" y="2376" width="342" height="154" rx="14" fill="#0D1722" stroke="#26384A"/>
+      <rect x="44" y="2396" width="40" height="40" rx="10" fill="#0EA5E9" fill-opacity="0.16"/><path d="M54 2408H74V2428H54V2408ZM54 2414H74M59 2404V2411M69 2404V2411" stroke="#38BDF8" stroke-width="1.6"/>
+      <text x="98" y="2420" class="h3" fill="white">Agenda e disponibilidade</text>
+      <text x="44" y="2466" class="small" fill="#94A3B8">Jornadas, folgas, bloqueios e horários livres.</text>
+      <text x="44" y="2500" class="eyebrow" fill="#7DD3FC">PLANEJADO MVP</text>
+    </g>
+    <g id="servico-atendimentos">
+      <rect x="24" y="2542" width="342" height="154" rx="14" fill="#0D1722" stroke="#26384A"/>
+      <rect x="44" y="2562" width="40" height="40" rx="10" fill="#0EA5E9" fill-opacity="0.16"/><path d="M54 2573H74V2588H64L59 2593V2588H54V2573Z" stroke="#38BDF8" stroke-width="1.6"/>
+      <text x="98" y="2578" class="h3" fill="white">Atendimentos, faltas</text>
+      <text x="98" y="2601" class="h3" fill="white">e WhatsApp</text>
+      <text x="44" y="2636" class="small" fill="#94A3B8">Acompanhamento e compartilhamento manual.</text>
+      <text x="44" y="2670" class="eyebrow" fill="#7DD3FC">PLANEJADO MVP</text>
+    </g>
+  </g>
+
+  <g id="como-funciona" data-name="Como funciona">
+    <rect y="2710" width="390" height="660" fill="#07111C"/>
+    <text x="24" y="2770" class="eyebrow" fill="#38BDF8">COMO FUNCIONA</text>
+    <text x="24" y="2812" class="h2" fill="white">Da configuração ao</text>
+    <text x="24" y="2848" class="h2" fill="white">agendamento.</text>
+    <g id="como-funciona-passos">
+      <circle cx="48" cy="2915" r="24" fill="#0EA5E9"/><text x="48" y="2921" text-anchor="middle" class="button" fill="white">1</text><text x="88" y="2908" class="h3" fill="white">Registre e configure</text><text x="88" y="2931" class="h3" fill="white">sua barbearia.</text><line x1="48" y1="2939" x2="48" y2="2986" stroke="#334155" stroke-dasharray="4 5"/>
+      <circle cx="48" cy="3010" r="24" fill="#172535" stroke="#0EA5E9"/><text x="48" y="3016" text-anchor="middle" class="button" fill="#38BDF8">2</text><text x="88" y="3003" class="h3" fill="white">Cadastre serviços,</text><text x="88" y="3026" class="h3" fill="white">equipe e horários.</text><line x1="48" y1="3034" x2="48" y2="3081" stroke="#334155" stroke-dasharray="4 5"/>
+      <circle cx="48" cy="3105" r="24" fill="#172535" stroke="#0EA5E9"/><text x="48" y="3111" text-anchor="middle" class="button" fill="#38BDF8">3</text><text x="88" y="3098" class="h3" fill="white">Compartilhe sua página</text><text x="88" y="3121" class="h3" fill="white">e receba agendamentos.</text>
+    </g>
+    <g id="fluxo-conceitual-cliente">
+      <rect x="24" y="3170" width="342" height="154" rx="14" fill="#0D1722" stroke="#26384A"/>
+      <text x="44" y="3202" class="eyebrow" fill="#94A3B8">FLUXO CONCEITUAL DO CLIENTE</text>
+      <text x="44" y="3240" class="small" font-weight="600" fill="white">Serviço → profissional → data</text>
+      <text x="44" y="3270" class="small" font-weight="600" fill="white">→ horário → autenticação → confirmação</text>
+      <text x="44" y="3302" class="micro" fill="#8291A5">Sem detalhes técnicos ou integração de API.</text>
+    </g>
+  </g>
+
+  <g id="diferenciais" data-name="Diferenciais">
+    <rect y="3370" width="390" height="530" fill="#0A1521"/>
+    <text x="24" y="3430" class="eyebrow" fill="#38BDF8">DIFERENCIAIS</text>
+    <text x="24" y="3472" class="h2" fill="white">Benefícios para a rotina.</text>
+    <g id="diferenciais-lista" class="font" font-size="15" font-weight="600" fill="#E2E8F0">
+      <rect x="24" y="3510" width="342" height="58" rx="10" fill="#0D1722" stroke="#26384A"/><text x="44" y="3546" fill="#38BDF8">01</text><text x="82" y="3546">Otimizado para celulares</text>
+      <rect x="24" y="3578" width="342" height="58" rx="10" fill="#0D1722" stroke="#26384A"/><text x="44" y="3614" fill="#38BDF8">02</text><text x="82" y="3614">Página própria para cada barbearia</text>
+      <rect x="24" y="3646" width="342" height="58" rx="10" fill="#0D1722" stroke="#26384A"/><text x="44" y="3682" fill="#38BDF8">03</text><text x="82" y="3682">Sem conflito de horários</text>
+      <rect x="24" y="3714" width="342" height="58" rx="10" fill="#0D1722" stroke="#26384A"/><text x="44" y="3750" fill="#38BDF8">04</text><text x="82" y="3750">Organização de jornadas e folgas</text>
+      <rect x="24" y="3782" width="342" height="58" rx="10" fill="#0D1722" stroke="#26384A"/><text x="44" y="3818" fill="#38BDF8">05</text><text x="82" y="3818">Compartilhamento pelo WhatsApp</text>
+    </g>
+  </g>
+
+  <g id="planos" data-name="Planos">
+    <rect y="3900" width="390" height="350" fill="#07111C"/>
+      <rect x="24" y="3950" width="342" height="276" rx="18" fill="#0D1722" stroke="#0EA5E9" stroke-opacity="0.55"/>
+    <text x="48" y="3998" class="eyebrow" fill="#38BDF8">PLANOS</text>
+    <text x="48" y="4034" class="h2" fill="white">Planos pensados para</text>
+    <text x="48" y="4070" class="h2" fill="white">acompanhar o</text>
+    <text x="48" y="4106" class="h2" fill="white">crescimento da sua</text>
+    <text x="48" y="4142" class="h2" fill="white">barbearia.</text>
+    <text x="48" y="4172" class="micro" fill="#94A3B8">Detalhes comerciais ainda estão em definição.</text>
+    <rect x="48" y="4188" width="294" height="48" rx="10" fill="#0EA5E9"/>
+    <text x="195" y="4218" text-anchor="middle" class="button" fill="white">Conhecer os planos</text>
+  </g>
+
+  <g id="contato" data-name="Contato">
+    <rect y="4250" width="390" height="570" fill="#0A1521"/>
+    <text x="24" y="4310" class="eyebrow" fill="#38BDF8">CONTATO</text>
+    <text x="24" y="4352" class="h2" fill="white">Fale sobre o produto.</text>
+    <text x="24" y="4386" class="small" fill="#AAB8C8">Canais conceituais, sem formulário ou API.</text>
+    <g id="contato-email">
+      <rect x="24" y="4420" width="342" height="108" rx="13" fill="#0D1722" stroke="#26384A"/>
+      <text x="44" y="4452" class="eyebrow" fill="#38BDF8">E-MAIL</text><text x="44" y="4482" class="h3" font-size="16" fill="white">Conversar por e-mail</text><text x="44" y="4508" class="small" fill="#94A3B8">Canal em definição — sem endereço publicado.</text>
+    </g>
+    <g id="contato-whatsapp">
+      <rect x="24" y="4542" width="342" height="108" rx="13" fill="#0D1722" stroke="#26384A"/>
+      <text x="44" y="4574" class="eyebrow" fill="#38BDF8">WHATSAPP</text><text x="44" y="4604" class="h3" font-size="16" fill="white">Falar pelo WhatsApp</text><text x="44" y="4630" class="small" fill="#94A3B8">Canal em definição — sem número publicado.</text>
+    </g>
+    <g id="contato-faq">
+      <rect x="24" y="4664" width="342" height="108" rx="13" fill="#0D1722" stroke="#26384A"/>
+      <text x="44" y="4696" class="eyebrow" fill="#38BDF8">AJUDA</text><text x="44" y="4726" class="h3" font-size="16" fill="white">Perguntas frequentes</text><text x="44" y="4752" class="small" fill="#94A3B8">Ver perguntas frequentes →</text>
+    </g>
+  </g>
+
+  <g id="cta-final" data-name="CTA final">
+    <rect y="4820" width="390" height="320" fill="#07111C"/>
+    <rect x="24" y="4874" width="342" height="214" rx="18" fill="#0D1722" stroke="#0EA5E9" stroke-opacity="0.6"/>
+    <rect x="24" y="4874" width="8" height="214" rx="4" fill="#0EA5E9"/>
+    <text x="48" y="4924" class="h2" fill="white">Comece a organizar</text>
+    <text x="48" y="4960" class="h2" fill="white">sua barbearia.</text>
+    <text x="48" y="4994" class="small" fill="#B6C2D1">Prepare sua página, seus serviços e sua agenda</text>
+    <text x="48" y="5016" class="small" fill="#B6C2D1">para receber clientes.</text>
+    <rect x="48" y="5034" width="294" height="48" rx="10" fill="#0EA5E9"/>
+    <text x="195" y="5064" text-anchor="middle" class="button" fill="white">Registrar</text>
+  </g>
+
+  <g id="footer" data-name="Footer">
+    <rect y="5140" width="390" height="380" fill="#050B12"/>
+    <line x1="24" y1="5140.5" x2="366" y2="5140.5" stroke="#26384A"/>
+    <text x="24" y="5202" class="font" font-size="24" font-weight="700" letter-spacing="1.2" fill="white">BARBER<tspan fill="#0EA5E9">HUB</tspan></text>
+    <g id="footer-navigation" class="font" font-size="15" fill="#CBD5E1">
+      <text x="24" y="5252">Início</text><text x="116" y="5252">Produto</text><text x="220" y="5252">Serviços</text>
+      <text x="24" y="5294">Planos</text><text x="116" y="5294">Contato</text>
+    </g>
+    <g id="footer-auth" class="font" font-size="15" font-weight="600">
+      <rect x="24" y="5326" width="164" height="48" rx="8" fill="#0EA5E9"/><text x="106" y="5356" text-anchor="middle" fill="white">Entrar</text>
+      <rect x="202" y="5326" width="164" height="48" rx="8" fill="#0EA5E9"/><text x="284" y="5356" text-anchor="middle" fill="white">Registrar</text>
+    </g>
+    <line x1="24" y1="5406.5" x2="366" y2="5406.5" stroke="#26384A"/>
+    <text x="24" y="5448" class="small" fill="#64748B">© BarberHub. Todos os direitos reservados.</text>
+    <text x="24" y="5480" class="small" fill="#64748B">Produto em desenvolvimento</text>
+  </g>
+</svg>
