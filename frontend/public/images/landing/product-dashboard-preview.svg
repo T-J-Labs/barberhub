@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="612" viewBox="660 975 700 612" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Composição conceitual do produto BarberHub</title>
+  <desc id="description">Interface ilustrativa com agenda da equipe, serviços e profissionais centralizados.</desc>
+  <defs>
+    <style>
+      .font { font-family: Geist, Inter, Arial, sans-serif; }
+      .small { font-family: Geist, Inter, Arial, sans-serif; font-size: 14px; font-weight: 400; }
+      .label { font-family: Geist, Inter, Arial, sans-serif; font-size: 12px; font-weight: 650; letter-spacing: 1px; }
+    </style>
+  </defs>
+
+  <rect x="660" y="975" width="700" height="612" fill="#07111C"/>
+  <rect x="660" y="1018" width="700" height="526" rx="22" fill="#0D1722" stroke="#334155"/>
+  <rect x="684" y="1042" width="652" height="58" rx="12" fill="#172535"/>
+  <text x="706" y="1078" class="font" font-size="16" font-weight="700" fill="white">BARBER<tspan fill="#0EA5E9">HUB</tspan></text>
+  <text x="1314" y="1077" text-anchor="end" class="label" fill="#94A3B8">COMPOSIÇÃO CONCEITUAL</text>
+
+  <rect x="684" y="1124" width="404" height="396" rx="12" fill="#111D2A"/>
+  <text x="706" y="1158" class="label" fill="#94A3B8">AGENDA DA EQUIPE</text>
+  <g class="small" text-anchor="middle" fill="#94A3B8">
+    <text x="748" y="1198">09:00</text><text x="748" y="1252">10:00</text><text x="748" y="1306">11:00</text><text x="748" y="1360">12:00</text><text x="748" y="1414">13:00</text><text x="748" y="1468">14:00</text>
+  </g>
+  <g stroke="#334155">
+    <line x1="790" y1="1188" x2="1064" y2="1188"/><line x1="790" y1="1242" x2="1064" y2="1242"/><line x1="790" y1="1296" x2="1064" y2="1296"/><line x1="790" y1="1350" x2="1064" y2="1350"/><line x1="790" y1="1404" x2="1064" y2="1404"/><line x1="790" y1="1458" x2="1064" y2="1458"/>
+  </g>
+  <rect x="804" y="1200" width="116" height="88" rx="8" fill="#075985"/>
+  <text x="818" y="1226" class="small" fill="white">Corte</text><text x="818" y="1248" class="font" font-size="11" fill="#BAE6FD">Equipe A</text><text x="818" y="1270" class="font" font-size="11" fill="#BAE6FD">09:15–10:00</text>
+  <rect x="934" y="1308" width="116" height="88" rx="8" fill="#0EA5E9"/>
+  <text x="948" y="1334" class="small" fill="white">Barba</text><text x="948" y="1356" class="font" font-size="11" fill="#E0F2FE">Equipe B</text><text x="948" y="1378" class="font" font-size="11" fill="#E0F2FE">11:15–12:00</text>
+
+  <rect x="1112" y="1124" width="224" height="188" rx="12" fill="#111D2A" stroke="#26384A"/>
+  <text x="1132" y="1158" class="label" fill="#94A3B8">SERVIÇOS</text>
+  <rect x="1132" y="1180" width="184" height="44" rx="8" fill="#172535"/><text x="1146" y="1207" class="small" fill="white">Corte tradicional</text>
+  <rect x="1132" y="1236" width="184" height="44" rx="8" fill="#172535"/><text x="1146" y="1263" class="small" fill="white">Barba completa</text>
+  <rect x="1112" y="1332" width="224" height="188" rx="12" fill="#111D2A" stroke="#26384A"/>
+  <text x="1132" y="1366" class="label" fill="#94A3B8">EQUIPE</text>
+  <circle cx="1152" cy="1404" r="14" fill="#0EA5E9" fill-opacity=".45"/><text x="1178" y="1409" class="small" fill="white">Profissional A</text>
+  <circle cx="1152" cy="1450" r="14" fill="#38BDF8" fill-opacity=".35"/><text x="1178" y="1455" class="small" fill="white">Profissional B</text>
+  <text x="1224" y="1495" text-anchor="middle" class="small" fill="#8291A5">Dados ilustrativos</text>
+</svg>

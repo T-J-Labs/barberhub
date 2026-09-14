@@ -66,12 +66,40 @@ máxima aproximada de 1280 px. Os controles mobile possuem áreas de pelo menos
 
 ## Identidade visual
 
-- fundo principal: `#07111C`;
-- superfícies: `#0D1722` e `#172535`;
-- azul principal: `#0EA5E9`;
-- azul claro: `#38BDF8`;
-- texto principal: branco;
-- texto secundário: slate claro com contraste sobre os fundos escuros.
+### Paleta oficial da interface pública
+
+As cores abaixo são a fonte de verdade para a landing page pública e seus
+componentes compartilhados. Novas seções devem reutilizar seus papéis, em vez
+de introduzir variações próximas de azul, cinza ou texto.
+
+| Papel | Valor | Uso |
+| --- | --- | --- |
+| Fundo principal | `#07111C` | Hero, Produto, header, drawer e seções principais. |
+| Fundo alternado | `#0A1521` | Seções alternadas, como Para quem é e Serviços. |
+| Superfície padrão | `#0D1722` | Cards e painéis sobre os fundos da página. |
+| Superfície elevada | `#172535` | Áreas internas de painéis e controles de interface. |
+| Superfície de painel | `#111D2A` | Regiões internas dos mockups de produto. |
+| Borda padrão | `#334155` | Contornos de cards, painéis e separadores. |
+| Borda sutil | `#26384A` | Contornos de menor contraste em mockups e superfícies. |
+| Azul de ação e marca | `#0EA5E9` (`sky-500`) | Botões primários, marca e elementos interativos. |
+| Azul de destaque | `#38BDF8` (`sky-400`) | Ícones, bullets, labels de seção e destaques em títulos. |
+| Azul de badge | `#7DD3FC` (`sky-300`) | Texto de badges sobre fundo azul translúcido. |
+| Texto principal | `#FFFFFF` | Títulos, navegação e conteúdo principal dos cards. |
+| Texto de corpo | `#B6C2D1` | Parágrafos explicativos principais. |
+| Texto secundário | `#94A3B8` (`slate-400`) | Descrições auxiliares em cards e metadados. |
+| Texto de apoio | `#CBD5E1` (`slate-300`) | Listas e conteúdos de menor hierarquia. |
+| Texto de ação secundária | `#E2E8F0` (`slate-200`) | Ações secundárias com borda. |
+
+### Regras de aplicação
+
+- Alternar fundos principais e alternados na sequência das seções para manter
+  separação visual sem interromper a identidade escura.
+- Usar `#0D1722` como superfície padrão de cards públicos; não criar novos
+  tons de azul-marinho para essa finalidade.
+- Usar `#0EA5E9` apenas para ações, marca e foco de interação. O
+  `#38BDF8` é reservado a elementos de destaque e apoio visual.
+- Manter títulos em branco, parágrafos principais em `#B6C2D1` e descrições
+  auxiliares em `#94A3B8`.
 
 Os SVGs utilizam formas, linhas e textos simples. Não há imagens externas,
 assets por URL, conteúdo base64, filtros, máscaras ou fontes proprietárias.
