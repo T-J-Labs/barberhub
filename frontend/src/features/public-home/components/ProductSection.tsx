@@ -19,29 +19,29 @@ export function ProductSection() {
 
               <div className="flex flex-col items-center justify-center gap-4 w-full">
 
-                <div
-                  className="flex  w-full items-center rounded-lg bg-[#0B1A2D] py-4 px-3 gap-4"
+                <article
+                  className="flex  w-full items-center rounded-lg border border-slate-700/70 bg-[#0D1722] py-4 px-3 gap-4"
                 >
                   <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sky-500/15">
                     <LuUsersRound aria-hidden="true" className="size-5 text-sky-400" />
                   </span>
                   <div className="flex flex-col items-start justify-center">
-                    <span className="text-lg font-medium">Organização da equipe e da agenda</span>
-                    <span className="text-sm text-slate-400">Uma visão compartilhada da operação diária</span>
+                    <h3 className="text-lg text-white font-medium">Organização da equipe e da agenda</h3>
+                    <p className="text-sm text-slate-400">Uma visão compartilhada da operação diária</p>
                   </div>
-                </div>
+                </article>
                 
-                <div
-                  className="flex  w-full items-center rounded-lg bg-[#0B1A2D] py-4 px-3 gap-4"
+                <article
+                  className="flex  w-full items-center rounded-lg border border-slate-700/70 bg-[#0D1722] py-4 px-3 gap-4"
                 >
                   <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sky-500/15">
                     <LuCalendarDays aria-hidden="true" className="size-5 text-sky-400" />
                   </span>
                   <div className="flex flex-col items-start justify-center">
-                    <span className="text-lg font-medium">Experiência direta para cada pessoa</span>
-                    <span className="text-sm text-slate-400">Menos etapas para escolher e organizar horários</span>
+                    <h3 className="text-lg text-white font-medium">Experiência direta para cada pessoa</h3>
+                    <p className="text-sm text-slate-400">Menos etapas para escolher e organizar horários</p>
                   </div>
-                </div>
+                </article>
 
               </div> {/* FIM DOS CARDS */}
 

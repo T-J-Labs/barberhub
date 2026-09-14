@@ -32,7 +32,7 @@ export function HeroSection() {
               <div className="flex flex-col items-center justify-center gap-4 lg:flex-row w-full">
                 <Link
                   href="/register"
-                  className="flex min-h-11 w-full items-center justify-center rounded-lg bg-sky-500 py-3 text-center"
+                  className="flex min-h-11 w-full items-center justify-center rounded-lg bg-sky-500 py-3 text-center text-white"
                 >
                   Registrar
                 </Link>
