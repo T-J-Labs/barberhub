@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container"
 export function AudienceSection() {
   return(
     <section
-      id="audience"
+      id="audiencia"
       className="relative isolate overflow-hidden bg-[#0A1521] py-12 sm:py-16"
     >
       <Container>

@@ -6,6 +6,7 @@ import { HowItWorksSection } from "@/features/public-home/components/HowItWorksS
 import { DifferentialsSection } from "@/features/public-home/components/DifferentialsSection";
 import { ContactSection } from "@/features/public-home/components/ContactSection";
 import { PlansSection } from "@/features/public-home/components/PlansSection";
+import { StartNowSection } from "@/features/public-home/components/StartNowSection";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <DifferentialsSection />
       <PlansSection />
       <ContactSection />
+      <StartNowSection />
     </>
   );
 }

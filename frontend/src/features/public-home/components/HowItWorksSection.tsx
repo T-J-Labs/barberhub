@@ -27,7 +27,7 @@ const clientFlow = [
 export function HowItWorksSection() {
   return (
     <section
-      id="como-funciona"
+      id="comoFunciona"
       className="relative isolate overflow-hidden bg-[#07111C] py-12 sm:py-16"
     >
       <Container>
@@ -68,7 +68,7 @@ export function HowItWorksSection() {
                 {index < setupSteps.length - 1 && (
                   <span
                     aria-hidden="true"
-                    className="absolute top-16 bottom-[-2rem] left-8 border-l border-dashed border-slate-700 md:hidden"
+                    className="absolute top-16 -bottom-8 left-8 border-l border-dashed border-slate-700 md:hidden"
                   />
                 )}
                 <div className="md:mt-5">
