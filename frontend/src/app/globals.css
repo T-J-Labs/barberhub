@@ -4,3 +4,7 @@ body{
   background-color: #07111C;
   color: #FFF;
 }
+
+.clients-action-button {
+  height: 44px;
+}
