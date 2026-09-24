@@ -1,7 +1,25 @@
+import { HeroSection } from "@/features/public-home/components/HeroSection";
+import { AudienceSection } from "@/features/public-home/components/AudienceSection";
+import { ProductSection } from "@/features/public-home/components/ProductSection";
+import { ServicesSection } from "@/features/public-home/components/ServicesSection";
+import { HowItWorksSection } from "@/features/public-home/components/HowItWorksSection";
+import { DifferentialsSection } from "@/features/public-home/components/DifferentialsSection";
+import { ContactSection } from "@/features/public-home/components/ContactSection";
+import { PlansSection } from "@/features/public-home/components/PlansSection";
+import { StartNowSection } from "@/features/public-home/components/StartNowSection";
+
 export default function Home() {
   return (
-    <div>
-      Hello World!
-    </div>
+    <>
+      <HeroSection />
+      <AudienceSection />
+      <ProductSection />
+      <ServicesSection />
+      <HowItWorksSection />
+      <DifferentialsSection />
+      <PlansSection />
+      <ContactSection />
+      <StartNowSection />
+    </>
   );
 }

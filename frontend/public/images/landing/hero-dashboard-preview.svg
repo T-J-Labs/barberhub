@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="608" height="532" viewBox="0 0 608 532" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Exemplo ilustrativo do painel BarberHub</title>
+  <desc id="description">Painel fictício com resumo de agenda, ocupação e próximo atendimento.</desc>
+
+  <rect width="608" height="532" rx="22" fill="#0D1722"/>
+  <rect width="608" height="56" rx="22" fill="#172535"/>
+  <path d="M0 34C0 21.85 9.85 12 22 12H586C598.15 12 608 21.85 608 34V56H0V34Z" fill="#172535"/>
+  <path d="M0 56H608V57H0V56Z" fill="#334155"/>
+
+  <circle cx="28" cy="28" r="5" fill="#64748B"/>
+  <circle cx="46" cy="28" r="5" fill="#64748B"/>
+  <circle cx="64" cy="28" r="5" fill="#64748B"/>
+  <text x="580" y="32" text-anchor="end" fill="#94A3B8" font-family="Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1">EXEMPLO DE VISUALIZAÇÃO</text>
+
+  <rect x="24" y="80" width="154" height="428" rx="14" fill="#111D2A"/>
+  <text x="46" y="117" fill="white" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing=".7">BARBER<tspan fill="#0EA5E9">HUB</tspan></text>
+
+  <rect x="40" y="148" width="122" height="38" rx="8" fill="#0EA5E9" fill-opacity=".16"/>
+  <rect x="52" y="161" width="12" height="12" rx="2" fill="#38BDF8"/>
+  <text x="74" y="174" fill="#E0F2FE" font-family="Arial, sans-serif" font-size="12" font-weight="600">Visão geral</text>
+  <text x="74" y="224" fill="#94A3B8" font-family="Arial, sans-serif" font-size="12">Agenda</text>
+  <text x="74" y="268" fill="#94A3B8" font-family="Arial, sans-serif" font-size="12">Serviços</text>
+  <text x="74" y="312" fill="#94A3B8" font-family="Arial, sans-serif" font-size="12">Equipe</text>
+
+  <text x="202" y="112" fill="white" font-family="Arial, sans-serif" font-size="22" font-weight="700">Visão geral</text>
+  <text x="202" y="138" fill="#94A3B8" font-family="Arial, sans-serif" font-size="12">Resumo da operação de hoje</text>
+  <rect x="488" y="94" width="88" height="32" rx="8" fill="#172535"/>
+  <text x="532" y="114" text-anchor="middle" fill="#E2E8F0" font-family="Arial, sans-serif" font-size="11" font-weight="600">Hoje</text>
+
+  <rect x="202" y="164" width="116" height="106" rx="12" fill="#172535"/>
+  <text x="220" y="192" fill="#94A3B8" font-family="Arial, sans-serif" font-size="11">HORÁRIOS HOJE</text>
+  <text x="220" y="236" fill="white" font-family="Arial, sans-serif" font-size="32" font-weight="700">8</text>
+  <text x="220" y="254" fill="#8291A5" font-family="Arial, sans-serif" font-size="10">agendamentos</text>
+
+  <rect x="332" y="164" width="116" height="106" rx="12" fill="#172535"/>
+  <text x="350" y="192" fill="#94A3B8" font-family="Arial, sans-serif" font-size="11">EQUIPE ATIVA</text>
+  <text x="350" y="236" fill="white" font-family="Arial, sans-serif" font-size="32" font-weight="700">3</text>
+  <text x="350" y="254" fill="#8291A5" font-family="Arial, sans-serif" font-size="10">profissionais</text>
+
+  <rect x="462" y="164" width="114" height="106" rx="12" fill="#0EA5E9"/>
+  <text x="480" y="192" fill="#E0F2FE" font-family="Arial, sans-serif" font-size="11">OCUPAÇÃO</text>
+  <text x="480" y="236" fill="white" font-family="Arial, sans-serif" font-size="32" font-weight="700">68%</text>
+  <rect x="480" y="246" width="76" height="5" rx="2.5" fill="#E0F2FE" fill-opacity=".35"/>
+  <rect x="480" y="246" width="52" height="5" rx="2.5" fill="white"/>
+
+  <rect x="202" y="290" width="374" height="194" rx="14" fill="#172535"/>
+  <text x="224" y="322" fill="white" font-family="Arial, sans-serif" font-size="15" font-weight="700">Próximos atendimentos</text>
+  <text x="554" y="322" text-anchor="end" fill="#38BDF8" font-family="Arial, sans-serif" font-size="11" font-weight="600">Ver agenda</text>
+  <path d="M224 340H554" stroke="#334155"/>
+
+  <circle cx="244" cy="372" r="12" fill="#0EA5E9" fill-opacity=".35"/>
+  <text x="244" y="376" text-anchor="middle" fill="#E0F2FE" font-family="Arial, sans-serif" font-size="10" font-weight="700">09</text>
+  <text x="268" y="368" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="600">Corte tradicional</text>
+  <text x="268" y="386" fill="#94A3B8" font-family="Arial, sans-serif" font-size="10">Cliente exemplo · 09:30</text>
+  <rect x="504" y="361" width="50" height="20" rx="10" fill="#0EA5E9" fill-opacity=".16"/>
+  <text x="529" y="375" text-anchor="middle" fill="#7DD3FC" font-family="Arial, sans-serif" font-size="9" font-weight="700">HOJE</text>
+
+  <path d="M224 408H554" stroke="#334155"/>
+  <circle cx="244" cy="440" r="12" fill="#0EA5E9" fill-opacity=".35"/>
+  <text x="244" y="444" text-anchor="middle" fill="#E0F2FE" font-family="Arial, sans-serif" font-size="10" font-weight="700">10</text>
+  <text x="268" y="436" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="600">Barba completa</text>
+  <text x="268" y="454" fill="#94A3B8" font-family="Arial, sans-serif" font-size="10">Cliente exemplo · 10:15</text>
+  <text x="554" y="454" text-anchor="end" fill="#8291A5" font-family="Arial, sans-serif" font-size="10">Dados demonstrativos</text>
+</svg>

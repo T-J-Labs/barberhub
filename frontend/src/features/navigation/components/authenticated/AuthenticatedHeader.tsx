@@ -22,12 +22,12 @@ export function AuthenticatedHeader({
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <header>
+    <header className="bg-[#07111C] border-b border-slate-700/55 lg:border-b-0">
       <Container>
-        <div className="mt-2 flex items-center justify-between">
+        <div className="flex items-center justify-between py-4 lg:border-b lg:border-slate-700/55">
           <button
             type="button"
-            className="text-white"
+            className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white"
             aria-label="Abrir menu"
             aria-controls="account-navigation"
             aria-expanded={menuOpen}
@@ -39,10 +39,18 @@ export function AuthenticatedHeader({
           <HeaderBrand />
 
           <div className="flex items-center gap-4">
-            <button type="button" className="text-white" aria-label="Notificações">
+            <button
+              type="button"
+              className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white"
+              aria-label="Notificações"
+            >
               <MdNotificationsNone size={24} />
             </button>
-            <button type="button" className="text-white" aria-label="Perfil">
+            <button
+              type="button"
+              className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white"
+              aria-label="Perfil"
+            >
               <FiUser size={24} />
             </button>
           </div>
