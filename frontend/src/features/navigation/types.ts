@@ -1,5 +1,6 @@
 export type NavigationItem = {
-  label: string
+  label: string,
+  href: string
 }
 
 export type NavigationConfig = {

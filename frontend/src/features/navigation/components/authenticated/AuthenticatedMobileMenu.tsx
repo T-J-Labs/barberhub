@@ -1,6 +1,7 @@
 import { FiX } from "react-icons/fi"
 import type { NavigationConfig } from "../../types"
 import { HeaderBrand } from "../HeaderBrand"
+import Link from "next/link"
 
 type MobileMenuProps = {
   contextLabel?: string
@@ -56,7 +57,7 @@ export function AuthenticatedMobileMenu({
           )}
 
           {navigation.primary.map((item) => (
-            <li key={item.label} className="flex min-h-11 items-center px-2">{item.label}</li>
+            <Link href={item.href} key={item.label} className="flex min-h-11 items-center px-2">{item.label}</Link>
           ))}
 
           <li role="separator" aria-hidden="true" className="mt-auto">
@@ -64,7 +65,7 @@ export function AuthenticatedMobileMenu({
           </li>
 
           {navigation.secondary.map((item) => (
-            <li key={item.label} className="flex min-h-11 items-center px-2">{item.label}</li>
+            <Link href={item.href} key={item.label} className="flex min-h-11 items-center px-2">{item.label}</Link>
           ))}
 
           <li role="separator" aria-hidden="true">
