@@ -1,4 +1,4 @@
-export type AgendaStatus = "Confirmado" | "Aguardando" | "Concluído" | "Cancelado"
+export type AgendaStatus = "Confirmado" | "Aguardando" | "Concluído" | "Cancelado" | "Falta"
 
 export type AgendaAppointment = {
   id: string

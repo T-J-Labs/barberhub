@@ -1,3 +1,5 @@
+import type { AgendaStatus } from "@/features/agenda/types"
+
 export type DashboardMetric = {
   label: string
   value: string
@@ -5,7 +7,7 @@ export type DashboardMetric = {
   trend: "positive" | "neutral" | "negative"
 }
 
-export type AppointmentStatus = "Confirmado" | "Aguardando" | "Concluído"
+export type AppointmentStatus = AgendaStatus
 
 export type Appointment = {
   time: string
@@ -19,11 +21,12 @@ export type DashboardAlert = {
   title: string
   description: string
   action: string
+  href: string
   tone: "warning" | "info"
 }
 
 export type DashboardData = {
   metrics: DashboardMetric[]
-  appointments: Appointment[]
+  appointmentDays: { date: string; appointments: Appointment[] }[]
   alerts: DashboardAlert[]
 }

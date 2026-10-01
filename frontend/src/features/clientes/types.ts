@@ -1,4 +1,4 @@
-export type ClientReputation = "Ótima" | "Regular" | "Atenção"
+export type ClientReputation = "Ótima" | "Regular" | "Atenção" | "Sem histórico"
 export type ClientAccountStatus = "Ativa" | "Convite pendente"
 
 export type Client = {

@@ -1,4 +1,5 @@
 import type { DashboardData } from "./types"
+import { agendaMock } from "@/features/agenda/mock-data"
 
 export const adminDashboardMock: DashboardData = {
   metrics: [
@@ -7,14 +8,12 @@ export const adminDashboardMock: DashboardData = {
     { label: "Faturamento previsto", value: "R$ 1.240", detail: "+8% vs. semana passada", trend: "positive" },
     { label: "Taxa de faltas", value: "4,2%", detail: "-1,8% este mês", trend: "positive" },
   ],
-  appointments: [
-    { time: "09:30", client: "Lucas Almeida", service: "Corte + barba", barber: "Rafael Costa", status: "Concluído" },
-    { time: "10:15", client: "Marcos Vinícius", service: "Corte tradicional", barber: "André Santos", status: "Confirmado" },
-    { time: "11:00", client: "João Pedro", service: "Barba completa", barber: "Rafael Costa", status: "Aguardando" },
-    { time: "11:45", client: "Gustavo Oliveira", service: "Corte + barba", barber: "Caio Mendes", status: "Confirmado" },
-  ],
+  appointmentDays: agendaMock.days.map((day) => ({
+    date: `${day.date} 2025`,
+    appointments: day.appointments.map(({ time, client, service, barber, status }) => ({ time, client, service, barber, status })),
+  })),
   alerts: [
-    { title: "3 confirmações pendentes", description: "Alguns clientes ainda não confirmaram o horário de hoje.", action: "Ver agendamentos", tone: "warning" },
-    { title: "Horário de funcionamento", description: "A agenda de sábado ainda não foi configurada.", action: "Configurar horários", tone: "info" },
+    { title: "1 confirmação pendente", description: "Um cliente ainda não confirmou o horário desta amostra.", action: "Ver agendamentos", href: "/admin/agenda", tone: "warning" },
+    { title: "Horário de funcionamento", description: "Confira o horário geral da barbearia na prévia de configurações.", action: "Configurar horários", href: "/admin/configuracoes#horarios", tone: "info" },
   ],
 }
