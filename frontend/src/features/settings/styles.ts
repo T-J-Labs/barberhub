@@ -1,0 +1,1 @@
+export const settingsInputClass = "min-h-11 w-full min-w-0 rounded-lg border border-slate-700 bg-[#07111c] px-3.5 text-sm font-normal text-white outline-none transition-colors placeholder:text-slate-500 focus:border-[#65d5ff] focus-visible:ring-2 focus-visible:ring-[#65d5ff]/20 disabled:cursor-not-allowed disabled:border-slate-800 disabled:text-slate-600"
