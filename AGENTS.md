@@ -39,6 +39,12 @@ Ao trabalhar no frontend:
 - Não acesse o banco de dados diretamente.
 - Toda comunicação com o backend deve ocorrer pela API REST.
 - Não invente tipos que contradigam o contrato OpenAPI.
+- Preserve o padrão aprovado dos botões primários públicos: `bg-sky-500`,
+  texto branco e hover sem alteração do tom de azul. `sky-400` fica reservado
+  a destaques e foco, não ao fundo desses botões. Nos perfis públicos, reutilize
+  `catalogActionClass` de `src/features/barbershop-catalog/styles.ts`, incluindo
+  o hover com ampliação e respeito a movimento reduzido. Não crie uma variante
+  de cor sem solicitação explícita do usuário. Consulte `docs/design/README.md`.
 
 ## Backend
 

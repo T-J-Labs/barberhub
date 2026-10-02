@@ -12,7 +12,7 @@ A implementação fica em `src/features/barbershop-catalog`. Página, filtros,
 cards e estados são Server Components. O formulário `next/form` usa navegação
 GET com `q` e `cidade` na URL, com suporte a links compartilhados e histórico.
 Esses parâmetros são exclusivos da interface, não parâmetros de uma API.
-Somente a prévia em diálogo e o boundary de erro usam `"use client"`.
+Somente o boundary de erro usa `"use client"`. Os cards levam ao perfil público.
 
 ## Experiência
 
@@ -23,8 +23,8 @@ Somente a prévia em diálogo e o boundary de erro usam `"use client"`.
   de logo, sem imagens remotas, avaliações, preços ou disponibilidade fictícia.
 - Controles de pelo menos 44px, rótulos explícitos, foco visível e skeleton com
   movimento desativado para quem prefere movimento reduzido.
-- Prévia reutiliza `DemoDialog`; a página individual da barbearia é a próxima
-  entrega e não recebe um link para uma rota inexistente.
+- Cards levam a `/barbearias/[subdomain]`, usando o identificador público
+  demonstrativo compartilhado com o perfil, sem enviar um `tenant_id`.
 - Estado vazio distingue catálogo sem estabelecimentos de busca sem resultados.
 - `loading.tsx` apresenta skeleton durante a navegação; `error.tsx` permite
   tentar novamente pelo `reset` do Next.js.
@@ -37,11 +37,11 @@ Somente a prévia em diálogo e o boundary de erro usam `"use client"`.
   O azul claro do catálogo continua reservado aos destaques e foco.
 - O select mantém comportamento nativo, seta a 16px da borda e 48px de espaço
   à direita do texto; em cores forçadas, volta à seta nativa do sistema.
-- A prévia usa a variante pública de `DemoDialog`, com superfície `#0D1722`
-  e foco `sky-400`. A variante administrativa continua sendo o padrão.
+- O perfil público substitui a antiga prévia em diálogo; a navegação dos cards
+  usa links nativos com foco `sky-400`.
 - A navegação pública identifica a página atual com `aria-current` e destaque
   visual no desktop e mobile.
-- Cards, resultados e títulos do diálogo admitem quebra de palavras longas.
+- Cards, resultados e perfis admitem quebra de palavras longas.
 
 A revisão preserva a composição mobile-first, o tamanho dos controles, os
 estados existentes e o uso de Server Components. A validação visual em navegador
@@ -74,7 +74,7 @@ Em desenvolvimento, estados podem ser inspecionados sem alterar as fixtures:
 - `/barbearias?cidade=Nova%20Igua%C3%A7u`: filtro por cidade.
 
 `estado` é ignorado em produção. Validar também a limpeza dos filtros, o
-histórico do navegador, a prévia (Escape e retorno do foco), o menu público e
+histórico do navegador, a navegação ao perfil, o menu público e
 as âncoras da landing em larguras de 390px e 1280px.
 
 Validação desta entrega: ESLint, TypeScript e build de produção aprovados.
