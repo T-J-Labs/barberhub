@@ -14,17 +14,35 @@ type AuthenticatedHeaderProps = {
   contextLabel?: string
   contextName?: string
   navigation: NavigationConfig
+  desktopNavigation?: boolean
 }
 
 export function AuthenticatedHeader({
   contextLabel,
   contextName,
   navigation,
+  desktopNavigation = false,
 }: AuthenticatedHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activePanel, setActivePanel] = useState<"notifications" | "profile" | null>(null)
   const menuTriggerRef = useRef<HTMLButtonElement>(null)
   const router = useRouter()
+
+  useEffect(() => {
+    if (!desktopNavigation || !menuOpen) return
+    const desktop = window.matchMedia("(min-width: 75rem)")
+    function closeOnDesktop() {
+      if (!desktop.matches) return
+      setMenuOpen(false)
+      const navigation = document.getElementById("admin-navigation")
+      const destination = navigation?.querySelector<HTMLAnchorElement>('a[aria-current="page"]') ??
+        navigation?.querySelector<HTMLAnchorElement>("a[href]")
+      destination?.focus({ preventScroll: true })
+    }
+    closeOnDesktop()
+    desktop.addEventListener("change", closeOnDesktop)
+    return () => desktop.removeEventListener("change", closeOnDesktop)
+  }, [desktopNavigation, menuOpen])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -38,14 +56,16 @@ export function AuthenticatedHeader({
     menuTriggerRef.current?.focus()
   }
 
+  const HeaderContainer = desktopNavigation ? "div" : Container
+
   return (
-    <header className="bg-[#07111C] border-b border-slate-700/55 lg:border-b-0">
-      <Container>
-        <div className="flex items-center justify-between py-4 lg:border-b lg:border-slate-700/55">
+    <header className={desktopNavigation ? "border-b border-slate-700/55 bg-[#07111C]" : "bg-[#07111C] border-b border-slate-700/55 lg:border-b-0"}>
+      <HeaderContainer {...(desktopNavigation ? { className: "px-4" } : {})}>
+        <div className={desktopNavigation ? "grid grid-cols-[44px_minmax(0,1fr)_auto] items-center gap-2 py-4 min-[360px]:gap-4 admin:flex admin:justify-between [&>a]:justify-self-center [&>a]:text-lg min-[360px]:[&>a]:text-xl sm:[&>a]:text-2xl" : "flex items-center justify-between py-4 lg:border-b lg:border-slate-700/55"}>
           <button
             ref={menuTriggerRef}
             type="button"
-            className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white"
+            className={`-my-1.5 inline-grid size-11 place-items-center rounded-md text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#65d5ff] ${desktopNavigation ? "admin:hidden" : ""}`}
             aria-label="Abrir menu"
             aria-controls="account-navigation"
             aria-expanded={menuOpen}
@@ -56,7 +76,7 @@ export function AuthenticatedHeader({
 
           <HeaderBrand />
 
-          <div className="flex items-center gap-4">
+          <div className={desktopNavigation ? "flex shrink-0 items-center gap-1 sm:gap-3" : "flex items-center gap-4"}>
             <button
               type="button"
               className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white"
@@ -80,6 +100,7 @@ export function AuthenticatedHeader({
             contextName={contextName}
             isOpen={menuOpen}
             navigation={navigation}
+            desktopNavigation={desktopNavigation}
             onClose={closeMenu}
             onExit={() => { setMenuOpen(false); router.push("/") }}
           />
@@ -93,7 +114,7 @@ export function AuthenticatedHeader({
             </div>
           </DemoDialog>
         </div>
-      </Container>
+      </HeaderContainer>
     </header>
   )
 }

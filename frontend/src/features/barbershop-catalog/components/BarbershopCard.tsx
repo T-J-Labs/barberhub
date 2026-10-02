@@ -4,7 +4,7 @@ import { publicBarbershopHref } from "@/features/public-barbershop/routing"
 import type { BarbershopPresentation } from "../types"
 import { catalogPanelClass, catalogSecondaryActionClass } from "../styles"
 
-export function BarbershopCard({ shop }: { shop: BarbershopPresentation }) {
+export function BarbershopCard({ shop, publicOrigin }: { shop: BarbershopPresentation; publicOrigin?: string }) {
   return (
     <li className={`${catalogPanelClass} flex min-w-0 flex-col break-words p-5 sm:p-6`}>
       <div aria-hidden="true" className="grid size-14 place-items-center rounded-lg border border-[#26384A] bg-[#172535] text-lg font-semibold text-sky-300">{shop.initials}</div>
@@ -13,9 +13,9 @@ export function BarbershopCard({ shop }: { shop: BarbershopPresentation }) {
         <FiMapPin className="mt-1 shrink-0 text-sky-400" size={16} aria-hidden="true" />
         <p className="min-w-0">{shop.neighborhood}<span className="block text-slate-400">{shop.city}</span></p>
       </div>
-      <Link href={publicBarbershopHref(shop.subdomain)} aria-label={`Conhecer ${shop.name}`} className={`mt-6 inline-flex w-full items-center justify-center ${catalogSecondaryActionClass}`}>
+      {publicOrigin ? <Link href={publicBarbershopHref(shop.subdomain, publicOrigin)} aria-label={`Conhecer ${shop.name}`} className={`mt-6 inline-flex w-full items-center justify-center ${catalogSecondaryActionClass}`}>
         Conhecer barbearia
-      </Link>
+      </Link> : <button type="button" disabled className={`mt-6 inline-flex w-full items-center justify-center opacity-50 ${catalogSecondaryActionClass}`}>Página indisponível</button>}
     </li>
   )
 }

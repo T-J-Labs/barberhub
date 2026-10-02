@@ -1,76 +1,108 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Container } from "@/components/ui/Container"
-import { publicNavigation } from "../../config/public-navigation"
-import { useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { FiMenu } from "react-icons/fi"
+import { Container } from "@/components/ui/Container"
+import { catalogActionClass, catalogFocusClass } from "@/features/barbershop-catalog/styles"
+import { publicNavigation } from "../../config/public-navigation"
 import { HeaderBrand } from "../HeaderBrand"
 import { PublicMobileMenu } from "./PublicMobileMenu"
+import { publicLoginClass, publicNavigationClass } from "./styles"
 
-export function PublicHeader() {
+export type PublicHeaderContext = "landing" | "catalog" | "barbershop" | "public"
+
+export function PublicHeader({ context }: { context: PublicHeaderContext }) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const pathname = usePathname()
+  const [activeSection, setActiveSection] = useState<string>(publicNavigation[0].href)
+  const isLandingPage = context === "landing"
+  const headerRef = useRef<HTMLElement>(null)
+  const activeHref = isLandingPage ? activeSection : undefined
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false)
+  }, [])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    if (!isLandingPage) {
+      const frame = requestAnimationFrame(closeMenu)
+      return () => cancelAnimationFrame(frame)
+    }
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    const desktop = window.matchMedia("(min-width: 64rem)")
+    function closeOnDesktop() {
+      if (!desktop.matches) return
+      setMenuOpen(false)
+      requestAnimationFrame(() => headerRef.current?.querySelector<HTMLAnchorElement>('nav a[aria-current="location"], nav a[href]')?.focus())
+    }
+    desktop.addEventListener("change", closeOnDesktop)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      desktop.removeEventListener("change", closeOnDesktop)
+    }
+  }, [menuOpen, isLandingPage, closeMenu])
+
+  useEffect(() => {
+    if (!isLandingPage) return
+    let frame = 0
+    function updateSection() {
+      const threshold = (headerRef.current?.offsetHeight ?? 80) + 40
+      const current = [...publicNavigation].reverse().find((item) => {
+        const section = document.getElementById(item.href.split("#")[1])
+        return section !== null && section.getBoundingClientRect().top <= threshold
+      })
+      setActiveSection(current?.href ?? publicNavigation[0].href)
+    }
+    function scheduleUpdate() {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(updateSection)
+    }
+    scheduleUpdate()
+    window.addEventListener("scroll", scheduleUpdate, { passive: true })
+    window.addEventListener("resize", scheduleUpdate)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener("scroll", scheduleUpdate)
+      window.removeEventListener("resize", scheduleUpdate)
+    }
+  }, [isLandingPage])
 
   return (
-    <header className="bg-[#07111C] border-b border-slate-700/55 lg:border-b-0">
+    <header ref={headerRef} className="public-header sticky top-0 z-30 border-b border-[#26384A] bg-[#07111C]/95 backdrop-blur-md">
       <Container>
-        <div className="flex items-center justify-between py-4 lg:border-b lg:border-slate-700/55">
-          <button
+        <div className={`${isLandingPage ? "grid grid-cols-[44px_minmax(0,1fr)_44px] lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-6 [&>a]:justify-self-center lg:[&>a]:justify-self-start" : "flex justify-between [&>a]:shrink-0 [&>a]:text-lg min-[360px]:[&>a]:text-xl sm:[&>a]:text-2xl"} min-h-20 items-center gap-3 py-4 [&>a]:focus-visible:outline-2 [&>a]:focus-visible:outline-offset-4 [&>a]:focus-visible:outline-sky-400`}>
+          {isLandingPage && <button
             type="button"
-            className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white lg:hidden"
+            className={`grid size-11 place-items-center rounded-lg border border-[#26384A] text-slate-200 transition-colors hover:border-sky-400 hover:bg-[#172535] hover:text-white lg:hidden ${catalogFocusClass}`}
             aria-label="Abrir menu"
             aria-controls="public-navigation"
             aria-expanded={menuOpen}
+            aria-haspopup="dialog"
             onClick={() => setMenuOpen(true)}
           >
-            <FiMenu size={24} />
-          </button>
+            <FiMenu size={21} aria-hidden="true" />
+          </button>}
 
-          <PublicMobileMenu
-            isOpen={menuOpen}
-            navigation={publicNavigation}
-            activeHref={pathname}
-            onClose={() => setMenuOpen(false)}
-          />
-          
           <HeaderBrand />
 
-          <nav
-            aria-label="Navegação principal"
-            className="hidden items-center gap-8 lg:flex"
-          >
+          {isLandingPage && <nav aria-label="Navegação principal" className="hidden items-center justify-center gap-1 lg:flex">
             {publicNavigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={item.href === pathname ? "page" : undefined}
-                className={`-my-1.5 inline-flex min-h-11 items-center rounded-md text-lg transition-colors hover:text-sky-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-400 ${item.href === pathname ? "text-sky-300 underline decoration-sky-400 underline-offset-8" : "text-white"}`}
-              >
+              <Link key={item.href} href={item.href} aria-current={item.href === activeHref ? "location" : undefined} className={publicNavigationClass(item.href === activeHref)}>
                 {item.label}
               </Link>
-            ))} 
-          </nav>
+            ))}
+          </nav>}
 
-          <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="-my-1.5 hidden min-h-11 items-center justify-center rounded-md bg-sky-500 px-4 font-medium text-white transition duration-300 hover:scale-105 lg:inline-flex"
-            >
-              Entrar
-            </Link>
-            
-            <Link
-              href="/register"
-              className="-my-1.5 hidden min-h-11 items-center justify-center rounded-md bg-sky-500 px-4 font-medium text-white transition duration-300 hover:scale-105 lg:inline-flex"
-            >
-              Registrar
-            </Link>
+          <div className={isLandingPage ? "hidden items-center gap-3 lg:flex" : "flex shrink-0 items-center gap-2 [&>a]:px-3 sm:gap-3 sm:[&>a]:px-5"}>
+            <Link href="/login" className={publicLoginClass}>Entrar</Link>
+            <Link href="/register" className={catalogActionClass}>Registrar</Link>
           </div>
-
         </div>
       </Container>
+
+      {isLandingPage && <PublicMobileMenu isOpen={menuOpen} navigation={publicNavigation} activeHref={activeHref} onClose={closeMenu} />}
     </header>
   )
 }

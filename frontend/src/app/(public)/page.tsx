@@ -7,10 +7,12 @@ import { DifferentialsSection } from "@/features/public-home/components/Differen
 import { ContactSection } from "@/features/public-home/components/ContactSection";
 import { PlansSection } from "@/features/public-home/components/PlansSection";
 import { StartNowSection } from "@/features/public-home/components/StartNowSection";
+import { PublicFooter } from "@/features/navigation/components/public/PublicFooter";
 
 export default function Home() {
   return (
     <>
+      <main>
       <HeroSection />
       <AudienceSection />
       <ProductSection />
@@ -20,6 +22,8 @@ export default function Home() {
       <PlansSection />
       <ContactSection />
       <StartNowSection />
+      </main>
+      <PublicFooter />
     </>
   );
 }

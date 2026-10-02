@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-admin: 75rem;
+}
+
 body{
   background-color: #07111C;
   color: #FFF;
@@ -7,4 +11,8 @@ body{
 
 .clients-action-button {
   height: 44px;
+}
+
+.public-header ~ main [id] {
+  scroll-margin-top: 6rem;
 }

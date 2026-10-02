@@ -1,5 +1,4 @@
-import { PublicHeader } from "@/features/navigation/components/public/PublicHeader"
-import { PublicFooter } from "@/features/navigation/components/public/PublicFooter"
+import { PublicHeaderRoute } from "@/features/navigation/components/public/PublicHeaderRoute"
 
 type PublicLayoutProps = Readonly<{
   children: React.ReactNode
@@ -8,9 +7,8 @@ type PublicLayoutProps = Readonly<{
 export default function PublicLayout({ children }: PublicLayoutProps) {
   return (
     <>
-      <PublicHeader />
-      <main>{children}</main>
-      <PublicFooter />
+      <PublicHeaderRoute />
+      {children}
     </>
   )
 }

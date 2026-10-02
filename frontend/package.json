@@ -10,6 +10,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "test:routing": "node --test tests/public-host.test.mjs",
+    "test:routing:http": "node --test tests/public-routing-http.test.mjs",
     "api:generate": "orval --config ./orval.config.ts",
     "api:watch": "orval --config ./orval.config.ts --watch"
   },
