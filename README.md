@@ -180,6 +180,7 @@ conhecer o processo completo.
 - [Processo de evolução da API](docs/api/README.md)
 - [Contrato OpenAPI](docs/api/openapi.yaml)
 - [Plano da experiência do cliente](docs/frontend/CLIENT_EXPERIENCE.md)
+- [Perfil público da barbearia](docs/frontend/PUBLIC_BARBERSHOP.md)
 
 ## Roadmap resumido
 

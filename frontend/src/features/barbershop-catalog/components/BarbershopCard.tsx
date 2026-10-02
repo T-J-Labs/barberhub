@@ -1,7 +1,8 @@
 import { FiMapPin } from "react-icons/fi"
+import Link from "next/link"
+import { publicBarbershopHref } from "@/features/public-barbershop/routing"
 import type { BarbershopPresentation } from "../types"
-import { catalogPanelClass } from "../styles"
-import { BarbershopPreview } from "./BarbershopPreview"
+import { catalogPanelClass, catalogSecondaryActionClass } from "../styles"
 
 export function BarbershopCard({ shop }: { shop: BarbershopPresentation }) {
   return (
@@ -12,7 +13,9 @@ export function BarbershopCard({ shop }: { shop: BarbershopPresentation }) {
         <FiMapPin className="mt-1 shrink-0 text-sky-400" size={16} aria-hidden="true" />
         <p className="min-w-0">{shop.neighborhood}<span className="block text-slate-400">{shop.city}</span></p>
       </div>
-      <BarbershopPreview shop={shop} />
+      <Link href={publicBarbershopHref(shop.subdomain)} aria-label={`Conhecer ${shop.name}`} className={`mt-6 inline-flex w-full items-center justify-center ${catalogSecondaryActionClass}`}>
+        Conhecer barbearia
+      </Link>
     </li>
   )
 }
