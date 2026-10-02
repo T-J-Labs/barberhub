@@ -1,78 +1,65 @@
-import Link from "next/link";
-import { FiX } from "react-icons/fi";
-import type { PublicNavigationItem } from "../../types";
-import { HeaderBrand } from "../HeaderBrand";
+import Link from "next/link"
+import { useEffect, useRef } from "react"
+import { FiX } from "react-icons/fi"
+import { catalogActionClass, catalogFocusClass } from "@/features/barbershop-catalog/styles"
+import type { PublicNavigationItem } from "../../types"
+import { HeaderBrand } from "../HeaderBrand"
+import { publicLoginClass, publicNavigationClass } from "./styles"
 
 type PublicMobileMenuProps = {
-  isOpen: boolean;
-  navigation: readonly PublicNavigationItem[];
-  onClose: () => void;
-  activeHref?: string;
+  isOpen: boolean
+  navigation: readonly PublicNavigationItem[]
+  onClose: () => void
+  activeHref?: string
 }
 
-export function PublicMobileMenu({ isOpen, navigation, onClose, activeHref }: PublicMobileMenuProps){
+export function PublicMobileMenu({ isOpen, navigation, onClose, activeHref }: PublicMobileMenuProps) {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const dialog = dialogRef.current
+    if (!dialog) return
+    if (isOpen && !dialog.open) {
+      dialog.showModal()
+      closeButtonRef.current?.focus()
+    }
+    if (!isOpen && dialog.open) dialog.close()
+  }, [isOpen])
+
   return (
-    <>
-      {isOpen && (
-        <button
-          type="button"
-          aria-label="Fechar menu"
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
-          onClick={onClose}
-        />
-      )}
+    <dialog
+      ref={dialogRef}
+      id="public-navigation"
+      aria-label="Menu principal"
+      onClose={onClose}
+      onCancel={(event) => { event.preventDefault(); onClose() }}
+      onClick={(event) => { if (event.target === event.currentTarget) onClose() }}
+      className="fixed inset-y-0 left-0 m-0 h-dvh max-h-none w-[85%] max-w-sm border-0 border-r border-[#26384A] bg-[#07111C] p-0 text-white backdrop:bg-black/65 backdrop:backdrop-blur-sm"
+    >
+      <nav aria-label="Navegação principal" className="flex h-full flex-col overflow-y-auto p-4 sm:p-6">
+        <div className="flex items-center justify-between gap-3 border-b border-[#26384A] pb-5 [&>a]:focus-visible:outline-2 [&>a]:focus-visible:outline-offset-4 [&>a]:focus-visible:outline-sky-400">
+          <HeaderBrand />
+          <button ref={closeButtonRef} type="button" aria-label="Fechar menu" className={`grid size-11 shrink-0 place-items-center rounded-lg border border-[#26384A] text-slate-300 transition-colors hover:border-sky-400 hover:bg-[#172535] hover:text-white ${catalogFocusClass}`} onClick={onClose}>
+            <FiX size={21} aria-hidden="true" />
+          </button>
+        </div>
 
-      <nav
-        id="public-navigation"
-        aria-label="Navegação principal"
-        className={`${ isOpen ? "flex" : "hidden" } fixed inset-y-0 left-0 z-50 h-dvh w-[85%] max-w-sm flex-col bg-[#07111C] p-4 lg:hidden`}
-      >
-       <div className="mb-8 flex items-center justify-between">
-         <HeaderBrand />
+        <ul className="space-y-2 py-6">
+          {navigation.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} aria-current={item.href === activeHref ? "location" : undefined} className={publicNavigationClass(item.href === activeHref)} onClick={onClose}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-         <button
-           type="button"
-           aria-label="Fechar menu"
-           className="inline-grid size-11 place-items-center rounded-md text-white"
-           onClick={onClose}
-         >
-          <FiX size={24}/>
-         </button>
-       </div>
-
-       <ul className="flex min-h-0 flex-1 flex-col gap-4 font-medium text-white">
-         {navigation.map((item) => (
-           <li key={item.href}>
-             <Link
-               href={item.href}
-               aria-current={item.href === activeHref ? "page" : undefined}
-               className={`flex min-h-11 items-center rounded-md px-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 ${item.href === activeHref ? "bg-sky-500/10 text-sky-300" : "hover:bg-white/5"}`}
-               onClick={onClose}
-             >
-               {item.label}
-             </Link>
-           </li>
-         ))}
-       </ul>
-
-       <div className="mt-auto flex flex-col gap-3 border-t border-slate-600 pt-6">
-         <Link
-           href="/login"
-           className="flex min-h-11 items-center justify-center rounded-md bg-sky-500 px-4 py-3 text-center font-semibold text-white"
-           onClick={onClose}
-         >
-           Entrar
-         </Link>
-
-         <Link
-           href="/register"
-           className="flex min-h-11 items-center justify-center rounded-md bg-sky-500 px-4 py-3 text-center font-semibold text-white"
-           onClick={onClose}
-         >
-           Registrar
-         </Link>
-       </div>
+        <div className="mt-auto grid shrink-0 gap-3 border-t border-[#26384A] pt-5">
+          <Link href="/login" className={publicLoginClass} onClick={onClose}>Entrar</Link>
+          <Link href="/register" className={catalogActionClass} onClick={onClose}>Registrar</Link>
+        </div>
       </nav>
-    </>
-  ) 
+    </dialog>
+  )
 }

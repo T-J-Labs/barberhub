@@ -2,23 +2,83 @@
 
 ## Rota e contexto público
 
-`/barbearias/[subdomain]` continua a descoberta iniciada em `/barbearias`.
-O catálogo não tinha rota individual nem resolução por host implementada.
+`<subdomain>.<domínio-base>/` continua a descoberta iniciada em `/barbearias`.
+`/barbearias/[subdomain]` é apenas a rota interna de renderização do rewrite.
 Foi adotada a chave pública `subdomain`, prevista no ADR, sem introduzir outro
 slug ou aceitar `tenant_id`. As fixtures compartilham os identificadores
 `demo-esquina`, `demo-navalha`, `demo-vila`, `demo-oficina`, `demo-raizes` e
 `demo-bairro`. `id` continua sendo apenas a chave local dos cards.
 
 A entrada direta em `<subdomain>.<domínio-base>/` faz rewrite para a mesma
-página, mantendo a URL pública. `next.config.ts` compara o Host com o domínio-base
+página, mantendo a URL pública. `src/proxy.ts` compara o Host com o domínio-base
 configurado em `BARBERHUB_PUBLIC_HOST` (hostname sem protocolo, porta ou caminho).
 Em desenvolvimento o padrão é `localhost`; em produção o operador precisa
 configurar o domínio-base antes do build e prover DNS/certificado para os
 subdomínios. Sem essa configuração não há rewrite de produção. O domínio-base
 continua servindo a landing comercial, e hosts arbitrários não são tratados como
 estabelecimentos. Não são usados `X-Forwarded-Host`, cookies ou parâmetros de
-query para resolver o perfil. Os caminhos explícitos sempre resolvem sua própria
-chave pública; o rewrite por host se aplica somente à raiz `/`.
+query para resolver o perfil. Os perfis públicos só são exibidos na raiz do seu
+respectivo subdomínio. Tanto no domínio-base quanto em um subdomínio,
+`/barbearias/[subdomain]` redireciona com HTTP 307 para a raiz
+do estabelecimento indicado no caminho, inclusive se for outro estabelecimento.
+Assim o perfil exibido corresponde ao hostname visível. O rewrite por host se
+aplica somente à raiz `/`; caixa e ponto final de DNS são normalizados na
+resolução, e subdomínios com ponto final redirecionam para a forma canônica.
+`skipProxyUrlNormalize` preserva a URL interna do servidor, e o rewrite usa
+`new URL(request.url)`. Isso evita que a normalização de `127.0.0.1` para
+`localhost` transforme o rewrite em um proxy externo e substitua o Host
+validado do estabelecimento. A seleção do perfil continua ignorando
+`X-Forwarded-Host` e `X-Forwarded-Proto`.
+
+Os cards do catálogo abrem a raiz do subdomínio quando o Host pertence ao
+domínio-base configurado. Em desenvolvimento, `localhost:3000/barbearias`
+leva a `http://demo-esquina.localhost:3000/`, preservando a porta em uso.
+Em produção, os links usam HTTPS e `BARBERHUB_PUBLIC_HOST`. Hosts externos,
+acesso por IP e produção sem domínio configurado não podem exibir os perfis.
+Nesses acessos, os cards não oferecem um link alternativo por caminho.
+A origem é calculada no servidor, usando apenas o Host validado; cabeçalhos
+encaminhados não definem o domínio dos links. A rota interna por caminho é
+destino exclusivo do rewrite; uma requisição externa nunca exibe o perfil
+mantendo esse caminho na URL. Novas tentativas retornam à raiz do subdomínio.
+
+Os links “Todas as barbearias” e “Explorar barbearias” retornam ao catálogo
+no domínio-base, inclusive quando o perfil foi aberto pelo subdomínio. O layout
+do perfil fornece esse destino calculado no servidor aos links compartilhados
+com os estados de carregamento, erro e barbearia não encontrada. Em localhost,
+o retorno é `http://localhost:3000/barbearias`, preservando a porta em uso.
+
+O catálogo não é servido dentro dos subdomínios dos estabelecimentos. O acesso
+direto a `demo-esquina.localhost:3000/barbearias` redireciona no servidor para
+`localhost:3000/barbearias`, preservando os parâmetros de busca, inclusive
+parâmetros repetidos. O domínio-base serve o catálogo normalmente, sem loop;
+hosts externos e acesso por IP não são convertidos em domínios de tenants.
+O redirecionamento do catálogo usa `redirect()` do App Router: após o início
+do streaming, o Next pode comunicá-lo no HTML em uma resposta 200. Os
+redirecionamentos de perfil e normalização do hostname usam HTTP 307 no proxy.
+Isso evita a conversão indevida para URL relativa que o proxy do Next faz
+em redirecionamentos para `localhost` com a configuração padrão do servidor.
+
+O header recebe um contexto explícito de `PublicHeaderRoute`, derivado dos
+segmentos da rota renderizada pelo App Router. O destino do rewrite identifica
+o estabelecimento mesmo quando a URL visível e `usePathname()` continuam em
+`/`. Os contextos de catálogo e estabelecimento exibem somente marca e ações
+de acesso; links institucionais e destaque de seção ficam restritos à landing.
+Esta composição preserva a renderização estática da landing e não introduz
+uma segunda regra de resolução de host no navegador.
+
+O rodapé do catálogo e dos perfis recebe a origem da plataforma no servidor.
+Marca, seções institucionais e links de acesso apontam para esse domínio-base;
+âncoras da própria barbearia continuam locais. A landing compõe seu rodapé
+estático, enquanto o layout de `/barbearias` compõe o rodapé dependente do Host.
+
+## Validação de domínios
+
+Execute `npm run test:routing` em `frontend/` para validar resolução e geração
+de links sem servidor. Com `npm run dev` na porta 3000, execute
+`npm run test:routing:http` para os testes HTTP. Para outra instalação, configure
+`TEST_PORT`, `TEST_PUBLIC_HOST` e `TEST_PROTOCOL` conforme o servidor. Os testes
+conectam apenas a `127.0.0.1`, simulando o Host; não exigem DNS público ou TLS.
+Resultados e limitações estão em [DOMAINS_VALIDATION.md](DOMAINS_VALIDATION.md).
 
 Esta resolução seleciona uma apresentação fictícia, não estabelece contexto
 autorizado no backend. Não há mudança na autorização privada ou na arquitetura
@@ -91,22 +151,22 @@ e o retorno após autenticação com destinos internos validados.
   com retorno ao catálogo e `notFound()` do Next.js. Com streaming já iniciado
   pelo loading boundary, o Next pode responder HTTP 200 com a tela de inexistência
   e `noindex`; sem streaming iniciado, responde 404.
-- Em desenvolvimento, `/barbearias/demo-esquina?estado=loading`, `estado=error`
+- Em desenvolvimento, `http://demo-esquina.localhost:3000/?estado=loading`, `estado=error`
   e `estado=not-found` permitem inspecionar os estados. O retry remove a query.
   `estado` é ignorado em produção e não integra a identidade pública.
-- `/barbearias/demo-navalha` permite conferir os dados opcionais ausentes.
-- `/barbearias/nao-existe` permite conferir inexistência real da fixture.
+- `http://demo-navalha.localhost:3000/` permite conferir os dados opcionais ausentes.
+- `http://demo-inexistente.localhost:3000/` permite conferir inexistência real da fixture.
 - `http://demo-esquina.localhost:3000/` permite conferir entrada pelo host local.
 
-ESLint, TypeScript e build de produção passaram. Foram aprovadas 18 verificações
-HTTP em desenvolvimento e 18 em produção: catálogo, seis perfis, dados opcionais
-ausentes, identificadores inválidos/desconhecidos, query `tenant_id` sem efeito,
-estados de desenvolvimento, entrada por subdomínio, host externo e landing.
-Em produção, os três valores de `estado` foram confirmados como ignorados.
-A revisão visual e as interações
-em 390px/1280px ficam pendentes, pois não há navegador conectado nesta sessão.
-O chat “Arquiteto de Software” não estava acessível pelas ferramentas; as decisões
-complementares utilizadas são as documentadas no ADR e no plano do cliente.
+Na revisão atual, lint, TypeScript e build passaram, além de 3 testes unitários
+de roteamento e 15 testes HTTP em desenvolvimento e no build de produção local.
+Os testes cobrem os seis perfis, redirects para a URL pública, parâmetros
+repetidos/codificados, headers contextuais, hosts não reconhecidos e cabeçalhos
+encaminhados sem efeito sobre identidade ou origem. A renderização final no
+navegador complementa a validação HTTP, pois o streaming pode entregar um
+skeleton e componentes RSC antes do conteúdo final. Consulte
+[DOMAINS_VALIDATION.md](DOMAINS_VALIDATION.md) para os percursos e limitações.
+As decisões de produto continuam registradas no ADR e no plano do cliente.
 
 ## Arquivos da entrega
 

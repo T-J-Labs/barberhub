@@ -8,7 +8,7 @@ import { BarbershopCard } from "./BarbershopCard"
 import { CatalogShell } from "./CatalogShell"
 import { CatalogState } from "./CatalogState"
 
-export function CatalogView({ filters, demoState }: { filters: CatalogFilters; demoState?: string }) {
+export function CatalogView({ filters, demoState, publicOrigin }: { filters: CatalogFilters; demoState?: string; publicOrigin?: string }) {
   const catalog = getCatalogPresentation(filters, demoState === "empty")
   const filtered = Boolean(filters.query || filters.city)
   const unsettled = demoState === "loading" || demoState === "error"
@@ -46,7 +46,7 @@ export function CatalogView({ filters, demoState }: { filters: CatalogFilters; d
           ? <CatalogState kind={demoState} />
           : catalog.shops.length === 0
             ? <CatalogState kind={catalog.total === 0 ? "empty" : "no-results"} />
-            : <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{catalog.shops.map((shop) => <BarbershopCard key={shop.id} shop={shop} />)}</ul>}
+            : <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{catalog.shops.map((shop) => <BarbershopCard key={shop.id} shop={shop} publicOrigin={publicOrigin} />)}</ul>}
       </section>
     </CatalogShell>
   )

@@ -2,12 +2,13 @@ import Link from "next/link"
 import { publicNavigation } from "../../config/public-navigation"
 import { HeaderBrand } from "../HeaderBrand"
 
-export function PublicFooter() {
+export function PublicFooter({ platformOrigin }: { platformOrigin?: string }) {
+  const platformHref = (path: string) => platformOrigin ? new URL(path, platformOrigin).href : path
   return (
     <footer className="border-t border-slate-800/70 bg-[#030811]">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1.4fr_1fr_1fr] lg:px-12 lg:py-16">
         <div className="max-w-sm">
-          <HeaderBrand />
+          <HeaderBrand href={platformHref("/")} />
           <p className="mt-5 text-sm leading-6 text-slate-300">
             Gestão simples e inteligente para barbearias organizarem sua rotina,
             seus serviços e seus agendamentos.
@@ -22,7 +23,7 @@ export function PublicFooter() {
             {publicNavigation.map((item) => (
               <li key={item.href}>
                 <Link
-                  href={item.href}
+                  href={platformHref(item.href)}
                   className="text-sm text-slate-300 transition-colors hover:text-sky-400"
                 >
                   {item.label}
@@ -38,13 +39,13 @@ export function PublicFooter() {
           </h2>
           <div className="mt-4 flex flex-col items-start gap-3">
             <Link
-              href="/login"
+              href={platformHref("/login")}
               className="text-sm text-slate-300 transition-colors hover:text-sky-400"
             >
               Entrar na plataforma
             </Link>
             <Link
-              href="/register"
+              href={platformHref("/register")}
               className="text-sm text-slate-300 transition-colors hover:text-sky-400"
             >
               Criar uma conta

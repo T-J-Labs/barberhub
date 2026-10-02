@@ -4,9 +4,11 @@
 
 `/barbearias` pertence a `app/(public)` e reutiliza header, footer e Container.
 A landing comercial continua em `/`; seu menu institucional não inclui o catálogo.
-As âncoras da navegação pública apontam
-para `/#...`, permitindo retornar às seções a partir do catálogo. A navegação
-do cliente também oferece acesso ao catálogo público, sem exigir um tenant.
+Os links de seções da landing aparecem somente em `/` no domínio da plataforma.
+No catálogo e nos perfis públicos, o header mantém a marca (link para `/` no Host atual) e as
+ações Entrar e Registrar diretamente acessíveis, inclusive no mobile, sem menu
+institucional. A navegação do cliente também oferece acesso ao catálogo público,
+sem exigir um tenant.
 
 A implementação fica em `src/features/barbershop-catalog`. Página, filtros,
 cards e estados são Server Components. O formulário `next/form` usa navegação
@@ -23,8 +25,11 @@ Somente o boundary de erro usa `"use client"`. Os cards levam ao perfil público
   de logo, sem imagens remotas, avaliações, preços ou disponibilidade fictícia.
 - Controles de pelo menos 44px, rótulos explícitos, foco visível e skeleton com
   movimento desativado para quem prefere movimento reduzido.
-- Cards levam a `/barbearias/[subdomain]`, usando o identificador público
-  demonstrativo compartilhado com o perfil, sem enviar um `tenant_id`.
+- Cards levam à raiz de `<subdomain>.<domínio-base>/`, usando o identificador
+  público demonstrativo compartilhado com o perfil, sem enviar um `tenant_id`.
+  `/barbearias/[subdomain]` é uma rota interna do rewrite; acessos diretos em
+  hosts confiáveis redirecionam para o subdomínio. Sem uma origem pública válida,
+  o card informa “Página indisponível”, sem oferecer uma URL alternativa.
 - Estado vazio distingue catálogo sem estabelecimentos de busca sem resultados.
 - `loading.tsx` apresenta skeleton durante a navegação; `error.tsx` permite
   tentar novamente pelo `reset` do Next.js.
@@ -39,13 +44,15 @@ Somente o boundary de erro usa `"use client"`. Os cards levam ao perfil público
   à direita do texto; em cores forçadas, volta à seta nativa do sistema.
 - O perfil público substitui a antiga prévia em diálogo; a navegação dos cards
   usa links nativos com foco `sky-400`.
-- A navegação pública identifica a página atual com `aria-current` e destaque
-  visual no desktop e mobile.
+- Na landing, a navegação institucional identifica a seção atual com
+  `aria-current="location"` e destaque visual no desktop e mobile.
+  Catálogo e perfis não exibem esse menu institucional.
 - Cards, resultados e perfis admitem quebra de palavras longas.
 
 A revisão preserva a composição mobile-first, o tamanho dos controles, os
-estados existentes e o uso de Server Components. A validação visual em navegador
-continua pendente por ausência de navegador conectado.
+estados existentes e o uso de Server Components. A navegação, os headers
+contextuais e os retornos ao catálogo foram conferidos no navegador. O registro
+de validação e seus limites estão em [DOMAINS_VALIDATION.md](DOMAINS_VALIDATION.md).
 
 ## Integração pendente
 
@@ -53,7 +60,7 @@ O contrato `docs/api/openapi.yaml` ainda tem `paths: {}`. Nenhum endpoint,
 schema, campo OpenAPI ou header de tenant é utilizado por esta entrega.
 Os campos em `types.ts` são exclusivamente de apresentação; os estabelecimentos
 em `mock-data.ts` são fictícios e a tela informa isso. A página não é indexável
-enquanto houver fixtures. Não há requisições HTTP, autenticação ou persistência.
+enquanto houver fixtures. Não há consultas à API, autenticação ou persistência.
 
 `getCatalogPresentation` é o ponto de substituição da fonte demonstrativa.
 Antes da integração, aprovar dados públicos, critérios de publicação, busca,
@@ -77,8 +84,11 @@ Em desenvolvimento, estados podem ser inspecionados sem alterar as fixtures:
 histórico do navegador, a navegação ao perfil, o menu público e
 as âncoras da landing em larguras de 390px e 1280px.
 
-Validação desta entrega: ESLint, TypeScript e build de produção aprovados.
-Nove verificações HTTP da renderização SSR cobriram catálogo, busca sem acentos,
-filtro por cidade, combinação de filtros, parâmetros repetidos e os três estados
-demonstrativos. A revisão visual e as interações no navegador permanecem
-pendentes: nenhum navegador conectado estava disponível na sessão.
+Na validação inicial, nove verificações HTTP da renderização SSR cobriram
+catálogo, busca sem acentos, filtro por cidade, combinação de filtros,
+parâmetros repetidos e os três estados demonstrativos. Na revisão de domínios
+e headers, lint, TypeScript e build passaram, além de 3 testes unitários de
+roteamento e 15 testes HTTP em desenvolvimento e no build de produção local.
+Resultados e percursos no navegador estão em
+[DOMAINS_VALIDATION.md](DOMAINS_VALIDATION.md); essa revisão não substitui
+a validação futura da integração com a API.

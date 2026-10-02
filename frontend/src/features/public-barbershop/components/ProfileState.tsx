@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { FiAlertCircle, FiMapPin } from "react-icons/fi"
 import { profileActionClass, profilePanelClass, profileSecondaryActionClass } from "../styles"
+import { PublicCatalogLink } from "./PublicCatalogLink"
 
 type Props = { kind: "loading" | "not-found" | "error"; onRetry?: () => void; retryHref?: string }
 
@@ -28,7 +29,7 @@ export function ProfileState({ kind, onRetry, retryHref }: Props) {
         {!missing && (onRetry
           ? <button type="button" onClick={onRetry} className={`${profileActionClass} cursor-pointer`}>Tentar novamente</button>
           : retryHref && <Link href={retryHref} className={profileActionClass}>Tentar novamente</Link>)}
-        <Link href="/barbearias" className={profileSecondaryActionClass}>Explorar barbearias</Link>
+        <PublicCatalogLink className={profileSecondaryActionClass}>Explorar barbearias</PublicCatalogLink>
       </div>
     </section>
   )

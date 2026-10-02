@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
+import { redirect } from "next/navigation"
 import { CatalogView } from "@/features/barbershop-catalog/components/CatalogView"
+import { getPublicBarbershopContext } from "@/features/public-barbershop/request-origin"
 
 export const metadata: Metadata = {
   title: "Encontre uma barbearia",
@@ -14,5 +16,16 @@ function first(value: SearchParams[string]) {
 
 export default async function BarbershopsPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const params = await searchParams
-  return <CatalogView filters={{ query: first(params.q), city: first(params.cidade) }} demoState={process.env.NODE_ENV === "development" ? first(params.estado) : undefined} />
+  const { origin: publicOrigin, isSubdomain } = await getPublicBarbershopContext()
+  if (isSubdomain && publicOrigin) {
+    const destination = new URL("/barbearias", publicOrigin)
+    for (const [name, values] of Object.entries(params)) {
+      for (const value of Array.isArray(values) ? values : values === undefined ? [] : [values]) {
+        destination.searchParams.append(name, value)
+      }
+    }
+    redirect(destination.href)
+  }
+  const development = process.env.NODE_ENV === "development"
+  return <CatalogView publicOrigin={publicOrigin} filters={{ query: first(params.q), city: first(params.cidade) }} demoState={development ? first(params.estado) : undefined} />
 }

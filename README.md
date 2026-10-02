@@ -122,6 +122,8 @@ O frontend estará disponível em [http://localhost:3000](http://localhost:3000)
 npm run dev           # Inicia o servidor de desenvolvimento
 npm run lint          # Executa o ESLint
 npm run typecheck     # Verifica os tipos TypeScript
+npm run test:routing  # Verifica resolução de hosts e geração de links
+npm run test:routing:http # Verifica rotas com o servidor local ativo na porta 3000
 npm run build         # Gera o build de produção
 npm run api:generate  # Gera o cliente a partir do contrato OpenAPI
 npm run api:watch     # Regenera o cliente quando o contrato é alterado
@@ -152,9 +154,18 @@ O frontend usa as seguintes variáveis:
 | --- | --- | --- |
 | `NEXT_PUBLIC_API_URL` | URL base versionada da API | `http://localhost:8080/api/v1` |
 | `NEXT_PUBLIC_API_MOCKING` | Controla o uso dos mocks da API | `disabled` |
+| `BARBERHUB_PUBLIC_HOST` | Domínio-base público sem protocolo, porta ou caminho; padrão `localhost` em desenvolvimento e obrigatório para perfis em produção | `barberhub.example` |
 
 Use [frontend/.env.example](frontend/.env.example) como referência e não
 adicione senhas, tokens ou outras credenciais ao repositório.
+
+O catálogo fica em `/barbearias` no domínio da plataforma. Cada perfil público
+usa apenas a raiz do próprio subdomínio, como `http://demo-esquina.localhost:3000/`.
+O caminho `/barbearias/[subdomain]` é interno: acessos diretos em hosts confiáveis
+redirecionam para o subdomínio, preservando os parâmetros. Em produção, configure
+`BARBERHUB_PUBLIC_HOST` no build e na execução e providencie DNS e TLS para os
+subdomínios. Sem uma origem pública válida, os perfis ficam indisponíveis.
+Consulte [a validação de domínios](docs/frontend/DOMAINS_VALIDATION.md).
 
 ## Contrato da API
 
