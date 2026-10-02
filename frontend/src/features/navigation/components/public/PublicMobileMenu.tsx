@@ -7,9 +7,10 @@ type PublicMobileMenuProps = {
   isOpen: boolean;
   navigation: readonly PublicNavigationItem[];
   onClose: () => void;
+  activeHref?: string;
 }
 
-export function PublicMobileMenu({ isOpen, navigation, onClose }: PublicMobileMenuProps){
+export function PublicMobileMenu({ isOpen, navigation, onClose, activeHref }: PublicMobileMenuProps){
   return (
     <>
       {isOpen && (
@@ -44,7 +45,8 @@ export function PublicMobileMenu({ isOpen, navigation, onClose }: PublicMobileMe
            <li key={item.href}>
              <Link
                href={item.href}
-               className="flex min-h-11 items-center rounded-md px-2"
+               aria-current={item.href === activeHref ? "page" : undefined}
+               className={`flex min-h-11 items-center rounded-md px-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 ${item.href === activeHref ? "bg-sky-500/10 text-sky-300" : "hover:bg-white/5"}`}
                onClick={onClose}
              >
                {item.label}

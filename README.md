@@ -28,6 +28,9 @@ O BarberHub busca reunir em uma única plataforma:
 
 ## Funcionalidades planejadas para o MVP
 
+- Catálogo público de barbearias com busca por nome, cidade ou bairro
+- Conta única do cliente para agendar em diferentes estabelecimentos
+- Área pessoal com os próprios agendamentos identificados por barbearia
 - Site institucional personalizado para cada barbearia
 - Cadastro de serviços e barbeiros
 - Configuração de jornadas, folgas e bloqueios de horário
@@ -62,16 +65,21 @@ O BarberHub busca reunir em uma única plataforma:
 
 O BarberHub utiliza uma arquitetura SaaS multi-tenant com banco de dados e
 schema compartilhados. Os recursos pertencentes a uma barbearia são associados
-a um `tenant_id`, que deve ser aplicado em todas as operações privadas para
-impedir o acesso aos dados de outro tenant.
+a um `tenant_id`, que deve limitar as operações privadas de cada estabelecimento.
+A identidade do cliente é global; seus perfis locais, agendamentos e reputação
+permanecem isolados por barbearia. O cliente pode consultar suas próprias reservas
+em diferentes estabelecimentos, sem permitir acesso cruzado entre barbearias.
 
 O backend segue o modelo de monólito modular orientado a funcionalidades. O
 frontend e o backend se comunicam exclusivamente por uma API REST, com rotas
 versionadas pelo prefixo `/api/v1`.
 
-Em rotas públicas, o tenant é identificado pelo header
-`X-Tenant-Subdomain`. Em rotas privadas, o contexto do tenant deverá ser obtido
-a partir da identidade autenticada, nunca aceito livremente do cliente.
+Em rotas públicas de um estabelecimento, o tenant é identificado pelo header
+`X-Tenant-Subdomain`. O catálogo público tem escopo global. Em rotas privadas
+administrativas, o contexto do tenant deverá ser obtido a partir da identidade
+autenticada. Em operações do cliente, o backend deve resolver o contexto dos
+recursos e validar a titularidade; um tenant informado pela interface nunca
+constitui autorização de acesso.
 
 As decisões e restrições arquiteturais estão documentadas em
 [docs/architecture/ADR.md](docs/architecture/ADR.md).
@@ -171,9 +179,12 @@ conhecer o processo completo.
 - [Decisões arquiteturais](docs/architecture/ADR.md)
 - [Processo de evolução da API](docs/api/README.md)
 - [Contrato OpenAPI](docs/api/openapi.yaml)
+- [Plano da experiência do cliente](docs/frontend/CLIENT_EXPERIENCE.md)
 
 ## Roadmap resumido
 
+- Catálogo público e página de cada barbearia
+- Conta global do cliente e seus agendamentos entre estabelecimentos
 - Autenticação e autorização com JWT
 - Administração de tenants
 - Catálogo de serviços e equipe

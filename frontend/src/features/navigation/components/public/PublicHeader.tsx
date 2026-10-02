@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Container } from "@/components/ui/Container"
 import { publicNavigation } from "../../config/public-navigation"
 import { useState } from "react"
@@ -10,6 +11,7 @@ import { PublicMobileMenu } from "./PublicMobileMenu"
 
 export function PublicHeader() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
     <header className="bg-[#07111C] border-b border-slate-700/55 lg:border-b-0">
@@ -29,6 +31,7 @@ export function PublicHeader() {
           <PublicMobileMenu
             isOpen={menuOpen}
             navigation={publicNavigation}
+            activeHref={pathname}
             onClose={() => setMenuOpen(false)}
           />
           
@@ -42,7 +45,8 @@ export function PublicHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="-my-1.5 inline-flex min-h-11 items-center rounded-md text-lg text-white transition-colors duration-300 hover:text-sky-500"
+                aria-current={item.href === pathname ? "page" : undefined}
+                className={`-my-1.5 inline-flex min-h-11 items-center rounded-md text-lg transition-colors hover:text-sky-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-400 ${item.href === pathname ? "text-sky-300 underline decoration-sky-400 underline-offset-8" : "text-white"}`}
               >
                 {item.label}
               </Link>
