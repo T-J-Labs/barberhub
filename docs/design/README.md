@@ -61,8 +61,10 @@ máxima aproximada de 1280 px. Os controles mobile possuem áreas de pelo menos
 - Os detalhes comerciais dos planos permanecem em definição.
 - E-mail e WhatsApp são canais conceituais, sem endereços ou números inventados.
 - Nenhum formulário é apresentado como funcional.
-- O fluxo do cliente é apenas conceitual:
-  **Serviço → profissional → data → horário → autenticação → confirmação**.
+- O fluxo aprovado no ADR é:
+  **Barbearia → agendar → autenticação (se necessária) → serviço → profissional → data → horário → revisão → confirmação**.
+  Os mockups são conceituais; qualquer fluxo antigo que apresente autenticação
+  após a escolha do horário deve ser alinhado ao ADR antes da implementação.
 
 ## Identidade visual
 

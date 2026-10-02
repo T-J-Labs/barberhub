@@ -39,12 +39,19 @@ verificável.
 configurar URL base, headers e tratamento comum de erros.
 
 `src/lib/api/axios-instance.ts` contém uma única instância compartilhada. O
-Orval direciona todas as funções geradas para ela. Requisições públicas recebem
-`X-Tenant-Subdomain` por `publicTenantRequest`; requisições privadas recebem
-Bearer JWT por `authenticatedRequest`.
+Orval direciona todas as funções geradas para ela. Requisições públicas de uma
+barbearia recebem `X-Tenant-Subdomain` por `publicTenantRequest`; requisições
+privadas recebem Bearer JWT por `authenticatedRequest`. O catálogo global não
+depende de um subdomínio; suas operações ainda precisam ser acordadas.
 
 O frontend nunca deve enviar um `tenant_id` escolhido pelo cliente em uma rota
 privada.
+
+Conforme o ADR 08, a identidade do cliente é global. Em operações de reserva,
+selecionar um estabelecimento não concede autorização: o backend resolve o
+contexto, valida os recursos e verifica a titularidade. A área pessoal entre
+tenants é restrita aos agendamentos do cliente autenticado. Os contratos desse
+fluxo ainda não estão aprovados.
 
 ### Orval
 
@@ -129,8 +136,9 @@ Sempre reinicie `npm run dev` depois de alterar variáveis de ambiente.
 4. Importe o agregador de handlers gerado em `src/mocks/handlers.ts`.
 5. Use a função Axios gerada dentro da feature correspondente em
    `src/features`.
-6. Passe `publicTenantRequest(subdomain)` nas opções de rotas públicas ou
-   `authenticatedRequest(token)` nas privadas.
+6. Passe `publicTenantRequest(subdomain)` nas opções de rotas públicas de uma
+   barbearia ou `authenticatedRequest(token)` nas privadas. Para operações
+   globais, siga o contrato específico, sem impor um tenant ao catálogo.
 
 O armazenamento do JWT ainda precisa ser acordado com o backend. Não adote
 `localStorage` automaticamente; cookie `HttpOnly` ou uma camada BFF costumam

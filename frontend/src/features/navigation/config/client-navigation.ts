@@ -2,7 +2,7 @@ import type { NavigationConfig } from "../types"
 
 export const clientNavigation = {
   primary: [
-    { label: "Início" },
+    { label: "Barbearias", href: "/barbearias" },
     { label: "Meus agendamentos" },
   ],
   secondary: [
