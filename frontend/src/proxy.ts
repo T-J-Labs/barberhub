@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getConfiguredPublicHost } from "./features/public-barbershop/host-config"
 import { isPublicSubdomain, publicBarbershopHref, publicHostContext } from "./features/public-barbershop/routing"
+import { getPublicBarbershopPresentation } from "./features/public-barbershop/barbershop-presentation"
 
 export function proxy(request: NextRequest) {
   const protocol = process.env.NODE_ENV === "development" ? "http:" : "https:"
@@ -14,12 +15,14 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(destination, 307)
   }
 
-  const profile = pathname.match(/^\/barbearias\/([^/]+)$/)
+  const profile = pathname.match(/^\/barbearias\/([^/]+)(?:\/(agendar|agendamento))?$/)
   if (profile) {
     let subdomain: string
     try { subdomain = decodeURIComponent(profile[1]) } catch { return NextResponse.next() }
-    if (isPublicSubdomain(subdomain)) {
-      return redirectTo(new URL(publicBarbershopHref(subdomain, context.origin)))
+    if (isPublicSubdomain(subdomain) && (!profile[2] || getPublicBarbershopPresentation(subdomain))) {
+      const destination = new URL(publicBarbershopHref(subdomain, context.origin))
+      if (profile[2]) destination.pathname = "/agendar"
+      return redirectTo(destination)
     }
   }
 
@@ -30,12 +33,17 @@ export function proxy(request: NextRequest) {
     destination.pathname = pathname
     return redirectTo(destination)
   }
-  if (context.subdomain && pathname === "/") {
+  if (pathname === "/agendamento") {
+    const destination = new URL(context.subdomain ? publicBarbershopHref(context.subdomain, context.origin) : context.origin)
+    destination.pathname = "/agendar"
+    return redirectTo(destination)
+  }
+  if (context.subdomain && (pathname === "/" || pathname === "/agendar")) {
     const destination = new URL(request.url)
-    destination.pathname = `/barbearias/${context.subdomain}`
+    destination.pathname = `/barbearias/${context.subdomain}${pathname === "/agendar" ? "/agendar" : ""}`
     return NextResponse.rewrite(destination)
   }
   return NextResponse.next()
 }
 
-export const config = { matcher: ["/", "/barbearias/:path*", "/login", "/cadastro", "/register"] }
+export const config = { matcher: ["/", "/barbearias/:path*", "/agendar", "/agendamento", "/login", "/cadastro", "/register"] }

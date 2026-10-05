@@ -129,19 +129,20 @@ no contrato ou no cliente gerado, nem acesso ao banco ou dados administrativos.
 
 Nome, iniciais, cidade e bairro são as fixtures existentes do catálogo.
 Descrição, serviços com preços/durações, dois profissionais e funcionamento
-do perfil `demo-esquina` são exclusivamente exemplos locais de apresentação.
+dos perfis `demo-esquina` e `demo-navalha` são exclusivamente exemplos locais de apresentação.
 Os demais perfis exibem ausência de serviços, profissionais e horários.
 Não há endereço completo, números de telefone, links de WhatsApp, fotos,
 galeria, avaliações, mapa, disponibilidade ou estado “aberto agora” simulados.
 Informações ausentes são descritas de forma explícita, sem controles sem destino.
 
-Não existem páginas de login/cadastro nem fluxo de reserva implementados,
-embora o header institucional já contenha links conceituais de autenticação.
-O CTA **Agendar horário** leva à seção local `#agendamento`, que informa que
-a reserva ainda está indisponível. O aviso também aparece junto ao CTA.
-Não há wizard, seleção fictícia de horário ou confirmação. Quando o fluxo real
-existir, substituir a âncora pelo destino aprovado, preservando o estabelecimento
-e o retorno após autenticação com destinos internos validados.
+As interfaces de login/cadastro já existem no domínio principal, com Google
+indisponível e sem autenticação real, conforme [CLIENT_AUTH.md](CLIENT_AUTH.md).
+O CTA **Agendar horário** abre a introdução demonstrativa em
+`<subdomínio>.<domínio-base>/agendar`. A ação “Experimentar demonstração” inicia
+serviço, profissional, data, horário, revisão e resultado local, com exemplos
+completos da Esquina e da Navalha. O estabelecimento e as regras atuais de retorno
+da autenticação são preservados. Nenhum login ou reserva real ocorre.
+Consulte [CLIENT_BOOKING.md](CLIENT_BOOKING.md) para cenários, conflito e validação.
 
 ## Estados e verificação
 
@@ -154,7 +155,7 @@ e o retorno após autenticação com destinos internos validados.
 - Em desenvolvimento, `http://demo-esquina.localhost:3000/?estado=loading`, `estado=error`
   e `estado=not-found` permitem inspecionar os estados. O retry remove a query.
   `estado` é ignorado em produção e não integra a identidade pública.
-- `http://demo-navalha.localhost:3000/` permite conferir os dados opcionais ausentes.
+- `http://demo-vila.localhost:3000/` permite conferir os dados opcionais ausentes.
 - `http://demo-inexistente.localhost:3000/` permite conferir inexistência real da fixture.
 - `http://demo-esquina.localhost:3000/` permite conferir entrada pelo host local.
 

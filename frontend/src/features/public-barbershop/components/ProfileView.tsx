@@ -5,11 +5,11 @@ import { ProfileHero } from "./ProfileHero"
 
 const priceFormat = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" })
 
-export function ProfileView({ shop }: { shop: PublicBarbershopPresentation }) {
+export function ProfileView({ shop, bookingHref }: { shop: PublicBarbershopPresentation; bookingHref: string | null }) {
   return (
     <>
       <p className="mb-5 border-l-2 border-sky-400 pl-3 text-sm leading-6 text-slate-300">Página demonstrativa. Este estabelecimento e as informações apresentadas são fictícios.</p>
-      <ProfileHero shop={shop} />
+      <ProfileHero shop={shop} bookingHref={bookingHref} />
       <nav aria-label="Nesta barbearia" className="mt-3 flex flex-wrap gap-x-5 border-b border-[#26384A] py-2 text-sm font-medium sm:gap-x-8">
         {[["#servicos", "Serviços"], ["#equipe", "Profissionais"], ["#visita", "Localização e contato"]].map(([href, label]) => (
           <a key={href} href={href} className={`inline-flex min-h-11 items-center rounded-md text-slate-300 hover:text-sky-300 ${profileFocusClass}`}>{label}</a>
@@ -51,8 +51,8 @@ export function ProfileView({ shop }: { shop: PublicBarbershopPresentation }) {
           <section id="agendamento" aria-labelledby="booking-title" tabIndex={-1} className={`${profilePanelClass} scroll-mt-6 p-5 sm:p-7 ${profileFocusClass}`}>
             <FiCalendar size={26} className="text-sky-400" aria-hidden="true" />
             <h2 id="booking-title" className="mt-4 text-2xl font-semibold tracking-tight">Seu próximo horário começa aqui</h2>
-            <p className="mt-3 max-w-xl text-base leading-7 text-[#B6C2D1]">O agendamento online de {shop.name} ainda não está disponível. Quando estiver, você poderá usar sua conta BarberHub para escolher serviço, profissional e horário.</p>
-            <p className="mt-4 text-sm leading-6 text-slate-400">Esta prévia não permite reservar horários.</p>
+            <p className="mt-3 max-w-xl text-base leading-7 text-[#B6C2D1]">O botão Agendar horário abre a introdução demonstrativa de {shop.name}. Você pode explorar serviço, profissional, data, horário e revisão com exemplos locais.</p>
+            <p className="mt-4 text-sm leading-6 text-slate-400">O acesso com Google continua indisponível. Esta demonstração não cria sessão nem reserva horários.</p>
           </section>
         </div>
         <aside id="visita" aria-labelledby="visit-title" className={`${profilePanelClass} min-w-0 scroll-mt-6 p-5 sm:p-6`}>

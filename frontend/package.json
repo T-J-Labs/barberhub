@@ -14,6 +14,8 @@
     "test:routing:http": "node --test tests/public-routing-http.test.mjs",
     "test:auth": "node ../validation/client-auth-routing.cjs",
     "test:auth:http": "node ../validation/client-auth-http.cjs",
+    "test:booking": "node ../validation/booking-state.cjs",
+    "test:booking:http": "node ../validation/booking-http.cjs",
     "api:generate": "orval --config ./orval.config.ts",
     "api:watch": "orval --config ./orval.config.ts --watch"
   },

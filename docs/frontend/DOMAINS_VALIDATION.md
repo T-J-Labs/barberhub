@@ -1,6 +1,9 @@
 # Validação de domínios e subdomínios
 
-Verificação local em 2 de outubro de 2026. Alterações deixadas sem commit.
+Registro histórico da verificação local em 2 de outubro de 2026.
+Os resultados abaixo pertencem àquela revisão, não a uma nova execução de testes.
+O estado posterior de login/cadastro está em [CLIENT_AUTH.md](CLIENT_AUTH.md);
+as próximas entregas estão em [FRONTEND_ROADMAP.md](FRONTEND_ROADMAP.md).
 
 ## Correções
 
@@ -48,10 +51,13 @@ Os testes de produção simulam o Host em conexões HTTP locais e verificam os
 destinos HTTPS gerados; DNS público, certificados TLS e infraestrutura de
 implantação não foram exercitados.
 
-## Limites e pendências existentes
+## Limites e pendências na revisão original
 
-- `/login` e `/register` retornam 404 porque essas telas ainda não existem.
-  Autenticação real e navegação do cliente permanecem para a entrega posterior.
+- Na revisão de 2026-10-02, `/login` e `/register` retornavam 404 porque as telas
+  ainda não existiam. Essa condição foi superada: login/cadastro possuem interface
+  e `/register` redireciona ao cadastro de barbearia. A autenticação real continua
+  pendente; consulte `CLIENT_AUTH.md`. Esta atualização documental não reexecuta
+  os testes históricos nem valida o futuro wizard de agendamento.
 - As páginas administrativas são demonstrativas. Esta validação não confirma
   autenticação ou isolamento de dados privados no backend.
 - No App Router, redirects e not-found após o início do streaming podem usar

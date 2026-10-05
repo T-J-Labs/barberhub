@@ -126,6 +126,8 @@ npm run test:routing  # Verifica resolução de hosts e geração de links
 npm run test:routing:http # Verifica rotas com o servidor local ativo na porta 3000
 npm run test:auth     # Verifica domínio, perfis e retorno seguro da autenticação
 npm run test:auth:http # Verifica a interface com servidor local ativo na porta 3000
+npm run test:booking  # Verifica seleções, conflito e fixtures demonstrativas
+npm run test:booking:http -- 3000 # Verifica entradas e contexto do agendamento
 npm run build         # Gera o build de produção
 npm run api:generate  # Gera o cliente a partir do contrato OpenAPI
 npm run api:watch     # Regenera o cliente quando o contrato é alterado
@@ -200,7 +202,10 @@ conhecer o processo completo.
 - [Processo de evolução da API](docs/api/README.md)
 - [Contrato OpenAPI](docs/api/openapi.yaml)
 - [Plano da experiência do cliente](docs/frontend/CLIENT_EXPERIENCE.md)
+- [Próximas entregas do frontend sem backend](docs/frontend/FRONTEND_ROADMAP.md)
+- [Interface de login/cadastro e limites de integração](docs/frontend/CLIENT_AUTH.md)
 - [Perfil público da barbearia](docs/frontend/PUBLIC_BARBERSHOP.md)
+- [Agendamento demonstrativo e validação](docs/frontend/CLIENT_BOOKING.md)
 
 ## Roadmap resumido
 

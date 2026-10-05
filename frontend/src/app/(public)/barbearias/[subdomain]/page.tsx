@@ -5,6 +5,8 @@ import { ProfileShell } from "@/features/public-barbershop/components/ProfileShe
 import { ProfileState } from "@/features/public-barbershop/components/ProfileState"
 import { ProfileView } from "@/features/public-barbershop/components/ProfileView"
 import { getPublicBarbershopContext } from "@/features/public-barbershop/request-origin"
+import { getPlatformNavigation } from "@/features/auth/server-navigation"
+import { publicBookingHref } from "@/features/booking/routing"
 
 type Props = {
   params: Promise<{ subdomain: string }>
@@ -33,7 +35,7 @@ export default async function PublicBarbershopPage({ params, searchParams }: Pro
     <ProfileShell>
       {state === "loading" || state === "error"
         ? <ProfileState kind={state} retryHref="/" />
-        : <ProfileView shop={shop} />}
+        : <ProfileView shop={shop} bookingHref={publicBookingHref(await getPlatformNavigation(), shop.subdomain)} />}
     </ProfileShell>
   )
 }

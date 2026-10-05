@@ -5,10 +5,12 @@
 `/barbearias` pertence a `app/(public)` e reutiliza header, footer e Container.
 A landing comercial continua em `/`; seu menu institucional não inclui o catálogo.
 Os links de seções da landing aparecem somente em `/` no domínio da plataforma.
-No catálogo e nos perfis públicos, o header mantém a marca (link para `/` no Host atual) e as
-ações Entrar e Registrar diretamente acessíveis, inclusive no mobile, sem menu
-institucional. A navegação do cliente também oferece acesso ao catálogo público,
-sem exigir um tenant.
+No catálogo e nos perfis públicos, o header mantém a marca com destino ao catálogo
+no domínio principal e as ações Entrar e Criar conta diretamente acessíveis,
+inclusive no mobile, sem menu institucional. Os links de acesso apontam para
+o domínio principal e preservam o contexto da barbearia quando aplicável,
+conforme [CLIENT_AUTH.md](CLIENT_AUTH.md). O catálogo é público, inclusive para
+visitantes, sem exigir login ou um tenant selecionado.
 
 A implementação fica em `src/features/barbershop-catalog`. Página, filtros,
 cards e estados são Server Components. O formulário `next/form` usa navegação
@@ -37,7 +39,7 @@ Somente o boundary de erro usa `"use client"`. Os cards levam ao perfil público
 ## Revisão de interface
 
 - Botões principais do catálogo usam `sky-500` com rótulos brancos, alinhados
-  aos botões Entrar e Registrar do header institucional, com cursor de clique
+  ao padrão de ação primária pública, com cursor de clique
   e ampliação de 5% no hover em 300ms, respeitando a preferência por movimento reduzido.
   O azul claro do catálogo continua reservado aos destaques e foco.
 - O select mantém comportamento nativo, seta a 16px da borda e 48px de espaço
