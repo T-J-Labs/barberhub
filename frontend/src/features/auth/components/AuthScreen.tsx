@@ -44,7 +44,7 @@ export async function AuthScreen({ mode, searchParams }: AuthPageProps & { mode:
               {shop && <p className="mt-1 text-sm leading-6 text-slate-400">{shop.neighborhood}, {shop.city}</p>}
               <Link href={returnHref} className={`mt-2 inline-flex min-h-11 items-center rounded-md text-sm font-medium text-sky-300 underline underline-offset-4 ${catalogFocusClass}`}>{returnLabel}</Link>
             </div>
-            <p className="mt-3 max-w-md text-sm leading-6 text-slate-400 lg:mt-5">Agendamento online ainda indisponível.<span className="hidden lg:inline"> Este fluxo volta ao perfil público e não reserva horários.</span></p>
+            <p className="mt-3 max-w-md text-sm leading-6 text-slate-400 lg:mt-5">Reservas reais ainda indisponíveis.<span className="hidden lg:inline"> Este fluxo volta ao perfil público, onde você pode experimentar o agendamento demonstrativo.</span></p>
           </section>
           <section aria-labelledby="auth-title" className={`${catalogPanelClass} min-w-0 p-5 sm:p-8`}>
             <h1 id="auth-title" className="text-3xl font-semibold tracking-tight text-balance">{mode === "login" ? "Entrar na sua conta" : "Criar sua conta"}</h1>

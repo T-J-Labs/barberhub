@@ -64,8 +64,8 @@ export function clientAuthHref(origin: string | null, mode: AuthMode, context?: 
 }
 
 export function publicClientContext(pathname: string, platform: PlatformNavigation): AuthContext {
-  const match = /^\/barbearias\/([a-z0-9-]+)\/?$/.exec(pathname)
-  const shop = match?.[1] ?? (pathname === "/" ? platform.hostSubdomain : null)
+  const match = /^\/barbearias\/([a-z0-9-]+)(?:\/(?:agendar|agendamento))?\/?$/.exec(pathname)
+  const shop = match?.[1] ?? (["/", "/agendar", "/agendamento"].includes(pathname) ? platform.hostSubdomain : null)
   const destination = shop && shop === platform.hostSubdomain && platform.origin
     ? `${tenantPublicOrigin(platform.origin, shop)}/` : null
   return validateAuthContext(platform.origin, shop, destination)

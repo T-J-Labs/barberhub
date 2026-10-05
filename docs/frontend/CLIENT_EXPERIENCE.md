@@ -5,6 +5,12 @@ Direção aprovada em 2026-10-01, conforme o ADR 08 em
 os contratos de API e a modelagem física de IAM ainda dependem de acordo com o
 backend.
 
+O planejamento das próximas entregas sem backend, registrado em 2026-10-05,
+está em [FRONTEND_ROADMAP.md](FRONTEND_ROADMAP.md). Ele detalha o agendamento
+demonstrativo como próxima prioridade, sem autorizar sua implementação por si só.
+A sequência abaixo descreve a jornada-alvo; seus critérios integrados não
+significam que autenticação, disponibilidade ou reservas reais já existam.
+
 ## Objetivo
 
 Permitir que uma pessoa encontre uma barbearia, utilize sua conta única, reserve
@@ -23,7 +29,11 @@ e reputação dos clientes.
 | 5 | Meus agendamentos | Próximas reservas, detalhes, histórico, cancelamento e reagendamento. | Cada reserva identifica a barbearia. O cliente acompanha apenas suas reservas e recebe feedback das alterações, conforme regras acordadas. |
 | 6 | Agenda do barbeiro | Agenda própria, conclusão, falta e bloqueios. | O profissional opera apenas sua agenda no tenant autorizado. |
 
-O primeiro trabalho é o catálogo público. A landing comercial do BarberHub
+O catálogo público foi a primeira entrega. Catálogo, perfil público e apresentação
+de login/cadastro já existem. O agendamento demonstrativo foi implementado em
+`/agendar`, com exemplos completos da Esquina e da Navalha, conflito local e
+recuperação; consulte [CLIENT_BOOKING.md](CLIENT_BOOKING.md). Google e reservas
+reais continuam indisponíveis. A landing comercial do BarberHub
 continua apresentando o produto para proprietários; catálogo e página da
 barbearia atendem à descoberta e à reserva pelo cliente. O cadastro de cliente
 deve ser distinguido do cadastro de um proprietário/estabelecimento.
@@ -35,7 +45,8 @@ Criar as features conforme cada entrega avançar, dentro de `frontend/src/featur
 - `barbershop-catalog`: busca, filtros e apresentação dos estabelecimentos.
 - `public-barbershop`: informações públicas de uma barbearia.
 - `auth`: login/cadastro somente com Google no domínio principal, escolha Cliente/Barbeiro/Barbearia e retorno à raiz do subdomínio de origem. A interface e a prévia do header estão implementadas; integração real depende dos contratos. Consulte [CLIENT_AUTH.md](CLIENT_AUTH.md).
-- `booking`: seleção e confirmação da reserva.
+- `booking`: feature implementada, com seleção e resultado demonstrativo
+  no subdomínio; confirmação real somente após integração aprovada.
 - `client-appointments`: acompanhamento das reservas pessoais.
 
 Usar Server Components por padrão e Client Components nos controles e etapas

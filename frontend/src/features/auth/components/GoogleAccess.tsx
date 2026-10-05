@@ -5,7 +5,7 @@ import type { AccountType, AuthMode } from "../routing"
 import { DemoHeaderPreview } from "./DemoHeaderPreview"
 
 const profileDescriptions: Record<AccountType, { label: string; description: string }> = {
-  cliente: { label: "Cliente", description: "Sua conta pessoal para conhecer barbearias. O agendamento online ainda não está disponível." },
+  cliente: { label: "Cliente", description: "Sua conta pessoal para conhecer barbearias. Reservas reais ainda indisponíveis; a demonstração de agendamento está no perfil público." },
   barbeiro: { label: "Barbeiro", description: "Seu perfil profissional. O cadastro e a vinculação a uma barbearia ainda estão em preparação." },
   barbearia: { label: "Barbearia", description: "Cadastro do estabelecimento pelo proprietário. A configuração da barbearia ainda está em preparação." },
 }

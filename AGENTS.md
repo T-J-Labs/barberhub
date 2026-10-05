@@ -9,6 +9,13 @@ Antes de sugerir ou implementar alterações, leia:
 - `docs/architecture/ADR.md`
 - `README.md`
 
+Para análise, planejamento ou implementação de frontend, leia também:
+
+- `docs/frontend/FRONTEND_ROADMAP.md`: prioridades, escopo demonstrativo,
+  limites e critérios de conclusão das próximas entregas.
+- `docs/frontend/CLIENT_EXPERIENCE.md`: jornada global do cliente.
+- `docs/frontend/CLIENT_AUTH.md`: autenticação, navegação e retorno entre domínios.
+
 ## Estrutura do repositório
 
 - `frontend/`: aplicação Next.js e TypeScript
@@ -32,6 +39,18 @@ Antes de sugerir ou implementar alterações, leia:
 
 Ao trabalhar no frontend:
 
+- Siga o escopo pedido pelo usuário. Pedidos de análise, planejamento, listagem
+  ou documentação não autorizam implementar funcionalidades. O roadmap orienta
+  futuras implementações, mas não autoriza executar suas etapas automaticamente.
+- A próxima entrega recomendada é o agendamento demonstrativo no subdomínio.
+  Quando solicitada a primeira entrega, limite-se ao wizard, documentação e
+  testes descritos em `docs/frontend/FRONTEND_ROADMAP.md`. Não inclua as demais
+  etapas, outra reformulação do Header ou mudança de domínio do admin.
+- Nas entregas demonstrativas desse roadmap, não altere backend ou banco.
+  Enquanto o OpenAPI mantiver `paths: {}`, use fixtures locais em memória,
+  sem inventar endpoints, autenticação ou persistência em `localStorage`.
+- Não apresente simulação como reserva, autenticação ou autorização real.
+  Registre apenas testes efetivamente executados e suas limitações.
 - Priorize mobile-first.
 - Utilize Server Components por padrão.
 - Adicione `"use client"` apenas quando necessário.

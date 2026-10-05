@@ -1,9 +1,10 @@
-import { FiCalendar, FiMapPin } from "react-icons/fi"
+import { FiMapPin } from "react-icons/fi"
+import { BookingEntry } from "@/features/booking/components/BookingEntry"
 import type { PublicBarbershopPresentation } from "../types"
-import { profileActionClass, profileSecondaryActionClass } from "../styles"
+import { profileSecondaryActionClass } from "../styles"
 import { BarbershopLogo } from "./BarbershopLogo"
 
-export function ProfileHero({ shop }: { shop: PublicBarbershopPresentation }) {
+export function ProfileHero({ shop, bookingHref }: { shop: PublicBarbershopPresentation; bookingHref: string | null }) {
   return (
     <header className="overflow-hidden rounded-2xl border border-[#26384A] bg-[#0A1521]">
       <div className="grid lg:grid-cols-[minmax(0,1fr)_340px]">
@@ -17,10 +18,10 @@ export function ProfileHero({ shop }: { shop: PublicBarbershopPresentation }) {
           <p className="mt-4 flex min-w-0 items-start gap-2 text-sm leading-6 text-slate-300 sm:text-base"><FiMapPin className="mt-1 shrink-0 text-sky-400" aria-hidden="true" /><span className="break-words">{shop.neighborhood}, {shop.city}</span></p>
           <p className="mt-5 max-w-xl text-base leading-7 text-[#B6C2D1] sm:text-lg sm:leading-8">{shop.description}</p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <a href="#agendamento" aria-describedby="booking-preview-note" className={profileActionClass}><FiCalendar size={18} aria-hidden="true" />Agendar horário</a>
+            <BookingEntry bookingHref={bookingHref} />
             <a href="#visita" className={profileSecondaryActionClass}><FiMapPin size={18} aria-hidden="true" />Informações de visita</a>
           </div>
-          <p id="booking-preview-note" className="mt-3 text-sm leading-6 text-slate-400">Agendamento online ainda indisponível nesta demonstração.</p>
+          <p id="booking-preview-note" className="mt-3 text-sm leading-6 text-slate-400">Explore o agendamento demonstrativo. Nenhum horário será reservado.</p>
         </div>
       </div>
     </header>

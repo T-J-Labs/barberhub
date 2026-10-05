@@ -24,6 +24,10 @@ redefinição de senha, SDK ou endpoints de autenticação inventados.
   mesmo se `returnTo` faltar, for inválido, repetido ou apontar ao caminho
   legado da plataforma. Não há redirecionamento para destinos arbitrários.
   Sem barbearia reconhecida, retornar ao catálogo.
+- O CTA público “Agendar horário” abre a introdução de `/agendar` no subdomínio.
+  O wizard pode ser experimentado sem autenticação. Seus links de login/cadastro
+  preservam a barbearia e retornam à raiz do perfil, sem ampliar destinos permitidos.
+  Consulte [CLIENT_BOOKING.md](CLIENT_BOOKING.md).
 - A origem vem de `BARBERHUB_PUBLIC_HOST`; desenvolvimento usa localhost
   e a porta validada do Host. Produção usa HTTPS no domínio configurado.
   Host externo, IP e X-Forwarded-Host não autorizam a tela de acesso.
