@@ -35,7 +35,7 @@ function assertProfileIdentity(body, name) {
 }
 
 function publicHeader(body) {
-  const header = body.match(/<header\b[^>]*class="[^"]*\bpublic-header\b[^"]*"[^>]*>([\s\S]*?)<\/header>/)?.[1]
+  const header = body.match(/<header\b[^>]*>([\s\S]*?)<\/header>/)?.[1]
   assert.notEqual(header, undefined, "The public header must be rendered")
   return header
 }
@@ -44,8 +44,8 @@ function assertCompactHeader(body) {
   const header = publicHeader(body)
   assert(!header.includes('aria-label="Navegação principal"'), "Institutional navigation belongs only to the platform landing")
   assert(!header.includes('id="public-navigation"'), "The institutional drawer must not appear on a profile or catalog")
-  assert(header.includes('href="/login"'))
-  assert(header.includes('href="/register"'))
+  const accessLinks = [...header.matchAll(/href="([^"]+)"/g)].map(match => new URL(match[1].replaceAll("&amp;", "&"), origin))
+  for (const route of ["/login", "/cadastro"]) assert(accessLinks.some(url => url.origin === origin && url.pathname === route), `Acesso ${route} no domínio principal`)
 }
 
 test("platform landing and catalog render without redirects", async () => {

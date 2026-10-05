@@ -34,7 +34,7 @@ Criar as features conforme cada entrega avançar, dentro de `frontend/src/featur
 
 - `barbershop-catalog`: busca, filtros e apresentação dos estabelecimentos.
 - `public-barbershop`: informações públicas de uma barbearia.
-- `auth`: acesso à conta e retorno ao fluxo iniciado.
+- `auth`: login/cadastro somente com Google no domínio principal, escolha Cliente/Barbeiro/Barbearia e retorno à raiz do subdomínio de origem. A interface e a prévia do header estão implementadas; integração real depende dos contratos. Consulte [CLIENT_AUTH.md](CLIENT_AUTH.md).
 - `booking`: seleção e confirmação da reserva.
 - `client-appointments`: acompanhamento das reservas pessoais.
 
@@ -63,8 +63,7 @@ API; a demonstração deve deixar claro seu caráter local.
   formato da busca e paginação.
 - Modelagem da identidade global do cliente e do perfil por barbearia, incluindo
   quando esse perfil é criado e quais dados o estabelecimento pode consultar.
-- Contratos de login, cadastro, sessão e armazenamento do JWT. Preservar o destino
-  após login usando somente destinos internos validados.
+- Contratos da integração Google, criação/vinculação de contas, sessão e armazenamento do JWT. Preservar o retorno ao subdomínio da barbearia validada; seleção de perfil não concede permissões.
 - Resolução e validação do contexto da barbearia nas operações do cliente,
   consulta de reservas próprias entre tenants e limites de acesso da equipe.
 - Regras de disponibilidade, datas e fuso horário, cancelamento, reagendamento,

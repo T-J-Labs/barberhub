@@ -1,0 +1,30 @@
+[
+  {
+    "left": 48,
+    "menuWidth": 256,
+    "right": 304,
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "left": 118.4000015258789,
+    "menuWidth": 256,
+    "right": 374.4000015258789,
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "left": 496,
+    "menuWidth": 256,
+    "right": 752,
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "left": 1088,
+    "menuWidth": 256,
+    "right": 1344,
+    "scrollWidth": 1440,
+    "width": 1440
+  }
+]

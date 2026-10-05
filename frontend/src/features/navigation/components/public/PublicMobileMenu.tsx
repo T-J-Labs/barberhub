@@ -11,9 +11,11 @@ type PublicMobileMenuProps = {
   navigation: readonly PublicNavigationItem[]
   onClose: () => void
   activeHref?: string
+  loginHref: string | null
+  signupHref: string | null
 }
 
-export function PublicMobileMenu({ isOpen, navigation, onClose, activeHref }: PublicMobileMenuProps) {
+export function PublicMobileMenu({ isOpen, navigation, onClose, activeHref, loginHref, signupHref }: PublicMobileMenuProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -56,8 +58,8 @@ export function PublicMobileMenu({ isOpen, navigation, onClose, activeHref }: Pu
         </ul>
 
         <div className="mt-auto grid shrink-0 gap-3 border-t border-[#26384A] pt-5">
-          <Link href="/login" className={publicLoginClass} onClick={onClose}>Entrar</Link>
-          <Link href="/register" className={catalogActionClass} onClick={onClose}>Registrar</Link>
+          {loginHref && <Link href={loginHref} className={publicLoginClass} onClick={onClose}>Entrar</Link>}
+          {signupHref && <Link href={signupHref} className={catalogActionClass} onClick={onClose}>Criar conta</Link>}
         </div>
       </nav>
     </dialog>

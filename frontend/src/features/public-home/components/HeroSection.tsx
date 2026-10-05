@@ -1,8 +1,12 @@
 import { Container } from "@/components/ui/Container";
 import Image from "next/image";
 import Link from "next/link";
+import { getPlatformNavigation } from "@/features/auth/server-navigation";
+import { clientAuthHref } from "@/features/auth/routing";
 
-export function HeroSection() {
+export async function HeroSection() {
+  const platform = await getPlatformNavigation();
+  const signupHref = clientAuthHref(platform.origin, "cadastro", undefined, "barbearia") ?? "#contato";
   return(
     <section
         id="inicio"
@@ -31,10 +35,10 @@ export function HeroSection() {
 
               <div className="flex flex-col items-center justify-center gap-4 lg:flex-row w-full">
                 <Link
-                  href="/register"
+                  href={signupHref}
                   className="flex min-h-11 w-full items-center justify-center rounded-lg bg-sky-500 py-3 text-center text-white"
                 >
-                  Registrar
+                  Cadastrar minha barbearia
                 </Link>
                 <Link
                   href="#como-funciona"

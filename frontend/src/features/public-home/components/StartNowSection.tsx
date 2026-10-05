@@ -1,7 +1,11 @@
 import { Container } from "@/components/ui/Container";
 import Link from "next/link";
+import { getPlatformNavigation } from "@/features/auth/server-navigation";
+import { clientAuthHref } from "@/features/auth/routing";
 
-export function StartNowSection() {
+export async function StartNowSection() {
+  const platform = await getPlatformNavigation();
+  const signupHref = clientAuthHref(platform.origin, "cadastro", undefined, "barbearia") ?? "#contato";
   return (
     <section
       id="startNow"
@@ -27,10 +31,10 @@ export function StartNowSection() {
             </div>
 
             <Link
-              href="#contato"
+              href={signupHref}
               className="flex min-h-12 shrink-0 items-center justify-center rounded-lg bg-sky-500 px-6 py-3 font-semibold text-white"
             >
-              Registrar
+              Cadastrar minha barbearia
             </Link>
           </div>
         </div>

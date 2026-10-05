@@ -1,0 +1,194 @@
+[
+  {
+    "label": "login: acesso direto na plataforma",
+    "pass": true
+  },
+  {
+    "label": "login: retorno padrão/caminho legado leva ao subdomínio (ausente)",
+    "pass": true
+  },
+  {
+    "label": "login: retorno padrão/caminho legado leva ao subdomínio (/barbearias/demo-esquina)",
+    "pass": true
+  },
+  {
+    "label": "login: retorno padrão/caminho legado leva ao subdomínio (https://barberhub.test/barbearias/demo-esquina)",
+    "pass": true
+  },
+  {
+    "label": "login: contexto e retorno por subdomínio",
+    "pass": true
+  },
+  {
+    "label": "login: host tenant redireciona para plataforma",
+    "pass": true
+  },
+  {
+    "label": "login: descarta https://externo.test/",
+    "pass": true
+  },
+  {
+    "label": "login: descarta //externo.test",
+    "pass": true
+  },
+  {
+    "label": "login: descarta javascript:alert(1)",
+    "pass": true
+  },
+  {
+    "label": "login: descarta https://demo-esquina.barberhub.test/?redirect=evil",
+    "pass": true
+  },
+  {
+    "label": "login: descarta /barbearias/demo-navalha",
+    "pass": true
+  },
+  {
+    "label": "login: retorno repetido descartado",
+    "pass": true
+  },
+  {
+    "label": "login: barbearia repetida descartada",
+    "pass": true
+  },
+  {
+    "label": "login: barbearia desconhecida descartada",
+    "pass": true
+  },
+  {
+    "label": "login: host arbitrário não apresenta formulário",
+    "pass": true
+  },
+  {
+    "label": "login: X-Forwarded-Host não autoriza origem",
+    "pass": true
+  },
+  {
+    "label": "cadastro: acesso direto na plataforma",
+    "pass": true
+  },
+  {
+    "label": "cadastro: retorno padrão/caminho legado leva ao subdomínio (ausente)",
+    "pass": true
+  },
+  {
+    "label": "cadastro: retorno padrão/caminho legado leva ao subdomínio (/barbearias/demo-esquina)",
+    "pass": true
+  },
+  {
+    "label": "cadastro: retorno padrão/caminho legado leva ao subdomínio (https://barberhub.test/barbearias/demo-esquina)",
+    "pass": true
+  },
+  {
+    "label": "cadastro: contexto e retorno por subdomínio",
+    "pass": true
+  },
+  {
+    "label": "cadastro: host tenant redireciona para plataforma",
+    "pass": true
+  },
+  {
+    "label": "cadastro: descarta https://externo.test/",
+    "pass": true
+  },
+  {
+    "label": "cadastro: descarta //externo.test",
+    "pass": true
+  },
+  {
+    "label": "cadastro: descarta javascript:alert(1)",
+    "pass": true
+  },
+  {
+    "label": "cadastro: descarta https://demo-esquina.barberhub.test/?redirect=evil",
+    "pass": true
+  },
+  {
+    "label": "cadastro: descarta /barbearias/demo-navalha",
+    "pass": true
+  },
+  {
+    "label": "cadastro: retorno repetido descartado",
+    "pass": true
+  },
+  {
+    "label": "cadastro: barbearia repetida descartada",
+    "pass": true
+  },
+  {
+    "label": "cadastro: barbearia desconhecida descartada",
+    "pass": true
+  },
+  {
+    "label": "cadastro: host arbitrário não apresenta formulário",
+    "pass": true
+  },
+  {
+    "label": "cadastro: X-Forwarded-Host não autoriza origem",
+    "pass": true
+  },
+  {
+    "label": "caminho legado redireciona ao subdomínio",
+    "pass": true
+  },
+  {
+    "label": "caminho explícito no subdomínio também usa sua raiz",
+    "pass": true
+  },
+  {
+    "label": "perfil no subdomínio usa links absolutos da plataforma",
+    "pass": true
+  },
+  {
+    "label": "CTAs institucionais pré-selecionam Barbearia",
+    "pass": true
+  },
+  {
+    "label": "register legado preserva intenção institucional",
+    "pass": true
+  },
+  {
+    "label": "cadastro: escolha cliente preserva origem e retorno",
+    "pass": true
+  },
+  {
+    "label": "login: cliente volta ao mesmo perfil de cadastro",
+    "pass": true
+  },
+  {
+    "label": "cadastro: escolha barbeiro preserva origem e retorno",
+    "pass": true
+  },
+  {
+    "label": "login: barbeiro volta ao mesmo perfil de cadastro",
+    "pass": true
+  },
+  {
+    "label": "cadastro: escolha barbearia preserva origem e retorno",
+    "pass": true
+  },
+  {
+    "label": "login: barbearia volta ao mesmo perfil de cadastro",
+    "pass": true
+  },
+  {
+    "label": "perfil desconhecido/repetido descartado: perfil=admin",
+    "pass": true
+  },
+  {
+    "label": "perfil desconhecido/repetido descartado: perfil=super-admin",
+    "pass": true
+  },
+  {
+    "label": "perfil desconhecido/repetido descartado: perfil=barbeiro&perfil=barbearia",
+    "pass": true
+  },
+  {
+    "label": "catálogo aponta diretamente aos subdomínios",
+    "pass": true
+  },
+  {
+    "label": "admin permanece disponível como demonstração existente",
+    "pass": true
+  }
+]
