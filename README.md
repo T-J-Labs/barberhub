@@ -124,6 +124,8 @@ npm run lint          # Executa o ESLint
 npm run typecheck     # Verifica os tipos TypeScript
 npm run test:routing  # Verifica resolução de hosts e geração de links
 npm run test:routing:http # Verifica rotas com o servidor local ativo na porta 3000
+npm run test:auth     # Verifica domínio, perfis e retorno seguro da autenticação
+npm run test:auth:http # Verifica a interface com servidor local ativo na porta 3000
 npm run build         # Gera o build de produção
 npm run api:generate  # Gera o cliente a partir do contrato OpenAPI
 npm run api:watch     # Regenera o cliente quando o contrato é alterado
@@ -166,6 +168,13 @@ redirecionam para o subdomínio, preservando os parâmetros. Em produção, conf
 `BARBERHUB_PUBLIC_HOST` no build e na execução e providencie DNS e TLS para os
 subdomínios. Sem uma origem pública válida, os perfis ficam indisponíveis.
 Consulte [a validação de domínios](docs/frontend/DOMAINS_VALIDATION.md).
+
+Login e cadastro ficam em `/login` e `/cadastro` no domínio principal e usam
+somente Google. O cadastro oferece Cliente, Barbeiro e Barbearia. A interface
+preserva o retorno ao subdomínio do estabelecimento. O acesso real com Google
+continua indisponível enquanto o contrato de autenticação não for aprovado;
+o botão informa essa condição. A prévia opcional do header não cria uma sessão.
+Consulte [a experiência de autenticação](docs/frontend/CLIENT_AUTH.md).
 
 ## Contrato da API
 

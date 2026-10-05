@@ -88,9 +88,9 @@
 
 ### Módulo de Identidade e Acesso (IAM)
 
-* **RF01:** O sistema deve autenticar usuários via E-mail e Senha gerando token JWT.
+* **RF01:** Cadastro/login de Cliente, Barbeiro e proprietário de Barbearia usam somente Google, conforme decisão de 2026-10-04. O cadastro permite escolher esses três perfis. A integração do provedor, criação/vinculação de conta e emissão/transporte da sessão dependem de contrato aprovado; escolher um perfil não concede permissões. Login e cadastro ficam no domínio principal; perfis públicos continuam nos subdomínios.
 * **RF02:** O sistema deve suportar controle de acesso baseado em papéis (RBAC).
-* **RF03:** O usuário pode editar seu próprio perfil e redefinir senha.
+* **RF03:** O usuário pode editar seu próprio perfil. A recuperação de acesso é realizada pelo Google; o BarberHub não oferece senha local ou redefinição de senha.
 
 ### Módulo SaaS (Tenant)
 
@@ -131,7 +131,7 @@
 * **RNF02 - Desempenho e SEO:** O frontend institucional (páginas públicas) deve utilizar Server-Side Rendering (SSR) / Static Site Generation (SSG) no Next.js para carregar em menos de 2 segundos.
 * **RNF03 - Usabilidade:** Interface 100% Mobile-First. O frontend deve ser um Progressive Web App (PWA) para instalação na tela inicial.
 * **RNF04 - Isolamento de Dados:** Dados privados de um `tenant_id` jamais podem ser expostos para outro tenant. A visão pessoal do cliente pode reunir suas próprias reservas, conforme o ADR 08, sem conceder acesso cruzado aos estabelecimentos.
-* **RNF05 - Escalabilidade:** O backend deve ser Stateless (sem estado local de sessão) para permitir escalabilidade horizontal futura. Senhas devem usar hashing (Bcrypt/Argon2).
+* **RNF05 - Escalabilidade:** O backend deve ser Stateless (sem estado local de sessão) para permitir escalabilidade horizontal futura. A identidade Google deve ser validada pelo backend conforme contrato aprovado; o BarberHub não armazena senhas locais. Emissão, transporte e revogação da sessão dependem dos contratos de IAM.
 
 ---
 

@@ -38,4 +38,4 @@ export function proxy(request: NextRequest) {
   return NextResponse.next()
 }
 
-export const config = { matcher: ["/", "/barbearias/:path*"] }
+export const config = { matcher: ["/", "/barbearias/:path*", "/login", "/cadastro", "/register"] }

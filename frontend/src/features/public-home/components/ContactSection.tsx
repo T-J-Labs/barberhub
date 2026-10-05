@@ -17,6 +17,7 @@ export function ContactSection() {
           <p className="max-w-2xl text-lg text-[#B6C2D1]">
             Escolha o canal que fizer mais sentido. Os contatos definitivos
             serão publicados quando estiverem disponíveis.
+            O cadastro de barbearias ainda não está disponível.
           </p>
         </div>
 

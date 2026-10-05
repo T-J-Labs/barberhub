@@ -9,10 +9,13 @@ import { publicNavigation } from "../../config/public-navigation"
 import { HeaderBrand } from "../HeaderBrand"
 import { PublicMobileMenu } from "./PublicMobileMenu"
 import { publicLoginClass, publicNavigationClass } from "./styles"
+import { clientAuthHref, type PlatformNavigation } from "@/features/auth/routing"
 
 export type PublicHeaderContext = "landing" | "catalog" | "barbershop" | "public"
 
-export function PublicHeader({ context }: { context: PublicHeaderContext }) {
+export function PublicHeader({ context, platform }: { context: PublicHeaderContext; platform: PlatformNavigation }) {
+  const loginHref = clientAuthHref(platform.origin, "login")
+  const signupHref = clientAuthHref(platform.origin, "cadastro")
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<string>(publicNavigation[0].href)
   const isLandingPage = context === "landing"
@@ -85,7 +88,7 @@ export function PublicHeader({ context }: { context: PublicHeaderContext }) {
             <FiMenu size={21} aria-hidden="true" />
           </button>}
 
-          <HeaderBrand />
+          <HeaderBrand href={platform.origin ? `${platform.origin}/` : "/"} />
 
           {isLandingPage && <nav aria-label="Navegação principal" className="hidden items-center justify-center gap-1 lg:flex">
             {publicNavigation.map((item) => (
@@ -96,13 +99,13 @@ export function PublicHeader({ context }: { context: PublicHeaderContext }) {
           </nav>}
 
           <div className={isLandingPage ? "hidden items-center gap-3 lg:flex" : "flex shrink-0 items-center gap-2 [&>a]:px-3 sm:gap-3 sm:[&>a]:px-5"}>
-            <Link href="/login" className={publicLoginClass}>Entrar</Link>
-            <Link href="/register" className={catalogActionClass}>Registrar</Link>
+            {loginHref && <Link href={loginHref} className={publicLoginClass}>Entrar</Link>}
+            {signupHref && <Link href={signupHref} className={catalogActionClass}>Criar conta</Link>}
           </div>
         </div>
       </Container>
 
-      {isLandingPage && <PublicMobileMenu isOpen={menuOpen} navigation={publicNavigation} activeHref={activeHref} onClose={closeMenu} />}
+      {isLandingPage && <PublicMobileMenu isOpen={menuOpen} navigation={publicNavigation} activeHref={activeHref} onClose={closeMenu} loginHref={loginHref} signupHref={signupHref} />}
     </header>
   )
 }
