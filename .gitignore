@@ -6,10 +6,92 @@ frontend/node_modules/
 frontend/.next/
 frontend/out/
 
-# Environment variables
-frontend/.env
-frontend/.env.local
-frontend/.env.*.local
+# Local environment files, at any depth
+# Examples/templates must contain placeholders only, never real credentials.
+.env
+.env.*
+*.env
+*.env.*
+.envrc
+!.env.example
+!.env.*.example
+!*.env.example
+!*.env.*.example
+!.env.template
+!.env.*.template
+!*.env.template
+!*.env.*.template
+
+# Private keys and keystores
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+id_*_sk
+
+# Local credentials and downloaded provider secrets
+.secrets/
+secrets/
+credentials/
+credentials.json
+credentials.*.json
+*-credentials.json
+secrets.json
+*.secrets.json
+service-account*.json
+service_account*.json
+firebase-adminsdk*.json
+*-firebase-adminsdk-*.json
+client_secret*.json
+!credentials.example.json
+!credentials.template.json
+!service-account.example.json
+!service-account.template.json
+!service_account.example.json
+!service_account.template.json
+!client_secret.example.json
+!client_secret.template.json
+
+# Local authentication/configuration for package registries and cloud tools
+.npmrc
+.yarnrc
+.yarnrc.yml
+.pypirc
+.netrc
+_netrc
+.aws/
+.azure/
+.ssh/
+.kube/
+**/.config/gcloud/
+**/.docker/config.json
+.vercel/
+.netlify/
+
+# Browser authentication state and network captures
+.auth/
+storage-state*.json
+storageState*.json
+cookies*.json
+cookies*.txt
+*.har
+
+# Logs, memory dumps and local backups may contain sensitive data
+*.log
+*.log.*
+*.heapsnapshot
+*.heapprofile
+*.hprof
+*.bak
+*.backup
+*.orig
+*~
 
 # Backend
 backend/target/
