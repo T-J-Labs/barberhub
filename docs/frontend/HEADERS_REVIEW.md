@@ -61,7 +61,8 @@ anterior; seu trecho de dropdown corresponde ao código antes desta revisão.
 Páginas e composições de papel continuam Server Components onde já eram;
 interação fica nos headers/drawer Client Components. Não existe componente com
 condicionais para todos os papéis. Nenhum destino indisponível do superadmin foi
-transformado em link; Minhas barbearias não foi adicionado.
+transformado em link; Minhas barbearias não foi adicionado naquela revisão.
+Foi entregue posteriormente, conforme a ampliação registrada no fim deste documento.
 
 ## QA executado
 
@@ -208,7 +209,7 @@ npm run test:profiles:browser -- 3000
 
 ### Correção da separação de Perfil e Ajuda
 
-O drawer do cliente mantém Barbearias e Meus agendamentos no bloco principal.
+O drawer do cliente mantém Explorar barbearias, Minhas barbearias e Meus agendamentos no bloco principal.
 Perfil e Ajuda ficam no rodapé com divisor, acima da saída local, seguindo o
 menu do barbeiro. Destinos, atalhos da barra e a centralização exclusiva do
 catálogo visitante permanecem preservados. A regressão existente em
@@ -221,3 +222,13 @@ grupos, divisor, rolagem e Escape/retorno de foco em 320×568, 390×844, 768×84
 no catálogo e login. Não houve erros JavaScript. Evidências em
 `validation/headers/client-grouping/`. Build e suíte completa não foram
 reexecutados nesta correção; as execuções acima são históricas.
+
+## Ampliação de navegação do cliente — 2026-10-06
+
+Minhas barbearias → `/cliente/barbearias` foi adicionada ao bloco principal,
+entre Explorar barbearias → `/barbearias` e Meus agendamentos →
+`/cliente/agendamentos`. Perfil/Ajuda e prévia do header permanecem; acesso
+direto não cria sessão. A ajuda explica a criação do vínculo após primeiro
+agendamento real confirmado e o filtro combinado com busca. As fixtures são
+vínculos fictícios prontos, independentes do wizard, cancelamento e superadmin.
+[Escopo e QA](CLIENT_BARBERSHOPS.md).

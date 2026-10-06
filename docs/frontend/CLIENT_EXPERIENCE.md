@@ -54,6 +54,9 @@ Criar as features conforme cada entrega avançar, dentro de `frontend/src/featur
 - `auth`: login/cadastro somente com Google no domínio principal, escolha Cliente/Barbeiro/Barbearia e retorno à raiz do subdomínio de origem. A interface e a prévia do header estão implementadas; integração real depende dos contratos. Consulte [CLIENT_AUTH.md](CLIENT_AUTH.md).
 - `booking`: feature implementada, com seleção e resultado demonstrativo
   no subdomínio; confirmação real somente após integração aprovada.
+- `client-barbershops`: vínculos fictícios em `/cliente/barbearias`, destinos
+  públicos e filtro combinado. Criação real aprovada após primeiro agendamento
+  real confirmado; a simulação não cria vínculo. [Escopo](CLIENT_BARBERSHOPS.md).
 - `client-appointments`: acompanhamento das reservas pessoais.
   Demonstração local implementada em `/cliente/agendamentos`, com próximas
   visitas, histórico, detalhes, cancelamento da amostra em memória e link para
@@ -91,7 +94,8 @@ API; a demonstração deve deixar claro seu caráter local.
 - Dados públicos e critérios de publicação, suspensão e retirada do catálogo;
   formato da busca e paginação.
 - Modelagem da identidade global do cliente e do perfil por barbearia, incluindo
-  quando esse perfil é criado e quais dados o estabelecimento pode consultar.
+  transação/modelagem da criação após primeiro agendamento real confirmado
+  (regra aprovada em 2026-10-06) e quais dados o estabelecimento pode consultar.
 - Contratos da integração Google, criação/vinculação de contas, sessão e armazenamento do JWT. Preservar o retorno ao subdomínio da barbearia validada; seleção de perfil não concede permissões.
 - Resolução e validação do contexto da barbearia nas operações do cliente,
   consulta de reservas próprias entre tenants e limites de acesso da equipe.
@@ -116,10 +120,15 @@ barbeiro compartilham o drawer, preservando destinos e contexto próprios.
 Implementação e limites: [HEADERS_REVIEW.md](HEADERS_REVIEW.md).
 
 As seis etapas iniciais do roadmap estão implementadas no escopo demonstrativo,
-sem integração real. “Minhas barbearias” ainda não está implementada: permanece
-após a jornada inicial e requer definir quando nasce o vínculo cliente/barbearia.
-Não equivale a favoritos e não deve receber vínculos automáticos de uma reserva
-simulada. Onboarding de estabelecimento/equipe também aguarda regras.
+sem integração real. “Minhas barbearias” foi implementada como demonstração local
+em 2026-10-06. O vínculo real nasce após primeiro agendamento real confirmado
+na barbearia. Fixtures são vínculos fictícios prontos, independentes de wizard,
+cancelamento local e superadmin; não equivalem a favoritos.
+Onboarding demonstrativo do proprietário foi implementado conforme plano específico
+aprovado, em `/onboarding/barbearia`, com duas origens independentes, checklist e
+cenários fictícios de liberação. [Escopo e limites](OWNER_ONBOARDING.md).
+Identidade/vínculo real do responsável e onboarding completo de equipe continuam
+pendentes de contratos e regras específicas.
 
 Geolocalização, avaliações, rankings e favoritos ficam para depois da jornada
 inicial. Pagamentos e fidelidade seguem o roadmap pós-MVP do ADR.

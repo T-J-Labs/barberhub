@@ -4,6 +4,13 @@ import { isPublicSubdomain, publicBarbershopHref, publicHostContext } from "./fe
 import { getPublicBarbershopPresentation } from "./features/public-barbershop/barbershop-presentation"
 
 export function proxy(request: NextRequest) {
+  if (["/cliente/barbearias", "/cliente/agendamentos"].includes(request.nextUrl.pathname)) {
+    // Sobrescrever sempre: header interno transporta só a query, nunca identidade/tenant.
+    // O layout redireciona antes de streaming, sem normalização de localhost do proxy.
+    const requestHeaders = new Headers(request.headers)
+    requestHeaders.set("x-barberhub-client-search", request.nextUrl.search)
+    return NextResponse.next({ request: { headers: requestHeaders } })
+  }
   const protocol = process.env.NODE_ENV === "development" ? "http:" : "https:"
   const host = request.headers.get("host")
   const context = publicHostContext(host, getConfiguredPublicHost(), protocol)
@@ -46,4 +53,4 @@ export function proxy(request: NextRequest) {
   return NextResponse.next()
 }
 
-export const config = { matcher: ["/", "/barbearias/:path*", "/agendar", "/agendamento", "/login", "/cadastro", "/register"] }
+export const config = { matcher: ["/", "/barbearias/:path*", "/agendar", "/agendamento", "/login", "/cadastro", "/register", "/cliente/barbearias", "/cliente/agendamentos"] }

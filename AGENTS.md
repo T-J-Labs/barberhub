@@ -56,9 +56,13 @@ Ao trabalhar no frontend:
   Preservar navegação admin/superadmin, sidebar desktop, domínios e retorno.
   A próxima prioridade é consolidar QA; esta orientação não autoriza novas
   implementações sem solicitação do usuário.
-  “Minhas barbearias” ainda não está implementada e depende da
-  definição da regra de vínculo; onboarding de estabelecimento/equipe também
-  aguarda regras. Uma recomendação não constitui aprovação dessas regras ou
+  “Minhas barbearias” está implementada como demonstração local. A regra
+  aprovada é vínculo após primeiro agendamento real confirmado na barbearia;
+  simulações não criam vínculo. Consulte `docs/frontend/CLIENT_BARBERSHOPS.md`.
+  Onboarding demonstrativo do proprietário está implementado conforme plano
+  específico aprovado; consulte `docs/frontend/OWNER_ONBOARDING.md`. Identidade,
+  vínculo e onboarding real de equipe continuam dependentes de contratos/regras.
+  Uma recomendação não constitui aprovação dessas regras ou
   autorização para implementar. Pedidos parciais continuam limitados ao recorte
   solicitado, sem outra reformulação do Header ou mudança de domínio implícita.
 - Nas entregas demonstrativas desse roadmap, não altere backend ou banco.

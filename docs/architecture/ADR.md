@@ -77,10 +77,18 @@
 * **Decisão:** O cliente terá **identidade e credenciais globais**, podendo agendar em diferentes barbearias com uma única conta. A plataforma oferecerá um **catálogo público simples**, com busca por nome, cidade ou bairro e acesso à página de cada estabelecimento.
 * **Isolamento:** Perfil do cliente no estabelecimento, agendamentos, histórico de atendimento e reputação continuam vinculados ao `tenant_id`. Uma barbearia não pode consultar os dados do cliente em outra. Admins e barbeiros mantêm permissões restritas aos seus respectivos tenants.
 * **Visão do Cliente:** O cliente poderá consultar seus próprios agendamentos em diferentes barbearias, identificadas na interface. O backend deve limitar essa consulta à identidade autenticada e validar a titularidade de cada reserva em consultas e alterações.
+* **Vínculo cliente/barbearia — decisão de produto aprovada em 2026-10-06:** O vínculo real nasce após o primeiro agendamento real confirmado na barbearia. Esta decisão substitui a pendência anterior sobre o momento de criação. A transação, modelagem física, consulta e demais efeitos do ciclo de vida ainda exigem contratos e implementação no backend. A demonstração de “Minhas barbearias” usa vínculos fictícios prontos: concluir o wizard não cria vínculo nem reserva global. Cancelamento local e suspensão no superadmin não alteram essa amostra; indisponibilidade mantém o vínculo fictício e a consulta aos agendamentos, sem ações públicas indisponíveis e sem motivo inventado.
 * **Descoberta Pública:** O catálogo expõe somente informações autorizadas para publicação de estabelecimentos ativos. O acesso direto pelo subdomínio permanece disponível. A consulta global ao catálogo não exige um tenant selecionado; a consulta pública de uma barbearia específica resolve seu contexto.
 * **Autorização:** Selecionar uma barbearia na interface não concede acesso aos seus dados privados. O backend resolve e valida o contexto de cada operação. Em operações administrativas, o tenant vem do contexto autenticado; em operações do cliente, a identidade global, os recursos envolvidos e a titularidade determinam o acesso.
 * **Escopo Inicial:** Catálogo, página da barbearia, login/cadastro do cliente, agendamento e meus agendamentos. Geolocalização, avaliações, rankings e favoritos ficam para uma etapa posterior.
 * **Impactos/Pendências:** Esta decisão substitui o cadastro de cliente com e-mail único por tenant. A modelagem física de identidade e vínculos, o ciclo de vida do perfil local e os contratos de autenticação e agendamento devem ser acordados com o backend antes da integração. O OpenAPI permanece como fonte de verdade das operações aprovadas.
+
+### ADR 09: Configuração Inicial e Liberação do Estabelecimento
+
+* **Decisão de produto aprovada em 2026-10-06:** A configuração mínima exige nome/localização válidos, subdomínio válido sem conflito, serviço ativo com duração/preço válidos, profissional associado e ao menos um intervalo suficiente dentro do funcionamento da barbearia.
+* **Liberação para publicação:** Exige configuração mínima e compra confirmada ou liberação explícita pelo superadmin. Checklist completo não publica automaticamente nem concede acesso.
+* **Entrega demonstrativa:** `/onboarding/barbearia` no domínio principal validado, com exemplos independentes de cadastro e convite fictício. Server Component compõe wizard Client Component; modelos, validações, checklist e transições locais ficam separados. Aceite, compra e liberação são cenários de apresentação em memória, sem transferência de rascunhos ou fixtures administrativas.
+* **Integração pendente:** Identidade/vínculo do responsável, autorização, compra/liberação auditadas, unicidade concorrente, convites, provisionamento e publicação exigem contratos e backend. A demonstração não cria tenant, conta, convite enviado, acesso ou endereço público. [Regras, efeitos fictícios e QA](../frontend/OWNER_ONBOARDING.md).
 
 ---
 
@@ -247,7 +255,7 @@ O plano da jornada está em [CLIENT_EXPERIENCE.md](../frontend/CLIENT_EXPERIENCE
 * **GraalVM (Spring Native):** Validar se a compilação nativa será estritamente necessária no dia 1, dependendo dos testes de estresse de memória (RAM) no provedor escolhido.
 * **Gestão de Domínios:** Como o mapeamento de domínios customizados (CNAME) será tratado tecnicamente se os tenants quiserem usar domínios próprios (ex: `[www.barbeariadoze.com](https://www.barbeariadoze.com).br`) no futuro.
 * **Identidade Global do Cliente:** Definir com o backend a modelagem física de IAM, vínculos locais, ciclo de vida do perfil por barbearia, armazenamento do JWT e contratos de autenticação, descoberta e reservas, incluindo a consulta pessoal entre tenants.
-* **Publicação no Catálogo:** Definir quais dados são públicos e os critérios de publicação, suspensão e retirada de um estabelecimento do catálogo.
+* **Publicação no Catálogo:** Definir projeção pública, contratos e efeitos de publicação, suspensão e retirada. A condição mínima de liberação foi aprovada em 2026-10-06: configuração mínima e compra confirmada ou liberação explícita pelo superadmin. A demonstração não executa esses efeitos.
 
 ---
 
@@ -262,6 +270,7 @@ O plano da jornada está em [CLIENT_EXPERIENCE.md](../frontend/CLIENT_EXPERIENCE
 * **Interação 8 & 9:** Estrutura de pastas baseada em Features. Definição estrita do escopo MVP (corte de automações pagas e sistemas financeiros).
 * **Interação 10:** Definição do Roadmap de evolução longo prazo e metodologia de trabalho Pré-MVP (API-First e trabalho em paralelo da dupla Frontend/Backend).
 * **Interação 11 (2026-10-01):** Aprovação de catálogo público de barbearias e conta global do cliente, preservando perfis, reputação, agendamentos e permissões operacionais por tenant. Prioridade do frontend passa a ser a jornada de descoberta e agendamento do cliente.
+* **Onboarding do proprietário (2026-10-06):** Plano específico aprova configuração mínima (nome/localização, subdomínio válido sem conflito, serviço ativo com duração/preço válidos, profissional associado e intervalo suficiente dentro do funcionamento). Liberação para publicação exige essa configuração e compra confirmada ou liberação explícita pelo superadmin. Implementada somente demonstração em memória em `/onboarding/barbearia`, com exemplos independentes de cadastro e convite fictício do superadmin. Aceite, compra e liberação são cenários de apresentação; não há tenant, conta, convite enviado, vínculo, autorização, reserva de subdomínio ou publicação. Contratos do responsável, IAM, concorrência, auditoria e provisionamento continuam pendentes. [Escopo e QA](../frontend/OWNER_ONBOARDING.md).
 
 ---
 

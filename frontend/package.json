@@ -34,7 +34,12 @@
     "test:superadmin:registration:browser": "node ../validation/superadmin-registration-browser.cjs",
     "test:qa:local": "node tests/qa-runner.mjs local",
     "test:qa:browser": "node tests/qa-runner.mjs browser",
-    "test:qa:production": "node tests/qa-runner.mjs production"
+    "test:qa:production": "node tests/qa-runner.mjs production",
+    "test:barbershops": "node ../validation/client-barbershops-state.cjs",
+    "test:barbershops:http": "node --test tests/client-barbershops-http.test.mjs",
+    "test:onboarding": "node ../validation/owner-onboarding-state.cjs",
+    "test:onboarding:http": "node --test tests/owner-onboarding-http.test.mjs",
+    "test:onboarding:browser": "node tests/qa-runner.mjs onboarding"
   },
   "dependencies": {
     "axios": "^1.19.0",

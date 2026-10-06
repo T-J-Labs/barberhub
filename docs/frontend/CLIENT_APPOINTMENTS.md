@@ -1,8 +1,8 @@
 # Meus agendamentos — demonstração local
 
 Entrega implementada em 2026-10-05 em `/cliente/agendamentos`, no domínio
-principal. Acesso pelo subdomínio confiável redireciona antes do boundary de
-carregamento; hosts externos não exibem a amostra. A página e seu layout são
+principal. Acesso pelo subdomínio conhecido redireciona antes de exibir a amostra;
+hosts externos/desconhecidos não exibem exemplos. A página e seu layout são
 Server Components, e a view usa estado React somente para as interações locais.
 O `ClientHeader` existente é reutilizado; seu menu agora oferece o destino.
 O grupo `(private)`, o domínio e o header não constituem proteção de acesso.
@@ -18,6 +18,18 @@ duas evidências JPG descritas na validação.
 Arquivos atualizados: `client-navigation.ts` (destino existente no menu),
 `frontend/package.json` (comandos de teste), `README.md`, `CLIENT_AUTH.md`,
 `CLIENT_EXPERIENCE.md` e `FRONTEND_ROADMAP.md` (estado e limites da entrega).
+
+## Filtro por barbearia — ampliação em 2026-10-06
+
+`?barbearia=<identificador>` aceita somente fixtures públicas conhecidas e
+combina com a busca `q`. Mostra a barbearia selecionada; remover filtro mantém
+busca, limpar busca mantém barbearia. History API integrada ao Next preserva
+filtros na navegação e Voltar sem uma entrada por tecla. Valores vazios,
+desconhecidos/repetidos exibem orientação e ocultam resultados até correção,
+sem escolher outro estabelecimento. A página redireciona subdomínios conhecidos
+para a plataforma preservando query; externos/desconhecidos não mostram dados.
+Isso é apresentação, nunca tenant_id ou autorização. Cancelamento local não
+altera Minhas barbearias. [Implementação e QA](CLIENT_BARBERSHOPS.md).
 
 ## Dados e apresentação
 

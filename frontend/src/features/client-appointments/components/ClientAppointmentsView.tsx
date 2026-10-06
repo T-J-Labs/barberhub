@@ -1,6 +1,9 @@
 "use client"
 
 import { useRef, useState } from "react"
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { appointmentBarbershopFilter, appointmentFiltersHref } from "../filters"
 import { catalogActionClass, catalogFieldClass, catalogFocusClass, catalogPanelClass, catalogSecondaryActionClass } from "@/features/barbershop-catalog/styles"
 import { DemoDialog } from "@/features/demo-ui/components/DemoDialog"
 import { demoReferenceDate } from "../demo-data"
@@ -18,7 +21,17 @@ export function ClientAppointmentsView({ initialItems, bookingLinks, allowScenar
   allowScenarios: boolean
 }) {
   const [items, setItems] = useState(initialItems)
-  const [query, setQuery] = useState("")
+  const searchParams = useSearchParams()
+  const query = searchParams.getAll("q").length === 1 ? searchParams.get("q") ?? "" : ""
+  const barbershops = searchParams.getAll("barbearia")
+  const filter = appointmentBarbershopFilter(barbershops)
+  function setQuery(value: string) {
+    window.history.replaceState(null, "", appointmentFiltersHref(window.location.search, { q: value }))
+  }
+  function clearBarbershop() {
+    window.history.pushState(null, "", appointmentFiltersHref(window.location.search, { removeBarbershop: true }))
+    searchRef.current?.focus()
+  }
   const [scenario, setScenario] = useState<DemoAppointmentsScenario>("normal")
   const [selectedKey, setSelectedKey] = useState<string | null>(null)
   const [confirmCancellation, setConfirmCancellation] = useState(false)
@@ -26,7 +39,7 @@ export function ClientAppointmentsView({ initialItems, bookingLinks, allowScenar
   const searchRef = useRef<HTMLInputElement>(null)
   const selected = items.find((item) => item.key === selectedKey)
   const visibleItems = scenario === "empty" ? [] : items
-  const { upcoming, history } = partitionAppointments(visibleItems, demoReferenceDate, query)
+  const { upcoming, history } = partitionAppointments(visibleItems, demoReferenceDate, query, barbershops)
   function close() { setSelectedKey(null); setConfirmCancellation(false) }
   function reset() { setItems(initialItems); setQuery(""); setScenario("normal"); close(); setMessage("Exemplos restaurados. Nenhuma reserva real foi alterada.") }
   return <div>
@@ -35,18 +48,24 @@ export function ClientAppointmentsView({ initialItems, bookingLinks, allowScenar
       <p className="mt-2">Estas reservas são exemplos, sem conta autenticada. A amostra usa 5 de outubro de 2026 como referência. Alterações ficam apenas nesta página e desaparecem ao recarregar.</p>
       <p className="mt-2 text-slate-400">Cancelamento e reagendamento reais aguardam integração e regras do backend. O wizard tem dados independentes e não adiciona nem atualiza itens nesta lista.</p>
     </aside>
+    <Link href="/cliente/barbearias" className={`mt-4 inline-flex min-h-11 items-center rounded-md text-sm text-sky-300 underline underline-offset-4 ${catalogFocusClass}`}>Minhas barbearias</Link>
+    {filter.kind !== "all" && <section aria-label="Filtro de barbearia" className={`${catalogPanelClass} mt-4 p-5`}>
+      {filter.kind === "invalid" ? <p role="alert" className="text-sm leading-6 text-slate-300">{filter.message} Nenhuma barbearia foi selecionada e os exemplos aguardam a correção do filtro.</p> : <p role="status" className="text-sm leading-6 text-slate-300">Barbearia selecionada: <strong className="text-white">{filter.shop.name}</strong></p>}
+      <button type="button" onClick={clearBarbershop} className={`mt-3 ${catalogSecondaryActionClass}`}>Remover filtro de barbearia</button>
+    </section>}
     {allowScenarios && <details className="mt-4 text-sm text-slate-300">
       <summary className={`flex min-h-11 w-fit cursor-pointer items-center rounded-md ${catalogFocusClass}`}>Cenários de demonstração (desenvolvimento)</summary>
       <div className="mt-2 flex flex-wrap gap-2">{([['normal', 'Lista completa'], ['empty', 'Lista vazia'], ['loading', 'Carregamento'], ['error', 'Falha ao carregar']] as const).map(([key, label]) => <button key={key} type="button" aria-pressed={scenario === key} onClick={() => { setScenario(key); close(); setMessage("") }} className={catalogSecondaryActionClass}>{label}</button>)}</div>
     </details>}
     <div className="mt-6 flex flex-wrap items-end gap-3">
       <div className="min-w-0 basis-full sm:flex-1 sm:basis-0"><label htmlFor="appointment-search" className="mb-2 block text-sm font-medium">Buscar nos exemplos</label><input ref={searchRef} id="appointment-search" value={query} onChange={(event) => { setQuery(event.target.value); setMessage("") }} type="search" placeholder="Barbearia, serviço ou profissional" className={catalogFieldClass} /></div>
-      {query && <button type="button" onClick={() => setQuery("")} className={catalogSecondaryActionClass}>Limpar busca</button>}
+      {query && <button type="button" onClick={() => { setQuery(""); searchRef.current?.focus() }} className={catalogSecondaryActionClass}>Limpar busca</button>}
       <button type="button" onClick={reset} className={catalogSecondaryActionClass}>Restaurar exemplos</button>
     </div>
     <p role="status" aria-live="polite" className="mt-3 text-sm leading-6 text-slate-300">{message || (scenario === "normal" ? `${upcoming.length} próximos e ${history.length} no histórico de exemplo.` : "Cenário demonstrativo selecionado.")}</p>
     <div className="mt-6">
       {scenario === "loading" || scenario === "error" ? <><AppointmentsState kind={scenario} /><button type="button" onClick={() => setScenario("normal")} className={`mt-4 ${catalogSecondaryActionClass}`}>{scenario === "error" ? "Tentar carregar exemplos novamente" : "Concluir carregamento demonstrativo"}</button></>
+        : filter.kind === "invalid" ? null
         : !visibleItems.length ? <AppointmentsState kind="empty" />
         : !upcoming.length && !history.length ? <AppointmentsState kind="no-results" />
         : <div className="space-y-8">

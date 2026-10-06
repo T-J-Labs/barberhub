@@ -1,0 +1,146 @@
+import assert from 'node:assert/strict'
+
+// Usa o contexto, coleta de erros, axe, capturas e transporte do agregador.
+export async function ownerOnboardingJourneys({ page, context, goto, button, check, geometry, audit }) {
+  const step = name => page.getByRole('navigation', { name: 'Etapas da configuração' }).getByRole('button', { name: new RegExp(name) })
+  const start = async origin => {
+    await goto(`/onboarding/barbearia?origem=${origin}`)
+    await button(origin === 'superadmin' ? 'Experimentar demonstração do aceite' : 'Iniciar configuração demonstrativa').click()
+    await page.locator('#name').waitFor()
+  }
+  await check('onboarding: cadastro Barbearia tem entrada separada com Google indisponível', async () => {
+    await goto('/cadastro?perfil=barbearia')
+    assert.equal(await page.getByRole('button', { name: /Google/ }).isDisabled(), true)
+    await page.getByRole('link', { name: 'Experimentar configuração' }).click()
+    await page.getByRole('status').filter({ hasText: 'Origem escolhida:' }).waitFor()
+    await button('Iniciar configuração demonstrativa').click()
+    assert.match(await page.locator('#name').inputValue(), /Horizonte/)
+  })
+  await check('onboarding: rascunho abre convite fictício independente', async () => {
+    await goto('/super-admin/barbearias')
+    await button('Cadastrar barbearia').click()
+    for (const [id, value] of Object.entries({ name: 'Rascunho não transferido', city: 'Cidade Rascunho', neighborhood: 'Bairro Rascunho', subdomain: 'rascunho-onboarding-qa', manualReason: 'Ensaio independente' })) await page.locator('#registration-' + id).fill(value)
+    await button('Criar na demonstração').click()
+    await page.getByRole('link', { name: 'Ver demonstração do onboarding' }).click()
+    await button('Experimentar demonstração do aceite').waitFor()
+    assert.match(await page.locator('main').innerText(), /Marina Exemplo/)
+    assert.match(await page.locator('main').innerText(), /independente do rascunho/)
+    await button('Experimentar demonstração do aceite').click()
+    assert.match(await page.locator('#name').inputValue(), /Pátio/)
+    assert.doesNotMatch(await page.locator('main').innerText(), /Cidade Rascunho/)
+  })
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 })
+    await check(`onboarding ${width}px: introdução direta, etapas e prévia das duas origens`, async () => {
+      await goto('/onboarding/barbearia')
+      assert.equal(await button('Iniciar configuração demonstrativa').isDisabled(), true)
+      await geometry(`owner-intro-${width}`); await audit('onboarding introdução')
+      for (const origin of ['cadastro', 'superadmin']) {
+        await page.getByRole('radio', { name: origin === 'cadastro' ? 'Cadastro com perfil Barbearia' : 'Demonstração de convite do superadmin', exact: true }).check()
+        await button(origin === 'cadastro' ? 'Iniciar configuração demonstrativa' : 'Experimentar demonstração do aceite').click()
+        assert.equal(await page.locator('#step-title').evaluate(el => document.activeElement === el), true)
+        await page.locator('#name').fill(' ')
+        await button('Ver revisão').click()
+        await geometry(`owner-incomplete-${origin}-${width}`); await audit('onboarding configuração incompleta')
+        await step('Estabelecimento').click()
+        await page.locator('#name').fill(origin === 'cadastro' ? 'Barbearia Horizonte — exemplo' : 'Barbearia Pátio — exemplo')
+        for (let i = 0; i < 5; i++) {
+          await geometry(`owner-${origin}-step${i}-${width}`); await audit(`onboarding etapa ${i}`)
+          await button('Continuar').click()
+        }
+        await page.getByRole('heading', { name: 'Configuração completa, liberação pendente', exact: true }).waitFor()
+        assert.equal(await button('Concluir simulação').isDisabled(), true)
+        await geometry(`owner-pending-${origin}-${width}`); await audit('onboarding liberação pendente')
+        await page.getByRole('radio', { name: origin === 'cadastro' ? 'Cenário fictício: compra confirmada' : 'Cenário fictício: liberação explícita pelo superadmin', exact: true }).check()
+        await page.getByRole('heading', { name: 'Configuração e liberação demonstrativas completas', exact: true }).waitFor()
+        await geometry(`owner-preview-${origin}-${width}`); await audit('onboarding prévia')
+        await button('Concluir simulação').click()
+        await page.locator('#result-title').waitFor()
+        assert.match(await page.locator('#result-title').innerText(), /Simulação concluída — nenhum estabelecimento, acesso ou endereço público foi criado\./)
+        assert.equal(await page.locator('#result-title').evaluate(el => document.activeElement === el), true)
+        await geometry(`owner-result-${origin}-${width}`); await audit('onboarding resultado')
+        await button('Reiniciar demonstração').click()
+        assert.equal(await page.locator('#intro-title').evaluate(el => document.activeElement === el), true)
+      }
+    })
+  }
+  await page.setViewportSize({ width: 390, height: 844 })
+  await check('onboarding: teclado, erros, edição e checklist reativo preservam o fluxo', async () => {
+    await start('cadastro')
+    await page.keyboard.press('Tab')
+    assert.equal(await page.locator('#name').evaluate(el => document.activeElement === el), true)
+    await page.locator('#name').fill('   ')
+    await button('Continuar').click()
+    assert.equal(await page.locator('#name').getAttribute('aria-invalid'), 'true')
+    assert.equal(await page.locator('#name').evaluate(el => document.activeElement === el), true)
+    assert.match(await page.getByRole('status').filter({ hasText: /de 5 requisitos/ }).innerText(), /4 de 5/)
+    await geometry('owner-errors'); await audit('onboarding erros')
+    await button('Ver revisão').click()
+    await page.getByRole('heading', { name: 'Configuração incompleta', exact: true }).waitFor()
+    await page.getByRole('button', { name: /^Estabelecimento: Preencha/ }).click()
+    await page.locator('#name').fill('Nome editado no fluxo')
+    await button('Continuar').click()
+    await page.locator('#subdomain').fill('demo-esquina'); await button('Continuar').click()
+    assert.equal(await page.locator('#subdomain').getAttribute('aria-invalid'), 'true')
+    await page.locator('#subdomain').fill('  EXEMPLO-NOVO  ')
+    await button('Continuar').click()
+    await page.locator('#serviceName').fill('Barba editada'); await page.locator('#duration').fill('60')
+    await page.locator('#price').fill('0,00'); await button('Continuar').click()
+    assert.equal(await page.locator('#associatedService').isChecked(), false)
+    await button('Continuar').click(); await page.locator('#associatedService').check(); await button('Continuar').click()
+    await page.locator('#availability-seg').uncheck(); await button('Continuar').click()
+    assert.equal(await page.locator('#availability-seg').evaluate(el => document.activeElement === el), true)
+    await page.locator('#availability-seg').check()
+    await page.locator('#availability-seg-end').fill('10:30'); await button('Continuar').click()
+    assert.equal(await page.locator('#availability-seg-end').getAttribute('aria-invalid'), 'true')
+    await page.locator('#availability-seg-end').fill('11:00'); await button('Continuar').click()
+    await step('Estabelecimento').click()
+    assert.equal(await page.locator('#name').inputValue(), 'Nome editado no fluxo')
+    await step('Serviço inicial').click(); await page.locator('#serviceActive').uncheck()
+    await step('Revisão').click(); assert.equal(await button('Concluir simulação').isDisabled(), true)
+    await step('Serviço inicial').click(); await page.locator('#serviceActive').check()
+    await step('Funcionamento').click(); await page.locator('#opening-seg-start').fill('12:00')
+    assert.match(await page.getByRole('status').filter({ hasText: /de 5 requisitos/ }).innerText(), /4 de 5/)
+    await page.locator('#opening-seg-start').fill('09:00')
+    assert.match(await page.getByRole('status').filter({ hasText: /de 5 requisitos/ }).innerText(), /5 de 5/)
+    await step('Revisão').click(); await page.getByRole('radio', { name: 'Cenário fictício: compra confirmada', exact: true }).check()
+    await step('Estabelecimento').click(); await page.locator('#name').fill('')
+    await step('Revisão').click(); assert.equal(await button('Concluir simulação').isDisabled(), true)
+    await step('Estabelecimento').click(); await page.locator('#name').fill('Nome editado no fluxo')
+    await step('Revisão').click(); await button('Concluir simulação').click()
+    const result = await page.locator('main').innerText()
+    assert.match(result, /Nome editado no fluxo/); assert.match(result, /Barba editada/)
+  })
+  await check('onboarding: limites nativos, reinício, recarga e saída descartam edições', async () => {
+    await start('cadastro')
+    for (const [id, max] of [['name',120], ['address',160], ['city',80], ['neighborhood',80]]) {
+      assert.equal(await page.locator('#' + id).getAttribute('maxlength'), String(max))
+    }
+    await page.locator('#name').fill('Descartar recarga'); await page.reload()
+    await button('Iniciar configuração demonstrativa').click(); assert.match(await page.locator('#name').inputValue(), /Horizonte/)
+    await page.locator('#name').fill('Descartar reinício'); await button('Reiniciar demonstração').click()
+    await button('Iniciar configuração demonstrativa').click(); assert.match(await page.locator('#name').inputValue(), /Horizonte/)
+    await page.locator('#name').fill('Descartar saída'); await page.getByRole('link', { name: 'Sair da demonstração' }).click()
+    await start('cadastro'); assert.match(await page.locator('#name').inputValue(), /Horizonte/)
+    assert.equal(await page.evaluate(() => Object.keys(localStorage).some(key => /onboarding/i.test(key))), false)
+  })
+  await check('onboarding: destinos administrativos avisam independência e conservam amostra', async () => {
+    for (const [label, route, heading] of [['Configurações','/admin/configuracoes','Configurações'], ['Serviços','/admin/servicos','Serviços'], ['Barbeiros','/admin/barbeiros','Barbeiros']]) {
+      await goto(route); const before = await page.locator('main').innerText()
+      await start('superadmin'); await button('Ver revisão').click()
+      await page.getByRole('radio', { name: 'Cenário fictício: liberação explícita pelo superadmin', exact: true }).check(); await button('Concluir simulação').click()
+      await page.locator('main').getByRole('link', { name: label, exact: true }).click()
+      await page.getByRole('heading', { level: 1, name: heading, exact: true }).waitFor()
+      assert.match(await page.getByRole('status').filter({ hasText: 'dados independentes do onboarding' }).innerText(), /nenhum dado foi transferido/)
+      const after = await page.locator('main').innerText()
+      assert(after.includes(before), route)
+    }
+  })
+  await check('onboarding: nenhum pedido a API e nenhuma persistência do fluxo', async () => {
+    const requests = []
+    const observe = request => { if (/\/api(?:\/|$)/.test(new URL(request.url()).pathname)) requests.push(request.url()) }
+    context.on('request', observe)
+    try { await start('cadastro'); await button('Ver revisão').click(); await page.getByRole('radio', { name: 'Cenário fictício: compra confirmada', exact: true }).check(); await button('Concluir simulação').click(); assert.equal(requests.length, 0) }
+    finally { context.off('request', observe) }
+  })
+}
