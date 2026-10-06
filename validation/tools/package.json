@@ -1,0 +1,6 @@
+{
+  "name": "barberhub-qa-tools",
+  "private": true,
+  "scripts": { "browsers": "playwright install chromium firefox webkit" },
+  "devDependencies": { "playwright": "1.58.2", "axe-core": "4.11.1" }
+}

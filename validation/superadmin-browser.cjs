@@ -1,10 +1,10 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const { chromium } = require('./qa-browser.cjs');
 const base = `http://localhost:${process.argv[2] || 3000}`;
 const results = [];
-const artifactDir = path.join(__dirname, 'superadmin');
+const artifactDir = require('./qa-output.cjs').outputDirectory('superadmin-browser');
 fs.mkdirSync(artifactDir, { recursive: true });
 (async () => {
   const browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {}) });

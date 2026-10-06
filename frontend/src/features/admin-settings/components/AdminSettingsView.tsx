@@ -123,7 +123,7 @@ export function AdminSettingsView({ initialSettings }: AdminSettingsViewProps) {
                 </SettingsField>
                 <div>
                   <p className="text-sm font-medium text-slate-200">Logomarca</p>
-                  <p className="mt-1 text-xs leading-5 text-slate-500">PNG, JPG ou WebP, até 2 MB. A imagem aparece apenas nesta prévia.</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-400">PNG, JPG ou WebP, até 2 MB. A imagem aparece apenas nesta prévia.</p>
                   <label className="mt-3 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-slate-700 px-4 text-sm font-semibold text-slate-200 hover:border-[#65d5ff] hover:text-white focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[#65d5ff]">
                     <FiImage size={16} aria-hidden="true" /> Escolher imagem
                     <input type="file" accept="image/png,image/jpeg,image/webp" onChange={selectLogo} className="sr-only" aria-label="Escolher logomarca" />
@@ -134,7 +134,7 @@ export function AdminSettingsView({ initialSettings }: AdminSettingsViewProps) {
               </div>
 
               <aside aria-label="Prévia da identidade" className="self-start overflow-hidden rounded-xl border border-slate-700/70 bg-[#07111c]">
-                <div className="border-b border-slate-800 px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">Prévia da identidade</div>
+                <div className="border-b border-slate-800 px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-400">Prévia da identidade</div>
                 <div className="p-5">
                   {logoPreview ? (
                     <Image src={logoPreview} width={64} height={64} unoptimized alt="Logomarca selecionada" className="size-16 rounded-lg object-cover" />
@@ -182,7 +182,7 @@ export function AdminSettingsView({ initialSettings }: AdminSettingsViewProps) {
                     </div>
                     <div className="flex min-w-0 items-center gap-2 sm:justify-end">
                       <label className="min-w-0 flex-1 sm:w-29 sm:flex-none"><span className="sr-only">Abertura de {dayLabels[day]}</span><input type="time" value={hours.start} onChange={(event) => updateHours(day, { start: event.target.value })} disabled={!hours.open} required={hours.open} className={settingsInputClass} /></label>
-                      <span className="text-xs text-slate-500" aria-hidden="true">até</span>
+                      <span className="text-xs text-slate-400" aria-hidden="true">até</span>
                       <label className="min-w-0 flex-1 sm:w-29 sm:flex-none"><span className="sr-only">Fechamento de {dayLabels[day]}</span><input type="time" value={hours.end} onChange={(event) => updateHours(day, { end: event.target.value })} disabled={!hours.open} required={hours.open} className={settingsInputClass} /></label>
                     </div>
                   </div>

@@ -25,6 +25,8 @@ const dialogTone = {
   },
 } as const
 
+// QA: manter tarefa e foco dentro da janela; hierarquia, Geist, paleta,
+// superfícies, bordas e ritmo de 4px existentes permanecem iguais.
 export function DemoDialog({ open, onClose, title, description, children, tone = "admin" }: DemoDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const titleId = useId()
@@ -44,6 +46,14 @@ export function DemoDialog({ open, onClose, title, description, children, tone =
       onClose={onClose}
       onCancel={(event) => { event.preventDefault(); onClose() }}
       onClick={(event) => { if (event.target === event.currentTarget) onClose() }}
+      onKeyDown={(event) => {
+        if (event.key !== "Tab") return
+        const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex="0"]')]
+          .filter((element) => element.checkVisibility() && element.tabIndex >= 0)
+        const first = controls[0], last = controls[controls.length - 1]
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
+        if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+      }}
       aria-labelledby={titleId}
       aria-describedby={description ? descriptionId : undefined}
       className={`m-auto max-h-[min(90dvh,760px)] w-[calc(100%-2rem)] max-w-xl overflow-y-auto rounded-xl border p-0 text-white backdrop:bg-black/70 ${colors.surface}`}

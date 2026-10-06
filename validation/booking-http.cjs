@@ -2,24 +2,13 @@
 const http = require('node:http');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const port = Number(process.argv[2] ?? 3101);
-const base = process.argv[3] ?? 'localhost';
-const production = Boolean(process.argv[3]);
-const origin = production ? `https://${base}` : `http://${base}:${port}`;
-const host = production ? base : `${base}:${port}`;
-const shopOrigin = `${origin.replace('://', '://demo-esquina.')}`;
-const shopHost = production ? `demo-esquina.${base}` : `demo-esquina.${base}:${port}`;
+const qa = require('./qa-http.cjs');
+const { port, base, origin, authority: host } = qa.config;
+const production = qa.config.environment === 'production';
+const shopOrigin = origin.replace('://', '://demo-esquina.');
+const shopHost = production ? 'demo-esquina.' + base : 'demo-esquina.' + base + ':' + port;
 const results = [];
-function request(path, hostname = host, extra = {}) {
-  return new Promise((resolve, reject) => {
-    http.get({ hostname: 'localhost', port, path, headers: { host: hostname, ...extra } }, (res) => {
-      let body = '';
-      res.setEncoding('utf8');
-      res.on('data', (chunk) => body += chunk);
-      res.on('end', () => resolve({ body, status: res.statusCode, headers: res.headers }));
-    }).on('error', reject);
-  });
-}
+function request(path, hostname = host, extra = {}) { return qa.request(path, { host: hostname, ...extra }); }
 function links(body) { return [...body.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((m) => m[1].replaceAll('&amp;', '&')); }
 async function check(name, path, hostname, verify, extra) {
   verify(await request(path, hostname, extra));
@@ -44,6 +33,7 @@ function authContext(response, shop, tenantOrigin) {
   });
 }
 (async () => {
+  await qa.probe();
   await check('perfil: Agendar horário abre a introdução demonstrativa', '/', shopHost, (r) => {
     assert.equal(r.status, 200);
     assert.match(r.body, /Agendar horário/);
@@ -84,6 +74,6 @@ function authContext(response, shop, tenantOrigin) {
   }
   await check('alias antigo explícito na plataforma usa a barbearia do caminho', '/barbearias/demo-esquina/agendamento', host, (r) => { assert.equal(r.status, 307); assert.equal(r.headers.location, `${shopOrigin}/agendar`); });
   await check('alias antigo na plataforma não usa barbearia de query', '/agendamento?barbearia=demo-esquina', host, (r) => { assert.equal(r.status, 307); assert.equal(new URL(r.headers.location, origin).pathname, '/agendar'); assert.equal(new URL(r.headers.location, origin).origin, origin); });
-  fs.writeFileSync(require('node:path').join(__dirname, `booking-http-${production ? 'production' : 'development'}-results.json`), JSON.stringify(results, null, 2));
+  fs.writeFileSync(require('node:path').join(qa.outputDir, `booking-http-${production ? 'production' : 'development'}-results.json`), JSON.stringify(results, null, 2));
   console.log(`${results.length} verificações HTTP aprovadas.`);
 })().catch((error) => { console.error(error); process.exitCode = 1; });

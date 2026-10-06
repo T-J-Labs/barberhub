@@ -4,6 +4,10 @@ frontend/node_modules/
 
 # Next.js
 frontend/.next/
+frontend/.next-qa-*/
+frontend/.qa-tsconfig-*.json
+validation/qa-runs/
+validation/qa-*.txt
 frontend/out/
 
 # Local environment files, at any depth

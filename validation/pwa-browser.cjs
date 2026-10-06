@@ -2,9 +2,9 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
-const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const { chromium, cleanupProfile } = require('./qa-browser.cjs');
 const base = `http://localhost:${process.argv[2] || 3110}`;
-const dir = path.join(__dirname, 'pwa'); fs.mkdirSync(dir, { recursive: true });
+const dir = require('./qa-output.cjs').outputDirectory('pwa-browser'); fs.mkdirSync(dir, { recursive: true });
 const results = [], observations = {};
 async function check(name, fn) { await fn(); results.push({ name, passed: true }); console.log('PASS', name); }
 (async () => {
@@ -176,5 +176,6 @@ async function check(name, fn) { await fn(); results.push({ name, passed: true }
   } finally {
     fs.writeFileSync(path.join(dir,'browser-results.json'), JSON.stringify({ results, observations },null,2));
     await browser.close();
+    cleanupProfile(profile);
   }
 })().catch(error => { console.error(error); process.exitCode = 1; });

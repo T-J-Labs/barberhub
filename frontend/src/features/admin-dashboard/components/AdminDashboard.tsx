@@ -57,11 +57,11 @@ export function AdminDashboard({ data }: AdminDashboardProps) {
                 <article key={metric.label} className="border-b border-slate-800 p-5 last:border-0 sm:nth-[2n]:border-l xl:border-b-0 xl:border-l xl:first:border-l-0">
                   <div className="flex items-center justify-between">
                     <span className="grid size-9 place-items-center rounded-lg bg-[#12344a] text-[#65d5ff]"><Icon size={18} /></span>
-                    <FiMoreHorizontal className="text-slate-600" />
+                    <FiMoreHorizontal className="text-slate-400" />
                   </div>
-                  <p className="mt-5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{metric.label}</p>
+                  <p className="mt-5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{metric.label}</p>
                   <p className="mt-1 text-2xl font-semibold text-white">{metric.value}</p>
-                  <p className={`mt-2 text-xs font-medium ${metric.trend === "positive" ? "text-emerald-400" : "text-slate-500"}`}>{metric.detail}</p>
+                  <p className={`mt-2 text-xs font-medium ${metric.trend === "positive" ? "text-emerald-400" : "text-slate-400"}`}>{metric.detail}</p>
                 </article>
               )
             })}
@@ -84,7 +84,7 @@ export function AdminDashboard({ data }: AdminDashboardProps) {
                       <div key={`${appointment.time}-${appointment.client}`} className={`relative grid grid-cols-[62px_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border border-transparent px-3 py-4 transition hover:border-slate-700 hover:bg-[#102235] sm:grid-cols-[78px_minmax(0,1fr)_150px_auto] sm:gap-5 ${index === 1 ? "bg-[#102235]/70" : ""}`}>
                         {index === 1 && <span className="absolute -left-px top-3 bottom-3 w-0.5 rounded-full bg-[#65d5ff]" />}
                         <div className="flex items-center gap-2 text-sm font-semibold text-slate-200"><FiClock className="text-[#65d5ff]" size={15} />{appointment.time}</div>
-                        <div className="min-w-0"><p className="truncate text-sm font-semibold text-white">{appointment.client}</p><p className="mt-1 truncate text-xs text-slate-500">{appointment.service}</p></div>
+                        <div className="min-w-0"><p className="truncate text-sm font-semibold text-white">{appointment.client}</p><p className="mt-1 truncate text-xs text-slate-400">{appointment.service}</p></div>
                         <p className="hidden truncate text-sm text-slate-400 sm:block">{appointment.barber}</p>
                         <span className={`justify-self-end whitespace-nowrap rounded-md border px-2 py-1 text-[10px] font-semibold ${appointmentTone(appointment.status)}`}>{appointment.status}</span>
                       </div>
@@ -92,13 +92,13 @@ export function AdminDashboard({ data }: AdminDashboardProps) {
                   </div>
                 ) : <DashboardState kind={mode === "ready" ? "empty" : mode} onRetry={() => setMode("ready")} />}
               </div>
-              <div className="flex items-center justify-between border-t border-slate-800 px-5 py-4 sm:px-6"><span className="text-xs text-slate-500">{visibleAppointments.length} horários exibidos</span><Link href="/admin/agenda" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#65d5ff] hover:text-white">Ver agenda completa <FiArrowRight size={16} /></Link></div>
+              <div className="flex items-center justify-between border-t border-slate-800 px-5 py-4 sm:px-6"><span className="text-xs text-slate-400">{visibleAppointments.length} horários exibidos</span><Link href="/admin/agenda" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#65d5ff] hover:text-white">Ver agenda completa <FiArrowRight size={16} /></Link></div>
             </section>
 
             <aside className="rounded-xl border border-slate-800 bg-[#0b1a29] p-5 sm:p-6">
               <div className="flex items-start justify-between"><div><h2 className="text-lg font-semibold">Para resolver nesta prévia</h2><p className="mt-2 text-sm text-slate-400">Caminhos para explorar o painel.</p></div><span className="grid size-8 place-items-center rounded-md bg-amber-300/10 text-sm font-bold text-amber-200">{data.alerts.length}</span></div>
               <div className="mt-6 space-y-3">{data.alerts.map((alert) => <div key={alert.title} className="border-l-2 border-amber-300/70 bg-[#102235] p-4"><p className="text-sm font-semibold text-slate-100">{alert.title}</p><p className="mt-1 text-xs leading-5 text-slate-400">{alert.description}</p><Link href={alert.href} className="mt-3 inline-flex min-h-11 items-center gap-1 text-xs font-bold text-[#65d5ff] hover:text-white">{alert.action} <FiArrowRight size={13} /></Link></div>)}</div>
-              <button type="button" onClick={() => setMode("empty")} className="mt-5 text-xs text-slate-500 hover:text-slate-300">Visualizar estado vazio</button>
+              <button type="button" onClick={() => setMode("empty")} className="mt-5 text-xs text-slate-400 hover:text-slate-300">Visualizar estado vazio</button>
             </aside>
           </div>
         </div>

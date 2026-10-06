@@ -13,7 +13,7 @@ const dayLabels: Record<Weekday, string> = {
   seg: "Seg", ter: "Ter", qua: "Qua", qui: "Qui", sex: "Sex", sab: "Sáb", dom: "Dom",
 }
 const emptyDraft: BarberDraft = { name: "", workdays: ["seg", "ter", "qua", "qui", "sex"], startTime: "09:00", endTime: "18:00" }
-const fieldClass = "min-h-11 w-full rounded-lg border border-slate-700 bg-[#07111c] px-3 text-sm text-white outline-none transition-colors placeholder:text-slate-500 focus:border-[#65d5ff] focus-visible:ring-2 focus-visible:ring-[#65d5ff]/25"
+const fieldClass = "min-h-11 w-full rounded-lg border border-slate-700 bg-[#07111c] px-3 text-sm text-white outline-none transition-colors placeholder:text-slate-400 focus:border-[#65d5ff] focus-visible:ring-2 focus-visible:ring-[#65d5ff]/25"
 
 function initials(name: string) {
   return name.trim().split(/\s+/).slice(0, 2).map((part) => part[0]).join("").toLocaleUpperCase("pt-BR")
@@ -176,7 +176,7 @@ export function BarbersView({ initialBarbers }: BarbersViewProps) {
             <label className="flex min-h-11 min-w-0 flex-1 items-center gap-3 rounded-lg border border-slate-700 bg-[#07111c] px-3 text-slate-400 focus-within:border-[#65d5ff]">
               <FiSearch size={17} aria-hidden="true" />
               <span className="sr-only">Buscar barbeiros</span>
-              <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar profissional" className="min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500" />
+              <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar profissional" className="min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-400" />
             </label>
             <select aria-label="Filtrar por situação" value={status} onChange={(event) => setStatus(event.target.value as StatusFilter)} className={`${fieldClass} sm:w-48`}>
               <option value="all">Toda a equipe</option>
@@ -190,18 +190,18 @@ export function BarbersView({ initialBarbers }: BarbersViewProps) {
               <div className="flex items-center gap-2"><FiUsers className="text-[#65d5ff]" aria-hidden="true" /><h2 className="text-lg font-semibold">Profissionais</h2></div>
               <p className="mt-1 text-sm text-slate-400">{visibleBarbers.length} {visibleBarbers.length === 1 ? "barbeiro encontrado" : "barbeiros encontrados"}</p>
             </div>
-            <p className="hidden text-xs text-slate-500 sm:block">Jornada semanal padrão</p>
+            <p className="hidden text-xs text-slate-400 sm:block">Jornada semanal padrão</p>
           </div>
 
           {visibleBarbers.length === 0 ? (
             <div className="flex min-h-52 flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 bg-[#0b1a29] px-6 text-center">
-              <FiUsers className="text-slate-500" size={25} aria-hidden="true" />
+              <FiUsers className="text-slate-400" size={25} aria-hidden="true" />
               <h3 className="mt-3 font-semibold">{barbers.length === 0 ? "Sua equipe está vazia" : "Nenhum barbeiro encontrado"}</h3>
               <p className="mt-1 max-w-sm text-sm text-slate-400">{barbers.length === 0 ? "Adicione o primeiro profissional para organizar os horários da equipe." : "Tente mudar a busca ou o filtro de situação."}</p>
             </div>
           ) : (
             <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#0b1a29]">
-              <div className="hidden grid-cols-[minmax(180px,1fr)_minmax(300px,1.5fr)_110px_180px] gap-5 border-b border-slate-800 bg-[#0d1d2d] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 lg:grid">
+              <div className="hidden grid-cols-[minmax(180px,1fr)_minmax(300px,1.5fr)_110px_180px] gap-5 border-b border-slate-800 bg-[#0d1d2d] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400 lg:grid">
                 <span>Profissional</span><span>Jornada padrão</span><span>Situação</span><span className="text-right">Ações</span>
               </div>
               <ul className="divide-y divide-slate-800/80">
@@ -209,11 +209,11 @@ export function BarbersView({ initialBarbers }: BarbersViewProps) {
                   <li key={barber.id} className="p-4 transition-colors hover:bg-[#102235] sm:p-5 lg:grid lg:grid-cols-[minmax(180px,1fr)_minmax(300px,1.5fr)_110px_180px] lg:items-center lg:gap-5 lg:px-6 lg:py-4">
                     <div className="flex min-w-0 items-center gap-3">
                       <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#12344a] text-xs font-bold text-[#8de1ff]" aria-hidden="true">{initials(barber.name)}</span>
-                      <div className="min-w-0"><p className="truncate font-semibold text-white" title={barber.name}>{barber.name}</p><p className="mt-0.5 text-xs text-slate-500">Barbeiro</p></div>
+                      <div className="min-w-0"><p className="truncate font-semibold text-white" title={barber.name}>{barber.name}</p><p className="mt-0.5 text-xs text-slate-400">Barbeiro</p></div>
                     </div>
                     <div className="mt-4 lg:mt-0">
-                      <div className="flex flex-wrap gap-1" aria-label={`Dias: ${barber.workdays.map((day) => dayLabels[day]).join(", ")}`}>
-                        {weekdays.map((day) => <span key={day} aria-hidden="true" className={`grid h-7 min-w-7 place-items-center rounded px-1 text-[10px] font-semibold ${barber.workdays.includes(day) ? "bg-[#12344a] text-[#8de1ff]" : "bg-[#07111c] text-slate-600"}`}>{dayLabels[day]}</span>)}
+                      <div role="group" className="flex flex-wrap gap-1" aria-label={`Dias: ${barber.workdays.map((day) => dayLabels[day]).join(", ")}`}>
+                        {weekdays.map((day) => <span key={day} aria-hidden="true" className={`grid h-7 min-w-7 place-items-center rounded px-1 text-[10px] font-semibold ${barber.workdays.includes(day) ? "bg-[#12344a] text-[#8de1ff]" : "bg-[#07111c] text-slate-400"}`}>{dayLabels[day]}</span>)}
                       </div>
                       <p className="mt-2 inline-flex items-center gap-1.5 text-xs tabular-nums text-slate-400"><FiClock className="text-[#65d5ff]" aria-hidden="true" />{barber.startTime}–{barber.endTime}</p>
                     </div>
@@ -229,7 +229,7 @@ export function BarbersView({ initialBarbers }: BarbersViewProps) {
               </ul>
             </div>
           )}
-          <p className="mt-4 text-xs text-slate-500">Alterações feitas nesta tela são demonstrativas e serão perdidas ao recarregar a página.</p>
+          <p className="mt-4 text-xs text-slate-400">Alterações feitas nesta tela são demonstrativas e serão perdidas ao recarregar a página.</p>
         </div>
       </Container>
     </div>
@@ -239,7 +239,7 @@ export function BarbersView({ initialBarbers }: BarbersViewProps) {
 function Summary({ label, value, detail, accent = false }: { label: string; value: number; detail: string; accent?: boolean }) {
   return (
     <div className="border-b border-slate-800 p-5 last:border-0 sm:border-r sm:border-b-0 sm:last:border-r-0">
-      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{label}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{label}</p>
       <p className={`mt-2 text-2xl font-semibold tabular-nums ${accent ? "text-[#8de1ff]" : "text-white"}`}>{value}</p>
       <p className="mt-1 text-xs text-slate-400">{detail}</p>
     </div>

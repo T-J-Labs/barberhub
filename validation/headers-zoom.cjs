@@ -2,9 +2,9 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const { chromium, cleanupProfile } = require('./qa-browser.cjs');
 const port = process.argv[2] || 3000;
-const dir = path.join(__dirname, 'headers', 'zoom');
+const dir = require('./qa-output.cjs').outputDirectory('headers-zoom');
 fs.mkdirSync(dir, { recursive:true });
 (async () => {
   // Preferência do navegador num perfil temporário. Não altera o CSS da página.
@@ -45,5 +45,6 @@ fs.mkdirSync(dir, { recursive:true });
   } finally {
     fs.writeFileSync(path.join(dir,'results.json'), JSON.stringify({ browser:context.browser().version(), profile, results }, null, 2));
     await context.close();
+    cleanupProfile(profile);
   }
 })().catch(error => { console.error(error); process.exitCode = 1; });

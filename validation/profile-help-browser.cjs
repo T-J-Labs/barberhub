@@ -1,10 +1,10 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const { chromium } = require('./qa-browser.cjs');
 const base = `http://localhost:${process.argv[2] || 3000}`;
 const results = [];
-const artifactDir = process.env.PROFILE_QA_OUTPUT || __dirname;
+const artifactDir = process.env.PROFILE_QA_OUTPUT || require('./qa-output.cjs').outputDirectory('profile-help-browser');
 fs.mkdirSync(artifactDir, { recursive: true });
 
 (async () => {
