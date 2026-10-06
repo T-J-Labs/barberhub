@@ -25,8 +25,10 @@ público, interfaces administrativas e apresentação de login/cadastro já exis
 Isso não representa um MVP integrado: Google, sessão, autorização, persistência,
 disponibilidade e reservas reais continuam pendentes de contratos. A PWA foi
 validada em produção local, não em todos os dispositivos/ambientes de publicação.
-“Minhas barbearias” e onboarding ainda não foram implementados e dependem de
-regras e solicitação própria. Consulte o
+“Minhas barbearias” está implementada como demonstração local de vínculos fictícios
+e filtro combinado de agendamentos. O onboarding demonstrativo do proprietário está
+implementado em `/onboarding/barbearia`, com dois exemplos independentes e checklist
+calculado. [Regras aprovadas, limites e QA](docs/frontend/OWNER_ONBOARDING.md). Consulte o
 [estado das entregas e limites](docs/frontend/FRONTEND_ROADMAP.md).
 
 Headers revisados com a landing como referência visual e de menu mobile;
@@ -35,9 +37,10 @@ sidebar desktop do admin preservada. [Arquivos, QA e limites](docs/frontend/HEAD
 Consolidação de QA e acessibilidade implementada com agregadores portáteis e
 correções pontuais; validação externa/manual continua parcial.
 [Preparação, cobertura, resultados e pendências](docs/frontend/QA_ACCESSIBILITY.md).
-“Minhas barbearias” e onboarding são entregas
-condicionadas às regras de vínculo e estabelecimento, não implementações
-automaticamente autorizadas. [Sequência vigente](docs/frontend/FRONTEND_ROADMAP.md#10-próximos-passos-sem-backend--sequência-vigente-em-2026-10-06).
+O vínculo real foi aprovado após o primeiro agendamento real confirmado; o wizard
+local não cria vínculos. O onboarding apresenta configuração mínima e cenários
+fictícios de compra confirmada ou liberação explícita, sem criar conta, tenant,
+convite, acesso ou publicação. [Sequência vigente](docs/frontend/FRONTEND_ROADMAP.md#10-próximos-passos-sem-backend--sequência-vigente-em-2026-10-06).
 
 O **Superadmin básico** está disponível como demonstração local em
 `/super-admin`, `/super-admin/barbearias` e `/super-admin/barbearias/[id]`:
@@ -169,6 +172,11 @@ npm run test:auth     # Verifica domínio, perfis e retorno seguro da autentica�
 npm run test:auth:http # Verifica a interface com servidor local ativo na porta 3000
 npm run test:booking  # Verifica seleções, conflito e fixtures demonstrativas
 npm run test:booking:http -- 3000 # Verifica entradas e contexto do agendamento
+npm run test:barbershops # Verifica vínculos fictícios, destinos e filtro combinado
+npm run test:barbershops:http # Verifica SSR, filtro e domínios com servidor preparado
+npm run test:onboarding # Valida configuração, checklist e transições em memória
+npm run test:onboarding:http # Verifica entradas, domínio principal e avisos admin
+npm run test:onboarding:browser # Recorte do agregador: regras, HTTP e jornada com axe
 npm run test:appointments # Verifica busca, histórico e cancelamento da amostra
 npm run test:appointments:http # Verifica página e domínio da área demonstrativa
 npm run test:profiles # Verifica nomes demonstrativos e contexto seguro da ajuda
@@ -239,6 +247,17 @@ continua indisponível enquanto o contrato de autenticação não for aprovado;
 o botão informa essa condição. A prévia opcional do header não cria uma sessão.
 Consulte [a experiência de autenticação](docs/frontend/CLIENT_AUTH.md).
 
+## Minhas barbearias
+
+`/cliente/barbearias` mostra Esquina e Navalha vinculadas à mesma identidade
+fictícia, com perfil canônico, introdução de agendamento e acesso a
+`/cliente/agendamentos?barbearia=<identificador>`. O filtro combina com busca
+e admite limpeza mantendo o texto. Valores desconhecidos/repetidos e hosts
+inválidos recebem orientação sem selecionar outro estabelecimento.
+O vínculo real nasce após o primeiro agendamento real confirmado; as fixtures
+são vínculos prontos e independentes de wizard, cancelamento e superadmin.
+[Arquivos, QA e integração pendente](docs/frontend/CLIENT_BARBERSHOPS.md).
+
 ## Perfil e ajuda demonstrativos
 
 As telas `/cliente/perfil`, `/cliente/ajuda`, `/barbeiro/perfil` e
@@ -286,6 +305,7 @@ conhecer o processo completo.
 - [Decisões arquiteturais](docs/architecture/ADR.md)
 - [Processo de evolução da API](docs/api/README.md)
 - [Contrato OpenAPI](docs/api/openapi.yaml)
+- [Minhas barbearias demonstrativas](docs/frontend/CLIENT_BARBERSHOPS.md)
 - [Plano da experiência do cliente](docs/frontend/CLIENT_EXPERIENCE.md)
 - [Próximas entregas do frontend sem backend](docs/frontend/FRONTEND_ROADMAP.md)
 - [Interface de login/cadastro e limites de integração](docs/frontend/CLIENT_AUTH.md)

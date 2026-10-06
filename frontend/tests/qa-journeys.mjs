@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { createRequire } from 'node:module'
 import { httpTestConfig, assertHttpTestRuntime } from './http-test-config.mjs'
+import { ownerOnboardingJourneys } from './owner-onboarding-journeys.mjs'
 
 const require = createRequire(new URL('../../validation/qa-browser.cjs', import.meta.url))
 const { chromium } = require('./qa-browser.cjs')
@@ -91,8 +92,44 @@ async function startBooking(scenario = 'normal') {
   await page.getByLabel('Cenário local', { exact: true }).selectOption(scenario)
 }
 try {
+  await ownerOnboardingJourneys({ page, context, goto, button, check, geometry, audit })
+  if (process.env.OWNER_ONBOARDING_QA_ONLY !== '1') {
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 })
+    await check(`minhas barbearias ${width}px: identidade, URLs, teclado e filtro`, async () => {
+      await goto('/cliente/barbearias')
+      const cards = page.getByRole('list', { name: 'Barbearias vinculadas de exemplo' }).getByRole('article')
+      assert.equal(await cards.count(), 2)
+      assert.match(await page.locator('main').innerText(), /Dados fictícios.*mesma identidade/s)
+      for (const [index, id] of ['demo-esquina', 'demo-navalha'].entries()) {
+        assert.equal(await cards.nth(index).getByRole('link', { name: 'Ver barbearia', exact: true }).getAttribute('href'), origin(id) + '/')
+        assert.equal(await cards.nth(index).getByRole('link', { name: 'Agendar horário', exact: true }).getAttribute('href'), origin(id) + '/agendar')
+        assert.equal(await cards.nth(index).getByRole('link', { name: 'Ver meus agendamentos' }).getAttribute('href'), `/cliente/agendamentos?barbearia=${id}`)
+      }
+      await geometry(`client-barbershops-${width}`)
+      if (width === 390) await audit('Minhas barbearias')
+      const link = cards.nth(1).getByRole('link', { name: 'Ver meus agendamentos' })
+      await link.focus(); await page.keyboard.press('Enter')
+      await page.getByText('Barbearia selecionada:', { exact: false }).waitFor()
+      const search = page.getByRole('searchbox', { name: 'Buscar nos exemplos' })
+      await search.fill('classico')
+      await page.getByRole('button', { name: /Ver detalhes/ }).first().waitFor()
+      assert.equal(await page.getByRole('button', { name: /Ver detalhes/ }).count(), 1)
+      assert.match(await page.locator('main').innerText(), /Corte clássico/)
+      assert.equal(new URL(page.url()).searchParams.get('barbearia'), 'demo-navalha')
+      assert.equal(new URL(page.url()).searchParams.get('q'), 'classico')
+      await button('Remover filtro de barbearia').click(); await focused(search)
+      assert.equal(new URL(page.url()).searchParams.has('barbearia'), false)
+      assert.equal(await search.inputValue(), 'classico')
+      await page.goBack(); await page.getByText('Barbearia selecionada:', { exact: false }).waitFor()
+      assert.equal(await search.inputValue(), 'classico')
+      await button('Limpar busca').click()
+      assert.equal(new URL(page.url()).searchParams.get('barbearia'), 'demo-navalha')
+      assert.equal(await page.getByRole('button', { name: /Ver detalhes/ }).count(), 2)
+      await page.getByRole('link', { name: 'Minhas barbearias', exact: true }).click()
+      await page.waitForURL(origin() + '/cliente/barbearias')
+      await page.goBack(); await page.getByText('Barbearia selecionada:', { exact: false }).waitFor()
+    })
     await check(`descoberta ${width}px: busca, vazio, cidade e identidade`, async () => {
       await goto('/barbearias')
       await page.getByRole('searchbox', { name: 'Nome, cidade ou bairro' }).fill('sem exemplo xyz')
@@ -173,7 +210,88 @@ try {
     })
   }
   await page.setViewportSize({ width: 390, height: 844 })
-  for (const route of ['/barbearias', '/login', '/cadastro', '/cliente/agendamentos', '/cliente/perfil', '/cliente/ajuda', '/barbeiro', '/barbeiro/agenda', '/barbeiro/historico', '/barbeiro/perfil', '/barbeiro/ajuda', '/super-admin', '/super-admin/barbearias', '/admin', '/admin/agenda', '/admin/clientes', '/admin/servicos', '/admin/barbeiros', '/admin/configuracoes']) {
+  await check('filtros desconhecidos/repetidos: orientação, sem seleção e limpeza mantendo busca', async () => {
+    for (const value of ['desconhecida', 'demo-esquina&barbearia=demo-navalha', 'demo-esquina&barbearia=demo-esquina']) {
+      await goto(`/cliente/agendamentos?barbearia=${value}&q=Bruno`)
+      await page.getByRole('alert').filter({ hasText: 'Nenhuma barbearia foi selecionada' }).waitFor()
+      assert.equal(await page.getByRole('button', { name: /Ver detalhes/ }).count(), 0)
+      await button('Remover filtro de barbearia').click()
+      assert.equal(await page.getByRole('searchbox').inputValue(), 'Bruno')
+      assert.equal(await page.getByRole('button', { name: /Ver detalhes/ }).count(), 1)
+    }
+  })
+  if (c.environment === 'development') for (const width of [320, 390, 768, 1440]) await check(`vínculos ${width}px: vazio, carregamento, erro, recuperação e indisponibilidade`, async () => {
+    await page.setViewportSize({ width, height: 900 })
+    await goto('/cliente/barbearias')
+    await page.getByText('Cenários de demonstração (desenvolvimento)', { exact: true }).click()
+    await button('Lista vazia').click()
+    await page.getByRole('heading', { name: 'Nenhuma barbearia de exemplo' }).waitFor()
+    assert.match(await page.locator('main').innerText(), /primeiro agendamento real confirmado/)
+    assert.equal(await page.getByRole('link', { name: 'Explorar barbearias', exact: true }).getAttribute('href'), '/barbearias')
+    await geometry(`client-barbershops-empty-${width}`); await audit('vínculos vazio')
+    await button('Carregamento').click(); assert.equal(await page.locator('[aria-busy="true"]').count(), 1)
+    await geometry(`client-barbershops-loading-${width}`)
+    await button('Concluir carregamento demonstrativo').click()
+    await button('Falha ao carregar').click(); await page.getByRole('alert').filter({ hasText: 'Não foi possível carregar as barbearias' }).waitFor()
+    await geometry(`client-barbershops-error-${width}`); await audit('vínculos erro')
+    await button('Tentar carregar exemplos novamente').click()
+    await button('Barbearia indisponível').click()
+    const card = page.getByRole('article', { name: 'Navalha & Pente' })
+    assert.equal(await card.getByRole('link').count(), 1)
+    assert.match(await card.innerText(), /vínculo fictício permanece/)
+    await geometry(`client-barbershops-unavailable-${width}`); await audit('vínculos indisponível')
+    await card.getByRole('link', { name: 'Ver meus agendamentos' }).click()
+    await page.getByText('Barbearia selecionada:', { exact: false }).waitFor()
+    assert.equal(await page.getByRole('button', { name: /Ver detalhes/ }).count(), 2)
+  })
+  await page.setViewportSize({ width: 390, height: 844 })
+  await check('cancelar exemplo mantém as duas barbearias', async () => {
+    await goto('/cliente/agendamentos?barbearia=demo-esquina')
+    await page.getByRole('button', { name: /Ver detalhes/ }).first().click()
+    await button('Simular cancelamento').click(); await button('Aplicar à amostra').click()
+    await page.getByRole('status').filter({ hasText: 'Cancelamento demonstrativo' }).waitFor()
+    await page.getByRole('link', { name: 'Minhas barbearias', exact: true }).click()
+    await page.waitForURL(origin() + '/cliente/barbearias')
+    await page.getByRole('list', { name: 'Barbearias vinculadas de exemplo' }).waitFor()
+    assert.equal(await page.getByRole('article').count(), 2)
+  })
+  await check('ações públicas das duas casas abrem perfil e introdução demonstrativa', async () => {
+    for (const index of [0, 1]) {
+      await goto('/cliente/barbearias')
+      await page.getByRole('article').nth(index).getByRole('link', { name: 'Ver barbearia', exact: true }).click()
+      await page.getByRole('heading', { level: 1 }).waitFor()
+      assert.match(page.url(), /demo-(esquina|navalha)/)
+      await goto('/cliente/barbearias')
+      await page.getByRole('article').nth(index).getByRole('link', { name: 'Agendar horário', exact: true }).click()
+      await button('Experimentar demonstração').waitFor()
+      assert.match(page.url(), /demo-(esquina|navalha).*\/agendar$/)
+    }
+  })
+  await check('áreas globais: subdomínio preserva filtro; host desconhecido não seleciona fixture', async () => {
+    // Redirect entre hosts é HTTP real em desenvolvimento. Em produção o transporte
+    // HTTPS/Host é interceptado; redirecionamentos são verificados pela suíte HTTP.
+    if (c.environment === 'development') {
+      await goto('/cliente/agendamentos?barbearia=demo-navalha&q=Bruno', 'demo-esquina')
+      assert.equal(page.url(), origin() + '/cliente/agendamentos?barbearia=demo-navalha&q=Bruno')
+      assert.equal(await page.getByRole('button', { name: /Ver detalhes/ }).count(), 1)
+    }
+    for (const route of ['/cliente/barbearias', '/cliente/agendamentos?barbearia=demo-esquina']) {
+      await goto(route, 'desconhecida')
+      await page.getByRole('heading', { name: 'Demonstração indisponível neste domínio' }).waitFor()
+      assert.equal(await page.getByRole('article').count(), 0)
+    }
+  })
+  await check('suspensão do superadmin mantém vínculos independentes', async () => {
+    await goto('/super-admin/barbearias/demo-navalha')
+    await button('Suspender na amostra').click()
+    await button('Confirmar suspender na amostra').click()
+    await page.getByRole('status').filter({ hasText: 'suspensa somente na amostra' }).waitFor()
+    await goto('/cliente/barbearias')
+    const navalha = page.getByRole('article', { name: 'Navalha & Pente' })
+    assert.equal(await navalha.getByRole('link').count(), 3)
+    assert.equal(await page.getByRole('article').count(), 2)
+  })
+  for (const route of ['/barbearias', '/login', '/cadastro', '/cliente/barbearias', '/cliente/agendamentos', '/cliente/perfil', '/cliente/ajuda', '/barbeiro', '/barbeiro/agenda', '/barbeiro/historico', '/barbeiro/perfil', '/barbeiro/ajuda', '/super-admin', '/super-admin/barbearias', '/admin', '/admin/agenda', '/admin/clientes', '/admin/servicos', '/admin/barbeiros', '/admin/configuracoes']) {
     await check(`axe/landmarks ${route}`, async () => { await goto(route); await geometry(route.replaceAll('/', '_')); await audit(route) })
   }
   await check('wizard: falha final preserva escolhas e reinício durante processamento', async () => {
@@ -192,6 +310,8 @@ try {
     await goto('/agendar', 'demo-navalha'); await button('Experimentar demonstração').click(); await chooseToReview()
     await button('Concluir demonstração').click(); await page.getByRole('heading', { name: 'Você explorou o agendamento' }).waitFor()
     assert.match(await page.locator('main').innerText(), /Navalha/)
+    await goto('/cliente/barbearias'); assert.equal(await page.getByRole('article').count(), 2)
+    await goto('/cliente/agendamentos'); await page.locator('main').getByRole('status').filter({ hasText: '2 próximos' }).waitFor()
   })
   await check('wizard: cenários vazio, carregamento, erro de horários e recuperação', async () => {
     for (const scenario of ['no-services', 'no-professionals', 'loading', 'no-slots', 'error']) {
@@ -212,6 +332,7 @@ try {
     const action = button('Buscar barbearias'); await action.hover()
     assert(['none', '1'].includes(await action.evaluate(el => getComputedStyle(el).scale)))
   })
+  }
   assert.equal(errors.length, 0, errors.join('\n'))
 } finally {
   await context.tracing.stop({ path: path.join(dir, 'trace.zip') })

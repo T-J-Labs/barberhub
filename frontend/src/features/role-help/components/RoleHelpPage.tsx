@@ -11,6 +11,7 @@ export async function RoleHelpPage({ role, candidate }: Props) {
   const client = role === "cliente"
   const destinations = client ? [
     { href: "/barbearias", title: "Explorar barbearias", description: "Busque por nome, cidade ou bairro e escolha um perfil público.", icon: <FiSearch /> },
+    { href: "/cliente/barbearias", title: "Minhas barbearias", description: "Consulte vínculos fictícios, abra o perfil, o agendamento ou filtre suas visitas por estabelecimento.", icon: <FiHome /> },
     { href: "/cliente/agendamentos", title: "Próximas visitas e histórico", description: "Abra detalhes, simule cancelamento ou consulte a prévia de reagendamento.", icon: <FiCalendar /> },
     { href: navigation.profile, title: navigation.context.barbershop ? "Perfil público da barbearia" : "Escolher uma barbearia", description: "O catálogo abre o perfil na raiz do subdomínio validado.", icon: <FiHome /> },
     { href: navigation.booking, title: navigation.context.barbershop ? "Experimentar o agendamento" : "Encontrar um agendamento demonstrativo", description: "No perfil público, use Agendar horário e Experimentar demonstração.", icon: <FiClock /> },
@@ -25,6 +26,8 @@ export async function RoleHelpPage({ role, candidate }: Props) {
 
   const questions = [
     ...(client ? [
+      { question: "Quando uma barbearia aparece em Minhas barbearias?", answer: "O vínculo real nasce após o primeiro agendamento real confirmado na barbearia. A tela atual mostra duas barbearias vinculadas à mesma identidade fictícia; não é uma lista de favoritos. Concluir o wizard não cria vínculo nem reserva global. Cancelar um exemplo ou suspender a amostra no superadmin não altera esses vínculos. Uma barbearia indisponível permanece na lista, com consulta aos agendamentos e sem as ações públicas indisponíveis." },
+      { question: "Como vejo só os agendamentos de uma barbearia?", answer: "Em Minhas barbearias, use Ver meus agendamentos. O filtro mostra a barbearia selecionada e combina com a busca por serviço ou profissional. Limpar busca mantém a barbearia; Remover filtro de barbearia mantém a busca. Valores desconhecidos ou repetidos precisam ser removidos antes de consultar os exemplos. Esse filtro não concede acesso a dados privados." },
       { question: "Como entro no perfil público e no wizard?", answer: "Explore o catálogo e abra uma barbearia. O perfil usa a raiz do subdomínio validado; Agendar horário abre /agendar nesse mesmo subdomínio. Sem contexto válido, os atalhos desta ajuda levam ao catálogo para você escolher um estabelecimento." },
       { question: "Como consulto visitas, detalhes e histórico?", answer: "Abra Meus agendamentos. A página reúne exemplos de próximas visitas e histórico; cada item identifica a barbearia. Abra os detalhes para consultar o atendimento demonstrativo." },
       { question: "Cancelar ou reagendar altera uma reserva real?", answer: "Não. Cancelar altera somente a amostra em memória e move o exemplo para o histórico. A prévia de reagendamento abre o wizard da mesma barbearia, sem transportar uma reserva real ou confirmar a mudança. Wizard e lista global usam dados independentes: experimentar um não atualiza o outro." },

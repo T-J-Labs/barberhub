@@ -8,6 +8,7 @@ import { actionClass, panelClass } from "../styles"
 import { ShopStatus } from "./ShopStatus"
 import { SuperadminState } from "./SuperadminState"
 import { registrationNotice } from "../registration"
+import { onboardingHref } from "@/features/owner-onboarding/routing"
 
 // Intenção: conferir identidade pública antes de testar alteração. Nome lidera;
 // estado e ação ficam juntos. Bordas/superfícies privadas, Geist 24/14px,
@@ -40,6 +41,7 @@ export function SuperadminDetails({ id, query }: { id: string; query: string }) 
         <div className="border-t border-slate-800 pt-5"><h3 className="mb-3 font-semibold">Estado demonstrativo</h3>
           <div className="flex flex-wrap items-center gap-4"><ShopStatus status={shop.demoStatus} />{shop.demoStatus !== "draft" && <button ref={triggerRef} type="button" onClick={() => setConfirming(true)} aria-describedby="status-limits" className={actionClass}>{action} na amostra</button>}</div>
           <p id="status-limits" className="mt-3 text-sm leading-6 text-slate-400">{shop.demoStatus === "draft" ? "Este rascunho não permite suspensão ou reativação. Não existe estabelecimento, acesso, compra, publicação ou subdomínio provisionado. Recarregar ou sair da área remove o rascunho." : "A mudança existe apenas nesta demonstração e se perde ao recarregar ou sair da área. Não suspende publicação, conta ou acesso."}</p>
+          {shop.demoStatus === "draft" && <div className="mt-5"><Link href={onboardingHref("superadmin")} className={actionClass}>Ver demonstração do onboarding</Link><p className="mt-3 text-sm leading-6 text-slate-400">Abre um exemplo fictício independente, nunca este rascunho. Não transfere dados, sincroniza, retoma configuração ou envia convite. Sair desta área descarta o rascunho.</p></div>}
         </div>
         {shop.demoStatus !== "draft" && <p role="status" aria-atomic="true" className="mt-4 text-sm leading-6 text-[#8de1ff]">{message}</p>}
       </section>

@@ -36,15 +36,33 @@ redefinição de senha, SDK ou endpoints de autenticação inventados.
 ## Estado da integração
 
 OpenAPI ainda tem `paths: {}`. O botão Google fica desabilitado com aviso visível.
-Não há OAuth, criação de conta, vinculação de equipe, onboarding de barbearia,
-sessão ou logout real. Escolher Barbeiro ou Barbearia não cria permissões.
+Não há OAuth, criação de conta, vinculação de equipe, sessão ou logout real.
+Existe onboarding demonstrativo independente, sem efeitos reais.
+Escolher Barbeiro ou Barbearia não cria permissões.
 
 A integração exige contratos aprovados para identidade Google validada no
 backend, contas/vínculos, permissões, sessão e logout. Também é necessário
 definir projeto/client IDs, callbacks, origens permitidas e sessão entre
 plataforma e subdomínios. Nenhum segredo ou token foi adicionado.
 
-## Prévia do header
+## Onboarding demonstrativo do proprietário — 2026-10-06
+
+No cadastro com perfil Barbearia, **Experimentar configuração** abre
+`/onboarding/barbearia?origem=cadastro`, separado do Google indisponível.
+Login/cadastro e retorno canônico permanecem iguais. A nova rota requer domínio
+principal validado pelo helper existente; em subdomínio confiável redireciona
+somente à mesma rota na plataforma, com origem demonstrativa validada. Host
+externo e encaminhados não autorizam o wizard. A origem não representa papel.
+
+O acesso direto escolhe entre cadastro e prévia de convite do superadmin.
+O aceite fictício não valida identidade ou autenticação; o exemplo é independente
+do rascunho. Dados ficam em memória e são descartados ao sair/recarregar.
+Regra aprovada: liberação para publicação exige configuração mínima e compra
+confirmada ou liberação explícita do superadmin. A entrega só apresenta cenários;
+não executa compra, liberação, convite, provisionamento ou publicação.
+[Percurso, validações, QA e integração pendente](OWNER_ONBOARDING.md).
+
+## Prévia do header demonstrativo
 
 ClientHeader oferece apresentação de visitante, cliente e saída. A opção
 “Ver prévia do header de cliente” fica separada do botão Google e só aparece
@@ -116,7 +134,7 @@ de `lg`; Entrar/Criar conta ficam no rodapé do drawer. No desktop, usam
 `publicLoginClass` e `catalogActionClass`. Login/cadastro continuam com um único
 header, logo para a landing, perfil visual e retorno canônico preservados.
 
-A prévia do cliente usa drawer modal em todas as larguras, com Barbearias,
+A prévia do cliente usa drawer modal em todas as larguras, com Explorar barbearias, Minhas barbearias e
 Meus agendamentos no bloco principal; Perfil e Ajuda ficam no rodapé separado,
 acima da saída local, como no menu do barbeiro. O nome demonstrativo quebra
 linha no drawer. Após ajuste solicitado, a barra da prévia usa o mesmo layout do
@@ -134,3 +152,13 @@ As ações desktop não mudaram de posição.
 Escape, backdrop, botão de fechar, foco contido/retornado, rolagem e mudança de
 rota/breakpoint foram verificados no Edge local. Resultados e comandos atuais:
 [HEADERS_REVIEW.md](HEADERS_REVIEW.md). As capturas do dropdown acima são históricas.
+
+## Ampliação de navegação do cliente — 2026-10-06
+
+Minhas barbearias → `/cliente/barbearias` foi adicionada ao bloco principal,
+entre Explorar barbearias → `/barbearias` e Meus agendamentos →
+`/cliente/agendamentos`. Perfil/Ajuda e prévia do header permanecem; acesso
+direto não cria sessão. A ajuda explica a criação do vínculo após primeiro
+agendamento real confirmado e o filtro combinado com busca. As fixtures são
+vínculos fictícios prontos, independentes do wizard, cancelamento e superadmin.
+[Escopo e QA](CLIENT_BARBERSHOPS.md).

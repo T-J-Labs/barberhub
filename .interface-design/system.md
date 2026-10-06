@@ -87,7 +87,7 @@ Painel operacional para o gerente de uma barbearia: leitura rápida, decisões c
   `HeaderAccountActions`. Nome/identificação demonstrativa ficam no drawer.
   Notificações permanece painel vazio de demonstração e Perfil usa o destino
   próprio do papel.
-- No drawer do cliente, Barbearias/Meus agendamentos ficam no bloco principal;
+- No drawer do cliente, Explorar barbearias/Minhas barbearias/Meus agendamentos ficam no bloco principal;
   Perfil/Ajuda ficam no rodapé separado, acima da saída, como no barbeiro.
 - Exceção de posição: somente `/barbearias` em estado visitante centraliza
   verticalmente Entrar/Criar conta no drawer. A composição pública sinaliza

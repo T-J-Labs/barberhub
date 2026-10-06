@@ -1,9 +1,7 @@
-import { redirect } from "next/navigation"
-import { getPlatformNavigation } from "@/features/auth/server-navigation"
+import { redirectClientArea } from "@/features/client-barbershops/server-domain"
 
-/** Redirecionar antes do boundary de carregamento. Domínio não concede autorização. */
+/** Validar o domínio antes do boundary, preservando a query do request. */
 export default async function AppointmentsLayout({ children }: { children: React.ReactNode }) {
-  const platform = await getPlatformNavigation()
-  if (platform.isTrustedHost && !platform.isPlatform && platform.origin) redirect(`${platform.origin}/cliente/agendamentos`)
+  await redirectClientArea("/cliente/agendamentos")
   return children
 }

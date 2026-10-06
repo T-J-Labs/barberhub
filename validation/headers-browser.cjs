@@ -151,10 +151,10 @@ const families = [
       await page.getByRole('link', { name: /^Voltar para/ }).click();
       await page.waitForURL(`http://demo-esquina.localhost:${port}/`);
     });
-    await check('cliente: prévia, quatro destinos, nome longo, saída/reinício locais', async () => {
+    await check('cliente: prévia, cinco destinos, nome longo, saída/reinício locais', async () => {
       await preview(); await open();
-      assert.deepEqual(await drawer().locator('ul a').allTextContents(), ['Barbearias','Meus agendamentos','Perfil','Ajuda']);
-      assert.deepEqual(await drawer().locator('nav > div').nth(1).locator('ul a').allTextContents(), ['Barbearias','Meus agendamentos']);
+      assert.deepEqual(await drawer().locator('ul a').allTextContents(), ['Explorar barbearias','Minhas barbearias','Meus agendamentos','Perfil','Ajuda']);
+      assert.deepEqual(await drawer().locator('nav > div').nth(1).locator('ul a').allTextContents(), ['Explorar barbearias','Minhas barbearias','Meus agendamentos']);
       assert.deepEqual(await drawer().locator('nav > div').last().locator('ul a').allTextContents(), ['Perfil','Ajuda']);
       await drawer().getByRole('link', { name: 'Perfil', exact: true }).click(); await page.waitForURL(/\/cliente\/perfil/);
       const long = 'Á'.repeat(300); await page.getByRole('textbox', { name: 'Nome de exibição', exact: true }).fill(long);
@@ -166,11 +166,11 @@ const families = [
         await page.screenshot({ path: path.join(dir, `client-preview-${width}.png`) }); await page.keyboard.press('Escape'); await closed();
       }
       await page.setViewportSize({ width:390,height:844 });
-      for (const [label, route] of [['Ajuda','/cliente/ajuda'],['Meus agendamentos','/cliente/agendamentos'],['Barbearias','/barbearias'],['Perfil','/cliente/perfil']]) {
+      for (const [label, route] of [['Ajuda','/cliente/ajuda'],['Meus agendamentos','/cliente/agendamentos'],['Explorar barbearias','/barbearias'],['Minhas barbearias','/cliente/barbearias'],['Perfil','/cliente/perfil']]) {
         await open(); const link = drawer().getByRole('link', { name: label, exact: true }); await link.focus(); await page.keyboard.press('Enter');
         await page.waitForURL(`${base}${route}`); await closed();
       }
-      await open(); await page.goBack(); await page.waitForURL(`${base}/barbearias`); await closed();
+      await open(); await page.goBack(); await page.waitForURL(`${base}/cliente/barbearias`); await closed();
       await open(); await drawer().getByRole('button', { name: 'Sair da demonstração', exact: true }).click();
       await closed(); assert.equal(await trigger().evaluate(el => el === document.activeElement), true);
       await open(); await drawer().getByRole('link', { name: 'Entrar', exact: true }).click(); await page.waitForURL(/\/login/);
@@ -245,7 +245,7 @@ const families = [
       await banner().getByRole('link', { name:'Perfil',exact:true }).click(); await page.waitForURL(`${base}/cliente/perfil`);
       assert.equal(await page.getByRole('textbox', { name:'Nome de exibição',exact:true }).count(),1);
       await page.setViewportSize({ width:390,height:844 });
-      await open(); await drawer().getByRole('link', { name:'Barbearias',exact:true }).click(); await page.waitForURL(`${base}/barbearias`);
+      await open(); await drawer().getByRole('link', { name:'Explorar barbearias',exact:true }).click(); await page.waitForURL(`${base}/barbearias`);
       await open(); assert.ok((await drawer().locator('nav > div').last().getAttribute('class')).includes('mt-auto'));
       await drawer().getByRole('button', { name:'Sair da demonstração',exact:true }).click(); await closed();
       assert.equal(await banner().getByRole('button', { name:'Notificações',exact:true }).count(),0);

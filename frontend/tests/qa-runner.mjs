@@ -7,7 +7,7 @@ import { httpTestConfig, assertHttpTestRuntime } from './http-test-config.mjs'
 
 const root = fileURLToPath(new URL('../..', import.meta.url))
 const mode = process.argv[2]
-if (!['local', 'browser', 'production'].includes(mode) || process.argv.length !== 3) throw new Error('Use qa-runner.mjs local|browser|production; configure TEST_*')
+if (!['local', 'browser', 'production', 'onboarding'].includes(mode) || process.argv.length !== 3) throw new Error('Use qa-runner.mjs local|browser|production|onboarding; configure TEST_*')
 const config = httpTestConfig(process.env, [])
 fs.mkdirSync(config.outputRoot, { recursive: true })
 const runDir = fs.mkdtempSync(path.join(config.outputRoot,
@@ -119,13 +119,18 @@ for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, async () => {
 try {
   if (mode === 'production' && config.environment !== 'production') throw new Error('test:qa:production exige TEST_ENV=production')
   await startServer()
-  if (mode !== 'browser') {
+  if (mode === 'onboarding') {
+    await command('owner-onboarding-state', ['../validation/owner-onboarding-state.cjs'])
+    await command('owner-onboarding-http', ['--test', 'tests/owner-onboarding-http.test.mjs'])
+    await command('journeys-accessibility', ['tests/qa-journeys.mjs'], { OWNER_ONBOARDING_QA_ONLY: '1' })
+  }
+  if (mode !== 'browser' && mode !== 'onboarding') {
     await command('routing', ['--test', 'tests/public-host.test.mjs', 'tests/http-test-config.test.mjs', 'tests/qa-config.test.mjs'])
-    for (const suite of ['client-auth-routing', 'booking-state', 'client-appointments-state', 'barber-demo-state', 'profile-help-state', 'superadmin-state', 'pwa-policy']) await command(suite, [`../validation/${suite}.cjs`])
-    await command('http-shared', ['--test', 'tests/public-routing-http.test.mjs', 'tests/profile-help-metadata-http.test.mjs'])
+    for (const suite of ['client-auth-routing', 'booking-state', 'client-appointments-state', 'client-barbershops-state', 'barber-demo-state', 'profile-help-state', 'superadmin-state', 'owner-onboarding-state', 'pwa-policy']) await command(suite, [`../validation/${suite}.cjs`])
+    await command('http-shared', ['--test', 'tests/public-routing-http.test.mjs', 'tests/profile-help-metadata-http.test.mjs', 'tests/client-barbershops-http.test.mjs', 'tests/owner-onboarding-http.test.mjs'])
     for (const suite of ['client-auth-http', 'booking-http', 'client-appointments-http']) await command(suite, [`../validation/${suite}.cjs`, String(config.port), ...(config.environment === 'production' ? [config.base] : [])])
   }
-  if (mode !== 'local') {
+  if (mode !== 'local' && mode !== 'onboarding') {
     if (config.environment === 'development') {
       if (config.base !== 'localhost' || config.connectionOrigin !== `http://127.0.0.1:${config.port}`) throw new Error('Suítes legadas de navegador exigem localhost; use produção para Host público simulado')
       for (const suite of ['headers-browser', 'profile-help-browser']) await command(suite, [`../validation/${suite}.cjs`, String(config.port)])

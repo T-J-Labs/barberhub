@@ -140,3 +140,13 @@ reservas reais. Antes da integração, acordar contratos de identidade autentica
 perfil, vínculos, permissões, validação e erros. Backend, banco e contrato não
 foram alterados nesta entrega; fixtures de agenda/agendamentos mantêm identidade
 e titularidade próprias. Registros anteriores de QA permanecem históricos.
+
+## Ampliação de navegação do cliente — 2026-10-06
+
+Minhas barbearias → `/cliente/barbearias` foi adicionada ao bloco principal,
+entre Explorar barbearias → `/barbearias` e Meus agendamentos →
+`/cliente/agendamentos`. Perfil/Ajuda e prévia do header permanecem; acesso
+direto não cria sessão. A ajuda explica a criação do vínculo após primeiro
+agendamento real confirmado e o filtro combinado com busca. As fixtures são
+vínculos fictícios prontos, independentes do wizard, cancelamento e superadmin.
+[Escopo e QA](CLIENT_BARBERSHOPS.md).

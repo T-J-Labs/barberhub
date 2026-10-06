@@ -42,6 +42,9 @@ Estado observado na revisão estrutural e documental:
 - Cliente tem “Meus agendamentos” demonstrativos em `/cliente/agendamentos`;
   barbeiro tem início, agenda e histórico demonstrativos. Ambos têm perfil e
   ajuda, conforme a seção 7 e [PROFILE_HELP.md](PROFILE_HELP.md).
+- Cliente também tem “Minhas barbearias” em `/cliente/barbearias`, vínculos
+  fictícios de Esquina/Navalha e filtro combinado de agendamentos. Regra aprovada
+  e limites em [CLIENT_BARBERSHOPS.md](CLIENT_BARBERSHOPS.md).
 - Superadmin tem visão geral, lista, detalhes, suspensão/reativação em memória
   e cadastro manual de rascunhos, conforme a seção 8 e
   [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md).
@@ -59,8 +62,10 @@ QA ou certificação de uma branch. Não há outra entrega automaticamente autor
 na sequência inicial. A revisão dos headers foi implementada posteriormente,
 com a landing como referência e QA local registrado na seção 10 e em
 [HEADERS_REVIEW.md](HEADERS_REVIEW.md). A próxima prioridade é consolidar QA.
-“Minhas barbearias” e onboarding continuam dependendo de definições e
-solicitação específica.
+“Minhas barbearias” foi solicitada e implementada como demonstração local em
+2026-10-06; regra e limites em [CLIENT_BARBERSHOPS.md](CLIENT_BARBERSHOPS.md).
+Onboarding demonstrativo do proprietário foi solicitado e implementado com as
+regras do plano aprovado em 2026-10-06. [Escopo e QA](OWNER_ONBOARDING.md).
 
 ## 3. Sequência inicial — entregas implementadas
 
@@ -81,10 +86,9 @@ Habilitar links de navegação e ajuda conforme seus destinos existirem, evitand
 controles que levem a páginas ausentes. Grupos de rotas e headers não são
 mecanismos de autorização.
 
-“Minhas barbearias” permanece depois da jornada inicial, conforme a escolha do
-usuário. Não confundir com favoritos nem presumir regras de vínculo ainda não
-definidas. A jornada inicial demonstrativa está implementada; essa tela ainda
-não existe e sua implementação não está autorizada por este registro.
+“Minhas barbearias” foi implementada após solicitação específica em 2026-10-06.
+A regra aprovada é vínculo após o primeiro agendamento real confirmado na
+barbearia; a tela usa vínculos fictícios prontos, sem criação por simulação.
 
 ## 4. Primeira entrega: agendamento demonstrativo
 
@@ -244,7 +248,9 @@ Testes HTTP locais com Host simulado não validam DNS público, TLS ou OAuth.
   não são contratos da API; Orval/MSW serão utilizados após aprovação de operações.
 - OAuth, sessão compartilhada, vínculos profissionais, disponibilidade real,
   concorrência, titularidade e persistência aguardam contratos e integração.
-- Onboarding de estabelecimento/equipe aguarda definição de suas regras.
+- Onboarding demonstrativo do proprietário foi implementado conforme plano
+  aprovado; regras e efeitos fictícios em [OWNER_ONBOARDING.md](OWNER_ONBOARDING.md).
+  Onboarding real de equipe/identidade continua dependente de contratos e regras.
 - Geolocalização, avaliações, rankings, favoritos, pagamentos e fidelidade não
   fazem parte desta sequência inicial.
 - Não introduzir preços de planos, condições comerciais, contatos ou avaliações
@@ -421,8 +427,10 @@ compra, acesso, publicação ou subdomínio é criado. Catálogo e hosts não mu
 Não havia política de nomes reservados no roteamento: a proteção local usa nomes
 das rotas existentes, com pendência explícita da política oficial e de unicidade
 real. OpenAPI continua com `paths: {}`. Backend, banco e contratos não foram
-alterados. Responsável/Google, liberação sem compra, auditoria, provisionamento,
-publicação e cobrança continuam separados e dependentes de definição real.
+alterados. Responsável/Google, auditoria, provisionamento, publicação e cobrança
+continuam separados e dependentes de contratos reais. A regra de liberação
+explícita sem compra foi aprovada pelo plano de onboarding; a demonstração apenas
+apresenta cenários, sem executar efeitos. Consulte [OWNER_ONBOARDING.md](OWNER_ONBOARDING.md).
 
 Verificações desta ampliação: lint, TypeScript, build, 12 grupos de regras,
 20 grupos de cadastro no navegador por ambiente (desenvolvimento/produção),
@@ -480,12 +488,12 @@ aparelhos reais e leitor de tela continuam pendentes. [Registro](HEADERS_REVIEW.
 | --- | --- | --- | --- |
 | 1 | Consistência e responsividade dos headers | Implementada e validada localmente em 2026-10-06. | Landing preservada; padrão de drawer compartilhado por cliente e barbeiro; acesso mobile no rodapé; sidebar admin preservada. |
 | 2 | Consolidação de QA e acessibilidade | Pendente complementar; não reimplementar a PWA. | Regressão reproduzível das jornadas, menus e domínios; registro das verificações de dispositivos, navegadores e leitor de tela ainda ausentes. |
-| 3 | Minhas barbearias | Tela ausente; definir e aprovar regra de vínculo antes de implementar. | Lista demonstrativa de vínculos fictícios, perfil público, agendamento e acesso aos próprios agendamentos por estabelecimento. |
-| 4 | Onboarding demonstrativo do proprietário | Fluxo ausente; definir regras e percurso antes de implementar. | Orientação de configuração inicial, dados demonstrativos e acesso às configurações existentes, sem criar conta, tenant ou publicação reais. |
+| 3 | Minhas barbearias | Implementada como demonstração local em 2026-10-06; criação real aprovada após primeiro agendamento real confirmado. | Lista demonstrativa de vínculos fictícios, perfil público, agendamento e acesso aos próprios agendamentos por estabelecimento. |
+| 4 | Onboarding demonstrativo do proprietário | Implementado em 2026-10-06 conforme plano específico aprovado. | Dois exemplos independentes, seis etapas, checklist calculado, cenários fictícios de liberação e atalhos administrativos com aviso; sem conta, tenant ou publicação reais. |
 | 5 | Ajuda do superadmin | Destino ausente; complemento opcional, mediante solicitação. | Guia das ações já existentes, cadastro manual e limites da demonstração; sem planos, cobrança ou suporte inventado. |
 
-As entregas 3 e 4 não são trabalho liberado enquanto suas decisões estiverem
-pendentes. É possível avançar em QA sem resolver regras de negócio. Esta lista
+A entrega 3 e a entrega 4 foram solicitadas e implementadas no escopo demonstrativo.
+É possível avançar em QA sem implementar integração real. Esta lista
 não exige criar novas telas para preencher cada opção desabilitada da navegação.
 
 ### 10.2. Revisão dirigida dos headers — implementada
@@ -598,43 +606,49 @@ Consolidar os testes existentes, evitando outra implementação da mesma PWA:
   dos botões públicos aprovados para encerrar um alerta: registrar o conflito e
   pedir decisão explícita antes de mudar esse padrão.
 
-### 10.4. Minhas barbearias — definição antes da tela
+### 10.4. Minhas barbearias — implementada como demonstração local
 
-Decisão necessária: o vínculo nasce no primeiro agendamento, no primeiro
-atendimento concluído ou por cadastro/vinculação pelo estabelecimento? Definir
-também como apresentar barbearia suspensa/indisponível e eventual remoção do
-vínculo. Nenhuma dessas alternativas está aprovada neste documento.
+Decisão aprovada em 2026-10-06: **o vínculo real nasce após o primeiro
+agendamento real confirmado na barbearia**. Substitui a pendência anterior.
+A implementação solicitada usa vínculos fictícios prontos e independentes.
+[Arquivos, comportamento, QA e pendências](CLIENT_BARBERSHOPS.md).
 
-Depois da definição e da solicitação de implementação:
+- Rota global `/cliente/barbearias`, feature `client-barbershops`, menu e ajuda.
+- Esquina e Navalha da mesma identidade fictícia, avatar de iniciais e localização.
+- Perfil público canônico, introdução de agendamento no subdomínio e consulta
+  de agendamentos com filtro público validado, combinado à busca.
+- Valores desconhecidos/repetidos e hosts inválidos não selecionam outra barbearia.
+- Vazio, carregamento, erro e indisponibilidade com orientação; indisponibilidade
+  mantém vínculo fictício e consulta, sem motivo ou remoção automática.
+- Sem favoritos, Tornar-me cliente, desvinculação ou dados privados.
+- Wizard, cancelamento local e suspensão no superadmin não alteram vínculos.
+- Sem backend, sessão, persistência, cache privado ou endpoints.
 
-- Planejar a rota global `/cliente/barbearias` (proposta, ainda não existente),
-  com feature própria e entrada na navegação/ajuda do cliente somente ao existir.
-- Usar vínculos fictícios explícitos com duas barbearias, identidade visual da
-  área do cliente, nome/localização e estado vazio com acesso ao catálogo.
-- Oferecer perfil público, agendamento demonstrativo no subdomínio e consulta
-  aos próprios agendamentos daquele estabelecimento. Reutilizar a lista existente;
-  se necessário, planejar filtro por identificador público validado, não por
-  `tenant_id` livre e sem inventar endpoint.
-- Não incluir favoritos, “Tornar-me cliente”, desvinculação ou outras ações cuja
-  regra não tenha sido aprovada. Não expor reputação ou dados privados de tenants.
-- Não criar vínculos ao concluir simulações nem armazenamento entre domínios.
-  Testar isolamento da amostra, estado vazio, indisponibilidade, links e filtros.
+### 10.5. Onboarding do proprietário — demonstração implementada
 
-### 10.5. Onboarding do proprietário — planejamento condicionado
+Plano específico aprovado em 2026-10-06 substitui as pendências anteriores de
+percurso e configuração mínima. `/onboarding/barbearia` existe somente no domínio
+principal; cadastro Barbearia e detalhes de rascunho oferecem entradas separadas.
+Acesso direto permite escolher os mesmos exemplos de cadastro/Horizonte e
+convite fictício/Pátio. Não recebe dados do cadastro ou do rascunho.
 
-Definir antes: quem inicia/cria o estabelecimento, relação com o rascunho manual
-do superadmin, identificação/vínculo do responsável, subdomínio pretendido,
-requisitos de ativação/publicação e relação entre acesso e compra. Não supor que
-escolher Barbearia no cadastro concede acesso ao admin.
+Seis etapas: estabelecimento, endereço público pretendido, serviço inicial,
+profissional inicial, funcionamento e revisão. Nome/localização, sintaxe e conflito
+local do subdomínio, serviço ativo, associação e intervalo suficiente dentro do
+funcionamento compõem o checklist calculado, atualizado após cada edição.
+Voltar preserva dados; reiniciar/sair/recarregar descarta o ensaio.
 
-Após aprovação, a demonstração poderá apresentar dados institucionais, revisão
-de endereço pretendido e checklist de configuração de serviços, equipe e
-funcionamento, aproveitando as telas admin existentes. Rota e passos finais
-precisam ser definidos nesse planejamento específico; não estão disponíveis.
+Estados: configuração incompleta com pendências acionáveis; configuração completa
+com liberação pendente; configuração e liberação demonstrativas completas com prévia.
+A liberação para publicação requer configuração mínima e compra confirmada ou
+liberação explícita pelo superadmin. As opções são cenários fictícios; não compram,
+concedem acesso ou publicam. Atalhos administrativos usam dados independentes e
+mostram aviso na chegada, sem substituir fixtures/CRUDs.
 
-Sem OAuth, upload externo, convites reais, provisionamento, publicação no catálogo,
-compra, plano ou liberação de acesso. Dados em memória, com resultado explícito
-de simulação; sem vincular automaticamente rascunhos de demonstrações independentes.
+Sem OAuth, upload externo, convites enviados, provisionamento, endereço acessível,
+reserva de subdomínio, compra, plano, conta, tenant, vínculo ou acesso real.
+Modelos/fixtures/validações/checklist/transições em `owner-onboarding`; nenhuma
+mudança em backend, banco ou OpenAPI. [Arquivos, testes e limites](OWNER_ONBOARDING.md).
 
 ### 10.6. O que ainda depende de backend ou fica para depois
 
@@ -642,8 +656,11 @@ de simulação; sem vincular automaticamente rascunhos de demonstrações indepe
   tenant, vínculos reais, disponibilidade, concorrência, reservas, cancelamento,
   reagendamento persistido, publicação e cadastro real de estabelecimentos.
   Só integrar após contratos aprovados no OpenAPI; não inventar DTOs ou endpoints.
-- **Decisões de produto:** ciclo de vida do vínculo cliente/barbearia, onboarding,
-  responsável por estabelecimento, ativação e acesso sem compra. Podem ser
+- **Decisões de produto:** demais efeitos do ciclo de vida do vínculo (criação
+  aprovada após primeiro agendamento real confirmado), identidade/vínculo real do
+  responsável e demais efeitos de ativação. Configuração mínima e liberação
+  explícita sem compra foram aprovadas no plano de onboarding; execução real
+  continua dependente de contratos. Outras regras podem ser
   discutidas agora, mas não transformadas em regras reais por um agente.
 - **Fora desta sequência:** planos/assinaturas, pagamentos, fidelidade, favoritos,
   geolocalização, avaliações, rankings e notificações reais. “Planos e assinaturas”

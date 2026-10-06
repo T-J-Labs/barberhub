@@ -19,6 +19,19 @@ escopo. Registros anteriores dos documentos de cada feature são históricos.
 | PWA/browser/lifecycle | 3110, Chromium/CDP e perfis temporários; ciclo de vida usa servidor próprio na porta dinâmica | Produção local; cache/offline e worker real, sem refazer implementação |
 | Baseline/visual/install/icons/performance/Lighthouse | Evidência e ferramentas específicas da entrega anterior | Históricos, não contados como nova execução; geração de ícones e instalação nativa não obrigatórias neste agregador |
 
+Ampliação em 2026-10-06: os agregadores incluem regras/HTTP de Minhas barbearias
+e as jornadas existentes incorporam cards, destinos, filtro combinado, limpeza,
+Voltar, valores inválidos, estados e independência das amostras. A navegação de
+headers foi atualizada para os cinco destinos. Resultados da rodada da entrega
+e limitações em [CLIENT_BARBERSHOPS.md](CLIENT_BARBERSHOPS.md); registros anteriores
+abaixo continuam históricos.
+
+Onboarding do proprietário: regras/HTTP em `test:qa:local` e `test:qa:production`;
+`owner-onboarding-journeys.mjs` é chamado pela jornada existente nos agregadores de
+navegador/produção, reutilizando contexto, transporte, axe e evidências. O comando
+`test:onboarding:browser` recorta esses mesmos testes pelo executor, sem duplicá-los.
+[Escopo, resultados e limitações](OWNER_ONBOARDING.md).
+
 Lacunas completadas em `frontend/tests/qa-journeys.mjs`: busca/filtros/vazio e
 perfil; wizard por teclado, edição/invalidação, conflito/recuperação, repetição,
 falhas e reinício; cliente com duas barbearias, histórico, diálogo, cancelamento

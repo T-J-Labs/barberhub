@@ -296,7 +296,26 @@ não certificam DNS/TLS, provisionamento, sessão ou autorização real.
 ### Pendências específicas do cadastro real
 
 Definir autorização exclusiva de superadmin; identidade Google validada e vínculo
-do responsável; critérios de liberação sem compra; separação entre cadastro,
+do responsável; contratos e auditoria da liberação explícita sem compra; separação entre cadastro,
 acesso, publicação e cobrança; auditoria; provisionamento e unicidade concorrente
 do subdomínio; política oficial de nomes reservados e contratos aprovados no
 OpenAPI. Nada disso está implementado por esta demonstração.
+
+## Entrada do onboarding do proprietário — 2026-10-06
+
+Detalhes de um rascunho oferecem **Ver demonstração do onboarding** →
+`/onboarding/barbearia?origem=superadmin`. O exemplo Pátio é independente:
+nenhum identificador, nome, subdomínio ou outro dado do rascunho é transferido.
+Sair da área descarta o rascunho conforme o provider atual; não há sincronização
+ou retomada entre demonstrações. Exemplos ativos/suspensos não recebem essa ação.
+
+A introdução apresenta convite e responsável fictícios, com **Experimentar
+demonstração do aceite**. Nada é enviado; identidade e autenticação não são
+validadas. O percurso e os dois exemplos usam a mesma feature `owner-onboarding`.
+
+Decisão de produto aprovada pelo plano mais recente: liberação para publicação
+requer configuração mínima e compra confirmada ou liberação explícita pelo
+superadmin. Isso substitui a pendência de regra de liberação sem compra;
+contratos, autorização, auditoria, persistência e efeitos continuam pendentes.
+O cadastro manual segue criando apenas rascunhos, sem mudar seus CRUDs, fixtures,
+catálogo ou hosts. [Regras aprovadas e efeitos fictícios](OWNER_ONBOARDING.md).

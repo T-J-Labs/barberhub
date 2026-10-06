@@ -8,6 +8,8 @@ import { getPlatformNavigation } from "../server-navigation"
 import { clientAuthHref, isAccountType, platformReturnHref, tenantPublicOrigin, validateAuthContext, type AuthMode } from "../routing"
 import { AccountTypeOptions } from "./AccountTypeOptions"
 import { GoogleAccess } from "./GoogleAccess"
+import { onboardingHref } from "@/features/owner-onboarding/routing"
+import { catalogActionClass } from "@/features/barbershop-catalog/styles"
 
 export type AuthPageProps = { searchParams: Promise<Record<string, string | string[] | undefined>> }
 
@@ -53,6 +55,7 @@ export async function AuthScreen({ mode, searchParams }: AuthPageProps & { mode:
             <div className="mt-6">{available && alternateHref && platform.origin ? <>
               {mode === "cadastro" && <div className="mb-5"><AccountTypeOptions origin={platform.origin} context={context} selected={accountType} /></div>}
               <GoogleAccess mode={mode} accountType={accountType} alternateHref={alternateHref} returnHref={returnHref} returnLabel={returnLabel} />
+              {mode === "cadastro" && accountType === "barbearia" && <div className="mt-6 border-t border-[#26384A] pt-5"><p className="mb-3 text-sm leading-6 text-slate-400">Ensaie a configuração de uma barbearia fictícia. Esta ação é independente do Google e não cria conta ou acesso.</p><Link href={onboardingHref("cadastro")} className={catalogActionClass}>Experimentar configuração</Link></div>}
             </> : <p role="status" className="text-sm leading-6 text-slate-300">Acesso indisponível neste domínio. A origem principal da plataforma precisa estar configurada e validada.</p>}</div>
           </section>
         </div>
