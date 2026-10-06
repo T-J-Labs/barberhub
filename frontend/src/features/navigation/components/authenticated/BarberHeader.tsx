@@ -8,6 +8,7 @@ type BarberHeaderProps = {
 export function BarberHeader({ barbershopName }: BarberHeaderProps) {
   return (
     <AuthenticatedHeader
+      profileHref="/barbeiro/perfil"
       contextLabel="Barbearia"
       contextName={barbershopName ?? "Barbearia não identificada"}
       navigation={barberNavigation}

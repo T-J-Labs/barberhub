@@ -53,8 +53,24 @@ volta a visitante. Não representa uma sessão autenticada.
 
 Após sair, a mensagem de prévia exibida desaparece e o botão para iniciar outra
 prévia reaparece. Durante a saída, esse botão fica bloqueado. Meus agendamentos
-e Ajuda continuam indisponíveis; nenhum horário é reservado. Grupos de rotas
+abre `/cliente/agendamentos`, uma demonstração pública com fixtures de uma
+identidade fictícia ([limites e validação](CLIENT_APPOINTMENTS.md)). Perfil e Ajuda
+abrem `/cliente/perfil` e `/cliente/ajuda`; nenhum horário é reservado. Grupos de rotas
 e componentes de header não são mecanismos de autorização.
+
+## Perfil e ajuda demonstrativos implementados
+
+Entrega concluída em 2026-10-05: `/cliente/perfil`, `/cliente/ajuda`,
+`/barbeiro/perfil` e `/barbeiro/ajuda`, conforme seção 7 do roadmap.
+Os menus têm destinos existentes; o controle Perfil do barbeiro abre sua página.
+Consulte [implementação e validação](PROFILE_HELP.md).
+
+Editar o nome de exibição aplica apenas uma apresentação em memória do próprio
+papel. Isso não altera nome, e-mail, avatar ou credenciais do Google, não cria
+sessão, não ativa automaticamente a prévia do header e não concede permissões.
+Estado local reinicia ao recarregar ou sair da área. A ajuda explica
+os fluxos existentes e essas limitações, sem oferecer senha local ou prometer
+autenticação, reserva ou alterações persistidas.
 
 ## Validação local
 

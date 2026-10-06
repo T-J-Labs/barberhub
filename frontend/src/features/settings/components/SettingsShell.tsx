@@ -1,9 +1,10 @@
-import type { ReactNode } from "react"
+import type { CSSProperties, ReactNode } from "react"
 import { Container } from "@/components/ui/Container"
 
 export type SettingsNavigationItem = { id: string; label: string }
 
 type SettingsShellProps = {
+  variant?: "admin" | "public"
   eyebrow: string
   title: string
   description: string
@@ -11,13 +12,13 @@ type SettingsShellProps = {
   children: ReactNode
 }
 
-export function SettingsShell({ eyebrow, title, description, navigation, children }: SettingsShellProps) {
+export function SettingsShell({ variant = "admin", eyebrow, title, description, navigation, children }: SettingsShellProps) {
   return (
-    <div className="min-h-[calc(100vh-81px)] bg-[#07111c] text-white">
+    <div style={variant === "public" ? { "--settings-accent": "#38BDF8", "--settings-surface": "#0D1722", "--settings-hover": "#172535", "--settings-highlight": "#7DD3FC", "--settings-icon": "#172535" } as CSSProperties : undefined} className="min-h-[calc(100vh-81px)] bg-[#07111c] text-white">
       <Container>
         <div className="py-8 lg:py-12">
           <header className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#65d5ff]">{eyebrow}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--settings-accent,#65d5ff)]">{eyebrow}</p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
             <p className="mt-3 text-sm leading-6 text-slate-400 sm:text-base">{description}</p>
           </header>
@@ -28,7 +29,7 @@ export function SettingsShell({ eyebrow, title, description, navigation, childre
               <ul className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
                 {navigation.map((item) => (
                   <li key={item.id} className="shrink-0 lg:shrink">
-                    <a href={`#${item.id}`} className="flex min-h-11 items-center rounded-lg border border-slate-800 bg-[#0b1a29] px-3 text-sm font-medium text-slate-300 transition-colors hover:border-slate-600 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#65d5ff] lg:border-transparent lg:bg-transparent lg:px-2 lg:hover:bg-[#0b1a29]">
+                    <a href={`#${item.id}`} className="flex min-h-11 items-center rounded-lg border border-slate-800 bg-[var(--settings-surface,#0b1a29)] px-3 text-sm font-medium text-slate-300 transition-colors hover:border-slate-600 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--settings-accent,#65d5ff)] lg:border-transparent lg:bg-transparent lg:px-2 lg:hover:bg-[var(--settings-surface,#0b1a29)]">
                       {item.label}
                     </a>
                   </li>
@@ -50,7 +51,7 @@ type SettingsSectionProps = SettingsNavigationItem & {
 
 export function SettingsSection({ id, label, description, children }: SettingsSectionProps) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-6 overflow-hidden rounded-xl border border-slate-800 bg-[#0b1a29]">
+    <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-6 overflow-hidden rounded-xl border border-slate-800 bg-[var(--settings-surface,#0b1a29)]">
       <div className="border-b border-slate-800 px-5 py-5 sm:px-7">
         <div>
           <h2 id={`${id}-title`} className="text-lg font-semibold text-white">{label}</h2>

@@ -6,8 +6,12 @@ os contratos de API e a modelagem física de IAM ainda dependem de acordo com o
 backend.
 
 O planejamento das próximas entregas sem backend, registrado em 2026-10-05,
-está em [FRONTEND_ROADMAP.md](FRONTEND_ROADMAP.md). Ele detalha o agendamento
-demonstrativo como próxima prioridade, sem autorizar sua implementação por si só.
+está em [FRONTEND_ROADMAP.md](FRONTEND_ROADMAP.md). Agendamento, área do barbeiro e Meus
+agendamentos já estão implementados como demonstrações locais. A
+entrega de perfil e ajuda demonstrativos **para cliente e barbeiro** também foi
+implementada em 2026-10-05. A seção 7 do roadmap registra as quatro telas,
+a edição local do nome de exibição e ajuda por papel; veja [PROFILE_HELP.md](PROFILE_HELP.md).
+Entregas restantes continuam dependendo de solicitação específica.
 A sequência abaixo descreve a jornada-alvo; seus critérios integrados não
 significam que autenticação, disponibilidade ou reservas reais já existam.
 
@@ -48,6 +52,17 @@ Criar as features conforme cada entrega avançar, dentro de `frontend/src/featur
 - `booking`: feature implementada, com seleção e resultado demonstrativo
   no subdomínio; confirmação real somente após integração aprovada.
 - `client-appointments`: acompanhamento das reservas pessoais.
+  Demonstração local implementada em `/cliente/agendamentos`, com próximas
+  visitas, histórico, detalhes, cancelamento da amostra em memória e link para
+  o wizard da mesma barbearia. Não há reservas ou identidade reais; consulte
+  [CLIENT_APPOINTMENTS.md](CLIENT_APPOINTMENTS.md).
+- `barber-demo`: início e agenda de um profissional fictício em `/barbeiro` e
+  `/barbeiro/agenda`, com detalhes, conclusão, falta e bloqueios em memória.
+  Consulte [BARBER_DEMO.md](BARBER_DEMO.md). Não representa autorização real.
+
+- `demo-profile`: nome de exibição em memória, separado por layout de cliente e
+  barbeiro; não altera a identidade Google ou as fixtures de atendimento.
+- `role-help`: guia contextual por papel, com destinos seguros e FAQ estático.
 
 Usar Server Components por padrão e Client Components nos controles e etapas
 interativas. Reutilizar componentes de navegação e apresentação existentes,

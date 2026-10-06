@@ -42,10 +42,14 @@ Ao trabalhar no frontend:
 - Siga o escopo pedido pelo usuário. Pedidos de análise, planejamento, listagem
   ou documentação não autorizam implementar funcionalidades. O roadmap orienta
   futuras implementações, mas não autoriza executar suas etapas automaticamente.
-- A próxima entrega recomendada é o agendamento demonstrativo no subdomínio.
-  Quando solicitada a primeira entrega, limite-se ao wizard, documentação e
-  testes descritos em `docs/frontend/FRONTEND_ROADMAP.md`. Não inclua as demais
-  etapas, outra reformulação do Header ou mudança de domínio do admin.
+- Consulte o estado atual em `docs/frontend/FRONTEND_ROADMAP.md` antes de
+  escolher a próxima entrega. Agendamento, meus agendamentos e área do barbeiro
+  já possuem demonstrações locais; não confundir isso com integração real.
+- A próxima entrega recomendada é perfil e ajuda demonstrativos para **cliente
+  e barbeiro**, conforme a seção 7 do roadmap. Quando solicitada essa entrega,
+  limite-se às quatro telas planejadas, navegação necessária, documentação e
+  testes. Não inclua admin, superadmin, outra reformulação do Header ou mudança
+  de domínio. Pedidos parciais continuam limitados ao recorte solicitado.
 - Nas entregas demonstrativas desse roadmap, não altere backend ou banco.
   Enquanto o OpenAPI mantiver `paths: {}`, use fixtures locais em memória,
   sem inventar endpoints, autenticação ou persistência em `localStorage`.
