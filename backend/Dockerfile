@@ -1,8 +1,10 @@
-# Estágio 1: Build da aplicação
+# Estágio 1: Build
 FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY . .
-RUN mvn clean package -DskipTests -Dproject.build.sourceEncoding=UTF-8 -Dproject.reporting.outputEncoding=UTF-8
+# Define a linguagem/encoding do sistema para UTF-8 durante a compilação
+ENV JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8"
+RUN mvn clean package -DskipTests -Dmaven.resources.filtering=false
 
 # Estágio 2: Execução
 FROM eclipse-temurin:17-jre
