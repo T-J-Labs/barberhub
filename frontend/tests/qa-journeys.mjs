@@ -4,6 +4,7 @@ import path from 'node:path'
 import { createRequire } from 'node:module'
 import { httpTestConfig, assertHttpTestRuntime } from './http-test-config.mjs'
 import { ownerOnboardingJourneys } from './owner-onboarding-journeys.mjs'
+import { superadminHelpJourneys } from './superadmin-help-journeys.mjs'
 
 const require = createRequire(new URL('../../validation/qa-browser.cjs', import.meta.url))
 const { chromium } = require('./qa-browser.cjs')
@@ -92,8 +93,9 @@ async function startBooking(scenario = 'normal') {
   await page.getByLabel('Cenário local', { exact: true }).selectOption(scenario)
 }
 try {
-  await ownerOnboardingJourneys({ page, context, goto, button, check, geometry, audit })
-  if (process.env.OWNER_ONBOARDING_QA_ONLY !== '1') {
+  if (process.env.SUPERADMIN_HELP_QA_ONLY !== '1') await ownerOnboardingJourneys({ page, context, goto, button, check, geometry, audit })
+  if (process.env.OWNER_ONBOARDING_QA_ONLY !== '1') await superadminHelpJourneys({ page, context, goto, button, check, geometry, audit, environment: c.environment })
+  if (process.env.OWNER_ONBOARDING_QA_ONLY !== '1' && process.env.SUPERADMIN_HELP_QA_ONLY !== '1') {
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 })
     await check(`minhas barbearias ${width}px: identidade, URLs, teclado e filtro`, async () => {

@@ -54,7 +54,9 @@ Ao trabalhar no frontend:
   como referência visual e de menu, substituindo a referência anterior ao
   barbeiro. A implementação e o QA local estão em `docs/frontend/HEADERS_REVIEW.md`.
   Preservar navegação admin/superadmin, sidebar desktop, domínios e retorno.
-  A próxima prioridade é consolidar QA; esta orientação não autoriza novas
+  A consolidação local de QA já foi implementada; a próxima prioridade é
+  complementar as verificações manuais e externas de acessibilidade/ambiente
+  em `docs/frontend/QA_ACCESSIBILITY.md`. Esta orientação não autoriza novas
   implementações sem solicitação do usuário.
   “Minhas barbearias” está implementada como demonstração local. A regra
   aprovada é vínculo após primeiro agendamento real confirmado na barbearia;
@@ -62,6 +64,9 @@ Ao trabalhar no frontend:
   Onboarding demonstrativo do proprietário está implementado conforme plano
   específico aprovado; consulte `docs/frontend/OWNER_ONBOARDING.md`. Identidade,
   vínculo e onboarding real de equipe continuam dependentes de contratos/regras.
+  Ajuda do superadmin está implementada e revisada em `/super-admin/ajuda`;
+  consulte `docs/frontend/SUPERADMIN_DEMO.md`. Preservar o provider da área,
+  os avisos de descarte ao sair e a indisponibilidade de Planos e assinaturas.
   Uma recomendação não constitui aprovação dessas regras ou
   autorização para implementar. Pedidos parciais continuam limitados ao recorte
   solicitado, sem outra reformulação do Header ou mudança de domínio implícita.

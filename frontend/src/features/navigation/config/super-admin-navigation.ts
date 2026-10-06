@@ -7,6 +7,6 @@ export const superAdminNavigation = {
     { label: "Planos e assinaturas" },
   ],
   secondary: [
-    { label: "Ajuda" },
+    { label: "Ajuda", href: "/super-admin/ajuda" },
   ],
 } satisfies NavigationConfig

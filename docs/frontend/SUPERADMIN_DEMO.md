@@ -17,8 +17,8 @@ Grupo privado, subdomínio, identificador e header não concedem permissões.
 
 Reutilizados sem alterar comportamento: `Container`, `NavigationItems`,
 `SuperAdminHeader`, `AuthenticatedHeader` e `DemoDialog` (diálogo HTML modal).
-Somente Início e Barbearias receberam destinos. Planos/assinaturas e Ajuda
-continuam desabilitados porque suas páginas não existem.
+Na entrega básica, somente Início e Barbearias receberam destinos. A ampliação
+de Ajuda está registrada abaixo; Planos e assinaturas continuam indisponíveis.
 
 A lista é o foco visual: nomes e localização lideram a leitura, com subdomínio
 de apoio, estado explícito em texto e link para detalhes. Superfícies privadas,
@@ -32,6 +32,7 @@ Não há gráficos, faturamento, planos, avaliações ou dados operacionais de t
 | `/super-admin` | Total, rascunhos, ativas e suspensas calculados da mesma amostra em memória. |
 | `/super-admin/barbearias?q=...` | Cadastro manual embutido, lista e busca por nome, cidade ou bairro, indiferente a caixa e acentos. |
 | `/super-admin/barbearias/[id]?q=...` | Fixture ou rascunho do provider; motivo manual quando houver, estado demonstrativo e retorno com a busca. |
+| `/super-admin/ajuda` | Guia estático de tarefas e FAQ, independente da coleção e dos cenários de QA. |
 
 Busca tem limite de 120 caracteres, como no catálogo existente. Valores repetidos
 de `q` usam busca vazia; o conteúdo nunca define um destino de redirecionamento.
@@ -319,3 +320,168 @@ superadmin. Isso substitui a pendência de regra de liberação sem compra;
 contratos, autorização, auditoria, persistência e efeitos continuam pendentes.
 O cadastro manual segue criando apenas rascunhos, sem mudar seus CRUDs, fixtures,
 catálogo ou hosts. [Regras aprovadas e efeitos fictícios](OWNER_ONBOARDING.md).
+
+## Ajuda do superadmin — 2026-10-06
+
+Implementada por solicitação específica em `/super-admin/ajuda`. Página e
+`SuperadminHelpPage` são Server Components, com título/descrição próprios e
+`noindex, nofollow`. Reutilizam `HelpShell`, `HelpDestination` e o único `main`
+do layout. A skill `interface-design` e `.interface-design/system.md` orientam
+superfícies administrativas, hierarquia de leitura e foco. Nenhum componente
+compartilhado, header, domínio, autenticação ou permissão foi reformulado.
+Ajuda foi habilitada no menu existente; Planos e assinaturas seguem indisponíveis.
+
+Três blocos: aviso de dados fictícios sem autenticação/autorização/alteração real;
+caminhos por tarefa; dúvidas frequentes com 13 `details` nativos. Cinco atalhos:
+
+- Visão geral → `/super-admin`, com explicação dos totais da coleção atual.
+- Busca e detalhes → `/super-admin/barbearias`, por nome, cidade ou bairro.
+- Cadastro manual → mesma lista; orienta abrir **Cadastrar barbearia** e preencher
+  os cinco campos obrigatórios. Não abre o formulário automaticamente.
+- Suspensão/reativação → mesma lista; orienta abrir um exemplo e confirmar nos
+  detalhes. Não cria links para identificadores transitórios.
+- Onboarding → `/onboarding/barbearia?origem=superadmin`, com aviso junto ao link:
+  sair descarta rascunhos e alterações locais; nenhum dado é transferido ao
+  proprietário. O exemplo continua independente, sem sincronização/retomada.
+
+As perguntas cobrem indicadores, busca/detalhes, cadastro/motivo/subdomínio,
+restrição dos rascunhos, suspensão, duração da memória, recarga/saída,
+rascunho indisponível, onboarding, compra/liberação e planos indisponíveis.
+Distinguem explicitamente comportamento implementado em memória, regra aprovada
+de publicação futura (configuração mínima e compra confirmada ou liberação
+explícita) e integração ausente: pagamento, convite, vínculo do responsável,
+autorização, provisionamento e publicação reais.
+
+### Estado e arquivos desta entrega
+
+O layout e `SuperadminProvider` não foram alterados. Navegação interna por Next
+Link entre lista, detalhes, visão geral e Ajuda preserva rascunhos e suspensões.
+Recarga restaura os exemplos; sair para onboarding/outra área descarta a memória,
+inclusive ao voltar pelo navegador. Ajuda não consulta a coleção e continua
+disponível com vazio/erro demonstrativo. Não há novo provider, fetch, estado de
+dados, efeitos, armazenamento, endpoints ou alteração de backend/banco/OpenAPI.
+
+Arquivos em `frontend/`:
+
+- Novos: `src/app/(private)/super-admin/ajuda/page.tsx`,
+  `src/features/superadmin-demo/components/SuperadminHelpPage.tsx`,
+  `tests/superadmin-help-http.test.mjs`, `tests/superadmin-help-journeys.mjs`.
+- Alterados: `src/features/navigation/config/super-admin-navigation.ts`,
+  `tests/qa-runner.mjs`, `tests/qa-journeys.mjs`, `package.json`.
+- Fora de `frontend/`: `validation/headers-zoom.cjs`, este documento,
+  `FRONTEND_ROADMAP.md` e `README.md`.
+
+HTTP foi integrado ao agregador local/produção; a mesma jornada é chamada pelo
+agregador de navegador/produção. `test:superadmin:help` recorta esses testes,
+reutiliza regressões de superadmin/cadastro e o zoom existente, sem duplicar
+infraestrutura ou definições de cobertura.
+
+### Validação e limites
+
+Windows, Node 24.21.0, Edge/Chromium 154.0.4258.53 e ferramentas separadas de QA.
+Servidores próprios iniciados/encerrados pelo agregador. Desenvolvimento final:
+porta 3224. Produção local final: porta 3225, com origem lógica HTTPS interceptada
+sobre transporte loopback na jornada; regressões legadas e zoom usam HTTP local.
+Isso não verifica DNS/TLS publicado.
+
+Comandos executados em `frontend`:
+
+```powershell
+npm run lint
+npm run typecheck
+npm run test:routing
+# Build direto, sem prebuild/Orval ou regeneração do cliente:
+$env:BARBERHUB_PUBLIC_HOST="localhost"
+node node_modules/next/dist/bin/next build
+
+$env:TEST_SERVER="isolated"
+$env:TEST_PUBLIC_HOST="localhost"
+$env:PLAYWRIGHT_CHANNEL="msedge"
+$env:TEST_ENV="development"
+$env:TEST_PORT="3224"
+npm run test:superadmin:help
+$env:TEST_ENV="production"
+$env:TEST_PORT="3225"
+npm run test:superadmin:help
+```
+
+ESLint, TypeScript, build e sete testes de roteamento/configuração: **PASS**.
+Nenhum arquivo gerado da API foi alterado. Desenvolvimento final: **PASS**, incluindo 12 grupos de regras, um teste HTTP,
+27 verificações de regressão do superadmin, 20 de cadastro, sete grupos da nova
+jornada e zoom nativo 200%. Rascunho/motivo e suspensão foram preservados ao
+visitar Ajuda e voltar; recarga/saída restauraram a amostra. Lista vazia e erro
+foram verificados pelos cenários locais de desenvolvimento, sem forçar o boundary
+real. Atalhos e todas as perguntas foram percorridos com mouse/teclado; foco,
+ordem de leitura e único main/h1 conferidos. Larguras 320/390/768/1440px e FAQ
+expandido no zoom 200% sem rolagem horizontal. Capturas mobile/desktop foram
+inspecionadas. Nenhuma chamada `/api/`, armazenamento da amostra ou erro JavaScript
+observado. Quatro auditorias axe da ajuda expandida: zero violações detectadas.
+
+Produção local final: **PASS**, incluindo os mesmos 12 grupos de regras e teste
+HTTP, 25 verificações do superadmin, 20 de cadastro, seis grupos da ajuda e zoom
+nativo 200%. Cenários de vazio/erro são exclusivos de desenvolvimento e não
+foram acionados em produção. As quatro larguras, preservação/recarga/saída,
+destinos e ausência de API/armazenamento/erros foram revalidados; mais quatro
+auditorias axe sem violações detectadas. O build inclui a ajuda como rota estática.
+
+Há resultados `incomplete` do axe (referência ARIA do controle de menu existente
+e contraste dos sinais decorativos de expansão). Permanecem pendentes conferência
+manual integral de contraste, leitor de tela real, dispositivos físicos,
+Safari/Firefox/WebKit, auditoria WCAG integral e ambiente publicado. A verificação
+DOM/teclado e o axe não certificam acessibilidade integral ou autorização.
+
+Rodadas intermediárias ficaram registradas como **FAIL**: a primeira execução
+concorreu indevidamente com build, que removeu artefatos do servidor de QA; as
+seguintes identificaram problemas no teste novo (SSR em chunks, leitura antes da
+navegação terminar, título do rascunho também presente na lista e alternância de
+`details` já aberto). Corrigidas as verificações e repetido o recorte final;
+nenhuma mudança de produto foi necessária para contornar essas falhas.
+
+Evidências em `validation/qa-runs/`:
+
+- `2026-10-06T23-00-31.422Z-superadmin-help-8no57j`: desenvolvimento final aprovado.
+- `2026-10-06T23-02-30.202Z-superadmin-help-5wmcuP`: produção local final aprovada.
+- `2026-10-06T22-51-49.798Z-superadmin-help-aM5irD`,
+  `2026-10-06T22-53-56.301Z-superadmin-help-ehaq0Q` e
+  `2026-10-06T22-57-01.196Z-superadmin-help-g6XaiK`: execuções intermediárias com falhas.
+
+Cada recorte guarda `run.json`, logs, resultados, axe, capturas e trace.
+
+### Revisão independente — 2026-10-06
+
+Ajuda aprovada no escopo demonstrativo, sem bloqueadores identificados na
+leitura do código e nas verificações abaixo. Nenhuma alteração de produto foi
+feita nesta revisão; a documentação existente da entrega foi preservada.
+
+- `npm run lint` e `npm run typecheck`: **PASS**.
+- `test:superadmin:help`, desenvolvimento isolado na porta 3225: **PASS**;
+  12 grupos de regras, um teste HTTP, 27 verificações do superadmin, 20 de
+  cadastro, sete grupos da ajuda, quatro auditorias axe e zoom nativo 200%.
+- Mesmo recorte em produção local isolada na porta 3226: **PASS**;
+  12 grupos de regras, um teste HTTP, 25 verificações do superadmin, 20 de
+  cadastro, seis grupos da ajuda, quatro auditorias axe e zoom nativo 200%.
+- `test:qa:local` em desenvolvimento no servidor preparado da porta 3000:
+  **PASS nas 14 suítes**, incluindo autenticação/retorno, domínios, booking,
+  agendamentos, Minhas barbearias, barbeiro, perfis, superadmin, onboarding e
+  política PWA. O servidor preparado não foi encerrado pelo executor.
+- Inspeção visual das capturas da ajuda em 320px e 1440px: hierarquia, textos,
+  identidade administrativa e FAQ expandido coerentes com os shells existentes.
+  Aplicada a skill `interface-design` com `.interface-design/system.md` para
+  revisar reutilização, hierarquia e foco, sem reformulação visual.
+- Rascunho e suspensão preservados na navegação interna; recarga/saída restauram
+  a amostra. Atalhos, teclado, foco e larguras 320/390/768/1440px aprovados.
+  Nenhuma chamada de API, armazenamento da amostra ou erro JavaScript detectado.
+
+Evidências em `validation/qa-runs/`:
+
+- `2026-10-06T23-06-58.199Z-superadmin-help-ouLzy7`: desenvolvimento.
+- `2026-10-06T23-07-49.305Z-superadmin-help-CVrwIe`: produção local.
+- `2026-10-06T23-08-00.867Z-local-JS2r3d`: regressão local.
+
+Não foi executado novo build: a produção reutilizou o build existente da entrega.
+O fingerprint de `frontend/src` e `frontend/tests` coincide com o recorte de
+produção aprovado anteriormente (`2026-10-06T23-02-30.202Z-superadmin-help-5wmcuP`);
+isso não é verificação de equivalência de toda a configuração ou dependências.
+As oito auditorias axe não detectaram violações, mas conservaram resultados
+`incomplete` para revisão humana. Mantidas as pendências de leitor de tela,
+contraste integral, aparelhos/navegadores reais e publicação descritas acima.

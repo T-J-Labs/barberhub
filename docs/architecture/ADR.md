@@ -230,6 +230,9 @@ login/cadastro → agendamento demonstrativo → meus agendamentos → área do 
 Perfil e ajuda de cliente/barbeiro, superadmin básico, cadastro manual de rascunhos
 e PWA/acabamento transversal também estão implementados, conforme atualização de
 2026-10-06 em [FRONTEND_ROADMAP.md](../frontend/FRONTEND_ROADMAP.md).
+As ampliações solicitadas de Minhas barbearias, onboarding demonstrativo do
+proprietário e Ajuda do superadmin também existem. Estado consolidado e registros
+de revisão estão no roadmap; não introduzem novos contratos ou efeitos reais.
 Isso não conclui o MVP integrado: autenticação, autorização, disponibilidade,
 concorrência e persistência continuam pendentes de contratos e backend.
 O plano da jornada está em [CLIENT_EXPERIENCE.md](../frontend/CLIENT_EXPERIENCE.md).

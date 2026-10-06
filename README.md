@@ -55,6 +55,23 @@ Não há autenticação/autorização de superadmin. Contratos e regras reais co
 pendentes enquanto o OpenAPI mantém `paths: {}`.
 [Escopo, arquivos, testes e limitações](docs/frontend/SUPERADMIN_DEMO.md).
 
+`/super-admin/ajuda` oferece cinco caminhos por tarefa e 13 perguntas frequentes,
+incluindo cadastro manual e onboarding independente. Ajuda usa o mesmo provider:
+navegar até ela e voltar preserva rascunhos e suspensões locais; recarregar ou
+sair da área os descarta. O atalho do onboarding avisa esse descarte e não
+transfere dados ao proprietário. Planos e assinaturas continuam indisponíveis.
+QA da ajuda aprovado em desenvolvimento e produção local: comportamento,
+regressões de superadmin/cadastro, teclado, 320/390/768/1440px, zoom 200%, axe,
+lint, TypeScript e build. Leitor de tela, dispositivos reais e contraste manual
+integral continuam pendentes; detalhes e evidências no documento acima.
+
+Revisão independente de 2026-10-06: Ajuda aprovada como demonstração local,
+com lint/TypeScript, recorte de navegador em desenvolvimento/produção e as
+14 suítes do agregador local passando. O build existente foi reutilizado nesta
+revisão. O registro anterior do onboarding também foi acrescentado ao seu
+documento, sem alegar reexecução nesta rodada. O [índice consolidado das entregas](docs/frontend/FRONTEND_ROADMAP.md#11-consolidação-das-entregas-e-revisões--2026-10-06)
+identifica o que já existe e mantém QA manual/externo e integração real separados.
+
 Muitas barbearias ainda controlam horários por papel ou por conversas dispersas
 no WhatsApp. Isso dificulta a organização da equipe, aumenta a ocorrência de
 conflitos e faltas e limita a presença digital do estabelecimento.
@@ -185,6 +202,7 @@ npm run test:headers:browser -- 3000 # QA de headers, drawers e navegação
 npm run test:headers:zoom -- 3000 # Zoom nativo 200% em perfil temporário do Edge
 npm run test:barber   # Verifica status, próximo atendimento e bloqueios da amostra
 npm run test:superadmin # Verifica busca, resumo, estados e regras de cadastro local
+npm run test:superadmin:help # Recorte de QA: HTTP, ajuda, regressões e zoom 200%
 npm run test:superadmin:browser -- 3000 # QA de regressão (requer Playwright e navegador)
 npm run test:superadmin:registration:browser -- 3000 # QA de cadastro e navegação em memória
 npm run test:pwa       # Política de hosts, cache exclusivo e worker
@@ -316,10 +334,16 @@ conhecer o processo completo.
 - [Revisão dos headers, navegação e acessibilidade](docs/frontend/HEADERS_REVIEW.md)
 - [Área do barbeiro demonstrativa e validação](docs/frontend/BARBER_DEMO.md)
 - [Superadmin básico demonstrativo e validação](docs/frontend/SUPERADMIN_DEMO.md)
+- [Ajuda do superadmin e revisão independente](docs/frontend/SUPERADMIN_DEMO.md#revisão-independente--2026-10-06)
+- [Onboarding demonstrativo do proprietário e validação](docs/frontend/OWNER_ONBOARDING.md)
 - [PWA, política offline e acabamento transversal](docs/frontend/PWA.md)
 - [Consolidação de QA, acessibilidade e validação parcial](docs/frontend/QA_ACCESSIBILITY.md)
 
 ## Roadmap resumido
+
+Os itens abaixo representam o **MVP integrado e sua evolução**, não uma lista
+de telas ainda ausentes. O estado das apresentações e demonstrações já
+implementadas está no [roadmap do frontend](docs/frontend/FRONTEND_ROADMAP.md).
 
 - Catálogo público e página de cada barbearia
 - Conta global do cliente e seus agendamentos entre estabelecimentos

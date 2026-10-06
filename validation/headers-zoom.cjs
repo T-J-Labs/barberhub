@@ -16,17 +16,26 @@ fs.mkdirSync(dir, { recursive:true });
   const page = await context.newPage();
   const results = [];
   try {
-    for (const [name, host, route] of [
+    const routes = [
       ['landing','localhost','/'], ['catalog','localhost','/barbearias'],
       ['public-profile','demo-esquina.localhost','/'], ['booking','demo-esquina.localhost','/agendar'],
       ['login','localhost','/login'], ['signup','localhost','/cadastro'],
       ['client','localhost','/cliente/agendamentos'], ['barber','localhost','/barbeiro'],
       ['admin','localhost','/admin'], ['superadmin','localhost','/super-admin'],
-    ]) {
+      ['superadmin-help','localhost','/super-admin/ajuda'],
+    ];
+    for (const [name, host, route] of routes.filter(([name]) => process.env.SUPERADMIN_HELP_QA_ONLY !== '1' || name === 'superadmin-help')) {
       await page.goto(`http://${host}:${port}${route}`);
       const metrics = await page.evaluate(() => ({ innerWidth, outerWidth, devicePixelRatio, visualScale:visualViewport.scale, horizontalOverflow:document.documentElement.scrollWidth > innerWidth }));
       assert.equal(metrics.devicePixelRatio, 2); assert.ok(metrics.innerWidth < metrics.outerWidth / 2 + 2);
       assert.equal(metrics.horizontalOverflow, false);
+      if (name === 'superadmin-help') {
+        await page.getByRole('heading', { name: 'Ajuda do superadmin', exact:true }).waitFor();
+        for (const summary of await page.locator('main summary').all()) await summary.click();
+        assert.equal(await page.locator('main details[open]').count(), 13);
+        assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+        await page.screenshot({ path:path.join(dir, 'superadmin-help-content-200.png'), fullPage:true });
+      }
       const banner = page.getByRole('banner');
       const controls = await banner.evaluate(el => [...el.querySelectorAll('a,button')].filter(x => x.checkVisibility()).map(x => {
         const r = x.getBoundingClientRect(); return { x:r.x, right:r.right, width:r.width, height:r.height };

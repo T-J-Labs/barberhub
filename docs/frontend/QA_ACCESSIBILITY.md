@@ -256,5 +256,45 @@ Próxima ação de QA: executar as camadas pendentes quando houver ambientes e
 equipamentos, anexando nova evidência datada. Não autoriza implementar Minhas
 barbearias, onboarding, sincronização de demos ou integração real.
 
+## Revisões independentes posteriores — 2026-10-06
+
+Minhas barbearias, onboarding e Ajuda do superadmin já foram implementados por
+solicitações específicas posteriores. A observação de escopo acima não indica
+que essas telas ainda estejam ausentes. Seus registros de revisão estão em
+[CLIENT_BARBERSHOPS.md](CLIENT_BARBERSHOPS.md),
+[OWNER_ONBOARDING.md](OWNER_ONBOARDING.md) e
+[SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md). Datas e resultados anteriores foram
+preservados; o [roadmap](FRONTEND_ROADMAP.md#11-consolidação-das-entregas-e-revisões--2026-10-06)
+consolida o estado das entregas.
+
+Nesta rodada de revisão da Ajuda:
+
+- ESLint e TypeScript passaram.
+- `test:superadmin:help` passou em desenvolvimento e produção local, com
+  regressões de superadmin/cadastro, HTTP, teclado/foco, quatro larguras e zoom
+  nativo 200%. Sete grupos da ajuda em desenvolvimento e seis em produção.
+- Oito auditorias axe da ajuda expandida não detectaram violações; resultados
+  `incomplete` permanecem sujeitos a inspeção humana, não contam como aprovados.
+- `test:qa:local` passou nas 14 suítes. Inclui agora o HTTP da Ajuda, além de
+  autenticação/retorno, domínios e regras/HTTP das demonstrações existentes.
+- Inspecionadas visualmente as capturas de 320px e 1440px da Ajuda, seguindo
+  `interface-design` e o sistema existente, sem alterações visuais.
+- Build de produção existente reutilizado. Não houve novo build, regressão
+  ampla de navegador/PWA, teste de instalação ou medição de desempenho nesta
+  revisão. Os testes do onboarding registrados agora foram executados na
+  revisão anterior, não reexecutados pelo recorte da Ajuda.
+
+Evidências em `validation/qa-runs/`: desenvolvimento
+`2026-10-06T23-06-58.199Z-superadmin-help-ouLzy7`, produção local
+`2026-10-06T23-07-49.305Z-superadmin-help-CVrwIe` e regressão local
+`2026-10-06T23-08-00.867Z-local-JS2r3d`. Windows, Node 24.21.0 e Edge 154;
+portas isoladas 3225/3226, servidor preparado 3000 preservado. Host/HTTPS lógico
+simulados sobre loopback não comprovam publicação.
+
+QA integral continua parcial: leitor de tela real, dispositivos físicos,
+outros navegadores, contraste integral e ambiente publicado não foram validados.
+A exceção de contraste dos botões públicos continua vigente nas outras jornadas;
+a ausência de violações nesta página não elimina essa pendência transversal.
+
 Referências das ferramentas: [isolamento do Playwright](https://playwright.dev/docs/browser-contexts)
 e [navegadores/canais](https://playwright.dev/docs/browsers).
