@@ -2,24 +2,12 @@
 const http = require('node:http');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const port = Number(process.argv[2] ?? 3000);
-const productionHost = process.argv[3];
-const host = productionHost ?? 'localhost';
-const origin = productionHost ? `https://${host}` : `http://${host}:${port}`;
-const tenantOrigin = productionHost ? `https://demo-esquina.${host}` : `http://demo-esquina.${host}:${port}`;
-const requestHost = productionHost ? host : `${host}:${port}`;
+const qa = require('./qa-http.cjs');
+const { port, base: host, origin, authority: requestHost } = qa.config;
+const productionHost = qa.config.environment === 'production' ? host : undefined;
+const tenantOrigin = origin.replace('://', '://demo-esquina.');
 const results = [];
-function request(path, requestHostname = requestHost, extraHeaders = {}) {
-  return new Promise((resolve, reject) => {
-    const req = http.get({ hostname: 'localhost', port, path, headers: { host: requestHostname, ...extraHeaders } }, (res) => {
-      let body = '';
-      res.setEncoding('utf8');
-      res.on('data', (chunk) => { body += chunk; });
-      res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, body }));
-    });
-    req.on('error', reject);
-  });
-}
+function request(path, requestHostname = requestHost, extraHeaders = {}) { return qa.request(path, { host: requestHostname, ...extraHeaders }); }
 function links(body) { return [...body.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1].replaceAll('&amp;', '&')); }
 async function check(label, path, action, requestHostname, extraHeaders) {
   const response = await request(path, requestHostname, extraHeaders);
@@ -48,6 +36,7 @@ function authLinks(response, shop, destination) {
   }
 }
 (async () => {
+  await qa.probe();
   for (const mode of ['login', 'cadastro']) {
     await check(`${mode}: acesso direto na plataforma`, `/${mode}`, (response) => { form(response); authLinks(response, null, null); });
     for (const destination of [undefined, '/barbearias/demo-esquina', `${origin}/barbearias/demo-esquina`]) {
@@ -132,7 +121,7 @@ function authLinks(response, shop, destination) {
     assert.doesNotMatch(response.body, /href="\/barbearias\/demo-/);
   });
   await check('admin permanece disponível como demonstração existente', '/admin', (response) => { assert.equal(response.status, 200); });
-  fs.writeFileSync(`${__dirname}/client-auth-http-${productionHost ? 'production' : 'development'}-results.json`, JSON.stringify(results, null, 2));
+  fs.writeFileSync(`${qa.outputDir}/client-auth-http-${productionHost ? 'production' : 'development'}-results.json`, JSON.stringify(results, null, 2));
   console.log(`${results.length} verificações HTTP aprovadas.`);
 })().catch((error) => { console.error(error); process.exitCode = 1; });
 

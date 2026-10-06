@@ -3,12 +3,13 @@ const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
 const ts = require('../frontend/node_modules/typescript');
-const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const { chromium } = require('./qa-browser.cjs');
 const exportsWorker = {};
 new Function('exports', ts.transpileModule(fs.readFileSync(path.join(__dirname,'../frontend/src/features/pwa/worker.ts'),'utf8'), {compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText)(exportsWorker);
 const base = `http://localhost:${process.argv[2] || 3110}`;
 let version = 'v1', origin;
 const results = [];
+const outputDir = require('./qa-output.cjs').outputDirectory('pwa-lifecycle');
 const server = http.createServer(async (request,response) => {
   if(request.url === '/pwa-worker.js') {
     response.writeHead(200, {'Content-Type':'application/javascript','Cache-Control':'no-store','Service-Worker-Allowed':'/'});
@@ -61,7 +62,7 @@ const server = http.createServer(async (request,response) => {
     });
     await conflictContext.close();
   } finally {
-    fs.mkdirSync(path.join(__dirname,'pwa'),{recursive:true});fs.writeFileSync(path.join(__dirname,'pwa/lifecycle-results.json'),JSON.stringify({browser:browser.version(),fixture:'HTTP isolado em localhost, fonte real do worker, formulário sintético e proxy da aplicação de produção',results},null,2));
+    fs.mkdirSync(outputDir,{recursive:true});fs.writeFileSync(path.join(outputDir,'lifecycle-results.json'),JSON.stringify({browser:browser.version(),fixture:'HTTP isolado em localhost, fonte real do worker, formulário sintético e proxy da aplicação de produção',results},null,2));
     await browser.close();await new Promise(resolve=>server.close(resolve));
   }
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -31,7 +31,10 @@
     "test:headers:visual": "node ../validation/headers-visual.cjs",
     "test:superadmin": "node ../validation/superadmin-state.cjs",
     "test:superadmin:browser": "node ../validation/superadmin-browser.cjs",
-    "test:superadmin:registration:browser": "node ../validation/superadmin-registration-browser.cjs"
+    "test:superadmin:registration:browser": "node ../validation/superadmin-registration-browser.cjs",
+    "test:qa:local": "node tests/qa-runner.mjs local",
+    "test:qa:browser": "node tests/qa-runner.mjs browser",
+    "test:qa:production": "node tests/qa-runner.mjs production"
   },
   "dependencies": {
     "axios": "^1.19.0",

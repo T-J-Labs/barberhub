@@ -1,10 +1,10 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const { chromium } = require('./qa-browser.cjs');
 const port = process.argv[2] || 3000;
 const base = `http://localhost:${port}`;
-const dir = process.env.HEADER_QA_OUTPUT || path.join(__dirname, 'headers', 'after');
+const dir = process.env.HEADER_QA_OUTPUT || require('./qa-output.cjs').outputDirectory('headers-browser');
 fs.mkdirSync(dir, { recursive: true });
 const results = [], observations = {};
 async function check(name, action) { await action(); results.push({ name, passed: true }); console.log('PASS', name); }

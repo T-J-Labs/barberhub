@@ -16,7 +16,7 @@ type ServiceDraft = {
 
 const emptyDraft: ServiceDraft = { name: "", description: "", price: "", durationMinutes: "" }
 const currency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" })
-const fieldClass = "min-h-11 w-full rounded-lg border border-slate-700 bg-[#07111c] px-3 text-sm text-white outline-none transition-colors placeholder:text-slate-500 focus:border-[#65d5ff] focus-visible:ring-2 focus-visible:ring-[#65d5ff]/25"
+const fieldClass = "min-h-11 w-full rounded-lg border border-slate-700 bg-[#07111c] px-3 text-sm text-white outline-none transition-colors placeholder:text-slate-400 focus:border-[#65d5ff] focus-visible:ring-2 focus-visible:ring-[#65d5ff]/25"
 
 export function ServicesView({ initialServices }: ServicesViewProps) {
   const [services, setServices] = useState(initialServices)
@@ -139,7 +139,7 @@ export function ServicesView({ initialServices }: ServicesViewProps) {
                   <input className={fieldClass} name="name" value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} maxLength={80} placeholder="Ex.: Corte tradicional" required />
                 </label>
                 <label className="grid gap-2 text-sm font-medium text-slate-200 sm:col-span-2">
-                  Descrição <span className="font-normal text-slate-500">(opcional)</span>
+                  Descrição <span className="font-normal text-slate-400">(opcional)</span>
                   <textarea className={`${fieldClass} min-h-24 resize-y py-3`} name="description" value={draft.description} onChange={(event) => setDraft({ ...draft, description: event.target.value })} maxLength={240} placeholder="O que está incluído?" />
                 </label>
                 <label className="grid gap-2 text-sm font-medium text-slate-200">
@@ -162,7 +162,7 @@ export function ServicesView({ initialServices }: ServicesViewProps) {
             <label className="flex min-h-11 min-w-0 flex-1 items-center gap-3 rounded-lg border border-slate-700 bg-[#07111c] px-3 text-slate-400 focus-within:border-[#65d5ff]">
               <FiSearch size={17} aria-hidden="true" />
               <span className="sr-only">Buscar serviços</span>
-              <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar serviço" className="min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500" />
+              <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar serviço" className="min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-400" />
             </label>
             <select aria-label="Filtrar por situação" value={status} onChange={(event) => setStatus(event.target.value as StatusFilter)} className={`${fieldClass} sm:w-48`}>
               <option value="all">Todos os serviços</option>
@@ -176,18 +176,18 @@ export function ServicesView({ initialServices }: ServicesViewProps) {
               <div className="flex items-center gap-2"><FiScissors className="text-[#65d5ff]" aria-hidden="true" /><h2 className="text-lg font-semibold">Catálogo</h2></div>
               <p className="mt-1 text-sm text-slate-400">{visibleServices.length} {visibleServices.length === 1 ? "serviço encontrado" : "serviços encontrados"}</p>
             </div>
-            <p className="hidden text-xs text-slate-500 sm:block">Preço e duração por atendimento</p>
+            <p className="hidden text-xs text-slate-400 sm:block">Preço e duração por atendimento</p>
           </div>
 
           {visibleServices.length === 0 ? (
             <div className="flex min-h-52 flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 bg-[#0b1a29] px-6 text-center">
-              <FiScissors className="text-slate-500" size={25} aria-hidden="true" />
+              <FiScissors className="text-slate-400" size={25} aria-hidden="true" />
               <h3 className="mt-3 font-semibold">{services.length === 0 ? "Seu catálogo está vazio" : "Nenhum serviço encontrado"}</h3>
               <p className="mt-1 max-w-sm text-sm text-slate-400">{services.length === 0 ? "Adicione o primeiro serviço para começar a organizar a agenda." : "Tente mudar a busca ou o filtro de situação."}</p>
             </div>
           ) : (
             <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#0b1a29]">
-              <div className="hidden grid-cols-[minmax(0,1fr)_130px_110px_110px_180px] gap-5 border-b border-slate-800 bg-[#0d1d2d] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 lg:grid">
+              <div className="hidden grid-cols-[minmax(0,1fr)_130px_110px_110px_180px] gap-5 border-b border-slate-800 bg-[#0d1d2d] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400 lg:grid">
                 <span>Serviço</span><span>Duração</span><span>Preço</span><span>Situação</span><span className="text-right">Ações</span>
               </div>
               <ul className="divide-y divide-slate-800/80">
@@ -213,7 +213,7 @@ export function ServicesView({ initialServices }: ServicesViewProps) {
               </ul>
             </div>
           )}
-          <p className="mt-4 text-xs text-slate-500">Alterações feitas nesta tela são demonstrativas e serão perdidas ao recarregar a página.</p>
+          <p className="mt-4 text-xs text-slate-400">Alterações feitas nesta tela são demonstrativas e serão perdidas ao recarregar a página.</p>
         </div>
       </Container>
     </div>
@@ -223,7 +223,7 @@ export function ServicesView({ initialServices }: ServicesViewProps) {
 function Summary({ label, value, detail, accent = false }: { label: string; value: number; detail: string; accent?: boolean }) {
   return (
     <div className="border-b border-slate-800 p-5 last:border-0 sm:border-r sm:border-b-0 sm:last:border-r-0">
-      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{label}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{label}</p>
       <p className={`mt-2 text-2xl font-semibold tabular-nums ${accent ? "text-[#8de1ff]" : "text-white"}`}>{value}</p>
       <p className="mt-1 text-xs text-slate-400">{detail}</p>
     </div>

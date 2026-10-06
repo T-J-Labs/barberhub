@@ -571,6 +571,14 @@ contextos nem implementa notificações, sessão ou autorização reais.
 
 ### 10.3. QA transversal e pendências da PWA
 
+**Atualização de 2026-10-06:** consolidação de testes e acessibilidade implementada
+após solicitação explícita, com `test:qa:local`, `test:qa:browser` e
+`test:qa:production`, ferramentas separadas, evidências únicas e correções
+pontuais. **Parcialmente validada**: leitor de tela, dispositivos físicos,
+Safari/Firefox/WebKit e HTTPS publicado permanecem pendentes. Resultados desta
+rodada, preparação e limites em [QA_ACCESSIBILITY.md](QA_ACCESSIBILITY.md).
+Os registros anteriores permanecem históricos; não representam reexecução.
+
 Consolidar os testes existentes, evitando outra implementação da mesma PWA:
 
 - Tornar reproduzível a regressão de descoberta → perfil → introdução → wizard,
@@ -641,7 +649,8 @@ de simulação; sem vincular automaticamente rascunhos de demonstrações indepe
   geolocalização, avaliações, rankings e notificações reais. “Planos e assinaturas”
   do superadmin permanece indisponível; não inventar condições comerciais.
 
-**Próxima entrega recomendada:** consolidação de QA e acessibilidade, incluindo
-os ambientes e dispositivos ainda pendentes. A revisão dirigida de headers foi
+**Próxima prioridade de QA:** completar as verificações manuais e externas ainda
+pendentes em [QA_ACCESSIBILITY.md](QA_ACCESSIBILITY.md). A consolidação local
+foi implementada; isso não conclui integralmente a QA. A revisão dirigida de headers foi
 implementada após solicitação explícita; não executar novas funcionalidades
 automaticamente nem repetir a revisão já concluída.

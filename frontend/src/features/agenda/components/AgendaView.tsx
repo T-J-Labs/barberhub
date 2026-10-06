@@ -35,7 +35,7 @@ function statusClass(status: AgendaStatus) {
 }
 
 function Contact({ phone }: { phone: string }) {
-  return <a href={`tel:${phone}`} className="mt-1 inline-flex max-w-full items-center gap-1 truncate text-xs text-slate-500 hover:text-[#65d5ff]"><FiPhone className="shrink-0" size={12} /> <span className="truncate">{phone}</span></a>
+  return <a href={`tel:${phone}`} className="mt-1 inline-flex max-w-full items-center gap-1 truncate text-xs text-slate-400 hover:text-[#65d5ff]"><FiPhone className="shrink-0" size={12} /> <span className="truncate">{phone}</span></a>
 }
 
 export function AgendaView({ data, initialRegisterOpen = false }: AgendaViewProps) {
@@ -126,9 +126,9 @@ export function AgendaView({ data, initialRegisterOpen = false }: AgendaViewProp
           </header>
 
           <section aria-label="Resumo do turno" className="mt-6 grid overflow-hidden rounded-xl border border-slate-800 bg-[#0b1a29] sm:grid-cols-3">
-            <div className="border-b border-slate-800 p-5 sm:border-b-0 sm:border-r"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">No turno</p><p className="mt-2 text-2xl font-semibold">{appointments.length}</p><p className="mt-1 text-xs text-slate-400">atendimentos filtrados</p></div>
-            <div className="border-b border-slate-800 p-5 sm:border-b-0 sm:border-r"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Confirmados</p><p className="mt-2 text-2xl font-semibold text-[#8de1ff]">{confirmedCount}</p><p className="mt-1 text-xs text-slate-400">clientes prontos para chegar</p></div>
-            <div className="p-5"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Pedem atenção</p><p className="mt-2 text-2xl font-semibold text-amber-200">{pendingCount}</p><p className="mt-1 text-xs text-slate-400">aguardando confirmação</p></div>
+            <div className="border-b border-slate-800 p-5 sm:border-b-0 sm:border-r"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">No turno</p><p className="mt-2 text-2xl font-semibold">{appointments.length}</p><p className="mt-1 text-xs text-slate-400">atendimentos filtrados</p></div>
+            <div className="border-b border-slate-800 p-5 sm:border-b-0 sm:border-r"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">Confirmados</p><p className="mt-2 text-2xl font-semibold text-[#8de1ff]">{confirmedCount}</p><p className="mt-1 text-xs text-slate-400">clientes prontos para chegar</p></div>
+            <div className="p-5"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">Pedem atenção</p><p className="mt-2 text-2xl font-semibold text-amber-200">{pendingCount}</p><p className="mt-1 text-xs text-slate-400">aguardando confirmação</p></div>
           </section>
 
           <p role="status" aria-live="polite" className="mt-4 min-h-5 text-sm text-[#8de1ff]">{notice}</p>
@@ -140,12 +140,12 @@ export function AgendaView({ data, initialRegisterOpen = false }: AgendaViewProp
             </div>
           </section>
 
-          <div className="mt-8 flex items-end justify-between gap-4"><div><div className="flex items-center gap-2"><FiActivity className="text-[#65d5ff]" /><h2 className="text-lg font-semibold">Linha do tempo</h2></div><p className="mt-2 text-sm text-slate-400">{appointments.length} {appointments.length === 1 ? "atendimento encontrado" : "atendimentos encontrados"}</p></div><button type="button" onClick={() => setMode("error")} className="min-h-11 shrink-0 text-xs font-semibold text-slate-500 transition hover:text-slate-200">Simular erro</button></div>
+          <div className="mt-8 flex items-end justify-between gap-4"><div><div className="flex items-center gap-2"><FiActivity className="text-[#65d5ff]" /><h2 className="text-lg font-semibold">Linha do tempo</h2></div><p className="mt-2 text-sm text-slate-400">{appointments.length} {appointments.length === 1 ? "atendimento encontrado" : "atendimentos encontrados"}</p></div><button type="button" onClick={() => setMode("error")} className="min-h-11 shrink-0 text-xs font-semibold text-slate-400 transition hover:text-slate-200">Simular erro</button></div>
 
           <div className="mt-4">
             {mode !== "ready" ? <AgendaState kind={mode} onRetry={() => setMode("ready")} /> : appointments.length === 0 ? <AgendaState kind="empty" /> : <AppointmentList appointments={appointments} onDetails={setSelectedId} />}
           </div>
-          <p className="mt-4 text-xs text-slate-500">Alterações nesta agenda são demonstrativas e desaparecem ao recarregar a página.</p>
+          <p className="mt-4 text-xs text-slate-400">Alterações nesta agenda são demonstrativas e desaparecem ao recarregar a página.</p>
         </div>
       </Container>
 
@@ -165,10 +165,10 @@ export function AgendaView({ data, initialRegisterOpen = false }: AgendaViewProp
       <DemoDialog open={!!selectedAppointment} onClose={() => setSelectedId(null)} title={selectedAppointment?.client ?? "Atendimento"} description="Detalhes e situação deste atendimento na prévia local.">
         {selectedAppointment && <div>
           <dl className="grid gap-4 rounded-lg border border-slate-800 bg-[#07111c] p-4 text-sm sm:grid-cols-2">
-            <div><dt className="text-slate-500">Horário</dt><dd className="mt-1 font-semibold tabular-nums">{selectedAppointment.time}–{selectedAppointment.endTime}</dd></div>
-            <div><dt className="text-slate-500">Situação</dt><dd className="mt-1 font-semibold">{selectedAppointment.status}</dd></div>
-            <div><dt className="text-slate-500">Serviço</dt><dd className="mt-1 font-semibold">{selectedAppointment.service}</dd></div>
-            <div><dt className="text-slate-500">Barbeiro</dt><dd className="mt-1 font-semibold">{selectedAppointment.barber}</dd></div>
+            <div><dt className="text-slate-400">Horário</dt><dd className="mt-1 font-semibold tabular-nums">{selectedAppointment.time}–{selectedAppointment.endTime}</dd></div>
+            <div><dt className="text-slate-400">Situação</dt><dd className="mt-1 font-semibold">{selectedAppointment.status}</dd></div>
+            <div><dt className="text-slate-400">Serviço</dt><dd className="mt-1 font-semibold">{selectedAppointment.service}</dd></div>
+            <div><dt className="text-slate-400">Barbeiro</dt><dd className="mt-1 font-semibold">{selectedAppointment.barber}</dd></div>
           </dl>
           <div className="mt-5 flex flex-wrap gap-2">
             {selectedAppointment.status === "Aguardando" && <button type="button" onClick={() => updateStatus(selectedAppointment, "Confirmado")} className="min-h-11 rounded-lg bg-[#65d5ff] px-4 text-sm font-bold text-[#061522]">Confirmar</button>}
@@ -185,14 +185,14 @@ export function AgendaView({ data, initialRegisterOpen = false }: AgendaViewProp
 
 type AppointmentListProps = { appointments: AgendaAppointment[]; onDetails: (id: string) => void }
 function AppointmentList({ appointments, onDetails }: AppointmentListProps) {
-  return <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#0b1a29]"><div className="hidden grid-cols-[110px_minmax(180px,1.3fr)_minmax(150px,1fr)_minmax(140px,1fr)_120px_44px] items-center gap-5 border-b border-slate-800 bg-[#0d1d2d] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 lg:grid"><span>Horário</span><span>Cliente</span><span>Serviço</span><span>Barbeiro</span><span className="text-center">Status</span><span /></div><div className="hidden lg:block">{appointments.map((appointment, index) => <AppointmentRow key={appointment.id} appointment={appointment} highlighted={index === 0} onDetails={onDetails} />)}</div><div className="space-y-3 p-3 lg:hidden">{appointments.map((appointment, index) => <AppointmentCard key={appointment.id} appointment={appointment} highlighted={index === 0} onDetails={onDetails} />)}</div></div>
+  return <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#0b1a29]"><div className="hidden grid-cols-[110px_minmax(180px,1.3fr)_minmax(150px,1fr)_minmax(140px,1fr)_120px_44px] items-center gap-5 border-b border-slate-800 bg-[#0d1d2d] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400 lg:grid"><span>Horário</span><span>Cliente</span><span>Serviço</span><span>Barbeiro</span><span className="text-center">Status</span><span /></div><div className="hidden lg:block">{appointments.map((appointment, index) => <AppointmentRow key={appointment.id} appointment={appointment} highlighted={index === 0} onDetails={onDetails} />)}</div><div className="space-y-3 p-3 lg:hidden">{appointments.map((appointment, index) => <AppointmentCard key={appointment.id} appointment={appointment} highlighted={index === 0} onDetails={onDetails} />)}</div></div>
 }
 
 type AppointmentItemProps = { appointment: AgendaAppointment; highlighted?: boolean; onDetails: (id: string) => void }
 function AppointmentRow({ appointment, highlighted, onDetails }: AppointmentItemProps) {
   return <div className={`relative grid min-w-0 grid-cols-[110px_minmax(180px,1.3fr)_minmax(150px,1fr)_minmax(140px,1fr)_120px_44px] items-center gap-5 border-b border-slate-800/80 px-6 py-4 last:border-0 transition hover:bg-[#102235] ${highlighted ? "bg-[#102235]/60" : ""}`}>
     {highlighted && <span className="absolute inset-y-3 left-0 w-0.5 rounded-full bg-[#65d5ff]" />}
-    <div className="flex min-w-0 items-center gap-2 text-sm font-semibold text-slate-200"><FiClock className="shrink-0 text-[#65d5ff]" size={16} aria-hidden="true" /><span>{appointment.time}</span><span className="hidden text-xs font-normal text-slate-500 xl:inline">até {appointment.endTime}</span></div>
+    <div className="flex min-w-0 items-center gap-2 text-sm font-semibold text-slate-200"><FiClock className="shrink-0 text-[#65d5ff]" size={16} aria-hidden="true" /><span>{appointment.time}</span><span className="hidden text-xs font-normal text-slate-400 xl:inline">até {appointment.endTime}</span></div>
     <div className="min-w-0"><p className="truncate text-sm font-semibold text-white" title={appointment.client}>{appointment.client}</p><Contact phone={appointment.phone} /></div>
     <p className="min-w-0 truncate text-sm text-slate-300" title={appointment.service}>{appointment.service}</p>
     <div className="flex min-w-0 items-center gap-2 text-sm text-slate-400"><FiUser className="shrink-0" size={14} aria-hidden="true" /><span className="truncate" title={appointment.barber}>{appointment.barber}</span></div>
@@ -208,6 +208,6 @@ function AppointmentCard({ appointment, highlighted, onDetails }: AppointmentIte
       <div className="flex items-center gap-1"><span className={`rounded-md border px-2 py-1 text-[10px] font-semibold ${statusClass(appointment.status)}`}>{appointment.status}</span><button type="button" onClick={() => onDetails(appointment.id)} aria-label={`Mais opções para ${appointment.client}`} className="grid size-11 shrink-0 place-items-center rounded-md text-slate-400 hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-[#65d5ff]"><FiMoreHorizontal aria-hidden="true" /></button></div>
     </div>
     <div className="mt-4 min-w-0"><p className="truncate text-base font-semibold text-white" title={appointment.client}>{appointment.client}</p><Contact phone={appointment.phone} /></div>
-    <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-700/70 pt-3 text-xs"><div className="min-w-0"><span className="block text-slate-500">Serviço</span><span className="mt-1 block truncate text-slate-200" title={appointment.service}>{appointment.service}</span></div><div className="min-w-0"><span className="block text-slate-500">Barbeiro</span><span className="mt-1 block truncate text-slate-200" title={appointment.barber}>{appointment.barber}</span></div></div>
+    <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-700/70 pt-3 text-xs"><div className="min-w-0"><span className="block text-slate-400">Serviço</span><span className="mt-1 block truncate text-slate-200" title={appointment.service}>{appointment.service}</span></div><div className="min-w-0"><span className="block text-slate-400">Barbeiro</span><span className="mt-1 block truncate text-slate-200" title={appointment.barber}>{appointment.barber}</span></div></div>
   </article>
 }

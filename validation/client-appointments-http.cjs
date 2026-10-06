@@ -1,14 +1,12 @@
 const http = require('node:http');
 const assert = require('node:assert/strict');
-const port = Number(process.argv[2] ?? 3000);
-const productionHost = process.argv[3];
-function request(host, path = '/cliente/agendamentos', extra = {}) {
-  return new Promise((resolve, reject) => http.get({ hostname: 'localhost', port, path, headers: { host, ...extra } }, res => {
-    let body = ''; res.setEncoding('utf8'); res.on('data', chunk => body += chunk); res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, body }));
-  }).on('error', reject));
-}
+const qa = require('./qa-http.cjs');
+const { port, base } = qa.config;
+const productionHost = qa.config.environment === 'production' ? base : undefined;
+function request(host, path = '/cliente/agendamentos', extra = {}) { return qa.request(path, { host, ...extra }); }
 (async () => {
-  const host = productionHost ?? `localhost:${port}`;
+  await qa.probe();
+  const host = qa.config.authority;
   const origin = productionHost ? `https://${productionHost}` : `http://${host}`;
   const normal = await request(host);
   assert.equal(normal.status, 200);

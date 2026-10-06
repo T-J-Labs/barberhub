@@ -25,7 +25,7 @@ export function SettingsShell({ variant = "admin", eyebrow, title, description, 
 
           <div className="mt-9 grid gap-7 border-t border-slate-800/90 pt-7 lg:grid-cols-[208px_minmax(0,1fr)] lg:gap-12">
             <nav aria-label="Seções das configurações" className="min-w-0 lg:self-start lg:sticky lg:top-6">
-              <p className="mb-3 hidden text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 lg:block">Nesta página</p>
+              <p className="mb-3 hidden text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400 lg:block">Nesta página</p>
               <ul className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
                 {navigation.map((item) => (
                   <li key={item.id} className="shrink-0 lg:shrink">
@@ -68,7 +68,7 @@ export function SettingsField({ label, hint, children }: { label: string; hint?:
     <label className="grid min-w-0 gap-2 text-sm font-medium text-slate-200">
       <span>{label}</span>
       {children}
-      {hint && <span className="text-xs font-normal leading-5 text-slate-500">{hint}</span>}
+      {hint && <span className="text-xs font-normal leading-5 text-slate-400">{hint}</span>}
     </label>
   )
 }

@@ -92,3 +92,13 @@ Painel operacional para o gerente de uma barbearia: leitura rápida, decisões c
 - Exceção de posição: somente `/barbearias` em estado visitante centraliza
   verticalmente Entrar/Criar conta no drawer. A composição pública sinaliza
   essa variação visual; os outros contextos mantêm ações no rodapé.
+
+## QA de acessibilidade — 2026-10-06
+
+- Nas superfícies escuras auditadas do admin, metadados legíveis usam `slate-400`
+  em lugar dos tons `slate-500/600` que falharam no contraste automatizado.
+- `DemoDialog` mantém o modal nativo e circula Tab/Shift+Tab entre controles.
+- Ações públicas mantêm `sky-500`/branco; movimento reduzido usa
+  `motion-reduce:hover:scale-100`, pois `transform-none` não anula `scale`.
+- Exceção de contraste dos botões e pendências humanas/externas continuam
+  documentadas em `docs/frontend/QA_ACCESSIBILITY.md`; sem certificação WCAG.

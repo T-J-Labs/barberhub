@@ -1,0 +1,219 @@
+{
+  "date": "2026-10-06",
+  "timezone": "America/Sao_Paulo",
+  "status": "Parcialmente validada: QA local aprovada, validações humanas e externas pendentes",
+  "gitRevision": "e0b2b601aec7d8029e9522297fade3d829bec866",
+  "node": "v24.21.0",
+  "platform": "win32",
+  "browser": "Microsoft Edge 154.0.4258.53",
+  "tools": {
+    "playwright": "1.58.2",
+    "axe": "4.11.1"
+  },
+  "runs": {
+    "local": {
+      "evidenceDirectory": "validation/qa-runs/2026-10-06T17-54-04.385Z-local-zxvnsR",
+      "environment": "development",
+      "port": 3210,
+      "server": "prepared",
+      "suites": [
+        {
+          "name": "routing",
+          "exit": 0
+        },
+        {
+          "name": "client-auth-routing",
+          "exit": 0
+        },
+        {
+          "name": "booking-state",
+          "exit": 0
+        },
+        {
+          "name": "client-appointments-state",
+          "exit": 0
+        },
+        {
+          "name": "barber-demo-state",
+          "exit": 0
+        },
+        {
+          "name": "profile-help-state",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-state",
+          "exit": 0
+        },
+        {
+          "name": "pwa-policy",
+          "exit": 0
+        },
+        {
+          "name": "http-shared",
+          "exit": 0
+        },
+        {
+          "name": "client-auth-http",
+          "exit": 0
+        },
+        {
+          "name": "booking-http",
+          "exit": 0
+        },
+        {
+          "name": "client-appointments-http",
+          "exit": 0
+        }
+      ],
+      "passed": true
+    },
+    "browser": {
+      "evidenceDirectory": "validation/qa-runs/2026-10-06T17-50-49.863Z-browser-GWSJee",
+      "environment": "development",
+      "port": 3210,
+      "server": "isolated",
+      "browserVersion": "154.0.4258.53",
+      "suites": [
+        {
+          "name": "headers-browser",
+          "exit": 0
+        },
+        {
+          "name": "profile-help-browser",
+          "exit": 0
+        },
+        {
+          "name": "headers-zoom",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-browser",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-registration-browser",
+          "exit": 0
+        },
+        {
+          "name": "journeys-accessibility",
+          "exit": 0
+        }
+      ],
+      "passed": true,
+      "axe": {
+        "states": 21,
+        "failures": 0,
+        "approvedColorExceptions": 4,
+        "incompleteRuleEntries": 22,
+        "evidence": "validation/qa-runs/2026-10-06T17-50-49.863Z-browser-GWSJee/journeys-accessibility/axe.json",
+        "trace": "validation/qa-runs/2026-10-06T17-50-49.863Z-browser-GWSJee/journeys-accessibility/trace.zip"
+      }
+    },
+    "production": {
+      "evidenceDirectory": "validation/qa-runs/2026-10-06T17-54-04.375Z-production-nsQwLm",
+      "environment": "production",
+      "port": 3211,
+      "server": "isolated",
+      "browserVersion": "154.0.4258.53",
+      "suites": [
+        {
+          "name": "routing",
+          "exit": 0
+        },
+        {
+          "name": "client-auth-routing",
+          "exit": 0
+        },
+        {
+          "name": "booking-state",
+          "exit": 0
+        },
+        {
+          "name": "client-appointments-state",
+          "exit": 0
+        },
+        {
+          "name": "barber-demo-state",
+          "exit": 0
+        },
+        {
+          "name": "profile-help-state",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-state",
+          "exit": 0
+        },
+        {
+          "name": "pwa-policy",
+          "exit": 0
+        },
+        {
+          "name": "http-shared",
+          "exit": 0
+        },
+        {
+          "name": "client-auth-http",
+          "exit": 0
+        },
+        {
+          "name": "booking-http",
+          "exit": 0
+        },
+        {
+          "name": "client-appointments-http",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-browser",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-registration-browser",
+          "exit": 0
+        },
+        {
+          "name": "journeys-accessibility",
+          "exit": 0
+        },
+        {
+          "name": "pwa-browser",
+          "exit": 0
+        },
+        {
+          "name": "pwa-lifecycle",
+          "exit": 0
+        }
+      ],
+      "passed": true,
+      "axe": {
+        "states": 21,
+        "failures": 0,
+        "approvedColorExceptions": 4,
+        "incompleteRuleEntries": 22,
+        "evidence": "validation/qa-runs/2026-10-06T17-54-04.375Z-production-nsQwLm/journeys-accessibility/axe.json",
+        "trace": "validation/qa-runs/2026-10-06T17-54-04.375Z-production-nsQwLm/journeys-accessibility/trace.zip"
+      }
+    }
+  },
+  "checks": {
+    "evidenceDirectory": "validation/qa-runs/2026-10-06T17-58-10.664Z-checks-gMYqW3",
+    "commands": {
+      "qa-tools-install.txt": "npm ci --prefix ../validation/tools",
+      "qa-lint.txt": "npm run lint",
+      "qa-build.txt": "npm run build",
+      "qa-typecheck.txt": "npm run typecheck",
+      "qa-executor-tests.txt": "node --test tests/qa-config.test.mjs"
+    },
+    "results": "PASS; saídas copiadas das execuções finais verificadas"
+  },
+  "limitations": [
+    "Host e HTTPS lógico simulados; sem certificação DNS/TLS público",
+    "22 entradas inconclusivas axe por rodada; exigem revisão humana",
+    "Botões públicos sky-500/branco: quatro ocorrências de contraste 2,7:1 mantidas por instrução explícita",
+    "Leitor de tela, Android/iPhone reais, Safari/Firefox/WebKit e instalação manual não executados",
+    "Instalação limpa das ferramentas pelo lockfile; produto não reinstalado em outro computador",
+    "Demonstrações não comprovam OAuth, autorização, reservas, concorrência ou isolamento real do backend"
+  ]
+}

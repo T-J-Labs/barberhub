@@ -1,10 +1,10 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const { chromium } = require('./qa-browser.cjs');
 const port = process.argv[2] || 3000;
 const base = `http://localhost:${port}`;
-const dir = path.join(__dirname, 'superadmin-registration');
+const dir = require('./qa-output.cjs').outputDirectory('superadmin-registration-browser');
 fs.mkdirSync(dir, { recursive: true });
 const notice = 'Barbearia adicionada à amostra — nenhum estabelecimento real foi criado. Subdomínio, acesso e publicação não foram provisionados.';
 (async () => {

@@ -32,7 +32,10 @@ regras e solicitação própria. Consulte o
 Headers revisados com a landing como referência visual e de menu mobile;
 cliente e barbeiro compartilham drawer acessível, com destinos próprios e
 sidebar desktop do admin preservada. [Arquivos, QA e limites](docs/frontend/HEADERS_REVIEW.md).
-Próxima prioridade sem backend: consolidação de QA. “Minhas barbearias” e onboarding são entregas
+Consolidação de QA e acessibilidade implementada com agregadores portáteis e
+correções pontuais; validação externa/manual continua parcial.
+[Preparação, cobertura, resultados e pendências](docs/frontend/QA_ACCESSIBILITY.md).
+“Minhas barbearias” e onboarding são entregas
 condicionadas às regras de vínculo e estabelecimento, não implementações
 automaticamente autorizadas. [Sequência vigente](docs/frontend/FRONTEND_ROADMAP.md#10-próximos-passos-sem-backend--sequência-vigente-em-2026-10-06).
 
@@ -157,6 +160,9 @@ O frontend estará disponível em [http://localhost:3000](http://localhost:3000)
 npm run dev           # Inicia o servidor de desenvolvimento
 npm run lint          # Executa o ESLint
 npm run typecheck     # Verifica os tipos TypeScript
+npm run test:qa:local # Regras e HTTP; configurar TEST_SERVER/TEST_ENV/TEST_PORT
+npm run test:qa:browser # Jornadas, headers, zoom e axe; ferramentas de QA separadas
+npm run test:qa:production # Regressões e PWA; exige build e TEST_ENV=production
 npm run test:routing  # Verifica resolução de hosts e geração de links
 npm run test:routing:http # Verifica rotas com o servidor local ativo na porta 3000
 npm run test:auth     # Verifica domínio, perfis e retorno seguro da autenticação
@@ -180,6 +186,13 @@ npm run build         # Gera o build de produção
 npm run api:generate  # Gera o cliente a partir do contrato OpenAPI
 npm run api:watch     # Regenera o cliente quando o contrato é alterado
 ```
+
+Os agregadores de QA usam ferramentas instaladas com
+`npm ci --prefix ../validation/tools` a partir de `frontend`. Exigem escolha
+explícita de servidor (`TEST_SERVER=isolated` ou `prepared`) e preservam logs,
+capturas e diagnósticos em um diretório único por execução. Consulte os exemplos
+completos e limites em [QA_ACCESSIBILITY.md](docs/frontend/QA_ACCESSIBILITY.md).
+Host/HTTPS simulados em produção local não validam DNS/TLS publicado.
 
 ## Executando o backend
 
@@ -284,6 +297,7 @@ conhecer o processo completo.
 - [Área do barbeiro demonstrativa e validação](docs/frontend/BARBER_DEMO.md)
 - [Superadmin básico demonstrativo e validação](docs/frontend/SUPERADMIN_DEMO.md)
 - [PWA, política offline e acabamento transversal](docs/frontend/PWA.md)
+- [Consolidação de QA, acessibilidade e validação parcial](docs/frontend/QA_ACCESSIBILITY.md)
 
 ## Roadmap resumido
 
