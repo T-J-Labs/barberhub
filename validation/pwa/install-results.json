@@ -1,0 +1,61 @@
+{
+  "base": "http://localhost:3110",
+  "browser": "154.0.4258.53",
+  "method": "PWA.install/launch em perfil temporário Edge",
+  "headless": false,
+  "installability": {
+    "installabilityErrors": []
+  },
+  "installed": true,
+  "browserDisplayMode": "standalone (preferência definida pelo QA)",
+  "launch": {
+    "targetId": "D4A539A157123398FE66878BDB2B8A28"
+  },
+  "targets": [
+    {
+      "targetId": "9584C0EF4B299A9C8AEF732148314C15",
+      "type": "service_worker",
+      "url": "http://localhost:3110/pwa-worker.js"
+    },
+    {
+      "targetId": "07F3BFAEA9CA5A8B3510D930FFDA3A94",
+      "type": "page",
+      "url": "http://localhost:3110/barbearias"
+    },
+    {
+      "targetId": "8E5B39E197732040D36FFB626C845F01",
+      "type": "page",
+      "url": "http://localhost:3110/barbearias"
+    },
+    {
+      "targetId": "6D1F504BD679A718BAD2516345AF00FB",
+      "type": "page",
+      "url": "about:blank"
+    }
+  ],
+  "nativeEvaluation": {
+    "id": 1,
+    "result": {
+      "result": {
+        "type": "object",
+        "value": {
+          "url": "http://localhost:3110/barbearias",
+          "standalone": true,
+          "installPanels": 0,
+          "cookie": "",
+          "localStorage": 0
+        }
+      }
+    }
+  },
+  "nativeWindow": {
+    "url": "http://localhost:3110/barbearias",
+    "standalone": true,
+    "installPanels": 0,
+    "cookie": "",
+    "localStorage": 0
+  },
+  "noSession": true,
+  "startUrl": "http://localhost:3110/barbearias",
+  "uninstalled": true
+}

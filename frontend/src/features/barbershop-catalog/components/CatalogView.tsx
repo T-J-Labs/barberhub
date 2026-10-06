@@ -7,6 +7,7 @@ import type { CatalogFilters } from "../types"
 import { BarbershopCard } from "./BarbershopCard"
 import { CatalogShell } from "./CatalogShell"
 import { CatalogState } from "./CatalogState"
+import { PwaInstallPanel } from "@/features/pwa/components/PwaRuntime"
 
 export function CatalogView({ filters, demoState, publicOrigin }: { filters: CatalogFilters; demoState?: string; publicOrigin?: string }) {
   const catalog = getCatalogPresentation(filters, demoState === "empty")
@@ -48,6 +49,7 @@ export function CatalogView({ filters, demoState, publicOrigin }: { filters: Cat
             ? <CatalogState kind={catalog.total === 0 ? "empty" : "no-results"} />
             : <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{catalog.shops.map((shop) => <BarbershopCard key={shop.id} shop={shop} publicOrigin={publicOrigin} />)}</ul>}
       </section>
+      <PwaInstallPanel />
     </CatalogShell>
   )
 }

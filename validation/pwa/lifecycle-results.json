@@ -1,0 +1,22 @@
+{
+  "browser": "154.0.4258.53",
+  "fixture": "HTTP isolado em localhost, fonte real do worker, formulário sintético e proxy da aplicação de produção",
+  "results": [
+    {
+      "name": "primeira ativação não reivindica a página aberta",
+      "passed": true
+    },
+    {
+      "name": "atualização fica waiting, preserva rascunho, controlador e cache ativo",
+      "passed": true
+    },
+    {
+      "name": "fechar a página permite ativação e limpa só o prefixo próprio",
+      "passed": true
+    },
+    {
+      "name": "runtime real não substitui outro worker do escopo raiz",
+      "passed": true
+    }
+  ]
+}

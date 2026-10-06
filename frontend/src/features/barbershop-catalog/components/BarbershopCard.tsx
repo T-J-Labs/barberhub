@@ -13,7 +13,7 @@ export function BarbershopCard({ shop, publicOrigin }: { shop: BarbershopPresent
         <FiMapPin className="mt-1 shrink-0 text-sky-400" size={16} aria-hidden="true" />
         <p className="min-w-0">{shop.neighborhood}<span className="block text-slate-400">{shop.city}</span></p>
       </div>
-      {publicOrigin ? <Link href={publicBarbershopHref(shop.subdomain, publicOrigin)} aria-label={`Conhecer ${shop.name}`} className={`mt-6 inline-flex w-full items-center justify-center ${catalogSecondaryActionClass}`}>
+      {publicOrigin ? <Link href={publicBarbershopHref(shop.subdomain, publicOrigin)} aria-label={`Conhecer barbearia ${shop.name}`} className={`mt-6 inline-flex w-full items-center justify-center ${catalogSecondaryActionClass}`}>
         Conhecer barbearia
       </Link> : <button type="button" disabled className={`mt-6 inline-flex w-full items-center justify-center opacity-50 ${catalogSecondaryActionClass}`}>Página indisponível</button>}
     </li>

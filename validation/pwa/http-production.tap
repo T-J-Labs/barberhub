@@ -1,0 +1,150 @@
+TAP version 13
+# Subtest: desenvolvimento preserva a porta nos hosts e links públicos
+ok 1 - desenvolvimento preserva a porta nos hosts e links públicos
+  ---
+  duration_ms: 1.6123
+  type: 'test'
+  ...
+# Subtest: produção separa a conexão local da origem pública HTTPS
+ok 2 - produção separa a conexão local da origem pública HTTPS
+  ---
+  duration_ms: 0.3308
+  type: 'test'
+  ...
+# Subtest: configuração ambígua ou inválida falha explicitamente
+ok 3 - configuração ambígua ou inválida falha explicitamente
+  ---
+  duration_ms: 1.7466
+  type: 'test'
+  ...
+# Subtest: transporte envia o Host simulado sem seguir redirects
+ok 4 - transporte envia o Host simulado sem seguir redirects
+  ---
+  duration_ms: 47.3248
+  type: 'test'
+  ...
+# HTTP: TEST_ENV=production; conexão=http://127.0.0.1:3110; Host=localhost; origem pública=https://localhost
+# Subtest: cliente/perfil: título específico e noindex
+ok 5 - cliente/perfil: título específico e noindex
+  ---
+  duration_ms: 36.6034
+  type: 'test'
+  ...
+# Subtest: cliente/ajuda: título específico e noindex
+ok 6 - cliente/ajuda: título específico e noindex
+  ---
+  duration_ms: 30.4557
+  type: 'test'
+  ...
+# Subtest: barbeiro/perfil: título específico e noindex
+ok 7 - barbeiro/perfil: título específico e noindex
+  ---
+  duration_ms: 6.0758
+  type: 'test'
+  ...
+# Subtest: barbeiro/ajuda: título específico e noindex
+ok 8 - barbeiro/ajuda: título específico e noindex
+  ---
+  duration_ms: 21.8071
+  type: 'test'
+  ...
+# HTTP: TEST_ENV=production; conexão=http://127.0.0.1:3110; Host=localhost; origem pública=https://localhost
+# Subtest: platform landing and catalog render without redirects
+ok 9 - platform landing and catalog render without redirects
+  ---
+  duration_ms: 65.9221
+  type: 'test'
+  ...
+# Subtest: profile demo-esquina and platform return links
+ok 10 - profile demo-esquina and platform return links
+  ---
+  duration_ms: 22.3691
+  type: 'test'
+  ...
+# Subtest: profile demo-navalha and platform return links
+ok 11 - profile demo-navalha and platform return links
+  ---
+  duration_ms: 19.0765
+  type: 'test'
+  ...
+# Subtest: profile demo-vila and platform return links
+ok 12 - profile demo-vila and platform return links
+  ---
+  duration_ms: 15.9174
+  type: 'test'
+  ...
+# Subtest: profile demo-oficina and platform return links
+ok 13 - profile demo-oficina and platform return links
+  ---
+  duration_ms: 17.3758
+  type: 'test'
+  ...
+# Subtest: profile demo-raizes and platform return links
+ok 14 - profile demo-raizes and platform return links
+  ---
+  duration_ms: 15.4927
+  type: 'test'
+  ...
+# Subtest: profile demo-bairro and platform return links
+ok 15 - profile demo-bairro and platform return links
+  ---
+  duration_ms: 14.0023
+  type: 'test'
+  ...
+# Subtest: profile paths on platform and tenant hosts redirect to the correct tenant, retaining the query
+ok 16 - profile paths on platform and tenant hosts redirect to the correct tenant, retaining the query
+  ---
+  duration_ms: 7.1571
+  type: 'test'
+  ...
+# Subtest: external hosts and IPs cannot render profiles or offer path-based profile links
+ok 17 - external hosts and IPs cannot render profiles or offer path-based profile links
+  ---
+  duration_ms: 99.8221
+  type: 'test'
+  ...
+# Subtest: encoded profile paths retain repeated and encoded parameters
+ok 18 - encoded profile paths retain repeated and encoded parameters
+  ---
+  duration_ms: 7.3155
+  type: 'test'
+  ...
+# Subtest: forwarded headers never change profile identity or generated public origins
+ok 19 - forwarded headers never change profile identity or generated public origins
+  ---
+  duration_ms: 21.6743
+  type: 'test'
+  ...
+# Subtest: catalog redirect preserves repeated and encoded filters
+ok 20 - catalog redirect preserves repeated and encoded filters
+  ---
+  duration_ms: 9.6186
+  type: 'test'
+  ...
+# Subtest: case and trailing-dot normalization preserve the tenant
+ok 21 - case and trailing-dot normalization preserve the tenant
+  ---
+  duration_ms: 17.6869
+  type: 'test'
+  ...
+# Subtest: external hosts and forwarded headers cannot select a tenant
+ok 22 - external hosts and forwarded headers cannot select a tenant
+  ---
+  duration_ms: 68.563
+  type: 'test'
+  ...
+# Subtest: unknown tenant and unknown path expose no other shop
+ok 23 - unknown tenant and unknown path expose no other shop
+  ---
+  duration_ms: 13.6192
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 630.5563

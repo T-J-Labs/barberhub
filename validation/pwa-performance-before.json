@@ -1,0 +1,57 @@
+{
+  "browser": "154.0.4258.53",
+  "conditions": "Edge headless; 390px; localhost; sem throttling; 3 contextos frios; SW bloqueado para comparação",
+  "samples": [
+    {
+      "ttfbMs": 33.30000019073486,
+      "domContentLoadedMs": 88.90000009536743,
+      "fcpMs": 228,
+      "transferredBytes": 227454,
+      "jsBytes": 151428,
+      "fonts": [
+        {
+          "url": "/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+          "bytes": 23408
+        },
+        {
+          "url": "/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+          "bytes": 29588
+        }
+      ]
+    },
+    {
+      "ttfbMs": 20.299999952316284,
+      "domContentLoadedMs": 58.700000047683716,
+      "fcpMs": 176,
+      "transferredBytes": 227143,
+      "jsBytes": 151428,
+      "fonts": [
+        {
+          "url": "/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+          "bytes": 23408
+        },
+        {
+          "url": "/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+          "bytes": 29588
+        }
+      ]
+    },
+    {
+      "ttfbMs": 18.5,
+      "domContentLoadedMs": 73.40000009536743,
+      "fcpMs": 168,
+      "transferredBytes": 227145,
+      "jsBytes": 151428,
+      "fonts": [
+        {
+          "url": "/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+          "bytes": 23408
+        },
+        {
+          "url": "/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+          "bytes": 29588
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "results": [
+    {
+      "name": "manifesto, escopo, início no catálogo, ícones e ausência de atalhos",
+      "passed": true
+    },
+    {
+      "name": "cache contém somente HTML offline e ícone, sem sessão ou dados locais",
+      "passed": true
+    },
+    {
+      "name": "critérios reais de instalação reportados pelo Edge",
+      "passed": true
+    },
+    {
+      "name": "hosts de tenant, arbitrário e IP sem manifesto válido ou worker",
+      "passed": true
+    },
+    {
+      "name": "orientação sem botão inoperante quando não há prompt",
+      "passed": true
+    },
+    {
+      "name": "prompt após clique, dispensa sem persistência (evento controlado de UI)",
+      "passed": true
+    },
+    {
+      "name": "modo standalone oculta instalação (emulação da API de apresentação)",
+      "passed": true
+    },
+    {
+      "name": "conexão recuperada é um sinal, mantém rascunho e não reenvia ação",
+      "passed": true
+    },
+    {
+      "name": "navegação offline preparada e retry refazem somente a página atual",
+      "passed": true
+    },
+    {
+      "name": "primeiro acesso offline sem preparação não recebe fallback",
+      "passed": true
+    },
+    {
+      "name": "POST/API e RSC sem rede falham sem fallback, cache ou fila",
+      "passed": true
+    },
+    {
+      "name": "transição interna offline preserva busca e oferece recuperação",
+      "passed": true
+    },
+    {
+      "name": "catálogo, cliente, barbeiro, admin e superadmin nas quatro larguras",
+      "passed": true
+    },
+    {
+      "name": "drawer da conta: modal nativo, Tab, Escape e retorno ao gatilho",
+      "passed": true
+    },
+    {
+      "name": "zoom 200%, movimento reduzido e foco da nova interface",
+      "passed": true
+    }
+  ],
+  "observations": {
+    "browser": "154.0.4258.53",
+    "base": "http://localhost:3110",
+    "manifest": {
+      "id": "/",
+      "name": "BarberHub",
+      "short_name": "BarberHub",
+      "lang": "pt-BR",
+      "description": "Encontre barbearias e acompanhe sua experiência no BarberHub.",
+      "start_url": "/barbearias",
+      "scope": "/",
+      "display": "standalone",
+      "background_color": "#07111C",
+      "theme_color": "#07111C",
+      "icons": [
+        {
+          "src": "/pwa/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "/pwa/icon-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "/pwa/maskable-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "maskable"
+        }
+      ]
+    },
+    "installability": {
+      "installabilityErrors": []
+    },
+    "appManifest": {
+      "url": "http://localhost:3110/manifest.webmanifest",
+      "errors": [],
+      "data": "{\"id\":\"/\",\"name\":\"BarberHub\",\"short_name\":\"BarberHub\",\"lang\":\"pt-BR\",\"description\":\"Encontre barbearias e acompanhe sua experiência no BarberHub.\",\"start_url\":\"/barbearias\",\"scope\":\"/\",\"display\":\"standalone\",\"background_color\":\"#07111C\",\"theme_color\":\"#07111C\",\"icons\":[{\"src\":\"/pwa/icon-192.png\",\"sizes\":\"192x192\",\"type\":\"image/png\",\"purpose\":\"any\"},{\"src\":\"/pwa/icon-512.png\",\"sizes\":\"512x512\",\"type\":\"image/png\",\"purpose\":\"any\"},{\"src\":\"/pwa/maskable-512.png\",\"sizes\":\"512x512\",\"type\":\"image/png\",\"purpose\":\"maskable\"}]}",
+      "parsed": {
+        "scope": "http://localhost:3110/"
+      },
+      "manifest": {
+        "backgroundColor": "rgba(7,17,28,1)",
+        "description": "Encontre barbearias e acompanhe sua experiência no BarberHub.",
+        "display": "kStandalone",
+        "icons": [
+          {
+            "url": "http://localhost:3110/pwa/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+          },
+          {
+            "url": "http://localhost:3110/pwa/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+          },
+          {
+            "url": "http://localhost:3110/pwa/maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+          }
+        ],
+        "id": "http://localhost:3110/",
+        "name": "BarberHub",
+        "orientation": "DEFAULT",
+        "preferRelatedApplications": false,
+        "scope": "http://localhost:3110/",
+        "startUrl": "http://localhost:3110/barbearias",
+        "themeColor": "rgba(7,17,28,1)"
+      }
+    },
+    "nativeInstallPromptOffered": true,
+    "finalCaches": {
+      "barberhub-pwa-v1": [
+        "/pwa/icon-192.png",
+        "/pwa/offline.html"
+      ]
+    },
+    "pageErrors": []
+  }
+}

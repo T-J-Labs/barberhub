@@ -7,6 +7,12 @@
 body{
   background-color: #07111C;
   color: #FFF;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid #38BDF8;
+  outline-offset: 4px;
 }
 
 .clients-action-button {

@@ -1,0 +1,4 @@
+HTTP: TEST_ENV=production; conexão=http://127.0.0.1:3000; Host=localhost; origem pública=https://localhost
+PASS: production na porta 3000 foi recusado
+HTTP: TEST_ENV=development; conexão=http://127.0.0.1:3110; Host=localhost:3110; origem pública=http://localhost:3110
+PASS: development na porta 3110 foi recusado

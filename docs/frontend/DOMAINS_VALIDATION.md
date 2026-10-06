@@ -87,6 +87,10 @@ Na pasta `frontend/`:
 ```powershell
 npm run test:routing
 # Em outro terminal, manter npm run dev ativo:
+$env:TEST_ENV = 'development'
+$env:TEST_PORT = '3000'
+$env:TEST_PUBLIC_HOST = 'localhost'
+$env:TEST_PROTOCOL = 'http:'
 npm run test:routing:http
 ```
 
@@ -96,6 +100,7 @@ e valida URLs HTTPS, sem usar DNS público ou terminar TLS:
 
 ```powershell
 $env:BARBERHUB_PUBLIC_HOST = 'barberhub.test'
+$env:NEXT_PUBLIC_API_MOCKING = 'disabled'
 npm run build
 npm run start -- -p 3103 -H 127.0.0.1
 ```
@@ -104,7 +109,14 @@ Em outro terminal, execute:
 
 ```powershell
 $env:TEST_PORT = '3103'
+$env:TEST_ENV = 'production'
 $env:TEST_PUBLIC_HOST = 'barberhub.test'
 $env:TEST_PROTOCOL = 'https:'
 npm run test:routing:http
 ```
+
+`TEST_PORT` é a porta TCP local. Em produção o Host simulado não contém essa
+porta, e a origem esperada usa HTTPS. A suíte verifica também se o worker de
+produção é servido; desenvolvimento exige 404 nessa rota. Argumentos
+posicionais não selecionam a porta. Consulte [PWA.md](PWA.md) para a revalidação
+atual em `localhost:3110`; a tabela acima mantém os resultados históricos.

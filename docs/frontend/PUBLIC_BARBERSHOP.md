@@ -76,7 +76,10 @@ estático, enquanto o layout de `/barbearias` compõe o rodapé dependente do Ho
 Execute `npm run test:routing` em `frontend/` para validar resolução e geração
 de links sem servidor. Com `npm run dev` na porta 3000, execute
 `npm run test:routing:http` para os testes HTTP. Para outra instalação, configure
-`TEST_PORT`, `TEST_PUBLIC_HOST` e `TEST_PROTOCOL` conforme o servidor. Os testes
+`TEST_PORT`, `TEST_PUBLIC_HOST` e `TEST_ENV` (`development` ou `production`)
+conforme o servidor. `TEST_PROTOCOL`, se informado, deve corresponder ao ambiente
+(`http:` ou `https:`, respectivamente). A porta seleciona a conexão local;
+produção usa Host sem porta e URLs públicas HTTPS. Os testes
 conectam apenas a `127.0.0.1`, simulando o Host; não exigem DNS público ou TLS.
 Resultados e limitações estão em [DOMAINS_VALIDATION.md](DOMAINS_VALIDATION.md).
 

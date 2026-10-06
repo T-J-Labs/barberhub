@@ -149,6 +149,9 @@ npm run test:barber   # Verifica status, próximo atendimento e bloqueios da amo
 npm run test:superadmin # Verifica busca, resumo, estados e regras de cadastro local
 npm run test:superadmin:browser -- 3000 # QA de regressão (requer Playwright e navegador)
 npm run test:superadmin:registration:browser -- 3000 # QA de cadastro e navegação em memória
+npm run test:pwa       # Política de hosts, cache exclusivo e worker
+npm run test:pwa:browser -- 3110 # QA PWA em produção local (Playwright/Edge)
+npm run test:pwa:lifecycle -- 3110 # Atualização sem recarga e conflito de workers
 npm run build         # Gera o build de produção
 npm run api:generate  # Gera o cliente a partir do contrato OpenAPI
 npm run api:watch     # Regenera o cliente quando o contrato é alterado
@@ -207,6 +210,22 @@ memória durante a navegação interna; recarga ou saída da área restaura o ex
 As ajudas explicam as tarefas de cada papel, sem autenticação ou reservas reais.
 Implementação, arquivos e validação: [PROFILE_HELP.md](docs/frontend/PROFILE_HELP.md).
 
+## PWA e acabamento transversal
+
+A plataforma possui manifesto, ícones e instalação no domínio principal. Em
+produção, o worker guarda somente `/pwa/offline.html` e `/pwa/icon-192.png`;
+navegações sem conexão recebem uma orientação e “Tentar novamente”. Não há
+reservas offline, cache de dados, filas, reenvio ou sessão criada pela instalação.
+Desenvolvimento e hosts de tenants não registram esse worker; MSW permanece separado.
+
+Validado em Windows/Edge 154 com produção local: política do cache, fallback,
+atualização sem interromper edição, larguras 320/390/768/1440px e regressões.
+Instalação nativa e abertura no catálogo foram verificadas em perfil temporário,
+com a preferência standalone definida pelo QA no navegador. Android/iOS reais,
+HTTPS publicado, instalação manual e leitor de tela continuam pendentes.
+Lighthouse foi usado como diagnóstico; a limitação de contraste dos botões
+azuis aprovados está registrada. [Comandos, arquivos, métricas e limites](docs/frontend/PWA.md).
+
 ## Contrato da API
 
 O arquivo [docs/api/openapi.yaml](docs/api/openapi.yaml) é a fonte de verdade
@@ -239,6 +258,7 @@ conhecer o processo completo.
 - [Perfil e ajuda demonstrativos e validação](docs/frontend/PROFILE_HELP.md)
 - [Área do barbeiro demonstrativa e validação](docs/frontend/BARBER_DEMO.md)
 - [Superadmin básico demonstrativo e validação](docs/frontend/SUPERADMIN_DEMO.md)
+- [PWA, política offline e acabamento transversal](docs/frontend/PWA.md)
 
 ## Roadmap resumido
 
