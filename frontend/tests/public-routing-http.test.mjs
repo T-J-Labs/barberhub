@@ -1,12 +1,11 @@
 import assert from "node:assert/strict"
 import http from "node:http"
-import test from "node:test"
+import test, { before } from "node:test"
+import { assertHttpTestRuntime, httpTestConfig } from "./http-test-config.mjs"
 
-const port = Number(process.env.TEST_PORT ?? 3000)
-const base = process.env.TEST_PUBLIC_HOST ?? "localhost"
-const protocol = process.env.TEST_PROTOCOL ?? "http:"
-const authority = `${base}:${port}`
-const origin = `${protocol}//${authority}`
+const config = httpTestConfig()
+const { port, base, protocol, authority, origin, normalizationPort } = config
+before(() => assertHttpTestRuntime(config))
 const shops = { "demo-esquina": "Barbearia da Esquina", "demo-navalha": "Navalha &amp; Pente", "demo-vila": "Barbearia Vila Nova", "demo-oficina": "Oficina do Corte", "demo-raizes": "Raízes Barbearia", "demo-bairro": "Barbearia do Bairro" }
 
 function request(host, path, headers = {}) {
@@ -129,7 +128,7 @@ test("catalog redirect preserves repeated and encoded filters", async () => {
 
 test("case and trailing-dot normalization preserve the tenant", async () => {
   assert((await request(`DEMO-ESQUINA.${authority.toUpperCase()}`, "/")).body.includes("Barbearia da Esquina"))
-  const normalized = await request(`demo-esquina.${base}.:${port}`, "/?x=1")
+  const normalized = await request(`demo-esquina.${base}.:${normalizationPort}`, "/?x=1")
   assert.equal(normalized.status, 307)
   assert.equal(normalized.location, `${protocol}//demo-esquina.${authority}/?x=1`)
 })

@@ -1,0 +1,126 @@
+TAP version 13
+# HTTP: TEST_ENV=development; conexão=http://127.0.0.1:3000; Host=localhost:3000; origem pública=http://localhost:3000
+# Subtest: cliente/perfil: título específico e noindex
+ok 1 - cliente/perfil: título específico e noindex
+  ---
+  duration_ms: 311.2827
+  type: 'test'
+  ...
+# Subtest: cliente/ajuda: título específico e noindex
+ok 2 - cliente/ajuda: título específico e noindex
+  ---
+  duration_ms: 646.4242
+  type: 'test'
+  ...
+# Subtest: barbeiro/perfil: título específico e noindex
+ok 3 - barbeiro/perfil: título específico e noindex
+  ---
+  duration_ms: 312.6358
+  type: 'test'
+  ...
+# Subtest: barbeiro/ajuda: título específico e noindex
+ok 4 - barbeiro/ajuda: título específico e noindex
+  ---
+  duration_ms: 665.8738
+  type: 'test'
+  ...
+# HTTP: TEST_ENV=development; conexão=http://127.0.0.1:3000; Host=localhost:3000; origem pública=http://localhost:3000
+# Subtest: platform landing and catalog render without redirects
+ok 5 - platform landing and catalog render without redirects
+  ---
+  duration_ms: 1901.2339
+  type: 'test'
+  ...
+# Subtest: profile demo-esquina and platform return links
+ok 6 - profile demo-esquina and platform return links
+  ---
+  duration_ms: 520.4003
+  type: 'test'
+  ...
+# Subtest: profile demo-navalha and platform return links
+ok 7 - profile demo-navalha and platform return links
+  ---
+  duration_ms: 651.1767
+  type: 'test'
+  ...
+# Subtest: profile demo-vila and platform return links
+ok 8 - profile demo-vila and platform return links
+  ---
+  duration_ms: 457.642
+  type: 'test'
+  ...
+# Subtest: profile demo-oficina and platform return links
+ok 9 - profile demo-oficina and platform return links
+  ---
+  duration_ms: 471.1881
+  type: 'test'
+  ...
+# Subtest: profile demo-raizes and platform return links
+ok 10 - profile demo-raizes and platform return links
+  ---
+  duration_ms: 418.2032
+  type: 'test'
+  ...
+# Subtest: profile demo-bairro and platform return links
+ok 11 - profile demo-bairro and platform return links
+  ---
+  duration_ms: 465.6436
+  type: 'test'
+  ...
+# Subtest: profile paths on platform and tenant hosts redirect to the correct tenant, retaining the query
+ok 12 - profile paths on platform and tenant hosts redirect to the correct tenant, retaining the query
+  ---
+  duration_ms: 64.3003
+  type: 'test'
+  ...
+# Subtest: external hosts and IPs cannot render profiles or offer path-based profile links
+ok 13 - external hosts and IPs cannot render profiles or offer path-based profile links
+  ---
+  duration_ms: 1797.5735
+  type: 'test'
+  ...
+# Subtest: encoded profile paths retain repeated and encoded parameters
+ok 14 - encoded profile paths retain repeated and encoded parameters
+  ---
+  duration_ms: 36.8149
+  type: 'test'
+  ...
+# Subtest: forwarded headers never change profile identity or generated public origins
+ok 15 - forwarded headers never change profile identity or generated public origins
+  ---
+  duration_ms: 488.9899
+  type: 'test'
+  ...
+# Subtest: catalog redirect preserves repeated and encoded filters
+ok 16 - catalog redirect preserves repeated and encoded filters
+  ---
+  duration_ms: 165.1606
+  type: 'test'
+  ...
+# Subtest: case and trailing-dot normalization preserve the tenant
+ok 17 - case and trailing-dot normalization preserve the tenant
+  ---
+  duration_ms: 469.957
+  type: 'test'
+  ...
+# Subtest: external hosts and forwarded headers cannot select a tenant
+ok 18 - external hosts and forwarded headers cannot select a tenant
+  ---
+  duration_ms: 1333.273
+  type: 'test'
+  ...
+# Subtest: unknown tenant and unknown path expose no other shop
+ok 19 - unknown tenant and unknown path expose no other shop
+  ---
+  duration_ms: 442.6588
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9895.9666

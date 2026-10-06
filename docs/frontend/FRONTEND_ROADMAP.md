@@ -51,8 +51,9 @@ funcional. Não é necessário remodelar novamente o Header para iniciar o wizar
 
 ## 3. Sequência das entregas restantes
 
-As cinco primeiras entregas estão **implementadas como demonstração local**. As demais
-continuam planejadas e dependem de solicitação específica.
+As cinco primeiras entregas estão **implementadas como demonstração local**.
+A sexta foi implementada e validada em produção local, com as limitações de
+ambiente descritas em [PWA.md](PWA.md). Integração real continua dependente de contratos.
 
 | Ordem | Entrega | Escopo sem backend |
 | --- | --- | --- |
@@ -61,7 +62,7 @@ continuam planejadas e dependem de solicitação específica.
 | 3 | Área do barbeiro — implementada | Início com próximo atendimento e agenda própria demonstrativa; detalhes, conclusão, falta, bloqueio e desbloqueio de horários em memória. |
 | 4 | Perfil e ajuda — implementados para ambos os papéis | Quatro telas: perfil e ajuda do cliente, perfil e ajuda do barbeiro. Prévia de edição do nome de exibição e orientação contextual, reutilizando `SettingsShell`, `HelpShell` e padrões existentes. Não alterar a conta Google. Escopo e testes na seção 7 e [PROFILE_HELP.md](PROFILE_HELP.md). |
 | 5 | Superadmin básico — implementado | Visão geral calculada, lista, busca por nome/cidade/bairro e detalhes das seis fixtures públicas; suspensão/reativação somente em memória. Busca preservada no retorno à lista. Sem cobrança, publicação ou autorização real. Consulte [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md). |
-| 6 | PWA e acabamento transversal | Manifesto, ícones, instalação, tela de indisponibilidade offline e revisão de acessibilidade, desempenho e navegação. Sem reservas offline ou cache de dados privados. |
+| 6 | PWA e acabamento transversal — implementada em produção local | Manifesto, ícones, instalação na plataforma, fallback offline e auditoria dirigida de acessibilidade, desempenho e navegação. Cache somente de HTML offline e favicon; sem reservas offline, dados privados, filas ou replay. Ambientes e pendências na seção 9 e em [PWA.md](PWA.md). |
 
 Habilitar links de navegação e ajuda conforme seus destinos existirem, evitando
 controles que levem a páginas ausentes. Grupos de rotas e headers não são
@@ -373,8 +374,8 @@ desenvolvimento; o boundary de erro real não foi forçado.
 Diagnóstico, arquivos, fixtures, comandos, evidências e pendências:
 [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md). O OpenAPI mantém `paths: {}`;
 a integração real ainda exige autorização global, projeção permitida e regras
-de suspensão/publicação aprovadas. PWA permanece planejada e requer nova
-solicitação; nenhuma outra entrega foi iniciada.
+de suspensão/publicação aprovadas. A entrega posterior de PWA foi solicitada e
+implementada conforme a seção 9.
 
 ### 8.1. Cadastro manual demonstrativo — ampliação solicitada
 
@@ -404,3 +405,36 @@ regressão do superadmin com 27/25 verificações e roteamento com 3 testes de h
 e 15 HTTP em desenvolvimento. QA DOM/teclado e visual em 320/390/768/1440px,
 sem leitor de tela real. Comandos, arquivos e limitações em
 [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md#cadastro-manual-demonstrativo--implementado-em-2026-10-06).
+
+## 9. PWA e acabamento transversal — 2026-10-06
+
+Implementada por solicitação explícita. Manifesto App Router com início em
+`/barbearias`, identidade derivada da marca, ícones 192/512/maskable/Apple 180,
+instalação após ação da pessoa e instruções quando o prompt não está disponível.
+Sem instalação por tenant, papel, sessão ou autenticação nova.
+
+Worker próprio de produção somente no domínio principal validado, separado do
+MSW. Cache `barberhub-pwa-v1` com `/pwa/offline.html` e `/pwa/icon-192.png`.
+Fallback de navegação completa em falha de rede; API, autenticação, POST,
+RSC/prefetch e externos não recebem cache nem HTML substituto. Sem fila, replay,
+sync ou reservas offline. Versões novas aguardam fechamento das páginas;
+nenhuma edição sofre recarga forçada. Limpa apenas caches do próprio prefixo.
+
+Auditoria corrigiu nomes acessíveis do catálogo, semântica modal do drawer da
+conta e foco global; removeu a fonte Mono sem uso e aplicou a Geist prevista no
+design. Sem reformulação do Header, mudança de domínio ou alteração de backend.
+
+Validação: lint, TypeScript, build, 12 grupos de política, 15 de navegador PWA,
+4 de ciclo de vida, regressões existentes de estado/HTTP, 38 de perfil/ajuda
+em desenvolvimento, 25 de superadmin e 20 de cadastro em produção. Edge 154 no
+Windows, produção local em localhost:3110; instalação nativa em perfil de QA,
+janela standalone após ajuste da preferência do navegador, catálogo sem sessão.
+Offline preparado e primeiro acesso sem preparação reproduzidos separadamente.
+UI e 20 rotas em 320/390/768/1440px; teclado, foco e zoom desktop 200%.
+
+Lighthouse antes/depois: performance 96/92 e acessibilidade 96/96, com contraste
+insuficiente mantido no padrão azul/branco exigido. Transferência mediana
+227.145/213.061 bytes; JS aumentou 3.223 bytes. Sem certificação WCAG ou SLO;
+leitor de tela, dispositivos móveis reais, instalação manual e HTTPS publicado
+permanecem pendentes. Resultados, arquivos, comandos e limitações:
+[PWA.md](PWA.md). As demonstrações não se tornaram operações integradas.
