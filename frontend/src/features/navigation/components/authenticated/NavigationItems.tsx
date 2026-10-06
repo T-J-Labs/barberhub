@@ -3,13 +3,15 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import type { NavigationItem } from "../../types"
+import { publicNavigationClass } from "../public/styles"
 
 type NavigationItemsProps = {
   items: readonly NavigationItem[]
   onNavigate?: () => void
+  appearance?: "sidebar" | "drawer"
 }
 
-export function NavigationItems({ items, onNavigate }: NavigationItemsProps) {
+export function NavigationItems({ items, onNavigate, appearance = "sidebar" }: NavigationItemsProps) {
   const pathname = usePathname()
 
   return items.map((item) => {
@@ -24,7 +26,7 @@ export function NavigationItems({ items, onNavigate }: NavigationItemsProps) {
             href={item.href}
             onClick={onNavigate}
             aria-current={active ? "page" : undefined}
-            className={`flex min-h-11 items-center rounded-lg px-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#65d5ff] ${active ? "bg-[#12344a] text-[#8de1ff]" : "hover:bg-[#102235]"}`}
+            className={appearance === "drawer" ? publicNavigationClass(active) : `flex min-h-11 items-center rounded-lg px-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#65d5ff] ${active ? "bg-[#12344a] text-[#8de1ff]" : "hover:bg-[#102235]"}`}
           >
             {item.label}
           </Link>

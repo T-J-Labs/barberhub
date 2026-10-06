@@ -72,7 +72,7 @@ Estado local reinicia ao recarregar ou sair da área. A ajuda explica
 os fluxos existentes e essas limitações, sem oferecer senha local ou prometer
 autenticação, reserva ou alterações persistidas.
 
-## Validação local
+## Validação local original
 
 Na pasta `frontend`:
 
@@ -101,9 +101,36 @@ de autenticação tanto em desenvolvimento quanto em produção local. ESLint,
 TypeScript e `npm run build` (Turbopack) também passaram. O ciclo de reinício
 da prévia foi reproduzido no navegador em `localhost:3000`.
 
-QA mobile: a navegação da conta ocupa a largura disponível e alinha seus itens
+QA mobile original (anterior à revisão de 2026-10-06): a navegação da conta ocupa a largura disponível e alinha seus itens
 à direita abaixo de `sm`, mantendo o dropdown dentro da tela quando o header
 quebra linha. Menu aberto verificado em 320, 390, 768 e 1440px; em 320px suas
 bordas no login ficam em 48 e 304px; cadastro também conferido em 320px, sem
 corte. Evidências em `validation/client-menu-320.jpg` e
 `validation/client-menu-responsive-results.json`.
+
+## Navegação revisada — 2026-10-06
+
+O padrão visual vigente é o header da landing. Visitantes no catálogo, perfil,
+agendamento, login e cadastro usam menu à esquerda e marca centralizada abaixo
+de `lg`; Entrar/Criar conta ficam no rodapé do drawer. No desktop, usam
+`publicLoginClass` e `catalogActionClass`. Login/cadastro continuam com um único
+header, logo para a landing, perfil visual e retorno canônico preservados.
+
+A prévia do cliente usa drawer modal em todas as larguras, com Barbearias,
+Meus agendamentos no bloco principal; Perfil e Ajuda ficam no rodapé separado,
+acima da saída local, como no menu do barbeiro. O nome demonstrativo quebra
+linha no drawer. Após ajuste solicitado, a barra da prévia usa o mesmo layout do
+barbeiro, com Notificações e Perfil à direita, também no mobile. Notificações
+abre um painel de demonstração vazio; Perfil leva a `/cliente/perfil`.
+O botão de menu recebe
+foco após a saída no mobile; no desktop, o foco segue para Entrar.
+Recarregar continua restaurando visitante. Não há OAuth, sessão ou logout real.
+
+Exclusivamente no catálogo `/barbearias` em estado visitante, Entrar e Criar conta
+ficam centralizados verticalmente na área disponível do drawer mobile.
+Login/cadastro, perfil público, agendamento e cliente em prévia mantêm o rodapé.
+As ações desktop não mudaram de posição.
+
+Escape, backdrop, botão de fechar, foco contido/retornado, rolagem e mudança de
+rota/breakpoint foram verificados no Edge local. Resultados e comandos atuais:
+[HEADERS_REVIEW.md](HEADERS_REVIEW.md). As capturas do dropdown acima são históricas.

@@ -1,0 +1,90 @@
+[
+  {
+    "name": "perfil: Agendar horário abre a introdução demonstrativa",
+    "pass": true
+  },
+  {
+    "name": "agendamento no subdomínio: contexto da conta preservado",
+    "pass": true
+  },
+  {
+    "name": "query de tenant_id e retorno externo não mudam barbearia",
+    "pass": true
+  },
+  {
+    "name": "caminho explícito redireciona: /barbearias/demo-esquina/agendar",
+    "pass": true
+  },
+  {
+    "name": "caminho explícito redireciona: /barbearias/demo-esquina/agendar?tenant_id=outro",
+    "pass": true
+  },
+  {
+    "name": "caminho explícito em outro subdomínio usa a chave do caminho",
+    "pass": true
+  },
+  {
+    "name": "plataforma sem contexto não aceita query: /agendar",
+    "pass": true
+  },
+  {
+    "name": "plataforma sem contexto não aceita query: /agendar?tenant_id=demo-esquina",
+    "pass": true
+  },
+  {
+    "name": "plataforma sem contexto não aceita query: /agendar?barbearia=demo-esquina",
+    "pass": true
+  },
+  {
+    "name": "contexto desconhecido/inválido seguro: nao-existe.localhost:3000/agendar",
+    "pass": true
+  },
+  {
+    "name": "contexto desconhecido/inválido seguro: localhost:3000/barbearias/nao-existe/agendar",
+    "pass": true
+  },
+  {
+    "name": "contexto desconhecido/inválido seguro: localhost:3000/barbearias/chave_invalida/agendar",
+    "pass": true
+  },
+  {
+    "name": "contexto desconhecido/inválido seguro: externo.test/barbearias/demo-esquina/agendar",
+    "pass": true
+  },
+  {
+    "name": "contexto desconhecido/inválido seguro: externo.test/agendar",
+    "pass": true
+  },
+  {
+    "name": "X-Forwarded-Host não escolhe barbearia",
+    "pass": true
+  },
+  {
+    "name": "outro estabelecimento mantém sua identidade",
+    "pass": true
+  },
+  {
+    "name": "perfil da Navalha apresenta seus próprios exemplos",
+    "pass": true
+  },
+  {
+    "name": "alias antigo usa rota canônica: /agendamento",
+    "pass": true
+  },
+  {
+    "name": "alias antigo usa rota canônica: /agendamento?tenant_id=outro",
+    "pass": true
+  },
+  {
+    "name": "alias antigo usa rota canônica: /barbearias/demo-esquina/agendamento",
+    "pass": true
+  },
+  {
+    "name": "alias antigo explícito na plataforma usa a barbearia do caminho",
+    "pass": true
+  },
+  {
+    "name": "alias antigo na plataforma não usa barbearia de query",
+    "pass": true
+  }
+]

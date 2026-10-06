@@ -1,15 +1,15 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import Link from "next/link"
+import { useCallback, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
-import { FiMenu, FiUser } from "react-icons/fi"
-import { MdNotificationsNone } from "react-icons/md"
+import { FiMenu } from "react-icons/fi"
 import { Container } from "@/components/ui/Container"
 import type { NavigationConfig } from "../../types"
 import { HeaderBrand } from "../HeaderBrand"
 import { AuthenticatedMobileMenu } from "./AuthenticatedMobileMenu"
 import { DemoDialog } from "@/features/demo-ui/components/DemoDialog"
+import { headerSurfaceClass, menuControlClass, operationalHeaderClass } from "../styles"
+import { HeaderAccountActions } from "../HeaderAccountActions"
 
 type AuthenticatedHeaderProps = {
   contextLabel?: string
@@ -27,77 +27,34 @@ export function AuthenticatedHeader({
   profileHref,
 }: AuthenticatedHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [activePanel, setActivePanel] = useState<"notifications" | "profile" | null>(null)
+  const [activePanel, setActivePanel] = useState<"profile" | null>(null)
   const menuTriggerRef = useRef<HTMLButtonElement>(null)
   const router = useRouter()
 
-  useEffect(() => {
-    if (!desktopNavigation || !menuOpen) return
-    const desktop = window.matchMedia("(min-width: 75rem)")
-    function closeOnDesktop() {
-      if (!desktop.matches) return
-      setMenuOpen(false)
-      const navigation = document.getElementById("admin-navigation")
-      const destination = navigation?.querySelector<HTMLAnchorElement>('a[aria-current="page"]') ??
-        navigation?.querySelector<HTMLAnchorElement>("a[href]")
-      destination?.focus({ preventScroll: true })
-    }
-    closeOnDesktop()
-    desktop.addEventListener("change", closeOnDesktop)
-    return () => desktop.removeEventListener("change", closeOnDesktop)
-  }, [desktopNavigation, menuOpen])
-
-  useEffect(() => {
-    if (!menuOpen) return
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = "hidden"
-    return () => { document.body.style.overflow = previousOverflow }
-  }, [menuOpen])
-
-  function closeMenu() {
-    setMenuOpen(false)
-    menuTriggerRef.current?.focus()
-  }
+  const closeMenu = useCallback(() => setMenuOpen(false), [])
 
   const HeaderContainer = desktopNavigation ? "div" : Container
 
   return (
-    <header className={desktopNavigation ? "border-b border-slate-700/55 bg-[#07111C]" : "bg-[#07111C] border-b border-slate-700/55 lg:border-b-0"}>
+    <header className={headerSurfaceClass}>
       <HeaderContainer {...(desktopNavigation ? { className: "px-4" } : {})}>
-        <div className={desktopNavigation ? "grid grid-cols-[44px_minmax(0,1fr)_auto] items-center gap-2 py-4 min-[360px]:gap-4 admin:flex admin:justify-between [&>a]:justify-self-center [&>a]:text-lg min-[360px]:[&>a]:text-xl sm:[&>a]:text-2xl" : "flex items-center justify-between py-4 lg:border-b lg:border-slate-700/55"}>
+        <div className={`${operationalHeaderClass} ${desktopNavigation ? "admin:flex admin:justify-between" : ""}`}>
           <button
             ref={menuTriggerRef}
             type="button"
-            className={`-my-1.5 inline-grid size-11 place-items-center rounded-md text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#65d5ff] ${desktopNavigation ? "admin:hidden" : ""}`}
+            className={`${menuControlClass} ${desktopNavigation ? "admin:hidden" : ""}`}
             aria-label="Abrir menu"
             aria-controls="account-navigation"
             aria-expanded={menuOpen}
+            aria-haspopup="dialog"
             onClick={() => { setActivePanel(null); setMenuOpen(true) }}
           >
-            <FiMenu size={24} />
+            <FiMenu size={21} aria-hidden="true" />
           </button>
 
           <HeaderBrand />
 
-          <div className={desktopNavigation ? "flex shrink-0 items-center gap-1 sm:gap-3" : "flex items-center gap-4"}>
-            <button
-              type="button"
-              className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white"
-              aria-label="Notificações"
-              onClick={() => setActivePanel("notifications")}
-            >
-              <MdNotificationsNone size={24} />
-            </button>
-            {profileHref ? (
-              <Link href={profileHref} aria-label="Perfil" className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#65d5ff]">
-                <FiUser size={24} />
-              </Link>
-            ) : (
-              <button type="button" className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white" aria-label="Perfil" onClick={() => setActivePanel("profile")}>
-                <FiUser size={24} />
-              </button>
-            )}
-          </div>
+          <HeaderAccountActions profileHref={profileHref} onProfile={() => setActivePanel("profile")} />
 
           <AuthenticatedMobileMenu
             contextLabel={contextLabel}
@@ -106,11 +63,9 @@ export function AuthenticatedHeader({
             navigation={navigation}
             desktopNavigation={desktopNavigation}
             onClose={closeMenu}
+            triggerRef={menuTriggerRef}
             onExit={() => { setMenuOpen(false); router.push("/") }}
           />
-          <DemoDialog open={activePanel === "notifications"} onClose={() => setActivePanel(null)} title="Notificações" description="Prévia das atualizações da sua conta.">
-            <p className="rounded-lg border border-slate-800 bg-[#07111c] px-4 py-5 text-sm leading-6 text-slate-400">Nenhuma notificação nesta demonstração. Novos avisos aparecerão aqui quando a plataforma estiver integrada.</p>
-          </DemoDialog>
           <DemoDialog open={activePanel === "profile"} onClose={() => setActivePanel(null)} title="Perfil" description="Conta de demonstração">
             <div className="rounded-lg border border-slate-800 bg-[#07111c] p-4">
               <p className="text-sm font-semibold text-white">{contextName ?? "BarberHub"}</p>

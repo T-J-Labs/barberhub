@@ -4,6 +4,8 @@ const path = require('node:path');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const base = `http://localhost:${process.argv[2] || 3000}`;
 const results = [];
+const artifactDir = process.env.PROFILE_QA_OUTPUT || __dirname;
+fs.mkdirSync(artifactDir, { recursive: true });
 
 (async () => {
   const browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {}) });
@@ -75,14 +77,14 @@ const results = [];
         assert.equal(await field().inputValue(), initial);
       });
       await page.setViewportSize({ width: 390, height: 900 });
-      await page.screenshot({ path: path.join(__dirname, `profile-${role}-normal-390.png`), fullPage: true });
+      await page.screenshot({ path: path.join(artifactDir, `profile-${role}-normal-390.png`), fullPage: true });
       await apply('Á'.repeat(300));
       for (const width of [320, 390, 768, 1440]) {
         await check(`${role}: perfil ${width}px sem corte horizontal`, async () => {
           await page.setViewportSize({ width, height: 900 });
           assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
           assert.equal((await applied().locator('p').nth(1).innerText()).length, 300);
-          await page.screenshot({ path: path.join(__dirname, `profile-${role}-${width}.png`), fullPage: true });
+          await page.screenshot({ path: path.join(artifactDir, `profile-${role}-${width}.png`), fullPage: true });
         });
       }
       await page.goto(`${base}/${role}/ajuda`);
@@ -99,7 +101,7 @@ const results = [];
             await summaries.nth(i).click();
           }
           assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-          await page.screenshot({ path: path.join(__dirname, `help-${role}-${width}.png`), fullPage: true });
+          await page.screenshot({ path: path.join(artifactDir, `help-${role}-${width}.png`), fullPage: true });
         });
       }
       await check(`${role}: todos os atalhos com mouse e teclado, sem destinos cruzados`, async () => {
@@ -121,21 +123,27 @@ const results = [];
       await page.getByText('Ver prévia do header de cliente', { exact: true }).click();
       await page.getByRole('button', { name: 'Visualizar header de cliente' }).click();
       // Next Link supplied by the feature, using the same root presentation provider.
-      await page.getByText('Cliente de demonstração', { exact: true }).click();
-      await page.getByRole('link', { name: 'Perfil', exact: true }).click();
+      await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
+      await page.locator('dialog[open]').getByRole('link', { name: 'Perfil', exact: true }).click();
       await apply('Cláudia da Silva');
-      assert.equal(await page.locator('header summary').innerText(), 'Cláudia da Silva');
-      await page.locator('header summary').click();
+      await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
+      assert.equal(await page.locator('dialog[open]').getByText('Cláudia da Silva', { exact: true }).count(), 1);
+      await page.keyboard.press('Escape');
+      await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
       await page.getByRole('link', { name: 'Ajuda', exact: true }).click();
-      assert.equal(await page.locator('header summary').innerText(), 'Cláudia da Silva');
+      await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
+      assert.equal(await page.locator('dialog[open]').getByText('Cláudia da Silva', { exact: true }).count(), 1);
+      await page.keyboard.press('Escape');
       await page.getByRole('link', { name: /Editar nome demonstrativo/ }).click();
       await apply('Á'.repeat(300));
       for (const width of [320, 390, 768, 1440]) {
         await page.setViewportSize({ width, height: 900 });
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-        assert.equal((await page.locator('header summary').innerText()).length, 300);
+        await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
+        assert.equal(await page.locator('dialog[open]').getByText('Á'.repeat(300), { exact: true }).count(), 1);
+        await page.keyboard.press('Escape');
       }
-      await page.locator('header summary').click();
+      await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
       await page.getByRole('button', { name: 'Sair da demonstração', exact: true }).click();
       await page.getByRole('link', { name: 'Entrar', exact: true }).waitFor();
       assert.equal(await field().inputValue(), 'Cliente de demonstração');
@@ -210,7 +218,7 @@ const results = [];
     assert.equal(await page.evaluate(() => localStorage.length), 0);
     assert.equal((await context.cookies()).length, 0);
   } finally {
-    fs.writeFileSync(path.join(__dirname, 'profile-help-browser-results.json'), JSON.stringify({ results, errors, screenReader: 'Não executado; inspeção DOM e visual separada.' }, null, 2));
+    fs.writeFileSync(path.join(artifactDir, 'profile-help-browser-results.json'), JSON.stringify({ results, errors, screenReader: 'Não executado; inspeção DOM e visual separada.' }, null, 2));
     await browser.close();
   }
 })().catch(error => { console.error(error); process.exitCode = 1; });

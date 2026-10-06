@@ -1,0 +1,158 @@
+{
+  "results": [
+    {
+      "name": "cliente: visitante direto e somente um campo editável",
+      "passed": true
+    },
+    {
+      "name": "cliente: rascunho separado, trim e acentos",
+      "passed": true
+    },
+    {
+      "name": "cliente: vazio e espaços preservam rascunho e aplicado",
+      "passed": true
+    },
+    {
+      "name": "cliente: cancelar e restaurar",
+      "passed": true
+    },
+    {
+      "name": "cliente: navegação interna mantém aplicado e descarta rascunho",
+      "passed": true
+    },
+    {
+      "name": "cliente: recarga restaura exemplo",
+      "passed": true
+    },
+    {
+      "name": "cliente: sair e retornar reinicia, papéis independentes",
+      "passed": true
+    },
+    {
+      "name": "cliente: perfil 320px sem corte horizontal",
+      "passed": true
+    },
+    {
+      "name": "cliente: perfil 390px sem corte horizontal",
+      "passed": true
+    },
+    {
+      "name": "cliente: perfil 768px sem corte horizontal",
+      "passed": true
+    },
+    {
+      "name": "cliente: perfil 1440px sem corte horizontal",
+      "passed": true
+    },
+    {
+      "name": "cliente: ajuda 320px e perguntas por teclado",
+      "passed": true
+    },
+    {
+      "name": "cliente: ajuda 390px e perguntas por teclado",
+      "passed": true
+    },
+    {
+      "name": "cliente: ajuda 768px e perguntas por teclado",
+      "passed": true
+    },
+    {
+      "name": "cliente: ajuda 1440px e perguntas por teclado",
+      "passed": true
+    },
+    {
+      "name": "cliente: todos os atalhos com mouse e teclado, sem destinos cruzados",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: visitante direto e somente um campo editável",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: rascunho separado, trim e acentos",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: vazio e espaços preservam rascunho e aplicado",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: cancelar e restaurar",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: navegação interna mantém aplicado e descarta rascunho",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: recarga restaura exemplo",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: sair e retornar reinicia, papéis independentes",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: perfil 320px sem corte horizontal",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: perfil 390px sem corte horizontal",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: perfil 768px sem corte horizontal",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: perfil 1440px sem corte horizontal",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: ajuda 320px e perguntas por teclado",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: ajuda 390px e perguntas por teclado",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: ajuda 768px e perguntas por teclado",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: ajuda 1440px e perguntas por teclado",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: todos os atalhos com mouse e teclado, sem destinos cruzados",
+      "passed": true
+    },
+    {
+      "name": "cliente: prévia ativa coerente sem iniciar sessão pelo perfil",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: controle Perfil e apresentação da agenda coerentes",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: Perfil e Ajuda no menu com mouse e teclado",
+      "passed": true
+    },
+    {
+      "name": "cliente: contexto validado, subdomínio e acesso preservam retorno",
+      "passed": true
+    },
+    {
+      "name": "admin: defaults e destinos existentes preservados",
+      "passed": true
+    },
+    {
+      "name": "HTTP: Host inválido e contexto repetido/ausente não geram destinos arbitrários",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "screenReader": "Não executado; inspeção DOM e visual separada."
+}

@@ -216,7 +216,15 @@ Fase atual. Focada no desenho paralelo orientando a produtividade da equipe:
 5. Botões integrados `wa.me` para avisos no WhatsApp.
 6. Catálogo público de barbearias e conta única do cliente, conforme ADR 08.
 
-A próxima sequência de trabalho do frontend é: catálogo público → página da barbearia → conta do cliente → agendamento → meus agendamentos → agenda do barbeiro. O plano está em [docs/frontend/CLIENT_EXPERIENCE.md](../frontend/CLIENT_EXPERIENCE.md).
+A sequência inicial da jornada do frontend foi implementada como apresentação
+e demonstrações locais: catálogo público → página da barbearia → apresentação de
+login/cadastro → agendamento demonstrativo → meus agendamentos → área do barbeiro.
+Perfil e ajuda de cliente/barbeiro, superadmin básico, cadastro manual de rascunhos
+e PWA/acabamento transversal também estão implementados, conforme atualização de
+2026-10-06 em [FRONTEND_ROADMAP.md](../frontend/FRONTEND_ROADMAP.md).
+Isso não conclui o MVP integrado: autenticação, autorização, disponibilidade,
+concorrência e persistência continuam pendentes de contratos e backend.
+O plano da jornada está em [CLIENT_EXPERIENCE.md](../frontend/CLIENT_EXPERIENCE.md).
 
 ### 11.3. Pós-MVP (Fase 1 - Engajamento)
 

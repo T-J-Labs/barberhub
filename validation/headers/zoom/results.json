@@ -1,0 +1,116 @@
+{
+  "browser": "154.0.4258.53",
+  "profile": "C:\\Users\\FELIPE~1\\AppData\\Local\\Temp\\barberhub-zoom-ENZiHw",
+  "results": [
+    {
+      "name": "landing",
+      "passed": true,
+      "metrics": {
+        "innerWidth": 707,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "catalog",
+      "passed": true,
+      "metrics": {
+        "innerWidth": 707,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "public-profile",
+      "passed": true,
+      "metrics": {
+        "innerWidth": 707,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "booking",
+      "passed": true,
+      "metrics": {
+        "innerWidth": 707,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "login",
+      "passed": true,
+      "metrics": {
+        "innerWidth": 707,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "signup",
+      "passed": true,
+      "metrics": {
+        "innerWidth": 707,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "client",
+      "passed": true,
+      "metrics": {
+        "innerWidth": 707,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "barber",
+      "passed": true,
+      "metrics": {
+        "innerWidth": 707,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "admin",
+      "passed": true,
+      "metrics": {
+        "innerWidth": 707,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "name": "superadmin",
+      "passed": true,
+      "metrics": {
+        "innerWidth": 707,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "horizontalOverflow": false
+      }
+    }
+  ]
+}

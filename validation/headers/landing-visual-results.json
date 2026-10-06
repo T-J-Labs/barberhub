@@ -1,0 +1,31 @@
+[
+  {
+    "width": 320,
+    "headerHeight": 81,
+    "changedChannels": 0,
+    "totalChannels": 77760
+  },
+  {
+    "width": 390,
+    "headerHeight": 81,
+    "changedChannels": 0,
+    "totalChannels": 94770
+  },
+  {
+    "width": 768,
+    "headerHeight": 81,
+    "changedChannels": 0,
+    "totalChannels": 186624
+  },
+  {
+    "width": 1440,
+    "headerHeight": 81,
+    "changedChannels": 0,
+    "totalChannels": 349920
+  },
+  {
+    "drawer": "landing",
+    "input": "mouse",
+    "changedChannels": 0
+  }
+]

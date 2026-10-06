@@ -43,13 +43,24 @@ Ao trabalhar no frontend:
   ou documentação não autorizam implementar funcionalidades. O roadmap orienta
   futuras implementações, mas não autoriza executar suas etapas automaticamente.
 - Consulte o estado atual em `docs/frontend/FRONTEND_ROADMAP.md` antes de
-  escolher a próxima entrega. Agendamento, meus agendamentos e área do barbeiro
-  já possuem demonstrações locais; não confundir isso com integração real.
-- A próxima entrega recomendada é perfil e ajuda demonstrativos para **cliente
-  e barbeiro**, conforme a seção 7 do roadmap. Quando solicitada essa entrega,
-  limite-se às quatro telas planejadas, navegação necessária, documentação e
-  testes. Não inclua admin, superadmin, outra reformulação do Header ou mudança
-  de domínio. Pedidos parciais continuam limitados ao recorte solicitado.
+  escolher a próxima entrega. As seis etapas da sequência inicial estão
+  implementadas: agendamento, meus agendamentos, área do barbeiro, perfil e ajuda
+  para cliente e barbeiro, superadmin básico e PWA/acabamento transversal.
+  O cadastro manual do superadmin também existe como rascunho demonstrativo.
+  Não confundir essas entregas com autenticação, autorização ou integração real;
+  preservar as limitações de QA e ambiente registradas nos documentos.
+- Não repetir etapas concluídas nem executar uma nova funcionalidade
+  automaticamente. A revisão dirigida dos headers usa a landing institucional
+  como referência visual e de menu, substituindo a referência anterior ao
+  barbeiro. A implementação e o QA local estão em `docs/frontend/HEADERS_REVIEW.md`.
+  Preservar navegação admin/superadmin, sidebar desktop, domínios e retorno.
+  A próxima prioridade é consolidar QA; esta orientação não autoriza novas
+  implementações sem solicitação do usuário.
+  “Minhas barbearias” ainda não está implementada e depende da
+  definição da regra de vínculo; onboarding de estabelecimento/equipe também
+  aguarda regras. Uma recomendação não constitui aprovação dessas regras ou
+  autorização para implementar. Pedidos parciais continuam limitados ao recorte
+  solicitado, sem outra reformulação do Header ou mudança de domínio implícita.
 - Nas entregas demonstrativas desse roadmap, não altere backend ou banco.
   Enquanto o OpenAPI mantiver `paths: {}`, use fixtures locais em memória,
   sem inventar endpoints, autenticação ou persistência em `localStorage`.

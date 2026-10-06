@@ -44,7 +44,7 @@ O código existente é a fonte de verdade:
   `#0EA5E9`;
 - navegação, nesta ordem: **Início**, **Produto**, **Serviços**, **Planos** e
   **Contato**;
-- ações **Entrar** e **Registrar** com aparência azul no desktop;
+- ações **Entrar** e **Criar conta** com aparência azul no desktop;
 - no mobile fechado, somente botão de menu e marca;
 - no mobile aberto, backdrop, botão de fechar, navegação completa e ações no
   rodapé do drawer.
@@ -52,6 +52,14 @@ O código existente é a fonte de verdade:
 O header desktop segue o limite visual do componente `Container`: largura
 máxima aproximada de 1280 px. Os controles mobile possuem áreas de pelo menos
 44 × 44 px.
+
+Decisão vigente de 2026-10-06: este header e seu drawer são a referência principal
+dos headers do produto, substituindo a referência anterior ao barbeiro. A landing
+permanece visualmente preservada. `MobileDrawer` e estilos de controles na feature
+`navigation` compartilham a estrutura; os contextos controlam destinos, ações e
+estado. Entrar reutiliza `publicLoginClass`; Criar conta, `catalogActionClass`.
+Admin mantém a sidebar desktop e o header sem sticky.
+[Arquivos, testes e limites](../frontend/HEADERS_REVIEW.md).
 
 ## Conteúdo e estado do produto
 

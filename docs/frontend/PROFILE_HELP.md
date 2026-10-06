@@ -14,6 +14,11 @@ públicas; layouts e headers não autenticam nem autorizam usuários.
 Os menus têm destinos de Perfil e Ajuda. No barbeiro, o controle Perfil abre
 diretamente a página. No cliente, o menu continua aparecendo somente quando a
 prévia do header já estiver ativa; acesso direto ao perfil não ativa essa prévia.
+Desde 2026-10-06, a navegação dessa prévia usa drawer modal com o padrão da
+landing, compartilhado com o barbeiro. Visitantes têm somente ações de acesso
+no drawer mobile. O nome completo aplicado quebra linha no drawer, sem cortes.
+A barra da prévia do cliente segue o barbeiro, com Notificações demonstrativas
+e atalho Perfil à direita. [Revisão e QA](HEADERS_REVIEW.md).
 
 As quatro páginas possuem títulos específicos por papel e `robots: noindex,
 nofollow`, sem alterar a indexação da landing ou do catálogo. Essa política
