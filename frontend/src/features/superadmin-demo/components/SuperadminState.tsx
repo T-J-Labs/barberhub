@@ -4,7 +4,7 @@ const content = {
   loading: ["Preparando a amostra", "Carregando a demonstração de barbearias."],
   error: ["Não foi possível exibir a amostra", "Nenhum dado real foi consultado ou alterado. Tente novamente."],
   empty: ["Nenhuma barbearia na amostra", "O resumo e a lista ficarão disponíveis quando houver exemplos."],
-  missing: ["Barbearia não encontrada na amostra", "Este identificador não corresponde a um exemplo disponível."],
+  missing: ["Exemplo indisponível", "Este identificador não corresponde a um exemplo disponível. Rascunhos são removidos ao recarregar ou sair da área."],
 } as const
 
 // Intenção: explicar a ausência do conteúdo; título lidera, sem ilustração decorativa.

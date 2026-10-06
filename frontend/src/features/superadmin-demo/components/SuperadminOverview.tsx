@@ -14,8 +14,8 @@ export function SuperadminOverview() {
   return <section className={`${panelClass} p-6`} aria-labelledby="sample-title">
     <h2 id="sample-title" className="text-lg font-semibold">Barbearias da amostra</h2>
     <p className="mt-2 text-sm text-slate-400">Contagens calculadas a partir dos exemplos locais, incluindo alterações demonstrativas.</p>
-    <dl aria-live="polite" className="my-7 grid grid-cols-1 gap-6 min-[390px]:grid-cols-3">
-      {[['Total', summary.total], ['Ativas', summary.active], ['Suspensas', summary.suspended]].map(([label, value], index) => <div key={label}>
+    <dl aria-live="polite" className="my-7 grid grid-cols-1 gap-6 min-[390px]:grid-cols-2 sm:grid-cols-4">
+      {[['Total', summary.total], ['Rascunhos', summary.drafts], ['Ativas', summary.active], ['Suspensas', summary.suspended]].map(([label, value], index) => <div key={label}>
         <dt className="text-sm text-slate-400">{label}</dt><dd className={`mt-2 font-semibold tabular-nums ${index === 0 ? "text-4xl" : "text-2xl"}`}>{value}</dd>
       </div>)}
     </dl>

@@ -17,7 +17,7 @@ export function SuperadminShell({ title, children }: { title: string; children: 
       <nav aria-label="Superadmin" className="mb-6"><ul className="flex flex-wrap gap-3 text-sm"><NavigationItems items={superAdminNavigation.primary.filter(item => "href" in item)} /></ul></nav>
       <aside aria-label="Limites da demonstração" className={`${panelClass} mb-6 p-5 text-sm leading-6 text-slate-300`}>
         <p className="font-semibold text-[#8de1ff]">Amostra fictícia · nenhuma operação real</p>
-        <p className="mt-2">Suspender e reativar alteram somente o estado da amostra em memória. Nada é salvo ou aplicado a uma barbearia real. Recarregar ou sair desta área restaura os exemplos.</p>
+        <p className="mt-2">Cadastrar, suspender e reativar alteram somente a amostra em memória. Nada é salvo ou aplicado a uma barbearia real. Nenhuma compra, acesso, publicação ou subdomínio é provisionado. Recarregar ou sair desta área restaura os exemplos e remove os rascunhos.</p>
         <p className="mt-2 text-slate-400">Catálogo, publicação e acesso não são alterados. Esta rota e o header não representam autenticação ou autorização.</p>
       </aside>
       {process.env.NODE_ENV === "development" && <DemoScenarios />}

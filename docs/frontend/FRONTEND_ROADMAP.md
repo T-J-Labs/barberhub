@@ -375,3 +375,32 @@ Diagnóstico, arquivos, fixtures, comandos, evidências e pendências:
 a integração real ainda exige autorização global, projeção permitida e regras
 de suspensão/publicação aprovadas. PWA permanece planejada e requer nova
 solicitação; nenhuma outra entrega foi iniciada.
+
+### 8.1. Cadastro manual demonstrativo — ampliação solicitada
+
+Implementado em 2026-10-06, por solicitação específica, na mesma feature
+`superadmin-demo`. `/super-admin/barbearias` oferece formulário embutido com
+nome, cidade, bairro, subdomínio pretendido e motivo obrigatório. Validação
+separada da interface, duplicidade contra fixtures e rascunhos em memória,
+erros associados e foco no primeiro inválido. Cancelar não adiciona item.
+
+Criar na demonstração adiciona **Rascunho na amostra** ao provider do layout e
+abre `/super-admin/barbearias/[id]` preservando a busca. Detalhes resolvem também
+IDs locais no componente cliente, sem alterar a página Server Component.
+Resumo mostra Total/Rascunhos/Ativas/Suspensas calculados da mesma coleção.
+Rascunho não aceita suspensão/reativação. Recarga ou saída o remove; ID ausente
+mostra “Exemplo indisponível” e retorno à lista. Nenhum estabelecimento real,
+compra, acesso, publicação ou subdomínio é criado. Catálogo e hosts não mudam.
+
+Não havia política de nomes reservados no roteamento: a proteção local usa nomes
+das rotas existentes, com pendência explícita da política oficial e de unicidade
+real. OpenAPI continua com `paths: {}`. Backend, banco e contratos não foram
+alterados. Responsável/Google, liberação sem compra, auditoria, provisionamento,
+publicação e cobrança continuam separados e dependentes de definição real.
+
+Verificações desta ampliação: lint, TypeScript, build, 12 grupos de regras,
+20 grupos de cadastro no navegador por ambiente (desenvolvimento/produção),
+regressão do superadmin com 27/25 verificações e roteamento com 3 testes de host
+e 15 HTTP em desenvolvimento. QA DOM/teclado e visual em 320/390/768/1440px,
+sem leitor de tela real. Comandos, arquivos e limitações em
+[SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md#cadastro-manual-demonstrativo--implementado-em-2026-10-06).
