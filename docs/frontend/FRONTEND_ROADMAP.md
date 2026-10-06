@@ -36,7 +36,9 @@ Estado observado na revisão estrutural e documental:
   A prévia do header de cliente não cria sessão. Consulte
   [CLIENT_AUTH.md](CLIENT_AUTH.md).
 - Cliente tem “Meus agendamentos” demonstrativos em `/cliente/agendamentos`;
-  barbeiro tem início e agenda demonstrativos; superadmin ainda possui apenas layout e navegação.
+  barbeiro tem início e agenda demonstrativos. Na revisão original, superadmin
+  tinha apenas layout e navegação; em 2026-10-06 recebeu a demonstração básica
+  descrita na seção 8 e em [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md).
 - O CTA “Agendar horário” abre a introdução de `/agendar` no subdomínio.
   A feature `booking` oferece serviço, profissional, data, horário, revisão,
   resultado e conflito com recuperação. Esquina e Navalha têm exemplos completos.
@@ -49,7 +51,7 @@ funcional. Não é necessário remodelar novamente o Header para iniciar o wizar
 
 ## 3. Sequência das entregas restantes
 
-As quatro primeiras entregas estão **implementadas como demonstração local**. As demais
+As cinco primeiras entregas estão **implementadas como demonstração local**. As demais
 continuam planejadas e dependem de solicitação específica.
 
 | Ordem | Entrega | Escopo sem backend |
@@ -58,7 +60,7 @@ continuam planejadas e dependem de solicitação específica.
 | 2 | Meus agendamentos — implementado | Área global demonstrativa com próximas reservas, histórico, detalhes, cancelamento da amostra em memória e acesso ao wizard existente. Exemplos de duas barbearias para uma identidade fictícia, independentes do wizard. Consulte [CLIENT_APPOINTMENTS.md](CLIENT_APPOINTMENTS.md). |
 | 3 | Área do barbeiro — implementada | Início com próximo atendimento e agenda própria demonstrativa; detalhes, conclusão, falta, bloqueio e desbloqueio de horários em memória. |
 | 4 | Perfil e ajuda — implementados para ambos os papéis | Quatro telas: perfil e ajuda do cliente, perfil e ajuda do barbeiro. Prévia de edição do nome de exibição e orientação contextual, reutilizando `SettingsShell`, `HelpShell` e padrões existentes. Não alterar a conta Google. Escopo e testes na seção 7 e [PROFILE_HELP.md](PROFILE_HELP.md). |
-| 5 | Superadmin básico | Visão geral, lista, busca e detalhes de barbearias, com suspensão/reativação demonstrativas. Não implementar cobrança ou inventar preços e condições comerciais. |
+| 5 | Superadmin básico — implementado | Visão geral calculada, lista, busca por nome/cidade/bairro e detalhes das seis fixtures públicas; suspensão/reativação somente em memória. Busca preservada no retorno à lista. Sem cobrança, publicação ou autorização real. Consulte [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md). |
 | 6 | PWA e acabamento transversal | Manifesto, ícones, instalação, tela de indisponibilidade offline e revisão de acessibilidade, desempenho e navegação. Sem reservas offline ou cache de dados privados. |
 
 Habilitar links de navegação e ajuda conforme seus destinos existirem, evitando
@@ -350,3 +352,26 @@ tela real. Comandos, arquivos e limitações em [PROFILE_HELP.md](PROFILE_HELP.m
 Google, identidade autenticada, vínculos, autorização e edição persistida
 continuam pendentes de contratos no OpenAPI. A implementação não autoriza
 executar as próximas etapas do roadmap.
+
+## 8. Superadmin básico — implementado
+
+Entrega demonstrativa concluída em 2026-10-06, após solicitação explícita.
+Rotas: `/super-admin`, `/super-admin/barbearias` e
+`/super-admin/barbearias/[id]`. Visão geral calculada, seis fixtures públicas,
+busca por nome/cidade/bairro, detalhes e retorno preservando a busca.
+Suspensão/reativação altera somente o estado React da amostra, com confirmação
+acessível e feedback de que nada foi salvo ou aplicado a uma barbearia real.
+Catálogo, publicação, autorização e acesso não são alterados.
+
+Validação executada: ESLint, TypeScript, build, 7 grupos de estado, 3 testes de
+host e QA Edge/Playwright com 27 verificações em desenvolvimento e 25 em produção
+local. Visão geral, lista, detalhes e diálogo conferidos em 320, 390, 768 e
+1440px. Teclado, foco e mensagens foram verificados por DOM; leitor de tela real
+não foi usado. Erro, carregamento e vazio reproduzidos por cenários locais em
+desenvolvimento; o boundary de erro real não foi forçado.
+
+Diagnóstico, arquivos, fixtures, comandos, evidências e pendências:
+[SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md). O OpenAPI mantém `paths: {}`;
+a integração real ainda exige autorização global, projeção permitida e regras
+de suspensão/publicação aprovadas. PWA permanece planejada e requer nova
+solicitação; nenhuma outra entrega foi iniciada.

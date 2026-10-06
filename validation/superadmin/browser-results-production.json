@@ -1,0 +1,107 @@
+{
+  "base": "http://localhost:3106",
+  "results": [
+    {
+      "name": "visão geral calculada, demonstração explícita e navegação existente",
+      "passed": true
+    },
+    {
+      "name": "lista tem seis exemplos e busca por bairro sem acento",
+      "passed": true
+    },
+    {
+      "name": "detalhes e retorno preservam busca, inclusive voltar do navegador",
+      "passed": true
+    },
+    {
+      "name": "diálogo por teclado: nome acessível, foco contido, Escape e cancelamento",
+      "passed": true
+    },
+    {
+      "name": "suspensão: feedback associado, sem persistência, lista e resumo coerentes",
+      "passed": true
+    },
+    {
+      "name": "reativação e resumo retornam ao estado inicial",
+      "passed": true
+    },
+    {
+      "name": "busca por nome e cidade, limpar e ausência de resultados",
+      "passed": true
+    },
+    {
+      "name": "produção não oferece seletores de cenários",
+      "passed": true
+    },
+    {
+      "name": "keyboard: busca e foco visível",
+      "passed": true
+    },
+    {
+      "name": "lista 320px sem rolagem horizontal",
+      "passed": true
+    },
+    {
+      "name": "lista 390px sem rolagem horizontal",
+      "passed": true
+    },
+    {
+      "name": "lista 768px sem rolagem horizontal",
+      "passed": true
+    },
+    {
+      "name": "lista 1440px sem rolagem horizontal",
+      "passed": true
+    },
+    {
+      "name": "detalhes e diálogo 320px sem corte",
+      "passed": true
+    },
+    {
+      "name": "detalhes e diálogo 390px sem corte",
+      "passed": true
+    },
+    {
+      "name": "detalhes e diálogo 768px sem corte",
+      "passed": true
+    },
+    {
+      "name": "detalhes e diálogo 1440px sem corte",
+      "passed": true
+    },
+    {
+      "name": "recarregar restaura suspensão local e não cria armazenamento",
+      "passed": true
+    },
+    {
+      "name": "catálogo independente e saída da área restaura amostra",
+      "passed": true
+    },
+    {
+      "name": "visão geral 320px sem corte",
+      "passed": true
+    },
+    {
+      "name": "visão geral 390px sem corte",
+      "passed": true
+    },
+    {
+      "name": "visão geral 768px sem corte",
+      "passed": true
+    },
+    {
+      "name": "visão geral 1440px sem corte",
+      "passed": true
+    },
+    {
+      "name": "identificador desconhecido tem estado indisponível e retorno válido",
+      "passed": true
+    },
+    {
+      "name": "sem erros JavaScript ou chamadas de API",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "apiRequests": []
+}
