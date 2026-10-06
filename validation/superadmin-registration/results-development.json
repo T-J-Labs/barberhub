@@ -1,0 +1,87 @@
+{
+  "base": "http://localhost:3000",
+  "results": [
+    {
+      "name": "cadastro abre por teclado acima da busca e foca o título",
+      "passed": true
+    },
+    {
+      "name": "cancelar não cria item, restaura foco e preserva busca",
+      "passed": true
+    },
+    {
+      "name": "vazios e espaços: erros associados e foco no primeiro campo inválido",
+      "passed": true
+    },
+    {
+      "name": "subdomínio inválido/reservado/duplicado preserva campos e foca subdomínio",
+      "passed": true
+    },
+    {
+      "name": "formulário com erros 320px: foco visível e sem corte",
+      "passed": true
+    },
+    {
+      "name": "formulário com erros 390px: foco visível e sem corte",
+      "passed": true
+    },
+    {
+      "name": "formulário com erros 768px: foco visível e sem corte",
+      "passed": true
+    },
+    {
+      "name": "formulário com erros 1440px: foco visível e sem corte",
+      "passed": true
+    },
+    {
+      "name": "cadastro válido com cliques repetidos cria somente um ID e abre detalhes",
+      "passed": true
+    },
+    {
+      "name": "detalhes do rascunho 320px sem corte",
+      "passed": true
+    },
+    {
+      "name": "detalhes do rascunho 390px sem corte",
+      "passed": true
+    },
+    {
+      "name": "detalhes do rascunho 768px sem corte",
+      "passed": true
+    },
+    {
+      "name": "detalhes do rascunho 1440px sem corte",
+      "passed": true
+    },
+    {
+      "name": "retorno preserva busca e rascunho aparece na lista e na busca pelo nome",
+      "passed": true
+    },
+    {
+      "name": "resumo calcula total e rascunhos da mesma coleção",
+      "passed": true
+    },
+    {
+      "name": "duplicidade inclui rascunhos após navegação interna",
+      "passed": true
+    },
+    {
+      "name": "catálogo e host pretendido não recebem o rascunho",
+      "passed": true
+    },
+    {
+      "name": "recarga perde rascunho, preserva retorno da busca e mostra Exemplo indisponível",
+      "passed": true
+    },
+    {
+      "name": "ID desconhecido e retorno válidos",
+      "passed": true
+    },
+    {
+      "name": "saída por navegação interna remove rascunho e não cria armazenamento/API",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "apiRequests": []
+}

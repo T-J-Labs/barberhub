@@ -10,11 +10,13 @@ export function filterShops(shops: readonly DemoShop[], query: string) {
 
 export function summarizeShops(shops: readonly DemoShop[]) {
   const active = shops.filter(shop => shop.demoStatus === "active").length
-  return { total: shops.length, active, suspended: shops.length - active }
+  const drafts = shops.filter(shop => shop.demoStatus === "draft").length
+  const suspended = shops.filter(shop => shop.demoStatus === "suspended").length
+  return { total: shops.length, drafts, active, suspended }
 }
 
-export function setDemoStatus(shops: readonly DemoShop[], id: string, status: DemoShop["demoStatus"]) {
-  return shops.map(shop => shop.id === id ? { ...shop, demoStatus: status } : shop)
+export function setDemoStatus(shops: readonly DemoShop[], id: string, status: "active" | "suspended") {
+  return shops.map(shop => shop.id === id && shop.demoStatus !== "draft" ? { ...shop, demoStatus: status } : shop)
 }
 
 export function readSearch(value: string | string[] | undefined) {

@@ -19,6 +19,10 @@ O **Superadmin básico** está disponível como demonstração local em
 resumo da amostra, lista, busca por nome/cidade/bairro, detalhes e
 suspensão/reativação em memória. Usa seis barbearias fictícias do catálogo;
 nenhuma alteração é salva ou afeta publicação, acesso ou estabelecimento real.
+O cadastro manual cria rascunhos somente nessa amostra, com nome, cidade, bairro,
+subdomínio pretendido e motivo. Rascunhos participam da busca, dos detalhes e do
+resumo durante a navegação interna; recarregar ou sair os remove. Não cria compra,
+conta, publicação ou subdomínio e não permite suspender/reativar rascunhos.
 Não há autenticação/autorização de superadmin. Contratos e regras reais continuam
 pendentes enquanto o OpenAPI mantém `paths: {}`.
 [Escopo, arquivos, testes e limitações](docs/frontend/SUPERADMIN_DEMO.md).
@@ -142,6 +146,9 @@ npm run test:appointments:http # Verifica página e domínio da área demonstrat
 npm run test:profiles # Verifica nomes demonstrativos e contexto seguro da ajuda
 npm run test:profiles:browser # QA de interação (requer Playwright e navegador)
 npm run test:barber   # Verifica status, próximo atendimento e bloqueios da amostra
+npm run test:superadmin # Verifica busca, resumo, estados e regras de cadastro local
+npm run test:superadmin:browser -- 3000 # QA de regressão (requer Playwright e navegador)
+npm run test:superadmin:registration:browser -- 3000 # QA de cadastro e navegação em memória
 npm run build         # Gera o build de produção
 npm run api:generate  # Gera o cliente a partir do contrato OpenAPI
 npm run api:watch     # Regenera o cliente quando o contrato é alterado
