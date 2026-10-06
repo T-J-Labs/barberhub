@@ -231,3 +231,32 @@ Evidências preservadas em `validation/qa-runs/`:
 Cada execução do agregador guarda `run.json`, logs, `results.json`, `axe.json`,
 capturas e trace. Limitações de ambiente e integração real permanecem as listadas
 acima; nenhum resultado declara tenant, autenticação, autorização ou publicação real.
+
+### Revisão independente — 2026-10-06
+
+Revisão realizada após a implementação e registrada nesta consolidação documental.
+Não é uma reexecução do onboarding durante a revisão posterior da Ajuda.
+Entrega aprovada como demonstração local, sem bloqueadores identificados.
+
+- ESLint e TypeScript: **PASS**.
+- `test:onboarding:browser`, servidores isolados em desenvolvimento (3223) e
+  produção local (3224): **PASS** em ambos. Por ambiente: nove grupos de regras,
+  quatro testes HTTP, dez grupos de navegador e 77 auditorias axe.
+- Percurso, edição/invalidação, configuração mínima, liberação fictícia,
+  três estados, reinício, recarga/saída e atalhos administrativos revalidados.
+  Nenhuma chamada de API, armazenamento do onboarding ou erro JavaScript observado.
+- Inspeção visual de funcionamento em 320px, prévia em 390px e início em 1440px;
+  testes de geometria também cobriram 768px. Sem corte/overflow detectado.
+- `test:qa:local` com servidor preparado na porta 3000: **PASS nas 14 suítes**.
+  Produção usou o build existente; não foi executado novo build nesta revisão.
+
+Evidências em `validation/qa-runs/`:
+
+- `2026-10-06T22-37-03.852Z-onboarding-MbvKix`: desenvolvimento.
+- `2026-10-06T22-37-55.407Z-onboarding-WzGz6Z`: produção local.
+- `2026-10-06T22-38-28.132Z-local-v40Eia`: regressão local daquela revisão.
+
+As auditorias axe mantêm a exceção vigente de contraste dos botões públicos;
+não certificam WCAG nem uso com leitor de tela. Equipamentos físicos, outros
+navegadores e DNS/TLS publicado continuam pendentes. Nenhuma alteração de código,
+backend ou banco foi realizada durante a revisão.

@@ -45,7 +45,7 @@ Estado observado na revisão estrutural e documental:
 - Cliente também tem “Minhas barbearias” em `/cliente/barbearias`, vínculos
   fictícios de Esquina/Navalha e filtro combinado de agendamentos. Regra aprovada
   e limites em [CLIENT_BARBERSHOPS.md](CLIENT_BARBERSHOPS.md).
-- Superadmin tem visão geral, lista, detalhes, suspensão/reativação em memória
+- Superadmin tem visão geral, lista, detalhes, ajuda, suspensão/reativação em memória
   e cadastro manual de rascunhos, conforme a seção 8 e
   [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md).
 - PWA tem manifesto, ícones, instalação na plataforma e fallback offline,
@@ -57,8 +57,9 @@ Estado observado na revisão estrutural e documental:
 - O OpenAPI mantém `paths: {}`. Não há operações aprovadas para integrar essas
   novas interfaces.
 
-Esta atualização consolida os resultados já documentados, sem nova execução de
-QA ou certificação de uma branch. Não há outra entrega automaticamente autorizada
+O levantamento inicial consolidou resultados já documentados, sem nova execução
+de QA. As revisões independentes posteriores estão identificadas na seção 11;
+não equivalem a certificação do MVP integrado. Não há outra entrega automaticamente autorizada
 na sequência inicial. A revisão dos headers foi implementada posteriormente,
 com a landing como referência e QA local registrado na seção 10 e em
 [HEADERS_REVIEW.md](HEADERS_REVIEW.md). A próxima prioridade é consolidar QA.
@@ -439,6 +440,28 @@ e 15 HTTP em desenvolvimento. QA DOM/teclado e visual em 320/390/768/1440px,
 sem leitor de tela real. Comandos, arquivos e limitações em
 [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md#cadastro-manual-demonstrativo--implementado-em-2026-10-06).
 
+### 8.2. Ajuda do superadmin — ampliação solicitada
+
+Implementada em `/super-admin/ajuda` em 2026-10-06. Página e conteúdo são Server
+Components com metadados próprios `noindex, nofollow`, reutilizando o `main` do
+layout e `HelpShell`/`HelpDestination` administrativos. Menu Ajuda habilitado;
+Planos e assinaturas continuam indisponíveis. Cinco atalhos orientam visão geral,
+busca/detalhes, cadastro manual, suspensão/reativação e onboarding independente.
+Treze perguntas usam `details` nativo e distinguem comportamento em memória,
+regra aprovada de publicação futura e integração ausente.
+
+O mesmo `SuperadminProvider` permanece montado: lista → Ajuda → lista preserva
+rascunhos e suspensões locais. Recarga ou saída descarta a amostra alterada. O
+atalho do onboarding avisa o descarte e a ausência de transferência de dados ao
+proprietário. Ajuda independe de dados e dos cenários de vazio/erro local.
+Sem novo provider, efeitos, API, persistência ou alterações de outros papéis.
+Validação local aprovada: lint, TypeScript, build, roteamento, regras/HTTP,
+regressões de superadmin/cadastro e jornada da ajuda em desenvolvimento/produção.
+Teclado, quatro larguras, zoom nativo 200% e oito auditorias axe sem violações
+detectadas. Leitor de tela, dispositivos reais e contraste manual integral
+permanecem pendentes; os cenários de erro são demonstrativos, não falhas de API.
+QA e limitações da entrega: [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md#ajuda-do-superadmin--2026-10-06).
+
 ## 9. PWA e acabamento transversal — 2026-10-06
 
 Implementada por solicitação explícita. Manifesto App Router com início em
@@ -487,12 +510,12 @@ aparelhos reais e leitor de tela continuam pendentes. [Registro](HEADERS_REVIEW.
 | Ordem | Entrega | Estado e condição | Resultado esperado sem backend |
 | --- | --- | --- | --- |
 | 1 | Consistência e responsividade dos headers | Implementada e validada localmente em 2026-10-06. | Landing preservada; padrão de drawer compartilhado por cliente e barbeiro; acesso mobile no rodapé; sidebar admin preservada. |
-| 2 | Consolidação de QA e acessibilidade | Pendente complementar; não reimplementar a PWA. | Regressão reproduzível das jornadas, menus e domínios; registro das verificações de dispositivos, navegadores e leitor de tela ainda ausentes. |
+| 2 | Consolidação de QA e acessibilidade | Infraestrutura e regressão local implementadas; validação manual/externa parcial. Não reimplementar a PWA. | Complementar verificações de dispositivos, navegadores, leitor de tela e ambiente publicado, preservando os agregadores existentes. |
 | 3 | Minhas barbearias | Implementada como demonstração local em 2026-10-06; criação real aprovada após primeiro agendamento real confirmado. | Lista demonstrativa de vínculos fictícios, perfil público, agendamento e acesso aos próprios agendamentos por estabelecimento. |
 | 4 | Onboarding demonstrativo do proprietário | Implementado em 2026-10-06 conforme plano específico aprovado. | Dois exemplos independentes, seis etapas, checklist calculado, cenários fictícios de liberação e atalhos administrativos com aviso; sem conta, tenant ou publicação reais. |
-| 5 | Ajuda do superadmin | Destino ausente; complemento opcional, mediante solicitação. | Guia das ações já existentes, cadastro manual e limites da demonstração; sem planos, cobrança ou suporte inventado. |
+| 5 | Ajuda do superadmin | Implementada e aprovada na revisão independente local de 2026-10-06. | Cinco caminhos por tarefa e 13 FAQs em `/super-admin/ajuda`, sob o mesmo provider; cadastro manual, onboarding independente e limites da memória, sem planos, cobrança ou suporte inventado. |
 
-A entrega 3 e a entrega 4 foram solicitadas e implementadas no escopo demonstrativo.
+As entregas 3, 4 e 5 foram solicitadas e implementadas no escopo demonstrativo.
 É possível avançar em QA sem implementar integração real. Esta lista
 não exige criar novas telas para preencher cada opção desabilitada da navegação.
 
@@ -671,3 +694,35 @@ pendentes em [QA_ACCESSIBILITY.md](QA_ACCESSIBILITY.md). A consolidação local
 foi implementada; isso não conclui integralmente a QA. A revisão dirigida de headers foi
 implementada após solicitação explícita; não executar novas funcionalidades
 automaticamente nem repetir a revisão já concluída.
+
+## 11. Consolidação das entregas e revisões — 2026-10-06
+
+Os registros abaixo consolidam o estado do frontend, sem autorizar novas
+implementações nem transformar evidências históricas em testes desta rodada.
+
+| Entrega existente | Registro de implementação e limites |
+| --- | --- |
+| Catálogo e perfil público | [BARBERSHOP_CATALOG.md](BARBERSHOP_CATALOG.md) e [PUBLIC_BARBERSHOP.md](PUBLIC_BARBERSHOP.md) |
+| Apresentação de login/cadastro e retorno seguro | [CLIENT_AUTH.md](CLIENT_AUTH.md) |
+| Agendamento demonstrativo | [CLIENT_BOOKING.md](CLIENT_BOOKING.md) |
+| Meus agendamentos | [CLIENT_APPOINTMENTS.md](CLIENT_APPOINTMENTS.md) |
+| Área do barbeiro | [BARBER_DEMO.md](BARBER_DEMO.md) |
+| Perfil e ajuda de cliente/barbeiro | [PROFILE_HELP.md](PROFILE_HELP.md) |
+| Superadmin, cadastro manual e ajuda | [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md) |
+| PWA e política offline | [PWA.md](PWA.md) |
+| Headers e navegação compartilhada | [HEADERS_REVIEW.md](HEADERS_REVIEW.md) |
+| Consolidação de QA | [QA_ACCESSIBILITY.md](QA_ACCESSIBILITY.md), com pendências manuais/externas |
+| Minhas barbearias | [CLIENT_BARBERSHOPS.md](CLIENT_BARBERSHOPS.md), incluindo revisão independente |
+| Onboarding demonstrativo do proprietário | [OWNER_ONBOARDING.md](OWNER_ONBOARDING.md), incluindo revisão independente |
+
+Na revisão independente da Ajuda foram reexecutados lint, TypeScript,
+`test:superadmin:help` em desenvolvimento e produção local e `test:qa:local`.
+Todos passaram; não foram encontrados bloqueadores no escopo demonstrativo.
+O build existente foi reutilizado, não reconstruído nesta revisão. As evidências
+e os testes da revisão anterior de onboarding foram registrados nos documentos
+das respectivas features. Não houve alterações na aplicação, backend ou banco.
+
+As entregas funcionais solicitadas desta sequência podem ser consideradas
+concluídas **como apresentação/demonstração local**. A próxima ação é complementar
+QA manual e externo mediante disponibilidade de equipamentos/ambiente, não
+reimplementar telas concluídas. Integração real continua na seção 10.6.
