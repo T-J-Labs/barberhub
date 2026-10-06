@@ -4,12 +4,13 @@ import Link from "next/link"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { FiMenu } from "react-icons/fi"
 import { Container } from "@/components/ui/Container"
-import { catalogActionClass, catalogFocusClass } from "@/features/barbershop-catalog/styles"
+import { catalogActionClass } from "@/features/barbershop-catalog/styles"
 import { publicNavigation } from "../../config/public-navigation"
 import { HeaderBrand } from "../HeaderBrand"
 import { PublicMobileMenu } from "./PublicMobileMenu"
 import { publicLoginClass, publicNavigationClass } from "./styles"
 import { clientAuthHref, type PlatformNavigation } from "@/features/auth/routing"
+import { menuControlClass } from "../styles"
 
 export type PublicHeaderContext = "landing" | "catalog" | "barbershop" | "public"
 
@@ -20,32 +21,12 @@ export function PublicHeader({ context, platform }: { context: PublicHeaderConte
   const [activeSection, setActiveSection] = useState<string>(publicNavigation[0].href)
   const isLandingPage = context === "landing"
   const headerRef = useRef<HTMLElement>(null)
+  const menuTriggerRef = useRef<HTMLButtonElement>(null)
   const activeHref = isLandingPage ? activeSection : undefined
 
   const closeMenu = useCallback(() => {
     setMenuOpen(false)
   }, [])
-
-  useEffect(() => {
-    if (!menuOpen) return
-    if (!isLandingPage) {
-      const frame = requestAnimationFrame(closeMenu)
-      return () => cancelAnimationFrame(frame)
-    }
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = "hidden"
-    const desktop = window.matchMedia("(min-width: 64rem)")
-    function closeOnDesktop() {
-      if (!desktop.matches) return
-      setMenuOpen(false)
-      requestAnimationFrame(() => headerRef.current?.querySelector<HTMLAnchorElement>('nav a[aria-current="location"], nav a[href]')?.focus())
-    }
-    desktop.addEventListener("change", closeOnDesktop)
-    return () => {
-      document.body.style.overflow = previousOverflow
-      desktop.removeEventListener("change", closeOnDesktop)
-    }
-  }, [menuOpen, isLandingPage, closeMenu])
 
   useEffect(() => {
     if (!isLandingPage) return
@@ -77,8 +58,9 @@ export function PublicHeader({ context, platform }: { context: PublicHeaderConte
       <Container>
         <div className={`${isLandingPage ? "grid grid-cols-[44px_minmax(0,1fr)_44px] lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-6 [&>a]:justify-self-center lg:[&>a]:justify-self-start" : "flex justify-between [&>a]:shrink-0 [&>a]:text-lg min-[360px]:[&>a]:text-xl sm:[&>a]:text-2xl"} min-h-20 items-center gap-3 py-4 [&>a]:focus-visible:outline-2 [&>a]:focus-visible:outline-offset-4 [&>a]:focus-visible:outline-sky-400`}>
           {isLandingPage && <button
+            ref={menuTriggerRef}
             type="button"
-            className={`grid size-11 place-items-center rounded-lg border border-[#26384A] text-slate-200 transition-colors hover:border-sky-400 hover:bg-[#172535] hover:text-white lg:hidden ${catalogFocusClass}`}
+            className={`${menuControlClass} lg:hidden`}
             aria-label="Abrir menu"
             aria-controls="public-navigation"
             aria-expanded={menuOpen}
@@ -105,7 +87,7 @@ export function PublicHeader({ context, platform }: { context: PublicHeaderConte
         </div>
       </Container>
 
-      {isLandingPage && <PublicMobileMenu isOpen={menuOpen} navigation={publicNavigation} activeHref={activeHref} onClose={closeMenu} loginHref={loginHref} signupHref={signupHref} />}
+      {isLandingPage && <PublicMobileMenu isOpen={menuOpen} navigation={publicNavigation} activeHref={activeHref} onClose={closeMenu} loginHref={loginHref} signupHref={signupHref} brandHref={platform.origin ? `${platform.origin}/` : "/"} triggerRef={menuTriggerRef} />}
     </header>
   )
 }

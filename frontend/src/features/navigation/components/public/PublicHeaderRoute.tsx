@@ -17,5 +17,5 @@ export function PublicHeaderRoute({ platform }: { platform: PlatformNavigation }
       ? segments.length > 1 ? "barbershop" : "catalog"
       : "public"
 
-  return context === "landing" ? <PublicHeader context={context} platform={platform} /> : <ClientHeader platformOrigin={platform.origin} context={clientContext} />
+  return context === "landing" ? <PublicHeader context={context} platform={platform} /> : <ClientHeader platformOrigin={platform.origin} context={clientContext} visitorAccessPlacement={context === "catalog" ? "center" : "footer"} />
 }

@@ -1,0 +1,649 @@
+{
+  "observations": {
+    "browser": "154.0.4258.53",
+    "port": "3000",
+    "pageErrors": []
+  },
+  "results": [
+    {
+      "name": "landing: 320px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "landing: 390px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "landing: 639px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "landing: 640px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "landing: 768px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "landing: 1023px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "landing: 1024px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "landing: 1199px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "landing: 1200px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "landing: 1440px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "landing: modal, foco inicial/contido, fundo inerte e Escape",
+      "passed": true
+    },
+    {
+      "name": "landing: fechar por botão e backdrop, restaurar overflow anterior",
+      "passed": true
+    },
+    {
+      "name": "landing: pouca altura, conteúdo rolável e rodapé alcançável",
+      "passed": true
+    },
+    {
+      "name": "landing: resize sem overlay/bloqueio residual",
+      "passed": true
+    },
+    {
+      "name": "landing: logo preservada no header e drawer",
+      "passed": true
+    },
+    {
+      "name": "catalog: 320px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "catalog: 390px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "catalog: 639px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "catalog: 640px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "catalog: 768px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "catalog: 1023px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "catalog: 1024px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "catalog: 1199px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "catalog: 1200px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "catalog: 1440px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "catalog: modal, foco inicial/contido, fundo inerte e Escape",
+      "passed": true
+    },
+    {
+      "name": "catalog: fechar por botão e backdrop, restaurar overflow anterior",
+      "passed": true
+    },
+    {
+      "name": "catalog: pouca altura, conteúdo rolável e rodapé alcançável",
+      "passed": true
+    },
+    {
+      "name": "catalog: resize sem overlay/bloqueio residual",
+      "passed": true
+    },
+    {
+      "name": "catalog: logo preservada no header e drawer",
+      "passed": true
+    },
+    {
+      "name": "public-profile: 320px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "public-profile: 390px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "public-profile: 639px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "public-profile: 640px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "public-profile: 768px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "public-profile: 1023px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "public-profile: 1024px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "public-profile: 1199px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "public-profile: 1200px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "public-profile: 1440px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "public-profile: modal, foco inicial/contido, fundo inerte e Escape",
+      "passed": true
+    },
+    {
+      "name": "public-profile: fechar por botão e backdrop, restaurar overflow anterior",
+      "passed": true
+    },
+    {
+      "name": "public-profile: pouca altura, conteúdo rolável e rodapé alcançável",
+      "passed": true
+    },
+    {
+      "name": "public-profile: resize sem overlay/bloqueio residual",
+      "passed": true
+    },
+    {
+      "name": "public-profile: logo preservada no header e drawer",
+      "passed": true
+    },
+    {
+      "name": "booking: 320px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "booking: 390px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "booking: 639px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "booking: 640px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "booking: 768px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "booking: 1023px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "booking: 1024px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "booking: 1199px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "booking: 1200px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "booking: 1440px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "booking: modal, foco inicial/contido, fundo inerte e Escape",
+      "passed": true
+    },
+    {
+      "name": "booking: fechar por botão e backdrop, restaurar overflow anterior",
+      "passed": true
+    },
+    {
+      "name": "booking: pouca altura, conteúdo rolável e rodapé alcançável",
+      "passed": true
+    },
+    {
+      "name": "booking: resize sem overlay/bloqueio residual",
+      "passed": true
+    },
+    {
+      "name": "booking: logo preservada no header e drawer",
+      "passed": true
+    },
+    {
+      "name": "login: 320px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "login: 390px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "login: 639px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "login: 640px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "login: 768px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "login: 1023px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "login: 1024px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "login: 1199px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "login: 1200px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "login: 1440px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "login: modal, foco inicial/contido, fundo inerte e Escape",
+      "passed": true
+    },
+    {
+      "name": "login: fechar por botão e backdrop, restaurar overflow anterior",
+      "passed": true
+    },
+    {
+      "name": "login: pouca altura, conteúdo rolável e rodapé alcançável",
+      "passed": true
+    },
+    {
+      "name": "login: resize sem overlay/bloqueio residual",
+      "passed": true
+    },
+    {
+      "name": "login: logo preservada no header e drawer",
+      "passed": true
+    },
+    {
+      "name": "signup: 320px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "signup: 390px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "signup: 639px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "signup: 640px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "signup: 768px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "signup: 1023px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "signup: 1024px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "signup: 1199px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "signup: 1200px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "signup: 1440px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "signup: modal, foco inicial/contido, fundo inerte e Escape",
+      "passed": true
+    },
+    {
+      "name": "signup: fechar por botão e backdrop, restaurar overflow anterior",
+      "passed": true
+    },
+    {
+      "name": "signup: pouca altura, conteúdo rolável e rodapé alcançável",
+      "passed": true
+    },
+    {
+      "name": "signup: resize sem overlay/bloqueio residual",
+      "passed": true
+    },
+    {
+      "name": "signup: logo preservada no header e drawer",
+      "passed": true
+    },
+    {
+      "name": "client: 320px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "client: 390px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "client: 639px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "client: 640px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "client: 768px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "client: 1023px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "client: 1024px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "client: 1199px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "client: 1200px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "client: 1440px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "client: modal, foco inicial/contido, fundo inerte e Escape",
+      "passed": true
+    },
+    {
+      "name": "client: fechar por botão e backdrop, restaurar overflow anterior",
+      "passed": true
+    },
+    {
+      "name": "client: pouca altura, conteúdo rolável e rodapé alcançável",
+      "passed": true
+    },
+    {
+      "name": "client: resize sem overlay/bloqueio residual",
+      "passed": true
+    },
+    {
+      "name": "client: logo preservada no header e drawer",
+      "passed": true
+    },
+    {
+      "name": "barber: 320px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "barber: 390px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "barber: 639px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "barber: 640px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "barber: 768px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "barber: 1023px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "barber: 1024px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "barber: 1199px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "barber: 1200px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "barber: 1440px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "barber: modal, foco inicial/contido, fundo inerte e Escape",
+      "passed": true
+    },
+    {
+      "name": "barber: fechar por botão e backdrop, restaurar overflow anterior",
+      "passed": true
+    },
+    {
+      "name": "barber: pouca altura, conteúdo rolável e rodapé alcançável",
+      "passed": true
+    },
+    {
+      "name": "barber: resize sem overlay/bloqueio residual",
+      "passed": true
+    },
+    {
+      "name": "barber: logo preservada no header e drawer",
+      "passed": true
+    },
+    {
+      "name": "admin: 320px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "admin: 390px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "admin: 639px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "admin: 640px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "admin: 768px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "admin: 1023px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "admin: 1024px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "admin: 1199px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "admin: 1200px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "admin: 1440px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "admin: modal, foco inicial/contido, fundo inerte e Escape",
+      "passed": true
+    },
+    {
+      "name": "admin: fechar por botão e backdrop, restaurar overflow anterior",
+      "passed": true
+    },
+    {
+      "name": "admin: pouca altura, conteúdo rolável e rodapé alcançável",
+      "passed": true
+    },
+    {
+      "name": "admin: resize sem overlay/bloqueio residual",
+      "passed": true
+    },
+    {
+      "name": "admin: logo preservada no header e drawer",
+      "passed": true
+    },
+    {
+      "name": "superadmin: 320px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "superadmin: 390px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "superadmin: 639px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "superadmin: 640px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "superadmin: 768px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "superadmin: 1023px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "superadmin: 1024px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "superadmin: 1199px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "superadmin: 1200px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "superadmin: 1440px, controles >=44px, sem sobreposição/corte",
+      "passed": true
+    },
+    {
+      "name": "superadmin: modal, foco inicial/contido, fundo inerte e Escape",
+      "passed": true
+    },
+    {
+      "name": "superadmin: fechar por botão e backdrop, restaurar overflow anterior",
+      "passed": true
+    },
+    {
+      "name": "superadmin: pouca altura, conteúdo rolável e rodapé alcançável",
+      "passed": true
+    },
+    {
+      "name": "superadmin: resize sem overlay/bloqueio residual",
+      "passed": true
+    },
+    {
+      "name": "superadmin: logo preservada no header e drawer",
+      "passed": true
+    },
+    {
+      "name": "landing: âncoras e estados ativos preservados por clique e scroll",
+      "passed": true
+    },
+    {
+      "name": "acesso: subdomínio → login → perfis/cadastro → retorno canônico",
+      "passed": true
+    },
+    {
+      "name": "cliente: prévia, quatro destinos, nome longo, saída/reinício locais",
+      "passed": true
+    },
+    {
+      "name": "barbeiro: todos os destinos existentes, itens indisponíveis e saída",
+      "passed": true
+    },
+    {
+      "name": "admin: todos os destinos existentes, itens indisponíveis e saída",
+      "passed": true
+    },
+    {
+      "name": "super-admin: todos os destinos existentes, itens indisponíveis e saída",
+      "passed": true
+    },
+    {
+      "name": "toque: abrir, fechar e backdrop em contexto touch",
+      "passed": true
+    },
+    {
+      "name": "catálogo visitante: acesso centralizado exclusivamente nesse contexto",
+      "passed": true
+    },
+    {
+      "name": "cliente: mesmos controles/layout do barbeiro, notificações e perfil",
+      "passed": true
+    },
+    {
+      "name": "movimento reduzido: ações aprovadas sem ampliação no hover",
+      "passed": true
+    }
+  ]
+}

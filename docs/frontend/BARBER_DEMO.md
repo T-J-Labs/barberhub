@@ -10,7 +10,10 @@ padrões privados em `.interface-design/system.md`.
 - `/barbeiro/agenda`: lista cronológica do dia de exemplo, estados e intervalos.
 - `/barbeiro/historico`: histórico completo com data de cada atendimento e detalhes.
 - Layout e `BarberHeader` existentes preservados; os destinos Início e Minha
-  agenda foram habilitados. Ajuda continua indisponível.
+  agenda foram habilitados. Perfil e Ajuda também estão disponíveis, conforme
+  [PROFILE_HELP.md](PROFILE_HELP.md). O header e seu drawer seguem o padrão da
+  landing desde a [revisão de 2026-10-06](HEADERS_REVIEW.md), mantendo destinos,
+  notificações demonstrativas e saída por navegação local.
 - Feature `frontend/src/features/barber-demo`: fixtures/modelos de apresentação,
   transições puras, estilos, shell Server Component, provider e view interativos.
 - `Container` e `DemoDialog` existentes reutilizados. Páginas são Server Components.

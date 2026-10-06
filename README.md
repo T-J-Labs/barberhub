@@ -14,6 +14,28 @@ isolamento seguro dos dados de cada estabelecimento.
 
 ## Problema e proposta
 
+### Estado atual do frontend — 2026-10-06
+
+As seis entregas da sequência inicial estão implementadas no escopo sem backend:
+agendamento demonstrativo, meus agendamentos, área do barbeiro, perfil e ajuda
+para cliente e barbeiro, superadmin básico e PWA/acabamento transversal. Também
+existe cadastro manual de rascunhos pelo superadmin. Landing, catálogo, perfil
+público, interfaces administrativas e apresentação de login/cadastro já existem.
+
+Isso não representa um MVP integrado: Google, sessão, autorização, persistência,
+disponibilidade e reservas reais continuam pendentes de contratos. A PWA foi
+validada em produção local, não em todos os dispositivos/ambientes de publicação.
+“Minhas barbearias” e onboarding ainda não foram implementados e dependem de
+regras e solicitação própria. Consulte o
+[estado das entregas e limites](docs/frontend/FRONTEND_ROADMAP.md).
+
+Headers revisados com a landing como referência visual e de menu mobile;
+cliente e barbeiro compartilham drawer acessível, com destinos próprios e
+sidebar desktop do admin preservada. [Arquivos, QA e limites](docs/frontend/HEADERS_REVIEW.md).
+Próxima prioridade sem backend: consolidação de QA. “Minhas barbearias” e onboarding são entregas
+condicionadas às regras de vínculo e estabelecimento, não implementações
+automaticamente autorizadas. [Sequência vigente](docs/frontend/FRONTEND_ROADMAP.md#10-próximos-passos-sem-backend--sequência-vigente-em-2026-10-06).
+
 O **Superadmin básico** está disponível como demonstração local em
 `/super-admin`, `/super-admin/barbearias` e `/super-admin/barbearias/[id]`:
 resumo da amostra, lista, busca por nome/cidade/bairro, detalhes e
@@ -145,6 +167,8 @@ npm run test:appointments # Verifica busca, histórico e cancelamento da amostra
 npm run test:appointments:http # Verifica página e domínio da área demonstrativa
 npm run test:profiles # Verifica nomes demonstrativos e contexto seguro da ajuda
 npm run test:profiles:browser # QA de interação (requer Playwright e navegador)
+npm run test:headers:browser -- 3000 # QA de headers, drawers e navegação
+npm run test:headers:zoom -- 3000 # Zoom nativo 200% em perfil temporário do Edge
 npm run test:barber   # Verifica status, próximo atendimento e bloqueios da amostra
 npm run test:superadmin # Verifica busca, resumo, estados e regras de cadastro local
 npm run test:superadmin:browser -- 3000 # QA de regressão (requer Playwright e navegador)
@@ -256,6 +280,7 @@ conhecer o processo completo.
 - [Agendamento demonstrativo e validação](docs/frontend/CLIENT_BOOKING.md)
 - [Meus agendamentos demonstrativos e validação](docs/frontend/CLIENT_APPOINTMENTS.md)
 - [Perfil e ajuda demonstrativos e validação](docs/frontend/PROFILE_HELP.md)
+- [Revisão dos headers, navegação e acessibilidade](docs/frontend/HEADERS_REVIEW.md)
 - [Área do barbeiro demonstrativa e validação](docs/frontend/BARBER_DEMO.md)
 - [Superadmin básico demonstrativo e validação](docs/frontend/SUPERADMIN_DEMO.md)
 - [PWA, política offline e acabamento transversal](docs/frontend/PWA.md)

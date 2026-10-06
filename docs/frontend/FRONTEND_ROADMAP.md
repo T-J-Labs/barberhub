@@ -12,21 +12,25 @@ Plano registrado em 2026-10-05, conforme a orientação do usuário. Complementa
 - Antes de uma implementação, conferir o código, o OpenAPI e o estado atual
   das entregas. O diagnóstico abaixo é uma referência datada, não uma garantia
   de que o projeto não evoluiu.
-- Quando o usuário pedir a primeira entrega deste plano, limitar o trabalho ao
-  agendamento demonstrativo, documentação associada e testes. Não executar o
-  restante do roadmap automaticamente.
-- Manter entregas pequenas e separadas. Não incluir outra reformulação do Header,
-  mudança de domínio do admin ou alterações de backend/banco nesta sequência
-  demonstrativa sem uma solicitação específica.
+- Quando o usuário pedir a próxima entrega deste plano, conferir seu estado na
+  seção 10. A revisão dos headers e o agendamento histórico já estão implementados;
+  a próxima prioridade é consolidação de QA. Não repetir entregas nem executar
+  o restante do roadmap automaticamente.
+- Manter entregas pequenas e separadas. A seção 10 registra uma revisão dirigida
+  dos headers, não uma reformulação livre da aplicação. Não mudar o domínio do
+  admin nem alterar backend/banco sem uma solicitação específica.
 - Respeitar o ADR e o contrato OpenAPI. Dúvidas que mudem regras de negócio,
   autenticação ou escopo devem ser esclarecidas antes de implementar.
 - Ao concluir uma entrega, atualizar seu estado e registrar somente verificações
   realmente executadas. Não apresentar uma simulação como funcionalidade integrada.
 
-## 2. Diagnóstico e prioridade
+## 2. Estado atual — atualizado em 2026-10-06
 
-**O agendamento demonstrativo foi implementado em 2026-10-05.** É a
-continuação da jornada de descoberta e conta global do cliente prevista no ADR.
+**As seis entregas da sequência inicial estão implementadas no escopo sem
+backend.** As cinco primeiras são demonstrações locais; a PWA foi implementada
+e validada em produção local, com pendências de ambiente e acessibilidade
+registradas na seção 9. O cadastro manual demonstrativo do superadmin também
+está implementado. Isso não significa conclusão do MVP integrado.
 
 Estado observado na revisão estrutural e documental:
 
@@ -36,9 +40,13 @@ Estado observado na revisão estrutural e documental:
   A prévia do header de cliente não cria sessão. Consulte
   [CLIENT_AUTH.md](CLIENT_AUTH.md).
 - Cliente tem “Meus agendamentos” demonstrativos em `/cliente/agendamentos`;
-  barbeiro tem início e agenda demonstrativos. Na revisão original, superadmin
-  tinha apenas layout e navegação; em 2026-10-06 recebeu a demonstração básica
-  descrita na seção 8 e em [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md).
+  barbeiro tem início, agenda e histórico demonstrativos. Ambos têm perfil e
+  ajuda, conforme a seção 7 e [PROFILE_HELP.md](PROFILE_HELP.md).
+- Superadmin tem visão geral, lista, detalhes, suspensão/reativação em memória
+  e cadastro manual de rascunhos, conforme a seção 8 e
+  [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md).
+- PWA tem manifesto, ícones, instalação na plataforma e fallback offline,
+  sem cache de dados privados ou reservas offline. Consulte [PWA.md](PWA.md).
 - O CTA “Agendar horário” abre a introdução de `/agendar` no subdomínio.
   A feature `booking` oferece serviço, profissional, data, horário, revisão,
   resultado e conflito com recuperação. Esquina e Navalha têm exemplos completos.
@@ -46,10 +54,15 @@ Estado observado na revisão estrutural e documental:
 - O OpenAPI mantém `paths: {}`. Não há operações aprovadas para integrar essas
   novas interfaces.
 
-Este registro não constitui uma nova execução de QA nem a conclusão de uma branch
-funcional. Não é necessário remodelar novamente o Header para iniciar o wizard.
+Esta atualização consolida os resultados já documentados, sem nova execução de
+QA ou certificação de uma branch. Não há outra entrega automaticamente autorizada
+na sequência inicial. A revisão dos headers foi implementada posteriormente,
+com a landing como referência e QA local registrado na seção 10 e em
+[HEADERS_REVIEW.md](HEADERS_REVIEW.md). A próxima prioridade é consolidar QA.
+“Minhas barbearias” e onboarding continuam dependendo de definições e
+solicitação específica.
 
-## 3. Sequência das entregas restantes
+## 3. Sequência inicial — entregas implementadas
 
 As cinco primeiras entregas estão **implementadas como demonstração local**.
 A sexta foi implementada e validada em produção local, com as limitações de
@@ -70,9 +83,14 @@ mecanismos de autorização.
 
 “Minhas barbearias” permanece depois da jornada inicial, conforme a escolha do
 usuário. Não confundir com favoritos nem presumir regras de vínculo ainda não
-definidas.
+definidas. A jornada inicial demonstrativa está implementada; essa tela ainda
+não existe e sua implementação não está autorizada por este registro.
 
 ## 4. Primeira entrega: agendamento demonstrativo
+
+Entrega implementada. Os itens abaixo preservam o escopo e as regras do plano
+original, não uma lista de funcionalidades ainda por desenvolver. O comportamento
+atual, os arquivos e as verificações estão em [CLIENT_BOOKING.md](CLIENT_BOOKING.md).
 
 ### 4.1. Entrada, domínio e contexto
 
@@ -150,22 +168,23 @@ autenticação quando necessária antes de uma reserva real.
 
 ### 4.5. Limitação entre subdomínio e área global
 
-A reserva demonstrativa e a futura lista global do cliente terão **dados
+A reserva demonstrativa e a lista global do cliente possuem **dados
 independentes**. A conclusão no subdomínio não deve adicionar automaticamente
 uma reserva a “Meus agendamentos”. A limitação precisa estar visível.
 
-Na entrega posterior, o reagendamento poderá abrir o wizard no estabelecimento,
-mas não atualizará automaticamente a lista global. Não criar armazenamento
+O reagendamento demonstrativo abre o wizard no estabelecimento,
+mas não atualiza automaticamente a lista global. Não criar armazenamento
 compartilhado entre domínios para contornar a ausência de integração.
 
-### 4.6. Documentação associada à futura implementação
+### 4.6. Documentação da entrega implementada
 
-- Atualizar `PUBLIC_BARBERSHOP.md` para descrever o novo destino do CTA somente
-  quando o wizard existir. Até lá, o destino continua sendo `#agendamento`.
-- Atualizar `CLIENT_EXPERIENCE.md` e este roadmap para distinguir interface
-  demonstrativa concluída de funcionalidades aguardando integração.
-- Documentar o wizard, seus cenários locais, testes e limitações, com links no
-  README. Não apresentar URLs ou comandos ainda inexistentes como disponíveis.
+- `PUBLIC_BARBERSHOP.md` descreve o CTA para a introdução de `/agendar` no
+  subdomínio; `#agendamento` não é mais seu destino.
+- `CLIENT_EXPERIENCE.md` e este roadmap distinguem a interface demonstrativa
+  implementada das funcionalidades aguardando integração.
+- `CLIENT_BOOKING.md` documenta o wizard, cenários locais, testes e limitações,
+  com referência no README. Não apresentar URLs ou comandos ainda inexistentes
+  como disponíveis.
 - Manter referências de autenticação e navegação coerentes com `CLIENT_AUTH.md`.
 - Preservar registros históricos de validação e acrescentar os novos resultados
   efetivamente obtidos, sem tratar testes antigos como validação da nova feature.
@@ -178,6 +197,11 @@ estão em [CLIENT_BOOKING.md](CLIENT_BOOKING.md). Os critérios abaixo preservam
 o plano; verificações manuais não realizadas devem permanecer pendentes.
 
 ### Primeira entrega
+
+Checklist da revisão original do agendamento: itens não marcados não devem ser
+convertidos em testes aprovados por esta atualização documental. Consulte o
+registro detalhado em `CLIENT_BOOKING.md` e as regressões posteriores em `PWA.md`;
+uso real de leitor de tela e validação de DNS/TLS/OAuth continuam pendentes.
 
 - [x] Percorrer introdução, todas as etapas, revisão e resultado demonstrativo.
 - [ ] Voltar e editar serviço, profissional e data, verificando invalidação das
@@ -229,7 +253,8 @@ Testes HTTP locais com Host simulado não validam DNS público, TLS ou OAuth.
 **Área do barbeiro implementada como demonstração local.** Consulte [BARBER_DEMO.md](BARBER_DEMO.md).
 
 **Perfil e ajuda demonstrativos implementados para ambos os papéis.**
-As etapas restantes exigem solicitação própria, sem reservas ou autorização reais.
+Superadmin, cadastro manual e PWA também estão implementados, conforme as seções
+8 e 9. Novas entregas exigem solicitação própria, sem reservas ou autorização reais.
 
 ## 7. Perfil e ajuda de cliente e barbeiro — implementados
 
@@ -246,9 +271,9 @@ Rotas disponíveis na demonstração:
 | Cliente | `/cliente/perfil` | `/cliente/ajuda` | Conta global, com `ClientHeader` e identidade visual da área do cliente. |
 | Barbeiro | `/barbeiro/perfil` | `/barbeiro/ajuda` | Profissional fictício da demonstração, com `BarberHeader` e identidade visual privada existente. |
 
-Implementar primeiro o perfil dos dois papéis; depois, a ajuda contextual de
-ambos. As quatro telas compõem a etapa 4. Não incluir perfil/ajuda de admin ou
-superadmin, nem alterar suas páginas ou domínios. Preservar as convenções de
+As quatro telas compõem a etapa 4 concluída. O escopo aprovado não inclui
+perfil/ajuda de admin ou superadmin, nem alterações em suas páginas ou domínios.
+Preservar as convenções de
 domínio e retorno já existentes; esta entrega não resolve sessão entre domínios
 nem muda o domínio operacional do barbeiro.
 
@@ -438,3 +463,185 @@ insuficiente mantido no padrão azul/branco exigido. Transferência mediana
 leitor de tela, dispositivos móveis reais, instalação manual e HTTPS publicado
 permanecem pendentes. Resultados, arquivos, comandos e limitações:
 [PWA.md](PWA.md). As demonstrações não se tornaram operações integradas.
+
+## 10. Próximos passos sem backend — sequência vigente em 2026-10-06
+
+Esta seção substitui a prioridade histórica de agendamento; as seções 3 a 9
+preservam as entregas já implementadas e seus registros. Planejamento não autoriza
+implementar: cada entrega exige solicitação própria. A revisão de headers foi
+solicitada e implementada em 2026-10-06. A **landing institucional é a referência
+principal de aparência e menu mobile**, substituindo expressamente a orientação
+anterior que usava o header do barbeiro. QA local no navegador foi executado;
+aparelhos reais e leitor de tela continuam pendentes. [Registro](HEADERS_REVIEW.md).
+
+### 10.1. Ordem recomendada e dependências
+
+| Ordem | Entrega | Estado e condição | Resultado esperado sem backend |
+| --- | --- | --- | --- |
+| 1 | Consistência e responsividade dos headers | Implementada e validada localmente em 2026-10-06. | Landing preservada; padrão de drawer compartilhado por cliente e barbeiro; acesso mobile no rodapé; sidebar admin preservada. |
+| 2 | Consolidação de QA e acessibilidade | Pendente complementar; não reimplementar a PWA. | Regressão reproduzível das jornadas, menus e domínios; registro das verificações de dispositivos, navegadores e leitor de tela ainda ausentes. |
+| 3 | Minhas barbearias | Tela ausente; definir e aprovar regra de vínculo antes de implementar. | Lista demonstrativa de vínculos fictícios, perfil público, agendamento e acesso aos próprios agendamentos por estabelecimento. |
+| 4 | Onboarding demonstrativo do proprietário | Fluxo ausente; definir regras e percurso antes de implementar. | Orientação de configuração inicial, dados demonstrativos e acesso às configurações existentes, sem criar conta, tenant ou publicação reais. |
+| 5 | Ajuda do superadmin | Destino ausente; complemento opcional, mediante solicitação. | Guia das ações já existentes, cadastro manual e limites da demonstração; sem planos, cobrança ou suporte inventado. |
+
+As entregas 3 e 4 não são trabalho liberado enquanto suas decisões estiverem
+pendentes. É possível avançar em QA sem resolver regras de negócio. Esta lista
+não exige criar novas telas para preencher cada opção desabilitada da navegação.
+
+### 10.2. Revisão dirigida dos headers — implementada
+
+**Objetivo:** permitir que visitante, cliente e profissional reconheçam a
+navegação e acessem seus destinos no celular, preservando contexto e diferenças
+entre papéis. Não redesenhar o conteúdo das páginas nem criar funcionalidades.
+
+Pontos de partida existentes em `frontend/src/features/navigation`:
+
+- `components/public/PublicHeader.tsx` e `PublicMobileMenu.tsx`: navegação
+  institucional, incluindo âncoras e ações de acesso.
+- `components/authenticated/ClientHeader.tsx`: apresentação de visitante,
+  prévia de cliente, acesso e menu de conta em drawer modal (substitui `details`).
+- `components/authenticated/BarberHeader.tsx`, `AuthenticatedHeader.tsx` e
+  `AuthenticatedMobileMenu.tsx`: composição do barbeiro e drawer compartilhado.
+- `HeaderBrand.tsx`, configurações por papel e `AdminSidebar.tsx`: marca,
+  destinos existentes e navegação administrativa a preservar.
+
+Escopo implementado, preservando as composições existentes:
+
+1. Reproduzir e registrar as diferenças e os problemas relatados em `/`, catálogo,
+   perfil público, agendamento, login/cadastro e áreas de cliente e barbeiro.
+   Distinguir diferenças intencionais de inconsistência ou quebra de layout.
+2. Alinhar marca, tipografia, espaçamento, dimensões de controles, superfícies,
+   bordas e foco aos padrões existentes. Reutilizar componentes e estilos;
+   compartilhar estrutura quando houver uso real, sem um componente monolítico
+   com regras de todos os papéis. Consultar `docs/design/README.md` e
+   `.interface-design/system.md`, preservando a identidade pública e privada.
+3. Usar a landing institucional como referência principal de aparência e menu
+   mobile: marca tipográfica, fundo/borda, controles de 44px, drawer esquerdo
+   com 85% e `max-w-sm`, backdrop, conteúdo rolável e ações no rodapé.
+   Essa decisão substitui a referência anterior ao header do barbeiro.
+   Cliente e barbeiro usam `MobileDrawer`, mantendo destinos, nomes e estados
+   próprios. Não copiar contexto de tenant ou notificações para o cliente.
+4. Corrigir ações de acesso em telas pequenas: Entrar e Criar conta devem ficar
+   acessíveis sem sobreposição, cortes, rolagem horizontal ou alvos comprimidos.
+   Usar composição responsiva coerente, incluindo menu quando necessário; não
+   impor mesma altura fixa se isso prejudicar zoom ou conteúdo longo.
+5. Preservar âncoras institucionais e seus estados ativos, URLs e destinos da logo:
+   login/cadastro retornam à landing; catálogo/perfis públicos levam ao catálogo.
+   Não alterar implicitamente o destino da marca nas áreas operacionais.
+6. Preservar contexto validado de barbearia, escolha visual de perfil, retorno
+   canônico ao subdomínio e indisponibilidade do Google, conforme `CLIENT_AUTH.md`.
+   Encerrar a prévia continua sendo uma ação local, não logout real.
+7. Preservar sidebar desktop do admin, header/menu mobile e comportamento do
+   superadmin. Alterações em componentes compartilhados exigem regressão dos
+   papéis afetados; não mudar domínio, permissões ou navegação operacional aprovada.
+
+Critérios de conclusão:
+
+- [x] Verificar todas as famílias de header em 320, 390, 768 e 1440px, incluindo
+  pontos imediatamente antes/depois dos breakpoints e zoom desktop de 200%.
+- [x] Testar nomes longos, visitante, prévia de cliente, saída, contexto válido
+  e ausente; nenhuma opção deve apontar a uma página inexistente.
+- [x] Menus abrem/fecham por mouse, toque e teclado; Escape e retorno de foco
+  funcionam, foco não alcança o fundo de um drawer modal, rolagem é restaurada
+  e navegação/resize não deixam overlay ou bloqueio residual.
+- [x] Controles têm rótulos acessíveis, estado expandido, foco visível e áreas
+  de toque de pelo menos 44px; respeitar movimento reduzido.
+- [x] Links de acesso, logo, perfil, ajuda, catálogo, subdomínio e âncoras mantêm
+  seus destinos/contextos; admin e superadmin não sofrem regressão.
+- [x] Executar testes de comportamento e QA no navegador, regressões relevantes
+  de auth/roteamento/perfil, lint, TypeScript e build. Registrar ambiente,
+  comandos, resultados e limitações; screenshot isolada não prova interação.
+- [x] Atualizar a documentação de navegação afetada e registrar os padrões
+  compartilhados sem declarar OAuth, sessão ou autorização implementados.
+
+Verificações realizadas em Windows/Edge 154, servidor de desenvolvimento local
+em `localhost:3000` e tenants `.localhost`. Toque emulado por Playwright; zoom
+nativo 200% por preferência de perfil temporário (janela 1440px, viewport CSS
+707px, DPR 2). Matriz inclui 639/640, 1023/1024 e 1199/1200px, altura 240px,
+nome de cliente com 300 caracteres e menu extenso do admin. A inspeção do foco
+e dos rótulos foi DOM/teclado, sem uso real de leitor de tela. Não valida
+Android/iOS, Safari/Firefox, publicação HTTPS/DNS/TLS ou autenticação real.
+Resultados, arquivos, comandos e capturas: [HEADERS_REVIEW.md](HEADERS_REVIEW.md).
+
+Ajuste posterior solicitado: header da prévia do cliente igual ao do barbeiro,
+com controles de Notificações demonstrativas e Perfil à direita. Exclusivamente
+no catálogo `/barbearias` em estado visitante, as ações de acesso ficam
+centralizadas no drawer. Isso não muda a referência da landing nos demais
+contextos nem implementa notificações, sessão ou autorização reais.
+
+### 10.3. QA transversal e pendências da PWA
+
+Consolidar os testes existentes, evitando outra implementação da mesma PWA:
+
+- Tornar reproduzível a regressão de descoberta → perfil → introdução → wizard,
+  área global do cliente, agenda do barbeiro e gestão demonstrativa do superadmin.
+  Wizard e lista global continuam independentes; não testar sincronização fictícia.
+- Documentar preparação do servidor e configuração de Host/porta por ambiente,
+  fixtures, reset de amostras e dependências do navegador. Não depender de caminhos
+  absolutos da máquina de um desenvolvedor. Avaliar execução automatizada em CI
+  numa entrega própria; hoje não há diretório `.github` no repositório inspecionado.
+- Complementar a inspeção DOM/teclado com leitor de tela real e aparelhos
+  Android/iOS quando disponíveis. Registrar Safari/Firefox e instalação manual,
+  distinguindo testes novos das evidências já existentes.
+- Validação HTTPS publicado e DNS/TLS exigem ambiente de hospedagem: podem ser
+  feitas sem API, mas não estão garantidas pelo frontend local nem autorizam
+  publicar o projeto automaticamente. Sem ambiente/dispositivo, manter pendência.
+- Acompanhar contraste e desempenho com medições comparáveis. Não alterar a cor
+  dos botões públicos aprovados para encerrar um alerta: registrar o conflito e
+  pedir decisão explícita antes de mudar esse padrão.
+
+### 10.4. Minhas barbearias — definição antes da tela
+
+Decisão necessária: o vínculo nasce no primeiro agendamento, no primeiro
+atendimento concluído ou por cadastro/vinculação pelo estabelecimento? Definir
+também como apresentar barbearia suspensa/indisponível e eventual remoção do
+vínculo. Nenhuma dessas alternativas está aprovada neste documento.
+
+Depois da definição e da solicitação de implementação:
+
+- Planejar a rota global `/cliente/barbearias` (proposta, ainda não existente),
+  com feature própria e entrada na navegação/ajuda do cliente somente ao existir.
+- Usar vínculos fictícios explícitos com duas barbearias, identidade visual da
+  área do cliente, nome/localização e estado vazio com acesso ao catálogo.
+- Oferecer perfil público, agendamento demonstrativo no subdomínio e consulta
+  aos próprios agendamentos daquele estabelecimento. Reutilizar a lista existente;
+  se necessário, planejar filtro por identificador público validado, não por
+  `tenant_id` livre e sem inventar endpoint.
+- Não incluir favoritos, “Tornar-me cliente”, desvinculação ou outras ações cuja
+  regra não tenha sido aprovada. Não expor reputação ou dados privados de tenants.
+- Não criar vínculos ao concluir simulações nem armazenamento entre domínios.
+  Testar isolamento da amostra, estado vazio, indisponibilidade, links e filtros.
+
+### 10.5. Onboarding do proprietário — planejamento condicionado
+
+Definir antes: quem inicia/cria o estabelecimento, relação com o rascunho manual
+do superadmin, identificação/vínculo do responsável, subdomínio pretendido,
+requisitos de ativação/publicação e relação entre acesso e compra. Não supor que
+escolher Barbearia no cadastro concede acesso ao admin.
+
+Após aprovação, a demonstração poderá apresentar dados institucionais, revisão
+de endereço pretendido e checklist de configuração de serviços, equipe e
+funcionamento, aproveitando as telas admin existentes. Rota e passos finais
+precisam ser definidos nesse planejamento específico; não estão disponíveis.
+
+Sem OAuth, upload externo, convites reais, provisionamento, publicação no catálogo,
+compra, plano ou liberação de acesso. Dados em memória, com resultado explícito
+de simulação; sem vincular automaticamente rascunhos de demonstrações independentes.
+
+### 10.6. O que ainda depende de backend ou fica para depois
+
+- **Integração:** Google/OAuth, sessões entre domínios, autorização por papel e
+  tenant, vínculos reais, disponibilidade, concorrência, reservas, cancelamento,
+  reagendamento persistido, publicação e cadastro real de estabelecimentos.
+  Só integrar após contratos aprovados no OpenAPI; não inventar DTOs ou endpoints.
+- **Decisões de produto:** ciclo de vida do vínculo cliente/barbearia, onboarding,
+  responsável por estabelecimento, ativação e acesso sem compra. Podem ser
+  discutidas agora, mas não transformadas em regras reais por um agente.
+- **Fora desta sequência:** planos/assinaturas, pagamentos, fidelidade, favoritos,
+  geolocalização, avaliações, rankings e notificações reais. “Planos e assinaturas”
+  do superadmin permanece indisponível; não inventar condições comerciais.
+
+**Próxima entrega recomendada:** consolidação de QA e acessibilidade, incluindo
+os ambientes e dispositivos ainda pendentes. A revisão dirigida de headers foi
+implementada após solicitação explícita; não executar novas funcionalidades
+automaticamente nem repetir a revisão já concluída.

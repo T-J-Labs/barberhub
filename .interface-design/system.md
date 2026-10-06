@@ -60,3 +60,35 @@ Painel operacional para o gerente de uma barbearia: leitura rápida, decisões c
 - `DemoDialog` em `src/features/demo-ui` centraliza foco, Escape, fechamento e superfície dos diálogos demonstrativos.
 - Dados criados ou alterados na prévia atualizam imediatamente a lista e seus resumos, mas não são persistidos; informar isso junto à tela.
 - Atalhos do Dashboard levam às respectivas telas, e a amostra de atendimentos do Dashboard deriva da mesma agenda demonstrativa.
+
+## Headers — decisão explícita de 2026-10-06
+
+- A landing é a referência visual e de menu, substituindo a referência anterior
+  ao barbeiro. Essa decisão aplica-se aos headers; as páginas operacionais
+  conservam suas superfícies e cores.
+- Base escura `#07111C`, borda `#26384A`, marca BARBER branco/HUB `sky-500`,
+  tipografia Geist, ritmo de 4px e controles fixos de 44px com foco `sky-400`.
+- Header com altura mínima de 80px, padding vertical 16px. Visitantes mobile:
+  grade de 44px/coluna flexível/44px, menu à esquerda e marca centralizada.
+  Áreas operacionais conservam Perfil/Notificações e marca responsiva.
+- `MobileDrawer`: diálogo nativo à esquerda, 85% da largura, máximo 384px,
+  `h-dvh`, borda direita, backdrop preto 65% com blur, nav rolável com padding
+  16px/24px. Header do drawer tem separador e padding inferior 20px; conteúdo
+  tem padding vertical 24px; rodapé fica no fim, com separador e padding 20px.
+- Entrar usa `publicLoginClass`; Criar conta usa `catalogActionClass`, sempre
+  `sky-500`/branco com ampliação que respeita movimento reduzido.
+- Modal contém foco, torna fundo inerte, fecha por Escape/backdrop/controle/link,
+  restaura foco e overflow. Breakpoints de fechamento: público/visitante 1024px;
+  admin 1200px com foco na sidebar; prévia/operacional conservam menu no desktop.
+- Destinos e estados pertencem a cada composição; não criar regras de papéis
+  no drawer. Sidebar desktop mantém aparência e navegação anteriores.
+- Ajuste solicitado: a prévia do cliente usa a mesma grade operacional do
+  barbeiro, com Notificações/Perfil à direita em todas as larguras, por
+  `HeaderAccountActions`. Nome/identificação demonstrativa ficam no drawer.
+  Notificações permanece painel vazio de demonstração e Perfil usa o destino
+  próprio do papel.
+- No drawer do cliente, Barbearias/Meus agendamentos ficam no bloco principal;
+  Perfil/Ajuda ficam no rodapé separado, acima da saída, como no barbeiro.
+- Exceção de posição: somente `/barbearias` em estado visitante centraliza
+  verticalmente Entrar/Criar conta no drawer. A composição pública sinaliza
+  essa variação visual; os outros contextos mantêm ações no rodapé.

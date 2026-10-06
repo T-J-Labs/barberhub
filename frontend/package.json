@@ -26,6 +26,9 @@
     "api:watch": "orval --config ./orval.config.ts --watch",
     "test:profiles": "node ../validation/profile-help-state.cjs",
     "test:profiles:browser": "node ../validation/profile-help-browser.cjs",
+    "test:headers:browser": "node ../validation/headers-browser.cjs",
+    "test:headers:zoom": "node ../validation/headers-zoom.cjs",
+    "test:headers:visual": "node ../validation/headers-visual.cjs",
     "test:superadmin": "node ../validation/superadmin-state.cjs",
     "test:superadmin:browser": "node ../validation/superadmin-browser.cjs",
     "test:superadmin:registration:browser": "node ../validation/superadmin-registration-browser.cjs"

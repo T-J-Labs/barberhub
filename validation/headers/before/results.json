@@ -1,0 +1,1290 @@
+{
+  "browser": "154.0.4258.53",
+  "port": "3000",
+  "states": [
+    {
+      "name": "landing",
+      "width": 320,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 16,
+          "right": 60
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 79.734375,
+          "right": 240.265625
+        }
+      ]
+    },
+    {
+      "name": "landing",
+      "width": 390,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 16,
+          "right": 60
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 114.734375,
+          "right": 275.265625
+        }
+      ]
+    },
+    {
+      "name": "landing",
+      "width": 768,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 16,
+          "right": 60
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 303.734375,
+          "right": 464.265625
+        }
+      ]
+    },
+    {
+      "name": "landing",
+      "width": 1440,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 96,
+          "right": 256.53125
+        },
+        {
+          "label": "Início",
+          "width": 59.0625,
+          "height": 44,
+          "x": 506.8125,
+          "right": 565.875
+        },
+        {
+          "label": "Produto",
+          "width": 75.984375,
+          "height": 44,
+          "x": 569.875,
+          "right": 645.859375
+        },
+        {
+          "label": "Serviços",
+          "width": 80.921875,
+          "height": 44,
+          "x": 649.859375,
+          "right": 730.78125
+        },
+        {
+          "label": "Planos",
+          "width": 68.71875,
+          "height": 44,
+          "x": 734.78125,
+          "right": 803.5
+        },
+        {
+          "label": "Contato",
+          "width": 76.3125,
+          "height": 44,
+          "x": 807.5,
+          "right": 883.8125
+        },
+        {
+          "label": "Entrar",
+          "width": 83.609375,
+          "height": 44,
+          "x": 1134.09375,
+          "right": 1217.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 1229.703125,
+          "right": 1344
+        }
+      ]
+    },
+    {
+      "name": "landing",
+      "interaction": "open/Escape",
+      "expandedAfterEscape": "false",
+      "overflowAfterEscape": ""
+    },
+    {
+      "name": "catalog",
+      "width": 320,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 102.09375,
+          "right": 177.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 189.703125,
+          "right": 304
+        }
+      ]
+    },
+    {
+      "name": "catalog",
+      "width": 390,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 172.09375,
+          "right": 247.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 259.703125,
+          "right": 374
+        }
+      ]
+    },
+    {
+      "name": "catalog",
+      "width": 768,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 550.09375,
+          "right": 625.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 637.703125,
+          "right": 752
+        }
+      ]
+    },
+    {
+      "name": "catalog",
+      "width": 1440,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 96,
+          "right": 256.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 1142.09375,
+          "right": 1217.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 1229.703125,
+          "right": 1344
+        }
+      ]
+    },
+    {
+      "name": "public-profile",
+      "width": 320,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 102.09375,
+          "right": 177.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 189.703125,
+          "right": 304
+        }
+      ]
+    },
+    {
+      "name": "public-profile",
+      "width": 390,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 172.09375,
+          "right": 247.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 259.703125,
+          "right": 374
+        }
+      ]
+    },
+    {
+      "name": "public-profile",
+      "width": 768,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 550.09375,
+          "right": 625.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 637.703125,
+          "right": 752
+        }
+      ]
+    },
+    {
+      "name": "public-profile",
+      "width": 1440,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 96,
+          "right": 256.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 1142.09375,
+          "right": 1217.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 1229.703125,
+          "right": 1344
+        }
+      ]
+    },
+    {
+      "name": "booking",
+      "width": 320,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 102.09375,
+          "right": 177.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 189.703125,
+          "right": 304
+        }
+      ]
+    },
+    {
+      "name": "booking",
+      "width": 390,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 172.09375,
+          "right": 247.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 259.703125,
+          "right": 374
+        }
+      ]
+    },
+    {
+      "name": "booking",
+      "width": 768,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 550.09375,
+          "right": 625.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 637.703125,
+          "right": 752
+        }
+      ]
+    },
+    {
+      "name": "booking",
+      "width": 1440,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 96,
+          "right": 256.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 1142.09375,
+          "right": 1217.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 1229.703125,
+          "right": 1344
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "width": 320,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 102.09375,
+          "right": 177.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 189.703125,
+          "right": 304
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "width": 390,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 172.09375,
+          "right": 247.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 259.703125,
+          "right": 374
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "width": 768,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 550.09375,
+          "right": 625.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 637.703125,
+          "right": 752
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "width": 1440,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 96,
+          "right": 256.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 1142.09375,
+          "right": 1217.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 1229.703125,
+          "right": 1344
+        }
+      ]
+    },
+    {
+      "name": "signup",
+      "width": 320,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 102.09375,
+          "right": 177.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 189.703125,
+          "right": 304
+        }
+      ]
+    },
+    {
+      "name": "signup",
+      "width": 390,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 172.09375,
+          "right": 247.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 259.703125,
+          "right": 374
+        }
+      ]
+    },
+    {
+      "name": "signup",
+      "width": 768,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 550.09375,
+          "right": 625.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 637.703125,
+          "right": 752
+        }
+      ]
+    },
+    {
+      "name": "signup",
+      "width": 1440,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 96,
+          "right": 256.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 1142.09375,
+          "right": 1217.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 1229.703125,
+          "right": 1344
+        }
+      ]
+    },
+    {
+      "name": "client",
+      "width": 320,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 102.09375,
+          "right": 177.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 189.703125,
+          "right": 304
+        }
+      ]
+    },
+    {
+      "name": "client",
+      "width": 390,
+      "height": 121,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 172.09375,
+          "right": 247.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 259.703125,
+          "right": 374
+        }
+      ]
+    },
+    {
+      "name": "client",
+      "width": 768,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 550.09375,
+          "right": 625.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 637.703125,
+          "right": 752
+        }
+      ]
+    },
+    {
+      "name": "client",
+      "width": 1440,
+      "height": 81,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 96,
+          "right": 256.53125
+        },
+        {
+          "label": "Entrar",
+          "width": 75.609375,
+          "height": 44,
+          "x": 1142.09375,
+          "right": 1217.703125
+        },
+        {
+          "label": "Criar conta",
+          "width": 114.296875,
+          "height": 44,
+          "x": 1229.703125,
+          "right": 1344
+        }
+      ]
+    },
+    {
+      "name": "barber",
+      "width": 320,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 24,
+          "height": 44,
+          "x": 16,
+          "right": 40
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 40,
+          "right": 200.53125
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 200.53125,
+          "right": 244.53125
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 260.53125,
+          "right": 304.53125
+        }
+      ]
+    },
+    {
+      "name": "barber",
+      "width": 390,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 16,
+          "right": 60
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 84.734375,
+          "right": 245.265625
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 270,
+          "right": 314
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 330,
+          "right": 374
+        }
+      ]
+    },
+    {
+      "name": "barber",
+      "width": 768,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 16,
+          "right": 60
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 273.734375,
+          "right": 434.265625
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 648,
+          "right": 692
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 708,
+          "right": 752
+        }
+      ]
+    },
+    {
+      "name": "barber",
+      "width": 1440,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 96,
+          "right": 140
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 609.734375,
+          "right": 770.265625
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 1240,
+          "right": 1284
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 1300,
+          "right": 1344
+        }
+      ]
+    },
+    {
+      "name": "barber",
+      "interaction": "open/Escape",
+      "expandedAfterEscape": "false",
+      "overflowAfterEscape": ""
+    },
+    {
+      "name": "admin",
+      "width": 320,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 16,
+          "right": 60
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 120.40625,
+          "height": 44,
+          "x": 75.796875,
+          "right": 196.203125
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 212,
+          "right": 256
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 260,
+          "right": 304
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "width": 390,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 16,
+          "right": 60
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 133.78125,
+          "height": 44,
+          "x": 104.109375,
+          "right": 237.890625
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 282,
+          "right": 326
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 330,
+          "right": 374
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "width": 768,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 16,
+          "right": 60
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 275.734375,
+          "right": 436.265625
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 652,
+          "right": 696
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 708,
+          "right": 752
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "width": 1440,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 16,
+          "right": 176.53125
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 1324,
+          "right": 1368
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 1380,
+          "right": 1424
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "interaction": "open/Escape",
+      "expandedAfterEscape": "false",
+      "overflowAfterEscape": ""
+    },
+    {
+      "name": "superadmin",
+      "width": 320,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 24,
+          "height": 44,
+          "x": 16,
+          "right": 40
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 40,
+          "right": 200.53125
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 200.53125,
+          "right": 244.53125
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 260.53125,
+          "right": 304.53125
+        }
+      ]
+    },
+    {
+      "name": "superadmin",
+      "width": 390,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 16,
+          "right": 60
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 84.734375,
+          "right": 245.265625
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 270,
+          "right": 314
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 330,
+          "right": 374
+        }
+      ]
+    },
+    {
+      "name": "superadmin",
+      "width": 768,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 16,
+          "right": 60
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 273.734375,
+          "right": 434.265625
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 648,
+          "right": 692
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 708,
+          "right": 752
+        }
+      ]
+    },
+    {
+      "name": "superadmin",
+      "width": 1440,
+      "height": 65,
+      "horizontalOverflow": false,
+      "controls": [
+        {
+          "label": "Abrir menu",
+          "width": 44,
+          "height": 44,
+          "x": 96,
+          "right": 140
+        },
+        {
+          "label": "BARBERHUB",
+          "width": 160.53125,
+          "height": 44,
+          "x": 609.734375,
+          "right": 770.265625
+        },
+        {
+          "label": "Notificações",
+          "width": 44,
+          "height": 44,
+          "x": 1240,
+          "right": 1284
+        },
+        {
+          "label": "Perfil",
+          "width": 44,
+          "height": 44,
+          "x": 1300,
+          "right": 1344
+        }
+      ]
+    },
+    {
+      "name": "superadmin",
+      "interaction": "open/Escape",
+      "expandedAfterEscape": "false",
+      "overflowAfterEscape": ""
+    },
+    {
+      "name": "client-preview",
+      "menu": "details",
+      "modal": 0
+    },
+    {
+      "name": "client-preview",
+      "interaction": "start/exit/restart available"
+    }
+  ]
+}

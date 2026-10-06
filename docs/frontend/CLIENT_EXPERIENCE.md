@@ -11,7 +11,10 @@ agendamentos já estão implementados como demonstrações locais. A
 entrega de perfil e ajuda demonstrativos **para cliente e barbeiro** também foi
 implementada em 2026-10-05. A seção 7 do roadmap registra as quatro telas,
 a edição local do nome de exibição e ajuda por papel; veja [PROFILE_HELP.md](PROFILE_HELP.md).
-Entregas restantes continuam dependendo de solicitação específica.
+Em 2026-10-06, a sequência inicial do roadmap também conta com superadmin básico,
+cadastro manual de rascunhos e PWA/acabamento transversal implementados.
+Consulte [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md) e [PWA.md](PWA.md) para escopo,
+validações e limitações. Novas entregas continuam dependendo de solicitação específica.
 A sequência abaixo descreve a jornada-alvo; seus critérios integrados não
 significam que autenticação, disponibilidade ou reservas reais já existam.
 
@@ -104,6 +107,19 @@ outra. Dois clientes disputando o mesmo horário devem receber o resultado
 validado pelo backend, sem confirmação duplicada.
 
 ## Etapas posteriores
+
+A sequência vigente está na seção 10 do [roadmap](FRONTEND_ROADMAP.md): primeiro
+consolidação de QA após a revisão dos headers; depois, entregas condicionadas à
+definição de regras. A referência visual e de menu é a landing institucional,
+substituindo a orientação anterior de seguir o header do barbeiro. Cliente e
+barbeiro compartilham o drawer, preservando destinos e contexto próprios.
+Implementação e limites: [HEADERS_REVIEW.md](HEADERS_REVIEW.md).
+
+As seis etapas iniciais do roadmap estão implementadas no escopo demonstrativo,
+sem integração real. “Minhas barbearias” ainda não está implementada: permanece
+após a jornada inicial e requer definir quando nasce o vínculo cliente/barbearia.
+Não equivale a favoritos e não deve receber vínculos automáticos de uma reserva
+simulada. Onboarding de estabelecimento/equipe também aguarda regras.
 
 Geolocalização, avaliações, rankings e favoritos ficam para depois da jornada
 inicial. Pagamentos e fidelidade seguem o roadmap pós-MVP do ADR.
