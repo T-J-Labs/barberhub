@@ -14,6 +14,15 @@ isolamento seguro dos dados de cada estabelecimento.
 
 ## Problema e proposta
 
+O **Superadmin básico** está disponível como demonstração local em
+`/super-admin`, `/super-admin/barbearias` e `/super-admin/barbearias/[id]`:
+resumo da amostra, lista, busca por nome/cidade/bairro, detalhes e
+suspensão/reativação em memória. Usa seis barbearias fictícias do catálogo;
+nenhuma alteração é salva ou afeta publicação, acesso ou estabelecimento real.
+Não há autenticação/autorização de superadmin. Contratos e regras reais continuam
+pendentes enquanto o OpenAPI mantém `paths: {}`.
+[Escopo, arquivos, testes e limitações](docs/frontend/SUPERADMIN_DEMO.md).
+
 Muitas barbearias ainda controlam horários por papel ou por conversas dispersas
 no WhatsApp. Isso dificulta a organização da equipe, aumenta a ocorrência de
 conflitos e faltas e limita a presença digital do estabelecimento.
@@ -222,6 +231,7 @@ conhecer o processo completo.
 - [Meus agendamentos demonstrativos e validação](docs/frontend/CLIENT_APPOINTMENTS.md)
 - [Perfil e ajuda demonstrativos e validação](docs/frontend/PROFILE_HELP.md)
 - [Área do barbeiro demonstrativa e validação](docs/frontend/BARBER_DEMO.md)
+- [Superadmin básico demonstrativo e validação](docs/frontend/SUPERADMIN_DEMO.md)
 
 ## Roadmap resumido
 

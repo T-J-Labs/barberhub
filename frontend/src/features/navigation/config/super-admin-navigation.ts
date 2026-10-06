@@ -2,8 +2,8 @@ import type { NavigationConfig } from "../types"
 
 export const superAdminNavigation = {
   primary: [
-    { label: "Início" },
-    { label: "Barbearias" },
+    { label: "Início", href: "/super-admin" },
+    { label: "Barbearias", href: "/super-admin/barbearias" },
     { label: "Planos e assinaturas" },
   ],
   secondary: [
