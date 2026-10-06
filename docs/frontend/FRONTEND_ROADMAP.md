@@ -35,8 +35,8 @@ Estado observado na revisão estrutural e documental:
 - Login/cadastro possuem apresentação pronta; Google permanece indisponível.
   A prévia do header de cliente não cria sessão. Consulte
   [CLIENT_AUTH.md](CLIENT_AUTH.md).
-- Cliente, barbeiro e superadmin possuem layouts e navegação, mas ainda não suas
-  páginas funcionais.
+- Cliente tem “Meus agendamentos” demonstrativos em `/cliente/agendamentos`;
+  barbeiro tem início e agenda demonstrativos; superadmin ainda possui apenas layout e navegação.
 - O CTA “Agendar horário” abre a introdução de `/agendar` no subdomínio.
   A feature `booking` oferece serviço, profissional, data, horário, revisão,
   resultado e conflito com recuperação. Esquina e Navalha têm exemplos completos.
@@ -49,15 +49,15 @@ funcional. Não é necessário remodelar novamente o Header para iniciar o wizar
 
 ## 3. Sequência das entregas restantes
 
-A primeira entrega está **implementada como demonstração local**. As demais
+As quatro primeiras entregas estão **implementadas como demonstração local**. As demais
 continuam planejadas e dependem de solicitação específica.
 
 | Ordem | Entrega | Escopo sem backend |
 | --- | --- | --- |
 | 1 | Agendamento demonstrativo — implementado | Serviço, profissional, data, horário, revisão, conflito e resultado demonstrativo no subdomínio da barbearia. |
-| 2 | Meus agendamentos | Área global do cliente com próximas reservas, histórico, detalhes, cancelamento em memória e acesso à prévia de reagendamento. Usar exemplos de duas barbearias para uma identidade fictícia. |
-| 3 | Área do barbeiro | Início com próximo atendimento e agenda própria demonstrativa; detalhes, conclusão, falta, bloqueio e desbloqueio de horários em memória. |
-| 4 | Perfil e ajuda | Prévia de edição do nome de exibição e ajuda contextual para cliente e barbeiro, reutilizando `SettingsShell`, `HelpShell` e padrões existentes. Não alterar a conta Google. |
+| 2 | Meus agendamentos — implementado | Área global demonstrativa com próximas reservas, histórico, detalhes, cancelamento da amostra em memória e acesso ao wizard existente. Exemplos de duas barbearias para uma identidade fictícia, independentes do wizard. Consulte [CLIENT_APPOINTMENTS.md](CLIENT_APPOINTMENTS.md). |
+| 3 | Área do barbeiro — implementada | Início com próximo atendimento e agenda própria demonstrativa; detalhes, conclusão, falta, bloqueio e desbloqueio de horários em memória. |
+| 4 | Perfil e ajuda — implementados para ambos os papéis | Quatro telas: perfil e ajuda do cliente, perfil e ajuda do barbeiro. Prévia de edição do nome de exibição e orientação contextual, reutilizando `SettingsShell`, `HelpShell` e padrões existentes. Não alterar a conta Google. Escopo e testes na seção 7 e [PROFILE_HELP.md](PROFILE_HELP.md). |
 | 5 | Superadmin básico | Visão geral, lista, busca e detalhes de barbearias, com suspensão/reativação demonstrativas. Não implementar cobrança ou inventar preços e condições comerciais. |
 | 6 | PWA e acabamento transversal | Manifesto, ícones, instalação, tela de indisponibilidade offline e revisão de acessibilidade, desempenho e navegação. Sem reservas offline ou cache de dados privados. |
 
@@ -223,5 +223,130 @@ Testes HTTP locais com Host simulado não validam DNS público, TLS ou OAuth.
 - Não introduzir preços de planos, condições comerciais, contatos ou avaliações
   reais inventados.
 
-**Próxima entrega funcional recomendada, quando solicitada: Meus agendamentos
-demonstrativos, com fixtures independentes do wizard e sem reservas reais.**
+**Área do barbeiro implementada como demonstração local.** Consulte [BARBER_DEMO.md](BARBER_DEMO.md).
+
+**Perfil e ajuda demonstrativos implementados para ambos os papéis.**
+As etapas restantes exigem solicitação própria, sem reservas ou autorização reais.
+
+## 7. Perfil e ajuda de cliente e barbeiro — implementados
+
+Planejamento e implementação registrados em 2026-10-05, após solicitação explícita.
+A entrega contempla os dois papéis e está pronta como demonstração local.
+Não há integração real. [Arquivos, testes e limitações](PROFILE_HELP.md).
+
+### 7.1. Telas e sequência
+
+Rotas disponíveis na demonstração:
+
+| Papel | Perfil | Ajuda | Contexto |
+| --- | --- | --- | --- |
+| Cliente | `/cliente/perfil` | `/cliente/ajuda` | Conta global, com `ClientHeader` e identidade visual da área do cliente. |
+| Barbeiro | `/barbeiro/perfil` | `/barbeiro/ajuda` | Profissional fictício da demonstração, com `BarberHeader` e identidade visual privada existente. |
+
+Implementar primeiro o perfil dos dois papéis; depois, a ajuda contextual de
+ambos. As quatro telas compõem a etapa 4. Não incluir perfil/ajuda de admin ou
+superadmin, nem alterar suas páginas ou domínios. Preservar as convenções de
+domínio e retorno já existentes; esta entrega não resolve sessão entre domínios
+nem muda o domínio operacional do barbeiro.
+
+### 7.2. Perfil: somente nome de exibição demonstrativo
+
+- Apresentar uma identidade fictícia, com aviso de demonstração e campo rotulado
+  como nome de exibição. Não utilizar dados pessoais reais da conta Google.
+- Manter rascunho separado do valor aplicado. Aceitar nomes com acentos e espaços;
+  remover espaços nas extremidades e rejeitar conteúdo vazio ou só espaços.
+  Mostrar erro junto ao campo, sem apagar o rascunho ou o último valor aplicado.
+- “Aplicar à demonstração” atualiza somente a apresentação local do próprio
+  papel. Exibir feedback acessível de que nada foi salvo em uma conta real.
+- “Cancelar edição” descarta o rascunho e repõe o último valor aplicado.
+  “Restaurar exemplo” repõe o nome fictício inicial e informa o resultado.
+- Conservar o valor aplicado durante navegação interna da mesma área usando
+  estado React no escopo adequado. Recarregar ou sair da área restaura o exemplo.
+  Cliente e barbeiro devem ter estados independentes, sem armazenamento persistente.
+- A edição não inicia prévia de autenticação, não promove visitante a cliente
+  e não concede um papel. Quando houver apresentação demonstrativa ativa do nome
+  na mesma área, mantê-la coerente com o valor aplicado, sem simular sessão real.
+- Não alterar nome/e-mail/avatar do Google, credenciais, vínculo com barbearia,
+  permissões ou identidade/titularidade das fixtures de agenda e agendamentos.
+  Não incluir senha, upload de foto, exclusão de conta ou desvinculação de equipe.
+
+### 7.3. Ajuda contextual por papel
+
+Compartilhar a estrutura de ajuda, não um texto genérico idêntico para ambos.
+Explicar somente ações existentes e seus limites, com atalhos válidos:
+
+- **Cliente:** explorar barbearias em `/barbearias`; entrar no perfil público e
+  no wizard pelo subdomínio validado; consultar próximos agendamentos, detalhes
+  e histórico em `/cliente/agendamentos`; simular cancelamento; abrir a prévia
+  de reagendamento. Explicar que wizard e lista global têm dados independentes.
+- **Barbeiro:** consultar início em `/barbeiro`, agenda em `/barbeiro/agenda`
+  e histórico em `/barbeiro/historico`; abrir detalhes, simular conclusão/falta,
+  bloquear/desbloquear intervalos e restaurar exemplos. Explicar que o recorte
+  de um profissional fictício não representa autorização real.
+- **Ambos:** explicar como editar/restaurar o nome demonstrativo, a perda das
+  alterações ao recarregar e a indisponibilidade atual do acesso Google.
+  Recuperação de acesso é responsabilidade do Google; não oferecer senha local.
+- Usar perguntas frequentes e orientação por tarefa. Não inventar contatos,
+  canais de suporte, prazos de atendimento, regras de cancelamento, reputação,
+  cobrança ou promessas de funcionalidades ainda não integradas.
+- Gerar links de barbearia com os helpers existentes e contexto validado,
+  nunca com tenant livre ou URLs arbitrárias. Sem contexto válido, orientar
+  pelo catálogo em vez de criar um destino de estabelecimento inválido.
+
+### 7.4. Reutilização, navegação e limites técnicos
+
+- Reutilizar `SettingsShell`, `SettingsSection`, `SettingsField`, `HelpShell`
+  e `HelpDestination`; organizar o conteúdo de cada papel em `src/features`.
+  Páginas e conteúdo estático devem ser Server Components; formulários e estado
+  local usam Client Components apenas onde necessário.
+- Preservar a identidade de cada área: a conta do cliente não deve herdar
+  automaticamente o azul administrativo dos shells. Se necessário, permitir
+  composição/variante nos componentes compartilhados, preservando os defaults
+  usados pelo admin e seus estilos aprovados.
+- Habilitar Perfil e Ajuda no menu de cada papel somente quando suas rotas
+  existirem. Na área do barbeiro, o controle Perfil deve dar acesso à nova tela;
+  preservar os demais controles e o funcionamento da navegação atual. Não fazer
+  outra reformulação estrutural do Header.
+- Usar apenas modelos de apresentação e estado em memória. Não criar endpoints,
+  DTOs, OAuth, sessão fictícia, tokens, cookies ou persistência em localStorage.
+  Backend, banco, contratos e arquivos gerados ficam fora desta entrega.
+- Antes de integração real, acordar no OpenAPI consulta/edição de perfil,
+  identidade autenticada, vínculos, permissões, validação e erros. Nenhuma
+  demonstração deve ser apresentada como autenticação ou autorização.
+
+### 7.5. Critérios de conclusão e validação
+
+Resultados da implementação em [PROFILE_HELP.md](PROFILE_HELP.md).
+A verificação acessível usa DOM, foco e teclado; não foi usado leitor de tela.
+
+- [x] As quatro telas existem, têm conteúdo específico do papel e são acessíveis
+  pelos menus correspondentes, sem links quebrados ou acesso cruzado entre áreas.
+- [x] Nos dois perfis, testar aplicar nome, cancelar rascunho, restaurar exemplo,
+  espaços nas extremidades, vazio/só espaços, acentos e nomes longos sem cortes.
+- [x] Conferir estado durante navegação interna, reinício após recarga/saída,
+  independência entre papéis e ausência de alteração da conta Google, das
+  fixtures de agendamentos ou de permissões. Testar acesso direto como visitante
+  sem criação implícita de sessão ou ativação da prévia de cliente.
+- [x] Na ajuda, percorrer todos os atalhos e perguntas com mouse e teclado;
+  conferir o contexto dos links entre catálogo, subdomínio e login/cadastro,
+  inclusive ausência de contexto e Host inválido.
+- [x] Conferir rótulos, erros associados ao campo, foco e avisos acessíveis;
+  testar 320, 390, 768 e 1440px. Registrar separadamente inspeção DOM/visual
+  e eventual uso real de leitor de tela.
+- [x] Executar testes de comportamento da nova entrega, regressões existentes
+  de autenticação, roteamento, booking, cliente e barbeiro, ESLint, TypeScript
+  e build; conferir navegação e shells administrativos para evitar regressão.
+- [x] Atualizar README, este roadmap, CLIENT_EXPERIENCE.md e CLIENT_AUTH.md
+  para distinguir telas demonstrativas prontas da integração pendente;
+  documentar comandos, resultados efetivamente obtidos e limitações da entrega.
+
+### 7.6. Resultado da entrega em 2026-10-05
+
+As quatro telas, formulários em memória e ajudas contextuais estão implementados.
+Passaram 7 grupos de regras e 38 grupos de navegador em Edge headless, além das
+regressões de auth, roteamento, booking, agendamentos e barbeiro. Lint, TypeScript
+e build passaram. QA em 320/390/768/1440px; inspeção visual e de DOM, sem leitor de
+tela real. Comandos, arquivos e limitações em [PROFILE_HELP.md](PROFILE_HELP.md).
+Google, identidade autenticada, vínculos, autorização e edição persistida
+continuam pendentes de contratos no OpenAPI. A implementação não autoriza
+executar as próximas etapas do roadmap.

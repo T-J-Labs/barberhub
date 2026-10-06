@@ -16,8 +16,13 @@
     "test:auth:http": "node ../validation/client-auth-http.cjs",
     "test:booking": "node ../validation/booking-state.cjs",
     "test:booking:http": "node ../validation/booking-http.cjs",
+    "test:appointments": "node ../validation/client-appointments-state.cjs",
+    "test:appointments:http": "node ../validation/client-appointments-http.cjs",
+    "test:barber": "node ../validation/barber-demo-state.cjs",
     "api:generate": "orval --config ./orval.config.ts",
-    "api:watch": "orval --config ./orval.config.ts --watch"
+    "api:watch": "orval --config ./orval.config.ts --watch",
+    "test:profiles": "node ../validation/profile-help-state.cjs",
+    "test:profiles:browser": "node ../validation/profile-help-browser.cjs"
   },
   "dependencies": {
     "axios": "^1.19.0",

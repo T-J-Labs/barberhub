@@ -128,6 +128,11 @@ npm run test:auth     # Verifica domínio, perfis e retorno seguro da autentica�
 npm run test:auth:http # Verifica a interface com servidor local ativo na porta 3000
 npm run test:booking  # Verifica seleções, conflito e fixtures demonstrativas
 npm run test:booking:http -- 3000 # Verifica entradas e contexto do agendamento
+npm run test:appointments # Verifica busca, histórico e cancelamento da amostra
+npm run test:appointments:http # Verifica página e domínio da área demonstrativa
+npm run test:profiles # Verifica nomes demonstrativos e contexto seguro da ajuda
+npm run test:profiles:browser # QA de interação (requer Playwright e navegador)
+npm run test:barber   # Verifica status, próximo atendimento e bloqueios da amostra
 npm run build         # Gera o build de produção
 npm run api:generate  # Gera o cliente a partir do contrato OpenAPI
 npm run api:watch     # Regenera o cliente quando o contrato é alterado
@@ -178,6 +183,14 @@ continua indisponível enquanto o contrato de autenticação não for aprovado;
 o botão informa essa condição. A prévia opcional do header não cria uma sessão.
 Consulte [a experiência de autenticação](docs/frontend/CLIENT_AUTH.md).
 
+## Perfil e ajuda demonstrativos
+
+As telas `/cliente/perfil`, `/cliente/ajuda`, `/barbeiro/perfil` e
+`/barbeiro/ajuda` estão disponíveis. Apenas o nome de exibição é editável, em
+memória durante a navegação interna; recarga ou saída da área restaura o exemplo.
+As ajudas explicam as tarefas de cada papel, sem autenticação ou reservas reais.
+Implementação, arquivos e validação: [PROFILE_HELP.md](docs/frontend/PROFILE_HELP.md).
+
 ## Contrato da API
 
 O arquivo [docs/api/openapi.yaml](docs/api/openapi.yaml) é a fonte de verdade
@@ -206,6 +219,9 @@ conhecer o processo completo.
 - [Interface de login/cadastro e limites de integração](docs/frontend/CLIENT_AUTH.md)
 - [Perfil público da barbearia](docs/frontend/PUBLIC_BARBERSHOP.md)
 - [Agendamento demonstrativo e validação](docs/frontend/CLIENT_BOOKING.md)
+- [Meus agendamentos demonstrativos e validação](docs/frontend/CLIENT_APPOINTMENTS.md)
+- [Perfil e ajuda demonstrativos e validação](docs/frontend/PROFILE_HELP.md)
+- [Área do barbeiro demonstrativa e validação](docs/frontend/BARBER_DEMO.md)
 
 ## Roadmap resumido
 

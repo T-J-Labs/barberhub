@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { FiMenu, FiUser } from "react-icons/fi"
 import { MdNotificationsNone } from "react-icons/md"
@@ -14,6 +15,7 @@ type AuthenticatedHeaderProps = {
   contextLabel?: string
   contextName?: string
   navigation: NavigationConfig
+  profileHref?: string
   desktopNavigation?: boolean
 }
 
@@ -22,6 +24,7 @@ export function AuthenticatedHeader({
   contextName,
   navigation,
   desktopNavigation = false,
+  profileHref,
 }: AuthenticatedHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activePanel, setActivePanel] = useState<"notifications" | "profile" | null>(null)
@@ -85,14 +88,15 @@ export function AuthenticatedHeader({
             >
               <MdNotificationsNone size={24} />
             </button>
-            <button
-              type="button"
-              className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white"
-              aria-label="Perfil"
-              onClick={() => setActivePanel("profile")}
-            >
-              <FiUser size={24} />
-            </button>
+            {profileHref ? (
+              <Link href={profileHref} aria-label="Perfil" className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#65d5ff]">
+                <FiUser size={24} />
+              </Link>
+            ) : (
+              <button type="button" className="-my-1.5 inline-grid size-11 place-items-center rounded-md text-white" aria-label="Perfil" onClick={() => setActivePanel("profile")}>
+                <FiUser size={24} />
+              </button>
+            )}
           </div>
 
           <AuthenticatedMobileMenu

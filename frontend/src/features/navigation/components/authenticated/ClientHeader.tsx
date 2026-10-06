@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+import { useOptionalDemoProfile } from "@/features/demo-profile/components/DemoProfileProvider"
 import { useRef } from "react"
 import { Container } from "@/components/ui/Container"
 import { clientAuthHref, type AccountType, type AuthContext } from "@/features/auth/routing"
@@ -21,6 +23,7 @@ type Props = {
 /** presentation/onExit são pontos de composição; não validam uma sessão. */
 export function ClientHeader({ platformOrigin = null, context, presentation, onExit, accountType = "cliente", brandHref }: Props) {
   const demo = useDemoClientPresentation()
+  const profile = useOptionalDemoProfile()
   const state = presentation ?? demo.presentation
   const login = clientAuthHref(platformOrigin, "login", context, accountType)
   const signup = clientAuthHref(platformOrigin, "cadastro", context, accountType)
@@ -29,6 +32,7 @@ export function ClientHeader({ platformOrigin = null, context, presentation, onE
   const loginRef = useRef<HTMLAnchorElement>(null)
   async function exit() {
     await exitAction?.()
+    profile?.restore()
     requestAnimationFrame(() => loginRef.current?.focus())
   }
   return (
@@ -44,17 +48,17 @@ export function ClientHeader({ platformOrigin = null, context, presentation, onE
               </> : <span className="text-sm text-slate-400">Acesso à conta indisponível</span>}
             </> : <>
               {state.demonstration && <span className="text-xs font-medium text-sky-300">Demonstração</span>}
-              <details className="relative" onKeyDown={(event) => {
+              <details className="relative min-w-0 max-w-full" onKeyDown={(event) => {
                 if (event.key === "Escape") {
                   event.currentTarget.open = false
                   event.currentTarget.querySelector("summary")?.focus()
                 }
               }}>
-                <summary className={`flex min-h-11 cursor-pointer items-center rounded-lg border border-[#334155] px-4 text-sm font-semibold ${catalogFocusClass}`}>{state.kind === "client" ? state.name : "Saindo…"}</summary>
+                <summary className={`flex min-h-11 cursor-pointer items-center rounded-lg border border-[#334155] max-w-full px-4 text-sm font-semibold [overflow-wrap:anywhere] ${catalogFocusClass}`}>{state.kind === "client" ? state.demonstration && profile ? profile.name : state.name : "Saindo…"}</summary>
                 <div className="absolute right-0 z-30 mt-2 w-64 max-w-[calc(100vw-2rem)] rounded-xl border border-[#334155] bg-[#0D1722] p-3 shadow-lg">
                   <p className="px-3 py-2 text-xs leading-5 text-slate-400">{state.demonstration ? "Prévia visual. Nenhuma sessão está ativa." : "Conta do cliente"}</p>
                   {items.map((item) => <div key={item.label}>
-                    {"href" in item && item.href ? <a href={platformOrigin ? `${platformOrigin}${item.href}` : item.href} className={`flex min-h-11 items-center rounded-lg px-3 text-sm text-white hover:bg-[#172535] ${catalogFocusClass}`}>{item.label}</a> : <button type="button" disabled className="flex min-h-11 w-full items-center justify-between gap-2 px-3 text-left text-sm text-slate-400">{item.label}<span className="text-xs">Em breve</span></button>}
+                    {"href" in item && item.href ? <Link href={platformOrigin ? `${platformOrigin}${item.href}` : item.href} onClick={event => { const menu = event.currentTarget.closest("details"); if (menu) menu.open = false }} className={`flex min-h-11 items-center rounded-lg px-3 text-sm text-white hover:bg-[#172535] ${catalogFocusClass}`}>{item.label}</Link> : <button type="button" disabled className="flex min-h-11 w-full items-center justify-between gap-2 px-3 text-left text-sm text-slate-400">{item.label}<span className="text-xs">Em breve</span></button>}
                   </div>)}
                   <button type="button" disabled={state.kind === "signing-out" || !exitAction} onClick={() => { void exit() }} className={`mt-2 min-h-11 w-full rounded-lg border border-[#334155] px-3 text-left text-sm text-white hover:bg-[#172535] disabled:cursor-wait disabled:opacity-60 ${catalogFocusClass}`}>{state.kind === "signing-out" ? "Saindo…" : state.demonstration ? "Sair da demonstração" : "Sair"}</button>
                 </div>
