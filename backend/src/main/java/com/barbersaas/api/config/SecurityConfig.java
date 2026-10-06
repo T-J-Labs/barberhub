@@ -37,4 +37,9 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration); // Aplica a regra para todas as rotas (/**)
         return source;
     }
+
+    @Bean
+    public org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
+        return new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder();
+    }
 }
