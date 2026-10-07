@@ -84,6 +84,24 @@ O BarberHub busca reunir em uma única plataforma:
 - acompanhamento de atendimentos e faltas;
 - administração isolada de diferentes barbearias.
 
+## Preço aprovado e configuração demonstrativa — 2026-10-07
+
+A landing apresenta um único plano de **R$ 40/mês por barbearia**, com perfil
+público, serviços, equipe, funcionamento, agenda e agendamentos identificados
+como funcionalidades previstas para o MVP. **Contratação ainda indisponível**:
+preço definido não significa MVP integrado, checkout ou assinatura disponível.
+O menu **Preço** leva a `/#preco`. **Experimentar configuração** abre
+`/onboarding/barbearia`, uma demonstração em memória que não contrata plano,
+cria conta ou estabelecimento, concede acesso nem publica barbearia.
+[Wireframes, implementação, verificações e limites](docs/design/README.md#preço-aprovado--2026-10-07).
+
+## Landing institucional revisada — 2026-10-07
+
+A landing institucional foi redesenhada em 2026-10-07 a partir da proposta v2
+aprovada: hero com agenda real, apresentações distintas por seção e capturas
+responsivas em WebP sem perda, com versões DPR 1/2. Catálogo, acesso e áreas
+operacionais mantêm sua identidade. [Implementação, verificações e limites](docs/frontend/INSTITUTIONAL_LANDING.md).
+
 ## Funcionalidades planejadas para o MVP
 
 - Catálogo público de barbearias com busca por nome, cidade ou bairro

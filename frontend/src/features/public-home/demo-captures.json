@@ -1,0 +1,82 @@
+{
+  "agenda-720": {
+    "width": 688,
+    "height": 710
+  },
+  "agenda-390": {
+    "width": 358,
+    "height": 306
+  },
+  "agenda-320": {
+    "width": 288,
+    "height": 334
+  },
+  "agenda-full": {
+    "width": 1168,
+    "height": 632
+  },
+  "profile-1060": {
+    "width": 1028,
+    "height": 399
+  },
+  "profile-390": {
+    "width": 358,
+    "height": 709
+  },
+  "profile-320": {
+    "width": 288,
+    "height": 761
+  },
+  "booking-service-390": {
+    "width": 358,
+    "height": 681
+  },
+  "booking-professional-390": {
+    "width": 358,
+    "height": 483
+  },
+  "booking-service-358": {
+    "width": 326,
+    "height": 713
+  },
+  "booking-professional-358": {
+    "width": 326,
+    "height": 539
+  },
+  "services-1024": {
+    "width": 992,
+    "height": 453
+  },
+  "team-1024": {
+    "width": 992,
+    "height": 379
+  },
+  "services-390": {
+    "width": 358,
+    "height": 872
+  },
+  "team-390": {
+    "width": 358,
+    "height": 857
+  },
+  "services-320": {
+    "width": 288,
+    "height": 892
+  },
+  "team-320": {
+    "width": 288,
+    "height": 857
+  },
+  "settings-1024": {
+    "width": 736,
+    "height": 726
+  },
+  "settings-390": {
+    "width": 358,
+    "height": 1146
+  },
+  "settings-320": {
+    "width": 288,
+    "height": 1146
+  }
+}

@@ -24,7 +24,17 @@ Plano registrado em 2026-10-05, conforme a orientação do usuário. Complementa
 - Ao concluir uma entrega, atualizar seu estado e registrar somente verificações
   realmente executadas. Não apresentar uma simulação como funcionalidade integrada.
 
-## 2. Estado atual — atualizado em 2026-10-06
+## 2. Estado atual — atualizado em 2026-10-07
+
+Landing atualizada mediante solicitação específica: preço aprovado de
+**R$ 40/mês por barbearia**, um único plano, com perfil público, serviços,
+equipe, funcionamento, agenda e agendamentos previstos para o MVP.
+Menu **Preço** → `/#preco`; **Experimentar configuração** →
+`/onboarding/barbearia`, demonstração sem contratação, conta, estabelecimento,
+acesso ou publicação. Contratação e Planos/assinaturas do superadmin continuam
+indisponíveis. Wireframes mobile/desktop e drawer atualizados antes do código.
+[Arquivos, verificações locais executadas e limites](../design/README.md#preço-aprovado--2026-10-07).
+Esta entrega não autoriza pagamentos, checkout ou novas funcionalidades.
 
 **As seis entregas da sequência inicial estão implementadas no escopo sem
 backend.** As cinco primeiras são demonstrações locais; a PWA foi implementada
@@ -726,3 +736,14 @@ As entregas funcionais solicitadas desta sequência podem ser consideradas
 concluídas **como apresentação/demonstração local**. A próxima ação é complementar
 QA manual e externo mediante disponibilidade de equipamentos/ambiente, não
 reimplementar telas concluídas. Integração real continua na seção 10.6.
+
+## 12. Landing institucional revisada — 2026-10-07
+
+Implementação solicitada explicitamente após aprovação da proposta visual v2.
+Hero com agenda real, presença pública, agendamento, operação com abas,
+configuração, plano único de R$ 40, FAQ e encerramento têm composições próprias.
+Capturas completas com enquadramentos responsivos e originais DPR 1/2, servidos
+em WebP sem perdas. Header e estilos novos ficam restritos à landing.
+Não altera catálogo, autenticação demonstrativa, domínios, áreas operacionais,
+providers, PWA ou backend. [Arquivos, QA executado e limitações](INSTITUTIONAL_LANDING.md).
+Esta entrega não autoriza novas funcionalidades nem conclui a QA externa pendente.

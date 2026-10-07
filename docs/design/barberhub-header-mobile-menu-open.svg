@@ -32,11 +32,11 @@
     </g>
 
     <g id="drawer-navigation" data-name="Navegação principal" class="nav" fill="white">
-      <g id="drawer-link-inicio" data-name="Início — área 48px"><rect x="8" y="76" width="316" height="48" rx="8" fill="#0D1722"/><text x="16" y="106">Início</text></g>
-      <g id="drawer-link-produto" data-name="Produto — área 48px"><rect x="8" y="124" width="316" height="48" rx="8" fill="#0D1722"/><text x="16" y="154">Produto</text></g>
-      <g id="drawer-link-servicos" data-name="Serviços — área 48px"><rect x="8" y="172" width="316" height="48" rx="8" fill="#0D1722"/><text x="16" y="202">Serviços</text></g>
-      <g id="drawer-link-planos" data-name="Planos — área 48px"><rect x="8" y="220" width="316" height="48" rx="8" fill="#0D1722"/><text x="16" y="250">Planos</text></g>
-      <g id="drawer-link-contato" data-name="Contato — área 48px"><rect x="8" y="268" width="316" height="48" rx="8" fill="#0D1722"/><text x="16" y="298">Contato</text></g>
+      <a href="barberhub-landing-mobile.svg#inicio"><g id="drawer-link-inicio" data-name="Início — área 48px"><rect x="8" y="76" width="316" height="48" rx="8" fill="#0D1722"/><text x="16" y="106">Início</text></g></a>
+      <a href="barberhub-landing-mobile.svg#produto"><g id="drawer-link-produto" data-name="Produto — área 48px"><rect x="8" y="124" width="316" height="48" rx="8" fill="#0D1722"/><text x="16" y="154">Produto</text></g></a>
+      <a href="barberhub-landing-mobile.svg#servicos"><g id="drawer-link-servicos" data-name="Serviços — área 48px"><rect x="8" y="172" width="316" height="48" rx="8" fill="#0D1722"/><text x="16" y="202">Serviços</text></g></a>
+      <a href="barberhub-landing-mobile.svg#preco"><g id="drawer-link-preco" data-name="Preço — área 48px"><rect x="8" y="220" width="316" height="48" rx="8" fill="#0D1722"/><text x="16" y="250">Preço</text></g></a>
+      <a href="barberhub-landing-mobile.svg#contato"><g id="drawer-link-contato" data-name="Contato — área 48px"><rect x="8" y="268" width="316" height="48" rx="8" fill="#0D1722"/><text x="16" y="298">Contato</text></g></a>
     </g>
 
     <g id="drawer-auth-actions" data-name="Ações de autenticação">

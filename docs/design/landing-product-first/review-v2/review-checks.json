@@ -1,0 +1,252 @@
+{
+  "browser": "154.0.4258.62",
+  "environment": "Artefato HTML estático em file://; não é implementação Next.js",
+  "results": [
+    {
+      "width": 320,
+      "overflow": false,
+      "height": 8979,
+      "images": [
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/agenda-320.png",
+          "complete": true,
+          "naturalWidth": 288,
+          "renderedWidth": 266
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/profile-320.png",
+          "complete": true,
+          "naturalWidth": 288,
+          "renderedWidth": 266
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/booking-service-358.png",
+          "complete": true,
+          "naturalWidth": 326,
+          "renderedWidth": 288
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/booking-professional-358.png",
+          "complete": true,
+          "naturalWidth": 326,
+          "renderedWidth": null
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/services-320.png",
+          "complete": true,
+          "naturalWidth": 288,
+          "renderedWidth": 288
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/team-320.png",
+          "complete": true,
+          "naturalWidth": 288,
+          "renderedWidth": null
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/settings-320.png",
+          "complete": true,
+          "naturalWidth": 288,
+          "renderedWidth": null
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "height": 8669,
+      "images": [
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/agenda-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 320
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/profile-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 320
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/booking-service-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 342
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/booking-professional-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": null
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/services-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 342
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/team-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": null
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/settings-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": null
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "height": 7816,
+      "images": [
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/agenda-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 326
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/profile-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 344
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/booking-service-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 338
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/booking-professional-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 338
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/services-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 390
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/team-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": null
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/settings-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": null
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "overflow": false,
+      "height": 6567,
+      "images": [
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/agenda-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 356
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/profile-1060.png",
+          "complete": true,
+          "naturalWidth": 1028,
+          "renderedWidth": 898
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/booking-service-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 282
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/booking-professional-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 282
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/services-1024.png",
+          "complete": true,
+          "naturalWidth": 992,
+          "renderedWidth": 944
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/team-1024.png",
+          "complete": true,
+          "naturalWidth": 992,
+          "renderedWidth": null
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/settings-1024.png",
+          "complete": true,
+          "naturalWidth": 736,
+          "renderedWidth": null
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "height": 6536,
+      "images": [
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/agenda-720.png",
+          "complete": true,
+          "naturalWidth": 688,
+          "renderedWidth": 596
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/profile-1060.png",
+          "complete": true,
+          "naturalWidth": 1028,
+          "renderedWidth": 830
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/booking-service-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 358
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/booking-professional-390.png",
+          "complete": true,
+          "naturalWidth": 358,
+          "renderedWidth": 358
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/services-1024.png",
+          "complete": true,
+          "naturalWidth": 992,
+          "renderedWidth": 996
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/team-1024.png",
+          "complete": true,
+          "naturalWidth": 992,
+          "renderedWidth": null
+        },
+        {
+          "src": "file:///C:/Users/Felipe%20Tajima/projetosportfolio/barberhub/docs/design/landing-product-first/captures-v2/settings-1024.png",
+          "complete": true,
+          "naturalWidth": 736,
+          "renderedWidth": null
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

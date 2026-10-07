@@ -109,10 +109,14 @@ const families = [
         }
       });
       await page.setViewportSize({ width: 390, height: 844 });
-      await check(`${name}: logo preservada no header e drawer`, async () => {
+      await check(`${name}: marca e destino do menu preservados no contexto`, async () => {
         const expectedPath = ['landing','login','signup','barber','admin','superadmin'].includes(name) ? '/' : '/barbearias';
         const brand = banner().locator('a').first(); assert.equal(new URL(await brand.getAttribute('href'), page.url()).pathname, expectedPath);
-        await open(); assert.equal(new URL(await drawer().locator('a').first().getAttribute('href'), page.url()).pathname, expectedPath);
+        await open();
+        if (name === 'landing') {
+          assert.equal(await drawer().getByRole('heading', { name: 'Menu', exact:true }).count(), 1);
+          assert.equal(await drawer().locator('a').first().getAttribute('href'), '#produto');
+        } else assert.equal(new URL(await drawer().locator('a').first().getAttribute('href'), page.url()).pathname, expectedPath);
         await drawer().locator('a').first().click();
         await page.waitForURL(url => url.hostname === 'localhost' && url.pathname === expectedPath);
         await page.waitForFunction(() => !document.querySelector('dialog[open]') && document.body.style.overflow !== 'hidden');
@@ -120,15 +124,15 @@ const families = [
     }
     await check('landing: âncoras e estados ativos preservados por clique e scroll', async () => {
       await page.goto(base); await page.setViewportSize({ width: 1440, height: 900 });
-      for (const [label, id] of [['Produto','produto'],['Serviços','servicos'],['Planos','planos'],['Contato','contato'],['Início','inicio']]) {
+      for (const [label, id] of [['Produto','produto'],['Como funciona','como-funciona'],['Preço','preco'],['Dúvidas','duvidas']]) {
         await banner().getByRole('link', { name: label, exact: true }).click();
-        await page.waitForFunction(id => document.querySelector(`header nav a[aria-current=location]`)?.getAttribute('href') === `/#${id}`, id);
+        await page.waitForFunction(id => document.querySelector(`header nav a[aria-current=location]`)?.getAttribute('href') === `#${id}`, id);
       }
       await page.setViewportSize({ width: 390, height: 844 }); await open();
       await drawer().getByRole('link', { name: 'Produto', exact: true }).click(); await closed();
       await page.waitForFunction(() => location.hash === '#produto');
-      await page.locator('#planos').evaluate(el => el.scrollIntoView());
-      await open(); await page.waitForFunction(() => document.querySelector('dialog[open] a[aria-current=location]')?.textContent === 'Planos');
+      await page.locator('#preco').evaluate(el => el.scrollIntoView());
+      await open(); await page.waitForFunction(() => document.querySelector('dialog[open] a[aria-current=location]')?.textContent === 'Preço');
       await page.keyboard.press('Escape');
     });
     await check('acesso: subdomínio → login → perfis/cadastro → retorno canônico', async () => {
@@ -185,7 +189,7 @@ const families = [
       await check(`${role}: todos os destinos existentes, itens indisponíveis e saída`, async () => {
         await page.goto(`${base}/${role}`); await open();
         const links = await drawer().locator('ul a').evaluateAll(els => els.map(el => ({ label: el.textContent, href: el.href })));
-        if (role === 'super-admin') assert.equal(await drawer().locator('[aria-disabled=true]').count(), 2);
+        if (role === 'super-admin') assert.deepEqual(await drawer().locator('[aria-disabled=true]').allTextContents(), ['Planos e assinaturas']);
         for (const { label, href } of links) {
           await drawer().getByRole('link', { name: label, exact: true }).click(); await page.waitForURL(href);
           await page.waitForFunction(() => !document.querySelector('dialog[open]') && document.body.style.overflow !== 'hidden');
