@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const { navigate: loadPage } = require('./qa-navigation.cjs');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
@@ -25,7 +26,7 @@ fs.mkdirSync(dir, { recursive:true });
       ['superadmin-help','localhost','/super-admin/ajuda'],
     ];
     for (const [name, host, route] of routes.filter(([name]) => process.env.SUPERADMIN_HELP_QA_ONLY !== '1' || name === 'superadmin-help')) {
-      await page.goto(`http://${host}:${port}${route}`);
+      await loadPage(page, `http://${host}:${port}${route}`);
       const metrics = await page.evaluate(() => ({ innerWidth, outerWidth, devicePixelRatio, visualScale:visualViewport.scale, horizontalOverflow:document.documentElement.scrollWidth > innerWidth }));
       assert.equal(metrics.devicePixelRatio, 2); assert.ok(metrics.innerWidth < metrics.outerWidth / 2 + 2);
       assert.equal(metrics.horizontalOverflow, false);

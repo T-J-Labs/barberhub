@@ -8,11 +8,12 @@ const base=`http://localhost:${process.argv[2] || 3110}`;
   const profile=fs.mkdtempSync(path.join(os.tmpdir(),'barberhub-install-qa-'));
   const headless=process.env.PWA_HEADLESS !== 'false';
   const context=await chromium.launchPersistentContext(profile,{headless,channel:process.env.PLAYWRIGHT_CHANNEL || 'msedge',args:headless?[]:['--start-minimized']});
-  const browser=context.browser(), cdp=await browser.newBrowserCDPSession(), report={base,browser:browser.version(),method:'PWA.install/launch em perfil temporário Edge',headless};
+  const browser=context.browser(), cdp=await browser.newBrowserCDPSession(), report={base,browser:browser.version(),channel:process.env.PLAYWRIGHT_CHANNEL || 'msedge',method:'PWA.install/launch em perfil temporário próprio',headless};
   let installed=false;
   try{
     const page=await context.newPage();await page.goto(base+'/barbearias');await page.evaluate(()=>navigator.serviceWorker.ready);
     const pageCdp=await context.newCDPSession(page);report.installability=await pageCdp.send('Page.getInstallabilityErrors');
+    assert.deepEqual(report.installability.installabilityErrors,[]);
     await cdp.send('PWA.install',{manifestId:base+'/',installUrlOrBundleUrl:base+'/barbearias'});installed=true;report.installed=true;
     // A instalação por CDP no Edge usa inicialmente apresentação em aba.
     // Definir a preferência do navegador é parte do QA da janela standalone.
@@ -37,9 +38,10 @@ const base=`http://localhost:${process.argv[2] || 3110}`;
     assert.equal(report.nativeWindow.url,base+'/barbearias');assert.equal(report.nativeWindow.standalone,true);assert.equal(report.nativeWindow.installPanels,0);
     assert.equal(report.nativeWindow.cookie,'');assert.equal(report.nativeWindow.localStorage,0);report.noSession=true;report.startUrl=report.nativeWindow.url;
     console.log('PASS instalação nativa, abertura standalone no catálogo e nenhuma sessão');
-  }catch(error){report.limitation=error.message;console.log('LIMITAÇÃO instalação nativa:',error.message);}
+  }catch(error){report.limitation=error.message;if(process.env.PWA_REQUIRE_SUCCESS==='true')process.exitCode=1;console.log('LIMITAÇÃO instalação nativa:',error.message);}
   finally{
     if(installed){try{await cdp.send('PWA.uninstall',{manifestId:base+'/'});report.uninstalled=true;}catch(error){report.cleanupError=error.message;}}
-    fs.mkdirSync(path.join(__dirname,'pwa'),{recursive:true});fs.writeFileSync(path.join(__dirname,'pwa/install-results.json'),JSON.stringify(report,null,2));await context.close();
+    const output=process.env.QA_SUITE_OUTPUT || path.join(__dirname,'pwa');
+    fs.mkdirSync(output,{recursive:true});fs.writeFileSync(path.join(output,'install-results.json'),JSON.stringify(report,null,2));await context.close();
   }
 })().catch(error=>{console.error(error);process.exitCode=1;});

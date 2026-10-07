@@ -139,7 +139,7 @@ export function AdminSettingsView({ initialSettings }: AdminSettingsViewProps) {
                   {logoPreview ? (
                     <Image src={logoPreview} width={64} height={64} unoptimized alt="Logomarca selecionada" className="size-16 rounded-lg object-cover" />
                   ) : (
-                    <div className="grid size-16 place-items-center rounded-lg bg-[#12344a] text-lg font-semibold text-[#8de1ff]" aria-label="Iniciais da barbearia">{initials(draft.name)}</div>
+                    <div role="img" className="grid size-16 place-items-center rounded-lg bg-[#12344a] text-lg font-semibold text-[#8de1ff]" aria-label="Iniciais da barbearia">{initials(draft.name)}</div>
                   )}
                   <p className="mt-5 text-lg font-semibold leading-6 text-white wrap-break-word">{draft.name.trim() || "Sua barbearia"}</p>
                   <p className="mt-2 text-xs leading-5 text-slate-400 wrap-break-word">{draft.description.trim() || "Uma breve apresentação da casa aparecerá aqui."}</p>

@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const { navigate: loadPage, reload, waitForURL } = require('./qa-navigation.cjs');
 const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require('./qa-browser.cjs');
@@ -23,7 +24,7 @@ fs.mkdirSync(artifactDir, { recursive: true });
   }
   async function search(query) {
     await page.getByRole('searchbox', { name: 'Buscar barbearia' }).fill(query); await page.getByRole('button', { name: 'Buscar', exact: true }).click();
-    await page.waitForURL(url => url.searchParams.get('q') === query);
+    await waitForURL(page, url => url.searchParams.get('q') === query);
     await main().locator('[role=status]').filter({ hasText: `Busca: “${query}”` }).waitFor();
   }
   async function scenario(value) {
@@ -33,7 +34,7 @@ fs.mkdirSync(artifactDir, { recursive: true });
   }
   async function noOverflow() { assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)); }
   try {
-    await page.goto(`${base}/super-admin`);
+    await loadPage(page, `${base}/super-admin`);
     await check('visão geral calculada, demonstração explícita e navegação existente', async () => {
       await page.getByRole('heading', { name: 'Visão geral', exact: true }).waitFor();
       assert.deepEqual(await main().locator('dd').allTextContents(), ['6', '0', '6', '0']);
@@ -54,10 +55,10 @@ fs.mkdirSync(artifactDir, { recursive: true });
       await main().getByRole('link', { name: 'Voltar à lista com a busca', exact: true }).click();
       assert.equal(await page.getByRole('searchbox').inputValue(), 'meier');
       await main().getByRole('link', { name: 'Ver detalhes de Navalha & Pente', exact: true }).click();
-      await page.waitForURL(url => url.pathname.endsWith('/demo-navalha'));
+      await waitForURL(page, url => url.pathname.endsWith('/demo-navalha'));
       await page.getByRole('heading', { name: 'Detalhes da barbearia', exact: true }).waitFor();
       await page.goBack();
-      await page.waitForURL(url => url.pathname === '/super-admin/barbearias');
+      await waitForURL(page, url => url.pathname === '/super-admin/barbearias');
       assert.equal(await page.getByRole('searchbox').inputValue(), 'meier');
       await main().getByRole('link', { name: 'Ver detalhes de Navalha & Pente', exact: true }).click();
     });
@@ -137,7 +138,7 @@ fs.mkdirSync(artifactDir, { recursive: true });
     await check('recarregar restaura suspensão local e não cria armazenamento', async () => {
       await page.getByRole('button', { name: 'Suspender na amostra', exact: true }).click();
       await page.getByRole('button', { name: 'Confirmar suspender na amostra', exact: true }).click();
-      await page.reload(); await page.getByRole('button', { name: 'Suspender na amostra', exact: true }).waitFor();
+      await reload(page); await page.getByRole('button', { name: 'Suspender na amostra', exact: true }).waitFor();
       assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length), 0);
       assert.equal((await context.cookies()).length, 0);
     });
@@ -146,16 +147,16 @@ fs.mkdirSync(artifactDir, { recursive: true });
       await page.getByRole('button', { name: 'Confirmar suspender na amostra', exact: true }).click();
       await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
       await page.getByRole('button', { name: 'Sair', exact: true }).focus(); await page.keyboard.press('Enter');
-      await page.waitForURL(base + '/');
-      await page.goto(base + '/barbearias'); await main().getByRole('heading', { name: 'Barbearia da Esquina', exact: true }).waitFor();
-      await page.goto(base + '/super-admin'); await page.getByRole('heading', { name: 'Barbearias da amostra', exact: true }).waitFor();
+      await waitForURL(page, base + '/');
+      await loadPage(page, base + '/barbearias'); await main().getByRole('heading', { name: 'Barbearia da Esquina', exact: true }).waitFor();
+      await loadPage(page, base + '/super-admin'); await page.getByRole('heading', { name: 'Barbearias da amostra', exact: true }).waitFor();
       assert.deepEqual(await main().locator('dd').allTextContents(), ['6','0','6','0']);
     });
     for (const width of [320,390,768,1440]) {
       await check(`visão geral ${width}px sem corte`, async () => { await page.setViewportSize({ width, height: 900 }); await noOverflow(); await page.screenshot({ path: path.join(artifactDir, `overview-${width}.png`), fullPage: true }); });
     }
     await check('identificador desconhecido tem estado indisponível e retorno válido', async () => {
-      await page.goto(base + '/super-admin/barbearias/unknown'); await page.getByRole('heading', { name: 'Exemplo indisponível', exact: true }).waitFor();
+      await loadPage(page, base + '/super-admin/barbearias/unknown'); await page.getByRole('heading', { name: 'Exemplo indisponível', exact: true }).waitFor();
       await page.getByRole('link', { name: 'Voltar à lista', exact: true }).click(); await page.getByRole('heading', { name: 'Barbearias', exact: true }).waitFor();
     });
     await check('sem erros JavaScript ou chamadas de API', async () => { assert.deepEqual(errors, []); assert.deepEqual(apiRequests, []); });

@@ -110,6 +110,11 @@ de introduzir variações próximas de azul, cinza ou texto.
   `#38BDF8` é reservado a elementos de destaque e apoio visual.
 - Manter títulos em branco, parágrafos principais em `#B6C2D1` e descrições
   auxiliares em `#94A3B8`.
+- Decisão explícita de 2026-10-07: botões primários públicos mantêm `sky-500`
+  com texto `#07111C`, substituindo branco para corrigir contraste. Preservar
+  hover sem mudança de azul, foco `sky-400` e movimento reduzido. Perfis e
+  componentes compartilhados reutilizam `catalogActionClass`; o fallback
+  offline usa o mesmo texto escuro. Esta decisão não muda outras superfícies.
 
 Os SVGs utilizam formas, linhas e textos simples. Não há imagens externas,
 assets por URL, conteúdo base64, filtros, máscaras ou fontes proprietárias.

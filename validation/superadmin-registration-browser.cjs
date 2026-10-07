@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const { navigate: loadPage, reload, waitForURL } = require('./qa-navigation.cjs');
 const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require('./qa-browser.cjs');
@@ -32,7 +33,7 @@ const notice = 'Barbearia adicionada à amostra — nenhum estabelecimento real 
   async function noOverflow() { assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)); }
   let id;
   try {
-    await page.goto(base + '/super-admin/barbearias?q=meier');
+    await loadPage(page, base + '/super-admin/barbearias?q=meier');
     await page.getByRole('heading', { name: 'Estabelecimentos', exact: true }).waitFor();
     await check('cadastro abre por teclado acima da busca e foca o título', async () => {
       const trigger = page.getByRole('button', { name: 'Cadastrar barbearia', exact: true });
@@ -83,7 +84,7 @@ const notice = 'Barbearia adicionada à amostra — nenhum estabelecimento real 
       await field('subdomain').fill(input.subdomain);
       // Dois cliques síncronos antes do render exercitam o bloqueio via ref.
       await submit().evaluate(el => { el.click(); el.click(); });
-      await page.waitForURL(url => url.pathname.startsWith('/super-admin/barbearias/manual-'));
+      await waitForURL(page, url => url.pathname.startsWith('/super-admin/barbearias/manual-'));
       await main().getByRole('heading', { name: 'Barbearia São João QA', exact: true }).waitFor();
       id = new URL(page.url()).pathname.split('/').at(-1);
       assert.match(id, /^manual-[0-9a-f-]{36}$/); assert.equal(new URL(page.url()).searchParams.get('q'), 'meier');
@@ -104,7 +105,7 @@ const notice = 'Barbearia adicionada à amostra — nenhum estabelecimento real 
       assert.equal(await page.getByRole('searchbox').inputValue(), 'meier');
       await search('São João QA'); assert.equal(await main().getByRole('link', { name: /^Ver detalhes de/ }).count(), 1);
       await main().getByRole('link', { name: 'Ver detalhes de Barbearia São João QA', exact: true }).click();
-      await page.waitForURL(url => url.pathname.endsWith(id));
+      await waitForURL(page, url => url.pathname.endsWith(id));
       await page.getByRole('heading', { name: 'Barbearia São João QA', exact: true }).waitFor();
     });
     await check('resumo calcula total e rascunhos da mesma coleção', async () => {
@@ -131,10 +132,10 @@ const notice = 'Barbearia adicionada à amostra — nenhum estabelecimento real 
     });
     await navigate('Barbearias'); await search('São João QA');
     await page.getByRole('link', { name: 'Ver detalhes de Barbearia São João QA', exact: true }).click();
-    await page.waitForURL(url => url.pathname.endsWith(id));
+    await waitForURL(page, url => url.pathname.endsWith(id));
     await page.getByRole('heading', { name: 'Barbearia São João QA', exact: true }).waitFor();
     await check('recarga perde rascunho, preserva retorno da busca e mostra Exemplo indisponível', async () => {
-      await page.reload(); await page.getByRole('heading', { name: 'Exemplo indisponível', exact: true }).waitFor();
+      await reload(page); await page.getByRole('heading', { name: 'Exemplo indisponível', exact: true }).waitFor();
       assert.equal(await main().getByRole('button', { name: /Suspender|Reativar/ }).count(), 0);
       await page.getByRole('link', { name: 'Voltar à lista com a busca', exact: true }).click();
       await page.getByRole('heading', { name: 'Nenhum resultado para esta busca', exact: true }).waitFor();
@@ -142,18 +143,18 @@ const notice = 'Barbearia adicionada à amostra — nenhum estabelecimento real 
       await navigate('Início'); assert.deepEqual(await main().locator('dd').allTextContents(), ['6','0','6','0']);
     });
     await check('ID desconhecido e retorno válidos', async () => {
-      await page.goto(base + '/super-admin/barbearias/unknown?q=meier'); await page.getByRole('heading', { name: 'Exemplo indisponível', exact: true }).waitFor();
+      await loadPage(page, base + '/super-admin/barbearias/unknown?q=meier'); await page.getByRole('heading', { name: 'Exemplo indisponível', exact: true }).waitFor();
       await page.getByRole('link', { name: 'Voltar à lista com a busca', exact: true }).click();
       await main().getByRole('status').filter({ hasText: '1 de 6' }).waitFor();
     });
     await check('saída por navegação interna remove rascunho e não cria armazenamento/API', async () => {
       await page.getByRole('button', { name: 'Cadastrar barbearia', exact: true }).click(); await fill(); await submit().click();
-      await page.waitForURL(url => url.pathname.startsWith('/super-admin/barbearias/manual-'));
+      await waitForURL(page, url => url.pathname.startsWith('/super-admin/barbearias/manual-'));
       await page.getByRole('heading', { name: 'Barbearia São João QA', exact: true }).waitFor();
       const lostUrl = page.url();
       await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
-      await page.getByRole('button', { name: 'Sair', exact: true }).focus(); await page.keyboard.press('Enter'); await page.waitForURL(base + '/');
-      await page.goto(lostUrl); await page.getByRole('heading', { name: 'Exemplo indisponível', exact: true }).waitFor();
+      await page.getByRole('button', { name: 'Sair', exact: true }).focus(); await page.keyboard.press('Enter'); await waitForURL(page, base + '/');
+      await loadPage(page, lostUrl); await page.getByRole('heading', { name: 'Exemplo indisponível', exact: true }).waitFor();
       assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length), 0); assert.equal((await context.cookies()).length, 0);
       assert.deepEqual(apiRequests, []); assert.deepEqual(errors, []);
     });

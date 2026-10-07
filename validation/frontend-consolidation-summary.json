@@ -1,0 +1,721 @@
+{
+  "dateLocal": "2026-10-06",
+  "timezone": "America/Sao_Paulo",
+  "baseCommit": "ee0fddfa13102b851c98d851bdb7e4296f8ddf28",
+  "environment": {
+    "osVersion": "10.0.26200",
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "playwright": "1.58.2",
+    "axe": "4.11.1",
+    "edge": "154.0.4258.53",
+    "chrome": "154.0.8037.98",
+    "managedChromium": "145.0.7632.6",
+    "physicalDevicesAvailable": false,
+    "realScreenReaderTested": false,
+    "dnsTlsPublishedTested": false
+  },
+  "evidenceRoot": "validation/qa-runs/final-consolidation-2026-10-06-d2c675ca",
+  "stage1": {
+    "status": "local complement complete; manual/external and approved public contrast pending",
+    "edgeInitial": {
+      "evidence": "stage1-native/qa-runs/2026-10-06T23-44-31.654Z-browser-b4Wjbq/run.json",
+      "passed": false,
+      "began": "2026-10-06T23:44:31.655Z",
+      "ended": "2026-10-06T23:52:28.765Z",
+      "browser": "154.0.4258.53",
+      "sourceFingerprint": "c947da61e5838e47d2a7d980f83d28ccf7b9d4fe16e0ff82614aa19683511cd9",
+      "results": [
+        {
+          "name": "headers-browser",
+          "exit": 1
+        },
+        {
+          "name": "profile-help-browser",
+          "exit": 0
+        },
+        {
+          "name": "headers-zoom",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-browser",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-registration-browser",
+          "exit": 0
+        },
+        {
+          "name": "journeys-accessibility",
+          "exit": 1
+        }
+      ],
+      "serverStopped": true
+    },
+    "chromeInitial": {
+      "evidence": "stage1-native/qa-runs/2026-10-06T23-53-15.314Z-browser-VZ4cBS/run.json",
+      "passed": false,
+      "began": "2026-10-06T23:53:15.316Z",
+      "ended": "2026-10-07T00:04:59.374Z",
+      "browser": "154.0.8037.98",
+      "sourceFingerprint": "dfb5f736ef5adc67bf875926fc16df56e6139b6cacc5dfff975b2697c4a3643f",
+      "results": [
+        {
+          "name": "headers-browser",
+          "exit": 0
+        },
+        {
+          "name": "profile-help-browser",
+          "exit": 1
+        },
+        {
+          "name": "headers-zoom",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-browser",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-registration-browser",
+          "exit": 0
+        },
+        {
+          "name": "journeys-accessibility",
+          "exit": 0
+        }
+      ],
+      "serverStopped": null
+    },
+    "finalRecuts": [
+      "final-edge-headers: 160 PASS",
+      "final-edge-journeys: 73 groups, 121 audits, 100 exceptions, 169 incomplete entries, 482 DOM nodes reviewed",
+      "final-chrome-profiles: 38 PASS",
+      "final-edge-supplementary-pass: native arrows, visible title, date/time Tab, hydration check PASS"
+    ],
+    "ownedSupplementaryServerCleanupVerified": true
+  },
+  "stage2": {
+    "status": "PASS local isolated",
+    "install": "npm ci application and QA tools in own snapshot; no node_modules/.next/.env.local initially; same Windows/npm cache",
+    "lintExit": 0,
+    "typecheckExit": 0,
+    "buildExit": 0,
+    "next": "16.3.8",
+    "axios": "1.20.0",
+    "orvalResolved": "8.40.0",
+    "buildId": "MBHQoC0b17PM3Sgz5Ck2Z",
+    "productionAuditAlerts": 0,
+    "developmentAuditHigh": 5,
+    "production": {
+      "evidence": "stage2-patched/2026-10-07T00-19-25.011Z-production-hRFeqR/run.json",
+      "passed": true,
+      "began": "2026-10-07T00:19:25.014Z",
+      "ended": "2026-10-07T00:25:59.72Z",
+      "browser": "154.0.4258.53",
+      "sourceFingerprint": "a32adf8b7d8458a6a080a2a9c563d4845ca6719c3f021b81d52be230f7f92aa8",
+      "results": [
+        {
+          "name": "routing",
+          "exit": 0
+        },
+        {
+          "name": "client-auth-routing",
+          "exit": 0
+        },
+        {
+          "name": "booking-state",
+          "exit": 0
+        },
+        {
+          "name": "client-appointments-state",
+          "exit": 0
+        },
+        {
+          "name": "client-barbershops-state",
+          "exit": 0
+        },
+        {
+          "name": "barber-demo-state",
+          "exit": 0
+        },
+        {
+          "name": "profile-help-state",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-state",
+          "exit": 0
+        },
+        {
+          "name": "owner-onboarding-state",
+          "exit": 0
+        },
+        {
+          "name": "pwa-policy",
+          "exit": 0
+        },
+        {
+          "name": "http-shared",
+          "exit": 0
+        },
+        {
+          "name": "client-auth-http",
+          "exit": 0
+        },
+        {
+          "name": "booking-http",
+          "exit": 0
+        },
+        {
+          "name": "client-appointments-http",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-browser",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-registration-browser",
+          "exit": 0
+        },
+        {
+          "name": "journeys-accessibility",
+          "exit": 0
+        },
+        {
+          "name": "pwa-browser",
+          "exit": 0
+        },
+        {
+          "name": "pwa-lifecycle",
+          "exit": 0
+        }
+      ],
+      "serverStopped": null
+    },
+    "nativeInstall": {
+      "edge": "installed/uninstalled; launch timeout, standalone not validated",
+      "chrome": "installed/launched catalogue standalone/no session/uninstalled PASS",
+      "method": "headless CDP with standalone preference set by QA; not human manual install",
+      "rawChromeMethodLabel": "legacy Edge label in original tool; actual channel chrome and version 154.0.8037.98"
+    },
+    "ownedProductionServerCleanupVerified": true
+  },
+  "stage3": {
+    "status": "implemented; final stable local development and production PASS; remote not executed",
+    "workflow": ".github/workflows/frontend.yml",
+    "actionlintVersion": "1.7.12",
+    "actionlintExit": 0,
+    "lintExit": 0,
+    "typecheckExit": 0,
+    "rulesSuites": 10,
+    "rulesExit": 0,
+    "remoteExecuted": false,
+    "ubuntuExecuted": false,
+    "edgeDevelopment": {
+      "evidence": "stage2-patched/2026-10-07T00-28-18.502Z-browser-ZnY2kp/run.json",
+      "passed": true,
+      "began": "2026-10-07T00:28:18.505Z",
+      "ended": "2026-10-07T00:38:53.565Z",
+      "browser": "154.0.4258.53",
+      "sourceFingerprint": "a841382498a9338bb829767c020c0336e0980d21f5c4ab1fe93b56c5d809baf7",
+      "results": [
+        {
+          "name": "headers-browser",
+          "exit": 0
+        },
+        {
+          "name": "profile-help-browser",
+          "exit": 0
+        },
+        {
+          "name": "headers-zoom",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-browser",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-registration-browser",
+          "exit": 0
+        },
+        {
+          "name": "journeys-accessibility",
+          "exit": 0
+        }
+      ],
+      "serverStopped": true
+    },
+    "managedProductionInitial": {
+      "evidence": "stage2-patched/2026-10-07T00-32-11.271Z-production-fsVuvm/run.json",
+      "passed": false,
+      "began": "2026-10-07T00:32:11.279Z",
+      "ended": "2026-10-07T00:36:00.535Z",
+      "browser": "145.0.7632.6",
+      "sourceFingerprint": "a841382498a9338bb829767c020c0336e0980d21f5c4ab1fe93b56c5d809baf7",
+      "results": [
+        {
+          "name": "routing",
+          "exit": 0
+        },
+        {
+          "name": "client-auth-routing",
+          "exit": 0
+        },
+        {
+          "name": "booking-state",
+          "exit": 0
+        },
+        {
+          "name": "client-appointments-state",
+          "exit": 0
+        },
+        {
+          "name": "client-barbershops-state",
+          "exit": 0
+        },
+        {
+          "name": "barber-demo-state",
+          "exit": 0
+        },
+        {
+          "name": "profile-help-state",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-state",
+          "exit": 0
+        },
+        {
+          "name": "owner-onboarding-state",
+          "exit": 0
+        },
+        {
+          "name": "pwa-policy",
+          "exit": 0
+        },
+        {
+          "name": "http-shared",
+          "exit": 0
+        },
+        {
+          "name": "client-auth-http",
+          "exit": 0
+        },
+        {
+          "name": "booking-http",
+          "exit": 0
+        },
+        {
+          "name": "client-appointments-http",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-browser",
+          "exit": 0
+        },
+        {
+          "name": "superadmin-registration-browser",
+          "exit": 0
+        },
+        {
+          "name": "journeys-accessibility",
+          "exit": 1
+        },
+        {
+          "name": "pwa-browser",
+          "exit": 1
+        },
+        {
+          "name": "pwa-lifecycle",
+          "exit": 0
+        }
+      ],
+      "serverStopped": true
+    },
+    "managedChannel": "chromium (full browser, new headless)",
+    "finalDevelopment": {
+      "began": "2026-10-07T04:38:12.512Z",
+      "endedFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+      "browser": "145.0.7632.6",
+      "sourceChanged": false,
+      "results": [
+        {
+          "exit": 0,
+          "name": "headers-browser"
+        },
+        {
+          "exit": 0,
+          "name": "profile-help-browser"
+        },
+        {
+          "exit": 0,
+          "name": "headers-zoom"
+        },
+        {
+          "exit": 0,
+          "name": "superadmin-browser"
+        },
+        {
+          "exit": 0,
+          "name": "superadmin-registration-browser"
+        },
+        {
+          "exit": 0,
+          "name": "journeys-accessibility"
+        }
+      ],
+      "channel": "chromium",
+      "serverStopped": true,
+      "sourceFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+      "ended": "2026-10-07T04:53:58.439Z",
+      "port": 3251,
+      "evidence": "stage2-patched/2026-10-07T04-38-12.509Z-browser-RiArvP/run.json",
+      "journeys": {
+        "groups": 75,
+        "audits": 122,
+        "errors": [],
+        "exceptions": 101,
+        "incomplete": 169,
+        "reviewNodes": 482,
+        "failures": 0
+      },
+      "suites": 6,
+      "passed": true
+    },
+    "finalProduction": {
+      "lifecycleGroups": 4,
+      "began": "2026-10-07T04:38:23.291Z",
+      "endedFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+      "browser": "145.0.7632.6",
+      "sourceChanged": false,
+      "results": [
+        {
+          "exit": 0,
+          "name": "routing"
+        },
+        {
+          "exit": 0,
+          "name": "client-auth-routing"
+        },
+        {
+          "exit": 0,
+          "name": "booking-state"
+        },
+        {
+          "exit": 0,
+          "name": "client-appointments-state"
+        },
+        {
+          "exit": 0,
+          "name": "client-barbershops-state"
+        },
+        {
+          "exit": 0,
+          "name": "barber-demo-state"
+        },
+        {
+          "exit": 0,
+          "name": "profile-help-state"
+        },
+        {
+          "exit": 0,
+          "name": "superadmin-state"
+        },
+        {
+          "exit": 0,
+          "name": "owner-onboarding-state"
+        },
+        {
+          "exit": 0,
+          "name": "pwa-policy"
+        },
+        {
+          "exit": 0,
+          "name": "http-shared"
+        },
+        {
+          "exit": 0,
+          "name": "client-auth-http"
+        },
+        {
+          "exit": 0,
+          "name": "booking-http"
+        },
+        {
+          "exit": 0,
+          "name": "client-appointments-http"
+        },
+        {
+          "exit": 0,
+          "name": "superadmin-browser"
+        },
+        {
+          "exit": 0,
+          "name": "superadmin-registration-browser"
+        },
+        {
+          "exit": 0,
+          "name": "journeys-accessibility"
+        },
+        {
+          "exit": 0,
+          "name": "pwa-browser"
+        },
+        {
+          "exit": 0,
+          "name": "pwa-lifecycle"
+        }
+      ],
+      "channel": "chromium",
+      "serverStopped": true,
+      "sourceFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+      "pwaGroups": 15,
+      "ended": "2026-10-07T04:49:06.51Z",
+      "port": 3252,
+      "evidence": "stage2-patched/2026-10-07T04-38-23.289Z-production-xduB3P/run.json",
+      "journeys": {
+        "groups": 70,
+        "audits": 110,
+        "errors": [],
+        "exceptions": 90,
+        "incomplete": 160,
+        "reviewNodes": 473,
+        "failures": 0
+      },
+      "suites": 19,
+      "passed": true
+    },
+    "intermediateRuns": [
+      {
+        "passed": true,
+        "port": 3240,
+        "sourceFingerprint": "a32adf8b7d8458a6a080a2a9c563d4845ca6719c3f021b81d52be230f7f92aa8",
+        "evidence": "stage2-patched/2026-10-07T00-19-25.011Z-production-hRFeqR/run.json",
+        "suites": 19,
+        "ended": "2026-10-07T00:25:59.72Z",
+        "sourceChanged": null,
+        "failures": 0,
+        "serverStopped": null,
+        "endedFingerprint": null,
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": true,
+        "port": 3241,
+        "sourceFingerprint": "a841382498a9338bb829767c020c0336e0980d21f5c4ab1fe93b56c5d809baf7",
+        "evidence": "stage2-patched/2026-10-07T00-28-18.502Z-browser-ZnY2kp/run.json",
+        "suites": 6,
+        "ended": "2026-10-07T00:38:53.565Z",
+        "sourceChanged": null,
+        "failures": 0,
+        "serverStopped": true,
+        "endedFingerprint": null,
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": false,
+        "port": 3242,
+        "sourceFingerprint": "a841382498a9338bb829767c020c0336e0980d21f5c4ab1fe93b56c5d809baf7",
+        "evidence": "stage2-patched/2026-10-07T00-32-11.271Z-production-fsVuvm/run.json",
+        "suites": 19,
+        "ended": "2026-10-07T00:36:00.535Z",
+        "sourceChanged": null,
+        "failures": 2,
+        "serverStopped": true,
+        "endedFingerprint": null,
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": false,
+        "port": 3243,
+        "sourceFingerprint": "a8eb6d2cee0cefe1edbca104c444c944750dcc0e82e7aa9c30c5995d9e692716",
+        "evidence": "stage2-patched/2026-10-07T00-37-18.836Z-production-wGNT1r/run.json",
+        "suites": 19,
+        "ended": "2026-10-07T00:41:59.548Z",
+        "sourceChanged": null,
+        "failures": 1,
+        "serverStopped": true,
+        "endedFingerprint": null,
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": false,
+        "port": 3244,
+        "sourceFingerprint": "a8eb6d2cee0cefe1edbca104c444c944750dcc0e82e7aa9c30c5995d9e692716",
+        "evidence": "stage2-patched/2026-10-07T00-38-47.512Z-browser-CNequd/run.json",
+        "suites": 6,
+        "ended": "2026-10-07T00:45:52.149Z",
+        "sourceChanged": null,
+        "failures": 6,
+        "serverStopped": true,
+        "endedFingerprint": null,
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": true,
+        "port": 3245,
+        "sourceFingerprint": "a8eb6d2cee0cefe1edbca104c444c944750dcc0e82e7aa9c30c5995d9e692716",
+        "evidence": "stage2-patched/2026-10-07T04-25-31.434Z-production-D5Ol9I/run.json",
+        "suites": 19,
+        "ended": "2026-10-07T04:31:18.23Z",
+        "sourceChanged": null,
+        "failures": 0,
+        "serverStopped": true,
+        "endedFingerprint": null,
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": false,
+        "port": 3246,
+        "sourceFingerprint": "a8eb6d2cee0cefe1edbca104c444c944750dcc0e82e7aa9c30c5995d9e692716",
+        "evidence": "stage2-patched/2026-10-07T04-25-41.373Z-browser-O5MuHK/run.json",
+        "suites": 6,
+        "ended": "2026-10-07T04:33:27.091Z",
+        "sourceChanged": null,
+        "failures": 6,
+        "serverStopped": true,
+        "endedFingerprint": null,
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": false,
+        "port": 3247,
+        "sourceFingerprint": "c0299c6f8482899d6069b0a9949bfe56f3ddc2810882806dca0fc932853d06e8",
+        "evidence": "stage2-patched/2026-10-07T04-33-25.108Z-production-JFlwBU/run.json",
+        "suites": 19,
+        "ended": "2026-10-07T04:41:09.435Z",
+        "sourceChanged": true,
+        "failures": 2,
+        "serverStopped": true,
+        "endedFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": false,
+        "port": 3248,
+        "sourceFingerprint": "c0299c6f8482899d6069b0a9949bfe56f3ddc2810882806dca0fc932853d06e8",
+        "evidence": "stage2-patched/2026-10-07T04-33-35.833Z-browser-H8uVfq/run.json",
+        "suites": 6,
+        "ended": "2026-10-07T04:48:16.51Z",
+        "sourceChanged": true,
+        "failures": 1,
+        "serverStopped": true,
+        "endedFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": false,
+        "port": 3249,
+        "sourceFingerprint": "e06af8e0e456129b10063af8beff1615fa1cf5875490f62b0c4b6e0d6566b24a",
+        "evidence": "stage2-patched/2026-10-07T04-36-28.891Z-production-iP41Ga/run.json",
+        "suites": 19,
+        "ended": "2026-10-07T04:46:53.993Z",
+        "sourceChanged": true,
+        "failures": 0,
+        "serverStopped": true,
+        "endedFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": false,
+        "port": 3250,
+        "sourceFingerprint": "e06af8e0e456129b10063af8beff1615fa1cf5875490f62b0c4b6e0d6566b24a",
+        "evidence": "stage2-patched/2026-10-07T04-36-39.768Z-browser-nYUiZA/run.json",
+        "suites": 6,
+        "ended": "2026-10-07T04:53:02.617Z",
+        "sourceChanged": true,
+        "failures": 1,
+        "serverStopped": true,
+        "endedFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+        "selectedAsFinalCIProof": false
+      },
+      {
+        "passed": true,
+        "port": 3251,
+        "sourceFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+        "evidence": "stage2-patched/2026-10-07T04-38-12.509Z-browser-RiArvP/run.json",
+        "suites": 6,
+        "ended": "2026-10-07T04:53:58.439Z",
+        "sourceChanged": null,
+        "failures": 0,
+        "serverStopped": true,
+        "endedFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+        "selectedAsFinalCIProof": true
+      },
+      {
+        "passed": true,
+        "port": 3252,
+        "sourceFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+        "evidence": "stage2-patched/2026-10-07T04-38-23.289Z-production-xduB3P/run.json",
+        "suites": 19,
+        "ended": "2026-10-07T04:49:06.51Z",
+        "sourceChanged": null,
+        "failures": 0,
+        "serverStopped": true,
+        "endedFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+        "selectedAsFinalCIProof": true
+      }
+    ]
+  },
+  "preservation": {
+    "originalServerPid": 15056,
+    "originalServerPort": 3000,
+    "originalServerStartLocal": "2026-10-06 15:26:03",
+    "originalServerStillRunning": true,
+    "originalNodeModulesAndBuildReinstalled": false,
+    "backendDatabaseOpenapiChanged": false,
+    "qaOwnedPortsNoLongerListening": true,
+    "finalCheckedUtc": "2026-10-07T04:59:35.6880591Z"
+  },
+  "pending": [
+    "Public white/sky-500 contrast about 2.7:1 requires explicit visual decision",
+    "Real screen reader and human incomplete/reading order review",
+    "Physical Android/iPhone, Firefox/WebKit/Safari engines",
+    "Published DNS/TLS and manual human installation; Edge launch timeout",
+    "Five high lint-tool advisories with no compatible published braces fix",
+    "Actual GitHub Actions run; Linux provisioning/artifact upload unverified",
+    "Personal environment still uses old dependency install/build until user adopts corrected lock"
+  ],
+  "resumedLocalDate": "2026-10-07",
+  "datesLocal": [
+    "2026-10-06",
+    "2026-10-07"
+  ],
+  "sourceVerification": {
+    "checked": "2026-10-07T04:53:42.814Z",
+    "expectedSnapshotFingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7",
+    "results": [
+      {
+        "root": "C:\\Users\\Felipe Tajima\\projetosportfolio\\barberhub",
+        "fingerprint": "cee7c74a0be7611831ac7d0d56673aeb56e39999bbbe96d513feccd12a642668"
+      },
+      {
+        "root": "C:\\Users\\Felipe Tajima\\AppData\\Local\\Temp\\barberhub-final-d2c675ca6bfc46f09f375b92240fdec5\\stage2-patched",
+        "fingerprint": "0f7e1f56fe9554d8047e0d06afd5da16097a85506541eef615b9114b3bf522f7"
+      }
+    ],
+    "exactOriginalAndSnapshotMatch": false,
+    "differences": [
+      {
+        "file": "frontend/src/lib/api/generated/barberhub.ts",
+        "onlyExpectedOrvalHeaderDifference": true
+      },
+      {
+        "file": "frontend/src/lib/api/generated/models/index.ts",
+        "onlyExpectedOrvalHeaderDifference": true
+      },
+      {
+        "file": "frontend/src/lib/api/generated/models/tenantSubdomainParameter.ts",
+        "onlyExpectedOrvalHeaderDifference": true
+      }
+    ],
+    "executableAndContractContentEqual": true,
+    "passed": true
+  },
+  "historicalRecord": true,
+  "currentFollowup": "validation/frontend-followup-summary.json"
+}
