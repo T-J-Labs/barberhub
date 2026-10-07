@@ -76,7 +76,8 @@ Painel operacional para o gerente de uma barbearia: leitura rápida, decisões c
   16px/24px. Header do drawer tem separador e padding inferior 20px; conteúdo
   tem padding vertical 24px; rodapé fica no fim, com separador e padding 20px.
 - Entrar usa `publicLoginClass`; Criar conta usa `catalogActionClass`, sempre
-  `sky-500`/branco com ampliação que respeita movimento reduzido.
+  `sky-500`/texto `#07111C` com ampliação que respeita movimento reduzido.
+  Decisão explícita de 2026-10-07 substitui branco para corrigir contraste.
 - Modal contém foco, torna fundo inerte, fecha por Escape/backdrop/controle/link,
   restaura foco e overflow. Breakpoints de fechamento: público/visitante 1024px;
   admin 1200px com foco na sidebar; prévia/operacional conservam menu no desktop.
@@ -98,7 +99,8 @@ Painel operacional para o gerente de uma barbearia: leitura rápida, decisões c
 - Nas superfícies escuras auditadas do admin, metadados legíveis usam `slate-400`
   em lugar dos tons `slate-500/600` que falharam no contraste automatizado.
 - `DemoDialog` mantém o modal nativo e circula Tab/Shift+Tab entre controles.
-- Ações públicas mantêm `sky-500`/branco; movimento reduzido usa
+- Ações públicas mantêm `sky-500`/texto `#07111C` (decisão de 2026-10-07); movimento reduzido usa
   `motion-reduce:hover:scale-100`, pois `transform-none` não anula `scale`.
-- Exceção de contraste dos botões e pendências humanas/externas continuam
-  documentadas em `docs/frontend/QA_ACCESSIBILITY.md`; sem certificação WCAG.
+- A exceção de contraste dos botões foi removida após a decisão de 2026-10-07.
+  Pendências humanas/externas continuam documentadas em
+  `docs/frontend/QA_ACCESSIBILITY.md`; sem certificação WCAG integral.

@@ -24,7 +24,13 @@ Plano registrado em 2026-10-05, conforme a orientação do usuário. Complementa
 - Ao concluir uma entrega, atualizar seu estado e registrar somente verificações
   realmente executadas. Não apresentar uma simulação como funcionalidade integrada.
 
-## 2. Estado atual — atualizado em 2026-10-06
+## 2. Estado atual — atualizado em 2026-10-07
+
+Pendências técnicas reclassificadas na seção 13 a partir das evidências brutas:
+ambiente pessoal atualizado, CI da revisão final aprovado, botões corrigidos,
+testes locais Chromium/Firefox/WebKit e Edge standalone automatizado comprovados.
+Publicação/QA público foram adiados para a etapa final, após as integrações com
+o backend estarem funcionando e validadas localmente; QA humano continua separado.
 
 **As seis entregas da sequência inicial estão implementadas no escopo sem
 backend.** As cinco primeiras são demonstrações locais; a PWA foi implementada
@@ -148,8 +154,9 @@ autenticação quando necessária antes de uma reserva real.
 - Separar regras de seleção e transição de estado da renderização para facilitar
   testes de comportamento.
 - Reutilizar identidade pública, componentes acessíveis e estilos existentes.
-  Manter os botões primários aprovados: `bg-sky-500`, texto branco e hover sem
-  mudar o tom de azul, respeitando movimento reduzido.
+  Manter os botões primários aprovados: `bg-sky-500`, texto `#07111C` e hover sem
+  mudar o tom de azul, respeitando movimento reduzido. O usuário aprovou a
+  troca do texto branco em 2026-10-07; ver [acompanhamento](VALIDATION_HISTORY.md#acompanhamento).
 - Manter estado somente em memória, sem tokens, cookies de sessão fictícios
   ou persistência em `localStorage`.
 
@@ -462,7 +469,7 @@ detectadas. Leitor de tela, dispositivos reais e contraste manual integral
 permanecem pendentes; os cenários de erro são demonstrativos, não falhas de API.
 QA e limitações da entrega: [SUPERADMIN_DEMO.md](SUPERADMIN_DEMO.md#ajuda-do-superadmin--2026-10-06).
 
-## 9. PWA e acabamento transversal — 2026-10-06
+## 9. PWA e acabamento transversal — registro histórico de 2026-10-06
 
 Implementada por solicitação explícita. Manifesto App Router com início em
 `/barbearias`, identidade derivada da marca, ícones 192/512/maskable/Apple 180,
@@ -602,12 +609,14 @@ contextos nem implementa notificações, sessão ou autorização reais.
 
 ### 10.3. QA transversal e pendências da PWA
 
-**Atualização de 2026-10-06:** consolidação de testes e acessibilidade implementada
+**Estado atual em 2026-10-07:** consolidação de testes e acessibilidade implementada
 após solicitação explícita, com `test:qa:local`, `test:qa:browser` e
 `test:qa:production`, ferramentas separadas, evidências únicas e correções
-pontuais. **Parcialmente validada**: leitor de tela, dispositivos físicos,
-Safari/Firefox/WebKit e HTTPS publicado permanecem pendentes. Resultados desta
-rodada, preparação e limites em [QA_ACCESSIBILITY.md](QA_ACCESSIBILITY.md).
+pontuais. Chromium, Firefox e WebKit têm testes locais comprovados, com recortes
+e limitações em [FRONTEND_PENDING_REVIEW.md](VALIDATION_HISTORY.md#revisao-final).
+**Parcialmente validada**: leitor de tela operado por pessoa, dispositivos físicos,
+Safari real, instalação manual e HTTPS publicado permanecem pendentes.
+Preparação e limites em [QA_ACCESSIBILITY.md](QA_ACCESSIBILITY.md).
 Os registros anteriores permanecem históricos; não representam reexecução.
 
 Consolidar os testes existentes, evitando outra implementação da mesma PWA:
@@ -617,17 +626,25 @@ Consolidar os testes existentes, evitando outra implementação da mesma PWA:
   Wizard e lista global continuam independentes; não testar sincronização fictícia.
 - Documentar preparação do servidor e configuração de Host/porta por ambiente,
   fixtures, reset de amostras e dependências do navegador. Não depender de caminhos
-  absolutos da máquina de um desenvolvedor. Avaliar execução automatizada em CI
-  numa entrega própria; hoje não há diretório `.github` no repositório inspecionado.
+  absolutos da máquina de um desenvolvedor. A consolidação final implementou
+  `.github/workflows/frontend.yml`, com lint, TypeScript, regras, build e
+  navegador/PWA Chromium. A execução real
+  [37642914180](https://github.com/T-J-Labs/barberhub/actions/runs/37642914180)
+  passou nos dois jobs Ubuntu, incluindo Chromium, testes, builds e upload.
+  Revisão `97cee8d917084d255f4d8112cbf9b876c41c2978`; ver artefato e limites
+  na [revisão final](VALIDATION_HISTORY.md#revisao-final). Não representa deploy.
 - Complementar a inspeção DOM/teclado com leitor de tela real e aparelhos
-  Android/iOS quando disponíveis. Registrar Safari/Firefox e instalação manual,
+  Android/iOS quando disponíveis. Registrar Safari real e instalação manual,
   distinguindo testes novos das evidências já existentes.
-- Validação HTTPS publicado e DNS/TLS exigem ambiente de hospedagem: podem ser
-  feitas sem API, mas não estão garantidas pelo frontend local nem autorizam
-  publicar o projeto automaticamente. Sem ambiente/dispositivo, manter pendência.
-- Acompanhar contraste e desempenho com medições comparáveis. Não alterar a cor
-  dos botões públicos aprovados para encerrar um alerta: registrar o conflito e
-  pedir decisão explícita antes de mudar esse padrão.
+- Por decisão de 2026-10-07, hospedagem na internet e validação pública ficam
+  para a etapa final, após as integrações com o backend estarem funcionando e
+  validadas localmente. DNS/TLS e HTTPS continuam sem validação pública;
+  disponibilidade de hospedagem, por si só, não antecipa essa etapa nem autoriza
+  publicação. Integração real continua dependente de contratos e solicitação própria.
+- Acompanhar contraste e desempenho com medições comparáveis. Preservar os botões
+  públicos corrigidos (`sky-500`, texto `#07111C`). O indicador “1” foi mantido
+  com contraste insuficiente por decisão explícita; uma correção futura exige
+  nova aprovação, medição de contraste e regressão visual.
 
 ### 10.4. Minhas barbearias — implementada como demonstração local
 
@@ -726,3 +743,84 @@ As entregas funcionais solicitadas desta sequência podem ser consideradas
 concluídas **como apresentação/demonstração local**. A próxima ação é complementar
 QA manual e externo mediante disponibilidade de equipamentos/ambiente, não
 reimplementar telas concluídas. Integração real continua na seção 10.6.
+
+## 12. Consolidação final solicitada — 2026-10-06 e 2026-10-07
+
+Foi executado o complemento local de QA/acessibilidade, com Edge/Chrome,
+teclado/foco/responsividade e evidência DOM dos inconclusivos. Corrigidos
+contraste secundário de Relatórios/Ajuda admin e nome acessível das iniciais
+em Configurações, preservando features, regras, domínios e botões públicos.
+Instalação limpa isolada, lint, TypeScript, build novo e regressão de produção
+com 19 suítes passaram, incluindo jornadas e PWA. Dependências de produção
+corrigidas; cinco alertas das ferramentas de lint permanecem documentados.
+
+GitHub Actions implementado para lint, TypeScript, regras, build e navegador/PWA
+Chromium, com primeira execução real aprovada no Ubuntu em 2026-10-07 e
+artefato publicado. O executor local passou no Chromium gerenciado,
+com snapshot estável: seis suítes em desenvolvimento e 19 em produção.
+No acompanhamento, o ambiente pessoal adotou o lock e o usuário aprovou texto
+escuro sobre sky-500, aplicado com regressão sem exceções de contraste.
+Leitor de tela, dispositivos físicos, Safari real, revisão humana integral
+dos inconclusivos, DNS/TLS publicado e instalação manual continuam pendentes.
+Uma rodada posterior exercitou WebKit no Windows, corrigiu foco e validou a
+abertura standalone real do Edge. O indicador “1” da landing permanece em
+2,7:1 por decisão explícita de preservar o visual; os botões públicos usam o
+texto escuro aprovado. Cinco alertas altos da cadeia de lint continuam sem
+correção compatível publicada.
+[Comandos, resultados, falhas corrigidas e limites](VALIDATION_HISTORY.md#consolidacao-inicial).
+[Estado posterior e evidências reais do CI](VALIDATION_HISTORY.md#acompanhamento).
+[Última revisão, resultados e limitações](VALIDATION_HISTORY.md#revisao-final).
+Não autoriza novas features nem repetição das entregas concluídas.
+
+## 13. Encerramento técnico e classificação — 2026-10-07
+
+### Pendências técnicas resolvidas
+
+- Documentação atual reconciliada com evidências, preservando falhas e resultados
+  históricos datados. [Registro completo](TECHNICAL_CLOSURE.md).
+- Atualização do ambiente pessoal comprovada: Next 16.3.8/Axios 1.20.0 instalados;
+  lock preservado. Node 24.21.0/npm 11.19.0 conferidos nesta rodada.
+- CI remoto da revisão final de código `97cee8d917084d255f4d8112cbf9b876c41c2978`
+  aprovado nos dois jobs, com upload de artefato:
+  [37642914180](https://github.com/T-J-Labs/barberhub/actions/runs/37642914180).
+  Metadados acessíveis conferidos; sem nova execução remota nesta rodada.
+- Botões públicos corrigidos e medidos: texto `#07111C` sobre `sky-500`,
+  7,017:1; fallback 6,851:1 e cache v2. Sem exceção nos testes atuais.
+- Testes locais comprovados em Chromium, Firefox e WebKit nos recortes da
+  [revisão final](VALIDATION_HISTORY.md#revisao-final): produção 19/19; Firefox 70/70 grupos;
+  WebKit 75/75 em repetição direta e 23 rotas retestadas por engine no coletor final.
+  O agregado WebKit com timeout permanece FAIL, sem alegar novo 5/5.
+- Edge 154.0.4258.62: abertura standalone real automatizada, instalação e
+  desinstalação em perfil temporário. Não encerra instalação manual humana.
+- Novas auditorias npm executadas; produção zero alertas. Lint, TypeScript e
+  dez suítes de regras passaram nesta rodada. Evidências em
+  `validation/qa-runs/technical-closure-2026-10-07/`.
+
+### Pendências externas ou decisões preservadas
+
+- **Pendência externa:** cinco altos propagados de braces 3.0.3 na cadeia
+  `eslint-config-next 16.3.8 → @next/eslint-plugin-next 16.3.8 → fast-glob 3.3.1
+  → micromatch 4.0.8 → braces 3.0.3`. Sem versão corrigida publicada no advisory;
+  config/plugin 16.4.0 ainda usam a cadeia afetada. Downgrade 14.2.35 sugerido
+  pelo audit rejeitado. Reavaliar após correção oficial compatível, validar
+  instalação limpa/lock, lint, tipos, regras, build e CI do novo commit.
+- **Adiada para a etapa final por decisão de 2026-10-07:** publicação e validação
+  pública ocorrerão após as integrações com o backend estarem funcionando e
+  validadas localmente. Usuário confirmou ausência de domínio/site publicado.
+  Faltam ambiente de demonstração/homologação, commit a publicar, domínio
+  principal e dois subdomínios, DNS/TLS, `BARBERHUB_PUBLIC_HOST` e autorização
+  explícita de publicação/infraestrutura. Validação pública não executada;
+  Host/HTTPS lógico local não comprova DNS/TLS. Plano em [TECHNICAL_CLOSURE.md](TECHNICAL_CLOSURE.md).
+- **Decisão preservada:** indicador “1” com contraste insuficiente de 2,7059:1,
+  mantido visualmente como solicitado. Correção futura exige nova aprovação
+  explícita, medição e regressão visual. Não declara acessibilidade integral.
+
+### QA humano excluído desta entrega
+
+- Leitor de tela operado por pessoa e anúncios reais; revisão humana integral
+  de inconclusivos, contraste e zoom.
+- Android/iPhone físicos, Safari real e instalação manual humana.
+
+Esses itens permanecem pendentes. Automação Chromium/Firefox/WebKit, axe ou
+Edge não equivale a esses testes. As etapas de publicação e validação publicada
+continuam não executadas; o trabalho inteiro não é declarado concluído.

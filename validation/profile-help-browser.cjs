@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const { navigate: loadPage, reload, waitForURL } = require('./qa-navigation.cjs');
 const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require('./qa-browser.cjs');
@@ -22,12 +23,13 @@ fs.mkdirSync(artifactDir, { recursive: true });
       const a = document.createElement('a'); a.href = destination; a.textContent = 'QA sair'; a.id = 'qa-exit'; document.body.append(a);
     }, href);
     await page.locator('#qa-exit').click();
-    await page.waitForURL(href);
+    await waitForURL(page, href);
+    await page.waitForLoadState('networkidle');
   }
   try {
     for (const role of ['cliente', 'barbeiro']) {
       const initial = role === 'cliente' ? 'Cliente de demonstração' : 'Rafael Lima (fictício)';
-      await page.goto(`${base}/${role}/perfil`);
+      await loadPage(page, `${base}/${role}/perfil`);
       await check(`${role}: visitante direto e somente um campo editável`, async () => {
         await field().waitFor(); assert.equal(await page.locator('main input').count(), 1);
         if (role === 'cliente') assert.equal(await page.getByRole('link', { name: 'Entrar', exact: true }).count(), 1);
@@ -65,7 +67,7 @@ fs.mkdirSync(artifactDir, { recursive: true });
         assert.equal(await field().inputValue(), 'Érica Souza');
       });
       await check(`${role}: recarga restaura exemplo`, async () => {
-        await page.reload(); assert.equal(await field().inputValue(), initial);
+        await reload(page); assert.equal(await field().inputValue(), initial);
       });
       await apply('Nome temporário');
       await check(`${role}: sair e retornar reinicia, papéis independentes`, async () => {
@@ -77,17 +79,17 @@ fs.mkdirSync(artifactDir, { recursive: true });
         assert.equal(await field().inputValue(), initial);
       });
       await page.setViewportSize({ width: 390, height: 900 });
-      await page.screenshot({ path: path.join(artifactDir, `profile-${role}-normal-390.png`), fullPage: true });
+      await page.screenshot({ caret: 'initial',  path: path.join(artifactDir, `profile-${role}-normal-390.png`), fullPage: true });
       await apply('Á'.repeat(300));
       for (const width of [320, 390, 768, 1440]) {
         await check(`${role}: perfil ${width}px sem corte horizontal`, async () => {
           await page.setViewportSize({ width, height: 900 });
           assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
           assert.equal((await applied().locator('p').nth(1).innerText()).length, 300);
-          await page.screenshot({ path: path.join(artifactDir, `profile-${role}-${width}.png`), fullPage: true });
+          await page.screenshot({ caret: 'initial',  path: path.join(artifactDir, `profile-${role}-${width}.png`), fullPage: true });
         });
       }
-      await page.goto(`${base}/${role}/ajuda`);
+      await loadPage(page, `${base}/${role}/ajuda`);
       for (const width of [320, 390, 768, 1440]) {
         await check(`${role}: ajuda ${width}px e perguntas por teclado`, async () => {
           await page.setViewportSize({ width, height: 900 });
@@ -101,7 +103,7 @@ fs.mkdirSync(artifactDir, { recursive: true });
             await summaries.nth(i).click();
           }
           assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-          await page.screenshot({ path: path.join(artifactDir, `help-${role}-${width}.png`), fullPage: true });
+          await page.screenshot({ caret: 'initial',  path: path.join(artifactDir, `help-${role}-${width}.png`), fullPage: true });
         });
       }
       await check(`${role}: todos os atalhos com mouse e teclado, sem destinos cruzados`, async () => {
@@ -109,17 +111,17 @@ fs.mkdirSync(artifactDir, { recursive: true });
         for (const { text, href } of links) {
           assert.ok(!href.includes(role === 'cliente' ? '/barbeiro/' : '/cliente/'));
           for (const method of ['mouse', 'keyboard']) {
-            await page.goto(`${base}/${role}/ajuda`);
+            await loadPage(page, `${base}/${role}/ajuda`);
             const target = page.getByRole('link', { name: text, exact: false });
             if (method === 'mouse') await target.click(); else { await target.focus(); await page.keyboard.press('Enter'); }
-            await page.waitForURL(href);
+            await waitForURL(page, href);
             assert.equal(await page.getByText('404', { exact: true }).count(), 0);
           }
         }
       });
     }
     await check('cliente: prévia ativa coerente sem iniciar sessão pelo perfil', async () => {
-      await page.goto(`${base}/login`);
+      await loadPage(page, `${base}/login`);
       await page.getByText('Ver prévia do header de cliente', { exact: true }).click();
       await page.getByRole('button', { name: 'Visualizar header de cliente' }).click();
       // Next Link supplied by the feature, using the same root presentation provider.
@@ -145,27 +147,28 @@ fs.mkdirSync(artifactDir, { recursive: true });
       }
       await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
       await page.getByRole('button', { name: 'Sair da demonstração', exact: true }).click();
-      await page.getByRole('link', { name: 'Entrar', exact: true }).waitFor();
+      await page.waitForFunction(() => !document.querySelector('dialog[open]') && document.body.style.overflow !== 'hidden');
+      await page.getByRole('banner').getByRole('link', { name: 'Entrar', exact: true }).waitFor();
       assert.equal(await field().inputValue(), 'Cliente de demonstração');
     });
     await check('barbeiro: controle Perfil e apresentação da agenda coerentes', async () => {
-      await page.goto(`${base}/barbeiro`);
+      await loadPage(page, `${base}/barbeiro`);
       await page.getByRole('link', { name: 'Perfil', exact: true }).click();
       await apply('Márcio da Silva');
       await page.getByRole('link', { name: 'Consultar ajuda do barbeiro' }).click();
       await page.getByRole('link', { name: /Consultar e experimentar a agenda/ }).click();
-      await page.waitForURL(`${base}/barbeiro/agenda`);
+      await waitForURL(page, `${base}/barbeiro/agenda`);
       await page.getByRole('heading', { name: 'Minha agenda', exact: true }).waitFor();
       assert.ok((await page.locator('main header').innerText()).includes('Márcio da Silva'));
     });
     await check('barbeiro: Perfil e Ajuda no menu com mouse e teclado', async () => {
       for (const destination of ['Perfil', 'Ajuda']) {
         for (const keyboard of [false, true]) {
-          await page.goto(`${base}/barbeiro`);
+          await loadPage(page, `${base}/barbeiro`);
           await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
           const item = page.locator('#account-navigation').getByRole('link', { name: destination, exact: true });
           if (keyboard) { await item.focus(); await page.keyboard.press('Enter'); } else await item.click();
-          await page.waitForURL(`${base}/barbeiro/${destination === 'Perfil' ? 'perfil' : 'ajuda'}`);
+          await waitForURL(page, `${base}/barbeiro/${destination === 'Perfil' ? 'perfil' : 'ajuda'}`);
           assert.equal(await page.locator('#account-navigation').isVisible(), false);
         }
       }
@@ -173,32 +176,32 @@ fs.mkdirSync(artifactDir, { recursive: true });
     await check('cliente: contexto validado, subdomínio e acesso preservam retorno', async () => {
       const url = `${base}/cliente/ajuda?barbearia=demo-esquina`;
       for (const keyboard of [false, true]) {
-        await page.goto(url);
+        await loadPage(page, url);
         const target = page.getByRole('link', { name: /Perfil público da barbearia/ });
         if (keyboard) { await target.focus(); await page.keyboard.press('Enter'); } else await target.click();
-        await page.waitForURL(`http://demo-esquina.localhost:${process.argv[2] || 3000}/`);
-        await page.goto(url);
+        await waitForURL(page, `http://demo-esquina.localhost:${process.argv[2] || 3000}/`);
+        await loadPage(page, url);
         const booking = page.getByRole('link', { name: /Experimentar o agendamento/ });
         if (keyboard) { await booking.focus(); await page.keyboard.press('Enter'); } else await booking.click();
-        await page.waitForURL(`http://demo-esquina.localhost:${process.argv[2] || 3000}/agendar`);
+        await waitForURL(page, `http://demo-esquina.localhost:${process.argv[2] || 3000}/agendar`);
         for (const mode of ['acesso', 'cadastro']) {
-          await page.goto(url);
+          await loadPage(page, url);
           const accessLink = page.getByRole('link', { name: new RegExp(`Consultar tela de ${mode}`) });
           const destination = await accessLink.getAttribute('href');
           if (keyboard) { await accessLink.focus(); await page.keyboard.press('Enter'); } else await accessLink.click();
-          await page.waitForURL(destination);
+          await waitForURL(page, destination);
           assert.equal(new URL(page.url()).searchParams.get('barbearia'), 'demo-esquina');
           assert.equal(new URL(page.url()).searchParams.get('returnTo'), `http://demo-esquina.localhost:${process.argv[2] || 3000}/`);
           assert.equal(await page.locator('button').filter({ hasText: 'Google' }).first().isDisabled(), true);
         }
       }
-      await page.goto(url);
+      await loadPage(page, url);
       const access = new URL(await page.getByRole('link', { name: /Consultar tela de acesso/ }).getAttribute('href'));
       assert.equal(access.searchParams.get('returnTo'), `http://demo-esquina.localhost:${process.argv[2] || 3000}/`);
     });
     await check('admin: defaults e destinos existentes preservados', async () => {
       for (const route of ['/admin/configuracoes', '/admin/ajuda']) {
-        await page.goto(base + route);
+        await loadPage(page, base + route);
         assert.equal(await page.locator('main h1').count(), 1);
         const eyebrow = page.locator('main header > p').first();
         assert.equal(await eyebrow.evaluate(el => getComputedStyle(el).color), 'rgb(101, 213, 255)');

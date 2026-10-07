@@ -45,7 +45,7 @@ export function AdminHelpView() {
             <Link href="/admin/agenda" className="mt-6 inline-flex min-h-11 items-center rounded-lg bg-[#65d5ff] px-5 text-sm font-bold text-[#061522] transition-colors hover:bg-[#8de1ff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#65d5ff]">Abrir agenda</Link>
           </div>
           <div className="p-3 sm:p-5">
-            <p className="px-3 pt-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 sm:px-4">Caminhos mais usados</p>
+            <p className="px-3 pt-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400 sm:px-4">Caminhos mais usados</p>
             <ul className="mt-2">
               {destinations.slice(0, 3).map((item) => <HelpDestination key={item.href} {...item} />)}
             </ul>
@@ -85,7 +85,7 @@ export function AdminHelpView() {
         </div>
       </section>
 
-      <p className="mt-8 text-xs leading-5 text-slate-500">Esta ajuda descreve a prévia atual do painel administrativo. Recursos que dependem da API serão disponibilizados em uma etapa posterior.</p>
+      <p className="mt-8 text-xs leading-5 text-slate-400">Esta ajuda descreve a prévia atual do painel administrativo. Recursos que dependem da API serão disponibilizados em uma etapa posterior.</p>
     </HelpShell>
   )
 }

@@ -5,6 +5,7 @@ import { createRequire } from 'node:module'
 import { httpTestConfig, assertHttpTestRuntime } from './http-test-config.mjs'
 import { ownerOnboardingJourneys } from './owner-onboarding-journeys.mjs'
 import { superadminHelpJourneys } from './superadmin-help-journeys.mjs'
+import { incompleteEvidence, keyboardSweep } from './accessibility-review.mjs'
 
 const require = createRequire(new URL('../../validation/qa-browser.cjs', import.meta.url))
 const { chromium } = require('./qa-browser.cjs')
@@ -22,9 +23,16 @@ if (c.environment === 'production') {
   await context.route('**/*', async route => {
     const url = new URL(route.request().url())
     if (url.hostname !== c.base && !url.hostname.endsWith(`.${c.base}`)) return route.abort()
-    const response = await route.fetch({ url: c.connectionOrigin + url.pathname + url.search,
-      headers: { ...route.request().headers(), host: url.host }, maxRedirects: 0 })
-    await route.fulfill({ response })
+    try {
+      const response = await route.fetch({ url: c.connectionOrigin + url.pathname + url.search,
+        headers: { ...route.request().headers(), host: url.host }, maxRedirects: 0,
+        // Retry restrito a uma falha ECONNRESET em leituras; nunca replay de ação.
+        maxRetries: ['GET', 'HEAD'].includes(route.request().method()) ? 1 : 0 })
+      await route.fulfill({ response })
+    } catch (error) {
+      errors.push(`Transporte QA ${route.request().method()} ${url.href}: ${error.message}`)
+      await route.abort('failed').catch(() => {})
+    }
   })
 }
 const page = await context.newPage()
@@ -54,13 +62,11 @@ async function audit(label) {
   const exceptions = [], failures = []
   for (const violation of report.violations) {
     for (const node of violation.nodes) {
-      // Exceção explícita limitada aos botões públicos sky-500/branco aprovados.
-      const approved = violation.id === 'color-contrast' && await page.locator(node.target.join(' ')).evaluate(el => el.classList.contains('bg-sky-500') && el.classList.contains('text-white'))
-      if (approved) exceptions.push({ id: violation.id, node })
-      else failures.push({ id: violation.id, impact: violation.impact, node })
+      failures.push({ id: violation.id, impact: violation.impact, node })
     }
   }
-  audits.push({ label, url: page.url(), exceptions, failures, incomplete: report.incomplete })
+  const review = await incompleteEvidence(page, report.incomplete)
+  audits.push({ label, url: page.url(), exceptions, failures, incomplete: report.incomplete, review })
   fs.writeFileSync(path.join(dir, 'axe.json'), JSON.stringify(audits, null, 2))
   assert.equal(failures.length, 0, JSON.stringify(failures.map(x => ({ id: x.id, target: x.node.target }))))
 }
@@ -146,6 +152,7 @@ try {
       await page.getByRole('heading', { level: 1, name: 'Barbearia da Esquina' }).waitFor()
       assert.equal(new URL(page.url()).hostname, `demo-esquina.${c.base}`)
       await geometry(`profile-${width}`)
+      if (width === 390) await audit('perfil público Esquina')
     })
     await check(`wizard ${width}px: teclado, invalidação, conflito, clique repetido e recuperação`, async () => {
       await startBooking('conflict')
@@ -170,6 +177,7 @@ try {
       await page.getByRole('heading', { name: 'Você explorou o agendamento' }).waitFor()
       assert.match(await page.locator('main').getByRole('status').first().innerText(), /nenhum horário foi reservado/)
       await geometry(`result-${width}`)
+      if (width === 390) await audit('wizard resultado')
       await button('Explorar novamente').click()
       assert.equal(await page.locator('input:checked').count(), 0)
     })
@@ -293,8 +301,12 @@ try {
     assert.equal(await navalha.getByRole('link').count(), 3)
     assert.equal(await page.getByRole('article').count(), 2)
   })
-  for (const route of ['/barbearias', '/login', '/cadastro', '/cliente/barbearias', '/cliente/agendamentos', '/cliente/perfil', '/cliente/ajuda', '/barbeiro', '/barbeiro/agenda', '/barbeiro/historico', '/barbeiro/perfil', '/barbeiro/ajuda', '/super-admin', '/super-admin/barbearias', '/admin', '/admin/agenda', '/admin/clientes', '/admin/servicos', '/admin/barbeiros', '/admin/configuracoes']) {
-    await check(`axe/landmarks ${route}`, async () => { await goto(route); await geometry(route.replaceAll('/', '_')); await audit(route) })
+  for (const route of ['/', '/barbearias', '/login', '/cadastro', '/cliente/barbearias', '/cliente/agendamentos', '/cliente/perfil', '/cliente/ajuda', '/barbeiro', '/barbeiro/agenda', '/barbeiro/historico', '/barbeiro/perfil', '/barbeiro/ajuda', '/super-admin', '/super-admin/barbearias', '/admin', '/admin/agenda', '/admin/clientes', '/admin/servicos', '/admin/barbeiros', '/admin/configuracoes', '/admin/relatorios', '/admin/ajuda']) {
+    await check(`axe/landmarks/teclado ${route}`, async () => {
+      await goto(route); await geometry(route.replaceAll('/', '_')); await audit(route)
+      const controls = await keyboardSweep(page)
+      fs.writeFileSync(path.join(dir, `keyboard-${route.replaceAll('/', '_')}.json`), JSON.stringify(controls, null, 2))
+    })
   }
   await check('wizard: falha final preserva escolhas e reinício durante processamento', async () => {
     await startBooking('final-error'); await chooseToReview()
@@ -307,6 +319,25 @@ try {
     await page.waitForTimeout(500)
     assert.equal(await page.getByRole('heading', { name: 'Você explorou o agendamento' }).count(), 0)
     assert.equal(await page.locator('input:checked').count(), 0)
+  })
+  await check('wizard: setas percorrem o grupo nativo de serviços', async () => {
+    await startBooking()
+    const radios = page.getByRole('radio')
+    assert.ok(await radios.count() >= 2)
+    await radios.first().focus(); await page.keyboard.press('Space')
+    await page.keyboard.press('ArrowDown')
+    assert.equal(await radios.nth(1).isChecked(), true)
+    await focused(radios.nth(1))
+    await page.keyboard.press('ArrowUp')
+    assert.equal(await radios.first().isChecked(), true)
+  })
+  await check('cliente: contraste do título no diálogo sem recorte por rolagem', async () => {
+    await goto('/cliente/agendamentos')
+    await page.getByRole('button', { name: /Ver detalhes/ }).first().click()
+    await page.locator('dialog[open] h2').scrollIntoViewIfNeeded()
+    await audit('cliente detalhes título visível')
+    await page.screenshot({ path: path.join(dir, 'client-dialog-title-visible.png'), caret: 'initial' })
+    await page.keyboard.press('Escape')
   })
   await check('Navalha: identidade e wizard completo', async () => {
     await goto('/agendar', 'demo-navalha'); await button('Experimentar demonstração').click(); await chooseToReview()

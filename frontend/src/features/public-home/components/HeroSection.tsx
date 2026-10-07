@@ -36,7 +36,7 @@ export async function HeroSection() {
               <div className="flex flex-col items-center justify-center gap-4 lg:flex-row w-full">
                 <Link
                   href={signupHref}
-                  className="flex min-h-11 w-full items-center justify-center rounded-lg bg-sky-500 py-3 text-center text-white"
+                  className="flex min-h-11 w-full items-center justify-center rounded-lg bg-sky-500 py-3 text-center text-[#07111C]"
                 >
                   Cadastrar minha barbearia
                 </Link>

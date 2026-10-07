@@ -1,0 +1,219 @@
+{
+  "recordedUtc": "2026-10-07T05:59:03.8353317Z",
+  "dateLocal": "2026-10-07",
+  "supersedesPendingFrom": "validation/frontend-consolidation-summary.json",
+  "evidenceRoot": "validation/qa-runs/environment-followup-2026-10-07-5aa60d89",
+  "personalEnvironment": {
+    "startedUtc": "2026-10-07T05:07:32.1112112Z",
+    "before": {
+      "next": "16.3.0",
+      "pid": 15056,
+      "port": 3000,
+      "nextParentPid": 15348,
+      "axios": "1.19.0"
+    },
+    "lockSha256": "D0F77A1DA0540D78F1966BB10E42D2E84F04C252E93FB9BB23FECC043EC93FB1",
+    "envFiles": [
+      {
+        "name": ".env.example",
+        "sha256": "45443BA151D1E40147B988BE33D6440D48DDFDAE662A89117059BCCB8806D434"
+      }
+    ],
+    "changes": [
+      " M README.md",
+      " M docs/frontend/FRONTEND_ROADMAP.md",
+      " M docs/frontend/PWA.md",
+      " M docs/frontend/QA_ACCESSIBILITY.md",
+      " M frontend/package-lock.json",
+      " M frontend/package.json",
+      " M frontend/src/features/admin-help/components/AdminHelpView.tsx",
+      " M frontend/src/features/admin-settings/components/AdminSettingsView.tsx",
+      " M frontend/src/features/relatorios/components/ReportsView.tsx",
+      " M frontend/tests/owner-onboarding-journeys.mjs",
+      " M frontend/tests/qa-journeys.mjs",
+      " M frontend/tests/qa-runner.mjs",
+      " M validation/headers-browser.cjs",
+      " M validation/headers-zoom.cjs",
+      " M validation/profile-help-browser.cjs",
+      " M validation/pwa-browser.cjs",
+      " M validation/superadmin-browser.cjs",
+      " M validation/superadmin-registration-browser.cjs",
+      "?? .github/",
+      "?? docs/frontend/FRONTEND_CONSOLIDATION.md",
+      "?? frontend/tests/accessibility-review.mjs",
+      "?? frontend/tests/qa-rule-suites.mjs",
+      "?? frontend/tests/rules-runner.mjs",
+      "?? validation/frontend-consolidation-summary.json",
+      "?? validation/qa-navigation.cjs"
+    ],
+    "after": {
+      "next": "16.3.8",
+      "axios": "1.20.0",
+      "pid": 14488,
+      "port": 3000,
+      "lockUnchanged": true,
+      "catalogStatus": 200,
+      "restartedUtc": "2026-10-07T05:10:34.7493381Z",
+      "envFilesUnchanged": true
+    }
+  },
+  "stage1": {
+    "status": "PASS local; manual/external pending",
+    "approvedPublicForeground": "#07111C",
+    "background": "sky-500 unchanged",
+    "contrastSrgb": 7.017130062,
+    "offlineContrastSrgb": 6.851,
+    "firefox": {
+      "evidence": "validation/qa-runs/environment-followup-2026-10-07-5aa60d89/firefox-terminal-fix/2026-10-07T05-35-25.940Z-browser-aVoVqD",
+      "passed": true,
+      "browser": "146.0.1",
+      "started": "2026-10-07T05:35:25.941Z",
+      "ended": "2026-10-07T05:42:46.078Z",
+      "sourceFingerprint": "4b62ed719af96c5f94ba2c960053daab9b23805214152b989f9fb6c0cf0cd0f9",
+      "endedFingerprint": "4b62ed719af96c5f94ba2c960053daab9b23805214152b989f9fb6c0cf0cd0f9",
+      "suites": 5,
+      "groups": 75,
+      "audits": 122,
+      "violations": 0,
+      "exceptions": 0,
+      "incomplete": 169,
+      "reviewNodes": 483,
+      "errors": [],
+      "server": "prepared",
+      "serverStopped": null
+    },
+    "physicalDevicesTested": false,
+    "realScreenReaderTested": false,
+    "humanIncompleteReviewComplete": false
+  },
+  "stage2": {
+    "status": "PASS isolated clean install, new build and local production",
+    "production": {
+      "evidence": "validation/qa-runs/environment-followup-2026-10-07-5aa60d89/production/2026-10-07T05-16-55.963Z-production-gWr7rj",
+      "passed": true,
+      "browser": "145.0.7632.6",
+      "started": "2026-10-07T05:16:55.964Z",
+      "ended": "2026-10-07T05:21:58.167Z",
+      "sourceFingerprint": "4efcf84d6ec161f26078a089a706ff250d0522afb75ef38121c8b2770bb2036b",
+      "endedFingerprint": "4efcf84d6ec161f26078a089a706ff250d0522afb75ef38121c8b2770bb2036b",
+      "suites": 19,
+      "groups": 70,
+      "audits": 110,
+      "violations": 0,
+      "exceptions": 0,
+      "incomplete": 160,
+      "reviewNodes": 473,
+      "errors": [],
+      "server": "isolated",
+      "serverStopped": true
+    },
+    "build": {
+      "buildExit": 0,
+      "buildId": "qpcxCJBsy4pcswj10HwdN",
+      "buildDirectory": "C:\\Users\\Felipe Tajima\\.codex\\worktrees\\frontend-ci-validation\\barberhub",
+      "dateUtc": "2026-10-07T05:16:54.4232429Z"
+    },
+    "edgeStandalone": "not validated; native CDP launch timed out again"
+  },
+  "stage3": {
+    "status": "PASS actual Ubuntu workflow on final code commit, both jobs and artifact upload",
+    "workflow": ".github/workflows/frontend.yml",
+    "firstRun": {
+      "id": 37576432180,
+      "url": "https://github.com/T-J-Labs/barberhub/actions/runs/37576432180",
+      "commit": "3ccbc97a6836f861c8aab282616a79d49aa5a1dd",
+      "conclusion": "success",
+      "jobs": 2,
+      "chromiumInstalled": true,
+      "artifactPublished": true,
+      "artifactName": "frontend-qa-37576432180-1",
+      "artifactBytes": 196332685
+    },
+    "artifactDownloaded": false,
+    "finalRun": {
+      "id": 37577800497,
+      "url": "https://github.com/T-J-Labs/barberhub/actions/runs/37577800497",
+      "commit": "2d98b37efe7d185c03f0091c79f9e5b9e4c4fa9f",
+      "conclusion": "success",
+      "jobs": 2,
+      "chromiumInstalled": true,
+      "artifactPublished": true,
+      "artifact": {
+        "id": 11463885846,
+        "name": "frontend-qa-37577800497-1",
+        "size_in_bytes": 211454224,
+        "digest": "sha256:aa250e7c3e28f379e6d0859f5cc42c534f5cd7ddb4b45b437c884fdaa1809bf9",
+        "expired": false,
+        "expires_at": "2026-10-21T05:56:54Z"
+      }
+    },
+    "ubuntuExecuted": true,
+    "remoteExecuted": true
+  },
+  "dependencies": {
+    "productionAlerts": 0,
+    "developmentHigh": 5,
+    "forcedFixApplied": false,
+    "recurringMonitorCreated": false
+  },
+  "pending": [
+    "Real screen reader and integral human review of axe incomplete results",
+    "Physical Android/iPhone, Safari/WebKit, human manual installation and published DNS/TLS",
+    "Native Edge standalone launch: repeated timeout",
+    "Five high lint tool advisories without compatible published fix"
+  ],
+  "preservation": {
+    "primaryBranch": "frontend/finalpatches",
+    "primaryHead": "ee0fddfa13102b851c98d851bdb7e4296f8ddf28",
+    "ownRemoteBranch": "codex/frontend-ci-validation",
+    "personalServerPort": 3000,
+    "personalServerPid": 14488,
+    "userAuthorizedRestart": true,
+    "backendDatabaseOpenapiChanged": false,
+    "finalCheck": {
+      "port": 3000,
+      "pid": 14488,
+      "parentPid": 19864,
+      "command": "\"C:\\Program Files\\nodejs\\node.exe\" \"C:\\Users\\Felipe Tajima\\projetosportfolio\\barberhub\\frontend\\node_modules\\next\\dist\\server\\lib\\start-server.js\"",
+      "installedNext": "16.3.8",
+      "installedAxios": "1.20.0",
+      "primaryHead": "ee0fddfa13102b851c98d851bdb7e4296f8ddf28",
+      "branch": "frontend/finalpatches",
+      "lockSha256": "D0F77A1DA0540D78F1966BB10E42D2E84F04C252E93FB9BB23FECC043EC93FB1",
+      "envFiles": [
+        {
+          "name": ".env.example",
+          "sha256": "45443BA151D1E40147B988BE33D6440D48DDFDAE662A89117059BCCB8806D434"
+        }
+      ],
+      "qaPortsListening": [],
+      "checkedUtc": "2026-10-07T05:46:00.4886563Z"
+    },
+    "temporaryWorktreeArchived": true,
+    "recoverableSnapshotConfirmed": true,
+    "remoteBranchPreserved": true,
+    "finalPersonalCatalogStatus": 200
+  },
+  "sourceVerification": {
+    "checkedUtc": "2026-10-07T05:50:05.2102899Z",
+    "publishedCodeCommit": "2d98b37efe7d185c03f0091c79f9e5b9e4c4fa9f",
+    "files": 286,
+    "differences": [
+      {
+        "file": "frontend/src\\lib\\api\\generated\\models\\tenantSubdomainParameter.ts",
+        "kind": "Orval generator version comment only"
+      },
+      {
+        "file": "frontend/src\\lib\\api\\generated\\models\\index.ts",
+        "kind": "Orval generator version comment only"
+      },
+      {
+        "file": "frontend/src\\lib\\api\\generated\\barberhub.ts",
+        "kind": "Orval generator version comment only"
+      }
+    ],
+    "executableAndContractContentEqual": true
+  },
+  "historicalRecord": true,
+  "currentFollowup": "validation/frontend-pending-review-summary.json"
+}

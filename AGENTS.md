@@ -82,8 +82,9 @@ Ao trabalhar no frontend:
 - Não acesse o banco de dados diretamente.
 - Toda comunicação com o backend deve ocorrer pela API REST.
 - Não invente tipos que contradigam o contrato OpenAPI.
-- Preserve o padrão aprovado dos botões primários públicos: `bg-sky-500`,
-  texto branco e hover sem alteração do tom de azul. `sky-400` fica reservado
+- Preserve o padrão aprovado em 2026-10-07 dos botões primários públicos:
+  `bg-sky-500`, texto `#07111C` e hover sem alteração do tom de azul. A decisão
+  explícita substitui o texto branco anterior para corrigir o contraste. `sky-400` fica reservado
   a destaques e foco, não ao fundo desses botões. Nos perfis públicos, reutilize
   `catalogActionClass` de `src/features/barbershop-catalog/styles.ts`, incluindo
   o hover com ampliação e respeito a movimento reduzido. Não crie uma variante

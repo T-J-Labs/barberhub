@@ -1,6 +1,49 @@
 # Consolidação de QA e acessibilidade
 
-Entrega de 2026-10-06: infraestrutura de testes, regressões, auditoria e correções
+## Estado atual confirmado — 2026-10-07
+
+CI remoto da revisão final `97cee8d917084d255f4d8112cbf9b876c41c2978` aprovado:
+[run 37642914180](https://github.com/T-J-Labs/barberhub/actions/runs/37642914180),
+dois jobs e upload success, metadados brutos conferidos localmente. Ambiente
+pessoal usa Next 16.3.8/Axios 1.20.0. Produção local final passou 19/19 suítes;
+Firefox passou 70/70 grupos e WebKit 75/75 na repetição direta, com reteste
+final de teclado em 23 rotas por engine. Não se declara agregado WebKit 5/5:
+o agregado com timeout continua FAIL. Edge passou abertura standalone real
+por automação, sem instalação manual humana.
+
+Botões públicos corrigidos: `#07111C` sobre `sky-500`, medição 7,017:1
+(fallback 6,851:1), sem exceções de contraste nos testes atuais. Indicador “1”
+mantido em 2,7059:1 por decisão explícita: dívida visual conhecida. Uma correção
+futura exige nova aprovação, medição e regressão visual. Não se declara WCAG
+integral nem aprovação humana dos resultados inconclusivos.
+
+Auditorias reexecutadas: produção zero alertas; completa cinco altos da cadeia
+de lint, **pendência externa** sem correção compatível identificada. Publicação
+e QA publicado **adiados para a etapa final**, por decisão de 2026-10-07, após
+as integrações com o backend estarem funcionando e validadas localmente.
+Ainda não há domínio ou site publicado. Leitor de tela operado por pessoa, aparelhos físicos, Safari
+real, instalação manual e revisão humana integral continuam pendentes.
+[Auditoria, versões, evidências e condições de publicação](TECHNICAL_CLOSURE.md).
+
+## Histórico e revisões anteriores
+
+Continuação posterior em [FRONTEND_PENDING_REVIEW.md](VALIDATION_HISTORY.md#revisao-final):
+correção de foco no WebKit, regressão nova de produção 19/19 e abertura real da
+PWA standalone no Edge. Revisão técnica dos 483 nós inconclusivos registrou
+uma pendência de contraste no indicador “1” da landing, mantida por escolha
+explícita do usuário. Anúncios de leitor de tela e QA humano/externo continuam
+limitados à disponibilidade; não se declara WCAG integral.
+
+Estado posterior em [FRONTEND_FOLLOWUP.md](VALIDATION_HISTORY.md#acompanhamento): em 2026-10-07
+o usuário aprovou texto `#07111C` sobre `sky-500`; a exceção de contraste foi
+removida dos testes. Registros anteriores de branco/exceções são históricos.
+Ambiente pessoal adotou o lock aprovado e foi reiniciado. QA humano/externo
+continua limitado à disponibilidade informada.
+Firefox 146.0.1 passou cinco suítes e 122 auditorias sem violações/exceções;
+Chromium passou 19 suítes de produção. O CI real no Ubuntu passou os dois jobs
+e publicou artefato, conforme run/commit registrados no acompanhamento.
+
+Registro histórico da entrega de 2026-10-06: infraestrutura de testes, regressões, auditoria e correções
 pontuais. **Parcialmente validada**: verificações externas/manuais listadas abaixo
 continuam pendentes. Não certifica WCAG, autenticação, autorização, isolamento do
 backend ou reservas reais. OpenAPI permanece `paths: {}`; CI e publicação fora do
@@ -152,7 +195,7 @@ Service workers são bloqueados nesse contexto. A PWA é verificada em **outro
 perfil temporário**, via HTTP localhost e a exceção de contexto seguro do browser,
 com worker real e sem esse roteamento. São camadas diferentes, ambas locais.
 
-## Cobertura e resultados desta execução
+## Cobertura e resultados da execução histórica de 2026-10-06
 
 | Jornada/camada | Cobertura |
 | --- | --- |
@@ -210,7 +253,7 @@ espera do streaming após recarga. O teste negativo do executor precisou remover
 de o Node ignorá-la como execução recursiva. Essa fixture testa o executor;
 nunca é contada como teste bem-sucedido da aplicação.
 
-## Correções e impacto
+## Correções e impacto da execução histórica de 2026-10-06
 
 Skill `interface-design` aplicada com `.interface-design/system.md`: intenção de
 conferir visitas/agenda com calma, mantendo hierarquia, Geist, superfícies/bordas,
@@ -233,7 +276,7 @@ ritmo de 4px e ações existentes. Não houve reformulação de headers nem da P
   A exceção não elimina outros alertas de contraste. `incomplete` do axe exige
   inspeção humana e não é registrado como aprovado.
 
-## Verificações não executadas e conclusão parcial
+## Verificações não executadas na rodada histórica de 2026-10-06
 
 - Leitor de tela real, ferramenta/versão: **não executado**. DOM, axe e teclado
   não são teste com NVDA/Narrator/VoiceOver. Nem ordem de anúncios real está certificada.
@@ -298,3 +341,39 @@ a ausência de violações nesta página não elimina essa pendência transversa
 
 Referências das ferramentas: [isolamento do Playwright](https://playwright.dev/docs/browser-contexts)
 e [navegadores/canais](https://playwright.dev/docs/browsers).
+
+## Consolidação final — registro histórico de 2026-10-06 e início de 2026-10-07
+
+[Registro completo](VALIDATION_HISTORY.md#consolidacao-inicial): teclado ampliado para 23 rotas,
+setas nos serviços, foco em campos date/time, revisão DOM dos inconclusivos e
+título de diálogo inteiro. Corrigidos nome acessível das iniciais de Configurações
+e 12 ocorrências de contraste dos textos secundários de Relatórios/Ajuda admin,
+com o `slate-400` existente. Botões públicos foram preservados e continuam
+falhando contraste AA; não se declara conformidade integral.
+
+Edge e Chrome locais foram exercitados; ambos usam Chromium. Reexecuções
+específicas passaram após corrigir expectativas/sincronização dos testes;
+os agregados inicialmente reprovados foram preservados como FAIL.
+Na produção Edge, o build novo passou 19 suítes, com 70 grupos de jornadas,
+110 auditorias, 90 exceções públicas repetidas, 160 entradas inconclusivas e
+473 nós com inspeção DOM. Não houve falhas fora da exceção pública.
+Inconclusivos continuam identificados, sem supressão nem aprovação automática.
+
+Foi executada instalação limpa da aplicação e ferramentas em snapshot sem
+dependências/build/env, na mesma máquina Windows. Essa execução substitui a
+limitação anterior de instalação limpa local, mas não testa outro computador.
+PWA e ciclo de atualização passaram; instalação nativa CDP passou no Chrome,
+com timeout de abertura no Edge. Leitor de tela, aparelhos, outras engines,
+instalação manual e TLS/DNS publicados continuam não executados.
+
+CI implementado com lint, TypeScript, regras, build e navegador/PWA Chromium;
+validação estática local aprovada, execução GitHub ainda não realizada.
+O executor final também passou em snapshot estável no Chromium gerenciado
+145.0.7632.6 completo: seis suítes em desenvolvimento (75 grupos, 122 auditorias,
+101 exceções repetidas, 169 inconclusivos, 482 nós registrados) e 19 em produção
+(70 grupos, 110 auditorias, 90 exceções, 160 inconclusivos, 473 nós). Nenhuma
+falha fora da exceção pública nem erro JavaScript. Fingerprints de início/fim
+iguais; tentativas durante alterações permanecem invalidadas e preservadas.
+Não aprova os inconclusivos nem substitui leitura humana ou leitor de tela.
+Resumo novo em `validation/frontend-consolidation-summary.json`; evidências
+próprias em `validation/qa-runs/final-consolidation-2026-10-06-d2c675ca/`.

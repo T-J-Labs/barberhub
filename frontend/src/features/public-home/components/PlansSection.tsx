@@ -28,7 +28,7 @@ export function PlansSection() {
 
             <Link
               href="#contato"
-              className="flex min-h-12 shrink-0 items-center justify-center rounded-lg bg-sky-500 px-6 py-3 font-semibold text-white"
+              className="flex min-h-12 shrink-0 items-center justify-center rounded-lg bg-sky-500 px-6 py-3 font-semibold text-[#07111C]"
             >
               Conhecer os planos
             </Link>
