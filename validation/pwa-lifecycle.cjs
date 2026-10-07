@@ -13,7 +13,7 @@ const outputDir = require('./qa-output.cjs').outputDirectory('pwa-lifecycle');
 const server = http.createServer(async (request,response) => {
   if(request.url === '/pwa-worker.js') {
     response.writeHead(200, {'Content-Type':'application/javascript','Cache-Control':'no-store','Service-Worker-Allowed':'/'});
-    response.end(exportsWorker.pwaWorkerSource(origin).replace('PREFIX + "v1"','PREFIX + "' + version + '"')); return;
+    response.end(exportsWorker.pwaWorkerSource(origin).replace('PREFIX + ' + JSON.stringify(exportsWorker.pwaCacheVersion),'PREFIX + ' + JSON.stringify(version))); return;
   }
   if(request.url === '/other-worker.js') {
     response.writeHead(200, {'Content-Type':'application/javascript','Service-Worker-Allowed':'/'}); response.end('self.addEventListener("fetch", () => {});'); return;

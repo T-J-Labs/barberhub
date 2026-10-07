@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { spawn, spawnSync } from 'node:child_process'
 import { randomUUID, createHash } from 'node:crypto'
 import { httpTestConfig, assertHttpTestRuntime } from './http-test-config.mjs'
+import { ruleSuites } from './qa-rule-suites.mjs'
 
 const root = fileURLToPath(new URL('../..', import.meta.url))
 const mode = process.argv[2]
@@ -23,12 +24,18 @@ function sourceFingerprint() {
     }
   }
   visit(path.join(root, 'frontend/src')); visit(path.join(root, 'frontend/tests'))
+  visit(path.join(root, 'frontend/public'))
+  for (const file of [
+    ...fs.readdirSync(path.join(root, 'validation')).filter(file => file.endsWith('.cjs')).map(file => `validation/${file}`),
+    'frontend/package.json', 'frontend/package-lock.json', 'validation/tools/package.json', 'validation/tools/package-lock.json',
+  ].sort()) { hash.update(file); hash.update(fs.readFileSync(path.join(root, file))) }
   return hash.digest('hex')
 }
 const report = { started: new Date().toISOString(), mode, code: git(['rev-parse', 'HEAD']), changes: git(['status', '--porcelain']),
   sourceFingerprint: sourceFingerprint(),
   node: process.version, platform: process.platform, config, server: process.env.TEST_SERVER,
-  limitations: [config.transport, config.fixtures, 'Leitor de tela, Android/iPhone, Safari real, instalação manual e HTTPS publicado não executados'], results: [] }
+  limitations: [config.transport, config.fixtures, 'Leitor de tela, Android/iPhone, Safari real, instalação manual e HTTPS publicado não executados'],
+  suiteTimeoutMs: (config.browser === 'webkit' ? 20 : 10) * 60 * 1000, results: [] }
 let server
 let generatedEnvBefore, generatedEnvAfter
 const writeReport = () => fs.writeFileSync(path.join(runDir, 'run.json'), JSON.stringify(report, null, 2))
@@ -41,13 +48,15 @@ async function command(name, args, extra = {}) {
   const began = new Date().toISOString()
   const result = await new Promise(resolve => {
     const child = spawn(process.execPath, args, { cwd: path.join(root, 'frontend'), env, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] })
+    let timedOut = false
     const timer = setTimeout(() => {
+      timedOut = true
       if (process.platform === 'win32') spawnSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { windowsHide: true })
       else child.kill()
-    }, 10 * 60 * 1000)
+    }, report.suiteTimeoutMs)
     for (const stream of [child.stdout, child.stderr]) stream.on('data', data => { log.write(data); process.stdout.write(data) })
     child.on('error', error => { log.write(error.stack); resolve({ exit: 1, error: error.message }) })
-    child.on('close', (code, signal) => { clearTimeout(timer); resolve({ exit: code ?? 1, signal }) })
+    child.on('close', (code, signal) => { clearTimeout(timer); resolve({ exit: code ?? 1, signal, timedOut }) })
   })
   await new Promise(resolve => log.end(resolve))
   report.results.push({ name, command: [process.execPath, ...args], began, ended: new Date().toISOString(), ...result })
@@ -73,7 +82,7 @@ async function startServer() {
   const probe = createServer()
   await new Promise((resolve, reject) => { probe.once('error', reject); probe.listen(config.port, resolve) })
   await new Promise(resolve => probe.close(resolve))
-  const args = [path.join(root, 'frontend/node_modules/next/dist/bin/next'), config.environment === 'production' ? 'start' : 'dev', '--port', String(config.port)]
+  const args = [path.join(root, 'frontend/node_modules/next/dist/bin/next'), config.environment === 'production' ? 'start' : 'dev', '--hostname', '127.0.0.1', '--port', String(config.port)]
   const serverLog = fs.openSync(path.join(runDir, 'server.txt'), 'w')
   const env = { ...process.env, BARBERHUB_PUBLIC_HOST: config.base, NEXT_PUBLIC_API_MOCKING: 'disabled' }
   if (config.environment === 'development') {
@@ -133,8 +142,7 @@ try {
     await command('journeys-accessibility', ['tests/qa-journeys.mjs'], { OWNER_ONBOARDING_QA_ONLY: '1' })
   }
   if (mode !== 'browser' && mode !== 'onboarding' && mode !== 'superadmin-help') {
-    await command('routing', ['--test', 'tests/public-host.test.mjs', 'tests/http-test-config.test.mjs', 'tests/qa-config.test.mjs'])
-    for (const suite of ['client-auth-routing', 'booking-state', 'client-appointments-state', 'client-barbershops-state', 'barber-demo-state', 'profile-help-state', 'superadmin-state', 'owner-onboarding-state', 'pwa-policy']) await command(suite, [`../validation/${suite}.cjs`])
+    for (const { name, args } of ruleSuites) await command(name, args)
     await command('http-shared', ['--test', 'tests/public-routing-http.test.mjs', 'tests/profile-help-metadata-http.test.mjs', 'tests/client-barbershops-http.test.mjs', 'tests/owner-onboarding-http.test.mjs', 'tests/superadmin-help-http.test.mjs'])
     for (const suite of ['client-auth-http', 'booking-http', 'client-appointments-http']) await command(suite, [`../validation/${suite}.cjs`, String(config.port), ...(config.environment === 'production' ? [config.base] : [])])
   }
@@ -158,6 +166,12 @@ try {
   process.exitCode = 1
 } finally {
   await stopServer()
+  report.endedFingerprint = sourceFingerprint()
+  if (report.endedFingerprint !== report.sourceFingerprint) {
+    report.sourceChanged = true
+    report.error = 'Fontes ou ferramentas mudaram durante a execução; repetir em snapshot estável'
+    process.exitCode = 1
+  }
   report.ended = new Date().toISOString(); report.passed = !process.exitCode
   writeReport()
   console.log(`Evidências: ${runDir}; resultado: ${report.passed ? 'PASS' : 'FAIL'}`)

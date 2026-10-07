@@ -1,5 +1,9 @@
 # BarberHub
 
+Acompanhamento de 2026-10-07: ambiente pessoal atualizado para o lock aprovado;
+botões públicos mantêm `sky-500` com texto escuro, conforme decisão explícita.
+[Execuções de CI, regressões e pendências atuais](docs/frontend/VALIDATION_HISTORY.md#acompanhamento).
+
 SaaS multi-tenant para gestão e agendamento de barbearias.
 
 O BarberHub foi concebido para ajudar pequenas e médias barbearias a divulgar
@@ -14,63 +18,37 @@ isolamento seguro dos dados de cada estabelecimento.
 
 ## Problema e proposta
 
-### Estado atual do frontend — 2026-10-06
+### Estado atual do frontend — 2026-10-07
 
-As seis entregas da sequência inicial estão implementadas no escopo sem backend:
-agendamento demonstrativo, meus agendamentos, área do barbeiro, perfil e ajuda
-para cliente e barbeiro, superadmin básico e PWA/acabamento transversal. Também
-existe cadastro manual de rascunhos pelo superadmin. Landing, catálogo, perfil
-público, interfaces administrativas e apresentação de login/cadastro já existem.
+As seis entregas iniciais estão implementadas como demonstrações locais:
+agendamento, meus agendamentos, área do barbeiro, perfil/ajuda, superadmin básico
+e PWA. Também existem Minhas barbearias, onboarding do proprietário, ajuda e
+cadastro manual do superadmin. Landing, catálogo, perfis públicos e interfaces
+administrativas estão disponíveis. [Entregas e limites](docs/frontend/FRONTEND_ROADMAP.md).
 
-Isso não representa um MVP integrado: Google, sessão, autorização, persistência,
-disponibilidade e reservas reais continuam pendentes de contratos. A PWA foi
-validada em produção local, não em todos os dispositivos/ambientes de publicação.
-“Minhas barbearias” está implementada como demonstração local de vínculos fictícios
-e filtro combinado de agendamentos. O onboarding demonstrativo do proprietário está
-implementado em `/onboarding/barbearia`, com dois exemplos independentes e checklist
-calculado. [Regras aprovadas, limites e QA](docs/frontend/OWNER_ONBOARDING.md). Consulte o
-[estado das entregas e limites](docs/frontend/FRONTEND_ROADMAP.md).
+Google, sessão, autorização, persistência, disponibilidade e reservas reais
+continuam dependentes de contratos e backend. Simulações não criam vínculos,
+contas, tenants ou publicação. O vínculo real exige primeiro agendamento real
+confirmado; liberação do estabelecimento exige configuração mínima e compra
+confirmada ou liberação explícita. [ADR](docs/architecture/ADR.md),
+[onboarding](docs/frontend/OWNER_ONBOARDING.md) e
+[superadmin](docs/frontend/SUPERADMIN_DEMO.md).
 
-Headers revisados com a landing como referência visual e de menu mobile;
-cliente e barbeiro compartilham drawer acessível, com destinos próprios e
-sidebar desktop do admin preservada. [Arquivos, QA e limites](docs/frontend/HEADERS_REVIEW.md).
-Consolidação de QA e acessibilidade implementada com agregadores portáteis e
-correções pontuais; validação externa/manual continua parcial.
-[Preparação, cobertura, resultados e pendências](docs/frontend/QA_ACCESSIBILITY.md).
-O vínculo real foi aprovado após o primeiro agendamento real confirmado; o wizard
-local não cria vínculos. O onboarding apresenta configuração mínima e cenários
-fictícios de compra confirmada ou liberação explícita, sem criar conta, tenant,
-convite, acesso ou publicação. [Sequência vigente](docs/frontend/FRONTEND_ROADMAP.md#10-próximos-passos-sem-backend--sequência-vigente-em-2026-10-06).
+Headers seguem a landing, com drawer compartilhado e sidebar desktop admin
+preservada. [Navegação e revisão](docs/frontend/HEADERS_REVIEW.md).
+Ambiente pessoal: Next 16.3.8/Axios 1.20.0. Instalação limpa isolada, build e
+produção local passaram; CI da revisão de código
+`97cee8d917084d255f4d8112cbf9b876c41c2978` aprovado nos dois jobs:
+[run 37642914180](https://github.com/T-J-Labs/barberhub/actions/runs/37642914180).
+Testes locais Chromium/Firefox/WebKit e Edge standalone automatizado estão
+comprovados nos recortes registrados. WebKit não equivale a Safari real.
+[Estado técnico, auditorias e limites](docs/frontend/TECHNICAL_CLOSURE.md),
+[QA humano pendente](docs/frontend/QA_ACCESSIBILITY.md) e
+[histórico de execuções](docs/frontend/VALIDATION_HISTORY.md).
 
-O **Superadmin básico** está disponível como demonstração local em
-`/super-admin`, `/super-admin/barbearias` e `/super-admin/barbearias/[id]`:
-resumo da amostra, lista, busca por nome/cidade/bairro, detalhes e
-suspensão/reativação em memória. Usa seis barbearias fictícias do catálogo;
-nenhuma alteração é salva ou afeta publicação, acesso ou estabelecimento real.
-O cadastro manual cria rascunhos somente nessa amostra, com nome, cidade, bairro,
-subdomínio pretendido e motivo. Rascunhos participam da busca, dos detalhes e do
-resumo durante a navegação interna; recarregar ou sair os remove. Não cria compra,
-conta, publicação ou subdomínio e não permite suspender/reativar rascunhos.
-Não há autenticação/autorização de superadmin. Contratos e regras reais continuam
-pendentes enquanto o OpenAPI mantém `paths: {}`.
-[Escopo, arquivos, testes e limitações](docs/frontend/SUPERADMIN_DEMO.md).
-
-`/super-admin/ajuda` oferece cinco caminhos por tarefa e 13 perguntas frequentes,
-incluindo cadastro manual e onboarding independente. Ajuda usa o mesmo provider:
-navegar até ela e voltar preserva rascunhos e suspensões locais; recarregar ou
-sair da área os descarta. O atalho do onboarding avisa esse descarte e não
-transfere dados ao proprietário. Planos e assinaturas continuam indisponíveis.
-QA da ajuda aprovado em desenvolvimento e produção local: comportamento,
-regressões de superadmin/cadastro, teclado, 320/390/768/1440px, zoom 200%, axe,
-lint, TypeScript e build. Leitor de tela, dispositivos reais e contraste manual
-integral continuam pendentes; detalhes e evidências no documento acima.
-
-Revisão independente de 2026-10-06: Ajuda aprovada como demonstração local,
-com lint/TypeScript, recorte de navegador em desenvolvimento/produção e as
-14 suítes do agregador local passando. O build existente foi reutilizado nesta
-revisão. O registro anterior do onboarding também foi acrescentado ao seu
-documento, sem alegar reexecução nesta rodada. O [índice consolidado das entregas](docs/frontend/FRONTEND_ROADMAP.md#11-consolidação-das-entregas-e-revisões--2026-10-06)
-identifica o que já existe e mantém QA manual/externo e integração real separados.
+Por decisão de 2026-10-07, hospedagem na internet e validação pública ficam
+para depois das integrações com o backend estarem funcionando e validadas
+localmente. Esta ordem não autoriza iniciar integração ou publicar agora.
 
 Muitas barbearias ainda controlam horários por papel ou por conversas dispersas
 no WhatsApp. Isso dificulta a organização da equipe, aumenta a ocorrência de
@@ -168,11 +146,16 @@ barberhub/
 ├── frontend/                 # Aplicação Next.js e TypeScript
 ├── docs/
 │   ├── api/                  # Contrato e processo OpenAPI
-│   └── architecture/         # Decisões arquiteturais
+│   ├── architecture/         # Decisões arquiteturais
+│   ├── design/               # Referências visuais
+│   └── frontend/             # Jornadas, estado atual e histórico de validação
+├── validation/               # Executores, ferramentas e evidências de QA
 ├── AGENTS.md                 # Orientações para agentes de IA
 ├── LICENSE
 └── README.md
 ```
+
+[Organização da validação e mapa das capturas compartilhadas](validation/README.md).
 
 ## Executando o frontend
 
@@ -180,6 +163,12 @@ barberhub/
 
 - Node.js compatível com o Next.js 16
 - npm
+
+Ambiente pessoal conferido em 2026-10-07: Node 24.21.0, npm 11.19.0,
+Next 16.3.8 e Axios 1.20.0. Novas auditorias: produção sem alertas;
+cinco altos na cadeia de lint permanecem como pendência externa sem correção
+compatível identificada. Pacotes e recomendações em
+[TECHNICAL_CLOSURE.md](docs/frontend/TECHNICAL_CLOSURE.md).
 
 ### Instalação
 
@@ -315,8 +304,12 @@ atualização sem interromper edição, larguras 320/390/768/1440px e regressõe
 Instalação nativa e abertura no catálogo foram verificadas em perfil temporário,
 com a preferência standalone definida pelo QA no navegador. Android/iOS reais,
 HTTPS publicado, instalação manual e leitor de tela continuam pendentes.
-Lighthouse foi usado como diagnóstico; a limitação de contraste dos botões
-azuis aprovados está registrada. [Comandos, arquivos, métricas e limites](docs/frontend/PWA.md).
+Lighthouse foi usado como diagnóstico histórico. O contraste dos botões públicos
+foi corrigido com texto `#07111C` sobre `sky-500` (7,017:1; fallback 6,851:1).
+O indicador “1” mantém contraste insuficiente de 2,7059:1 por decisão explícita;
+uma correção futura exige nova aprovação, medição e regressão visual.
+Não se declara conformidade integral de acessibilidade.
+[Comandos, arquivos, métricas e limites](docs/frontend/PWA.md).
 
 ## Contrato da API
 
@@ -356,6 +349,7 @@ conhecer o processo completo.
 - [Onboarding demonstrativo do proprietário e validação](docs/frontend/OWNER_ONBOARDING.md)
 - [PWA, política offline e acabamento transversal](docs/frontend/PWA.md)
 - [Consolidação de QA, acessibilidade e validação parcial](docs/frontend/QA_ACCESSIBILITY.md)
+- [Consolidação técnica, auditoria de dependências e publicação pendente](docs/frontend/TECHNICAL_CLOSURE.md)
 
 ## Roadmap resumido
 

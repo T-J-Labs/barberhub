@@ -116,24 +116,30 @@ export async function ownerOnboardingJourneys({ page, context, goto, button, che
     for (const [id, max] of [['name',120], ['address',160], ['city',80], ['neighborhood',80]]) {
       assert.equal(await page.locator('#' + id).getAttribute('maxlength'), String(max))
     }
-    await page.locator('#name').fill('Descartar recarga'); await page.reload()
+    await page.locator('#name').fill('Descartar recarga'); await page.reload(); await page.waitForLoadState('networkidle')
     await button('Iniciar configuração demonstrativa').click(); assert.match(await page.locator('#name').inputValue(), /Horizonte/)
     await page.locator('#name').fill('Descartar reinício'); await button('Reiniciar demonstração').click()
     await button('Iniciar configuração demonstrativa').click(); assert.match(await page.locator('#name').inputValue(), /Horizonte/)
     await page.locator('#name').fill('Descartar saída'); await page.getByRole('link', { name: 'Sair da demonstração' }).click()
+    await page.waitForURL(url => url.pathname === '/')
+    await page.waitForLoadState('networkidle')
     await start('cadastro'); assert.match(await page.locator('#name').inputValue(), /Horizonte/)
     assert.equal(await page.evaluate(() => Object.keys(localStorage).some(key => /onboarding/i.test(key))), false)
   })
   await check('onboarding: destinos administrativos avisam independência e conservam amostra', async () => {
+    const fields = () => page.locator('main').evaluate(root => [...root.querySelectorAll('input,select,textarea')]
+      .map(el => ({ tag: el.tagName, id: el.id, value: el.value, checked: el.tagName === 'INPUT' ? el.checked : null })))
     for (const [label, route, heading] of [['Configurações','/admin/configuracoes','Configurações'], ['Serviços','/admin/servicos','Serviços'], ['Barbeiros','/admin/barbeiros','Barbeiros']]) {
       await goto(route); const before = await page.locator('main').innerText()
+      const beforeFields = await fields()
       await start('superadmin'); await button('Ver revisão').click()
       await page.getByRole('radio', { name: 'Cenário fictício: liberação explícita pelo superadmin', exact: true }).check(); await button('Concluir simulação').click()
       await page.locator('main').getByRole('link', { name: label, exact: true }).click()
       await page.getByRole('heading', { level: 1, name: heading, exact: true }).waitFor()
       assert.match(await page.getByRole('status').filter({ hasText: 'dados independentes do onboarding' }).innerText(), /nenhum dado foi transferido/)
       const after = await page.locator('main').innerText()
-      assert(after.includes(before), route)
+      assert(after.replace(/\s+/g, ' ').trim().includes(before.replace(/\s+/g, ' ').trim()), route)
+      assert.deepEqual(await fields(), beforeFields, `${route}: campos da amostra independente`)
     }
   })
   await check('onboarding: nenhum pedido a API e nenhuma persistência do fluxo', async () => {

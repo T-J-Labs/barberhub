@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const { navigate: loadPage, reload } = require('./qa-navigation.cjs');
 const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
@@ -16,13 +17,23 @@ async function check(name, fn) { await fn(); results.push({ name, passed: true }
   const page = await context.newPage();
   page.setDefaultTimeout(15000);
   const errors = []; page.on('pageerror', e => errors.push(e.message));
+  // A emulação de offline do Chromium 145 não cobriu o fetch do worker após
+  // reload. Bloquear também sua rede mantém o worker/cache reais em teste.
+  const offlineNetwork = route => {
+    (observations.offlineRequests ??= []).push({ url: route.request().url(), method: route.request().method(), worker: !!route.request().serviceWorker() });
+    return route.abort('internetdisconnected');
+  };
+  async function setOffline(value) {
+    if (value) { await context.route('**/*', offlineNetwork); await context.setOffline(true); }
+    else { await context.setOffline(false); await context.unroute('**/*', offlineNetwork); }
+  }
   const cacheContents = () => page.evaluate(async () => {
     const names = await caches.keys(); const contents = {};
     for (const name of names) contents[name] = (await (await caches.open(name)).keys()).map(r => new URL(r.url).pathname).sort();
     return contents;
   });
   try {
-    await page.goto(`${base}/barbearias`);
+    await loadPage(page, `${base}/barbearias`);
     await page.evaluate(() => navigator.serviceWorker.ready);
     await check('manifesto, escopo, início no catálogo, ícones e ausência de atalhos', async () => {
       const m = await (await context.request.get(`${base}/manifest.webmanifest`)).json();
@@ -36,17 +47,17 @@ async function check(name, fn) { await fn(); results.push({ name, passed: true }
       assert.equal(await page.locator('link[rel=apple-touch-icon]').getAttribute('href'), '/pwa/apple-180.png');
       observations.manifest = m;
     });
-    await page.reload();
+    await reload(page);
     await page.waitForFunction(() => navigator.serviceWorker.controller?.scriptURL.endsWith('/pwa-worker.js'));
     await check('cache contém somente HTML offline e ícone, sem sessão ou dados locais', async () => {
-      assert.deepEqual(await cacheContents(), { 'barberhub-pwa-v1': ['/pwa/icon-192.png','/pwa/offline.html'] });
+      assert.deepEqual(await cacheContents(), { 'barberhub-pwa-v2': ['/pwa/icon-192.png','/pwa/offline.html'] });
       assert.equal(await page.evaluate(() => localStorage.length), 0); assert.equal((await context.cookies()).length, 0);
       assert.deepEqual(await page.evaluate(async () => await indexedDB.databases()), []);
     });
     const cdp = await context.newCDPSession(page);
     observations.installability = await cdp.send('Page.getInstallabilityErrors');
     observations.appManifest = await cdp.send('Page.getAppManifest');
-    await check('critérios reais de instalação reportados pelo Edge', () => assert.deepEqual(observations.installability.installabilityErrors, []));
+    await check('critérios reais de instalação reportados pelo Chromium', () => assert.deepEqual(observations.installability.installabilityErrors, []));
     await check('hosts de tenant, arbitrário e IP sem manifesto válido ou worker', async () => {
       for (const host of [`demo-esquina.localhost:${new URL(base).port}`, `arbitrario.test:${new URL(base).port}`, `127.0.0.1:${new URL(base).port}`]) {
         const options = { headers: { host } };
@@ -74,7 +85,10 @@ async function check(name, fn) { await fn(); results.push({ name, passed: true }
       });
       const trigger = page.getByRole('button', { name: 'Instalar BarberHub', exact: true }); await trigger.waitFor();
       assert.equal(await page.evaluate(() => window.qaPromptCalls), 0);
-      await trigger.focus(); assert.ok(await trigger.evaluate(el => getComputedStyle(el).outlineStyle !== 'none'));
+      // focus() após clique preserva modalidade de mouse em alguns Chromium.
+      // Exercitar Tab de fato antes de exigir o indicador :focus-visible.
+      await trigger.focus(); await page.keyboard.press('Shift+Tab'); await page.keyboard.press('Tab');
+      assert.ok(await trigger.evaluate(el => el === document.activeElement && el.matches(':focus-visible') && getComputedStyle(el).outlineStyle !== 'none'));
       await page.keyboard.press('Enter'); await page.getByText(/Instalação dispensada/).waitFor();
       assert.equal(await page.evaluate(() => window.qaPromptCalls), 1);
       assert.equal(await trigger.count(), 0); assert.equal(await page.evaluate(() => localStorage.length), 0);
@@ -92,18 +106,18 @@ async function check(name, fn) { await fn(); results.push({ name, passed: true }
       await standaloneContext.close();
     });
     await check('conexão recuperada é um sinal, mantém rascunho e não reenvia ação', async () => {
-      await page.goto(`${base}/cliente/perfil`);
+      await loadPage(page, `${base}/cliente/perfil`);
       const field = page.getByRole('textbox', { name: 'Nome de exibição', exact: true });
       await field.fill('Rascunho em andamento');
       const operations = []; const observe = r => { if (r.method() !== 'GET') operations.push(r.method()); }; page.on('request', observe);
-      await context.setOffline(true); await page.getByRole('status').filter({ hasText: 'Seu navegador está sem conexão' }).waitFor();
+      await setOffline(true); await page.getByRole('status').filter({ hasText: 'Seu navegador está sem conexão' }).waitFor();
       assert.equal(await field.inputValue(), 'Rascunho em andamento');
-      await context.setOffline(false); await page.getByRole('status').filter({ hasText: 'O navegador voltou a ficar online' }).waitFor();
+      await setOffline(false); await page.getByRole('status').filter({ hasText: 'O navegador voltou a ficar online' }).waitFor();
       assert.equal(await field.inputValue(), 'Rascunho em andamento'); assert.deepEqual(operations, []); page.off('request', observe);
       await page.getByRole('button', { name: 'Fechar aviso de conexão' }).click();
     });
     await check('navegação offline preparada e retry refazem somente a página atual', async () => {
-      await context.setOffline(true); await page.goto(`${base}/barbearias?q=meier`);
+      await setOffline(true); await loadPage(page, `${base}/barbearias?q=meier`);
       await page.getByRole('heading', { name: 'Vamos retomar quando houver conexão.' }).waitFor();
       assert.equal(await page.getByRole('status').textContent(), 'Não foi possível conectar ao BarberHub. Agendamentos e alterações precisam de conexão. Nenhuma ação foi enviada.');
       assert.ok(page.url().includes('q=meier'));
@@ -114,8 +128,17 @@ async function check(name, fn) { await fn(); results.push({ name, passed: true }
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
         await page.screenshot({ path: path.join(dir, `offline-${width}.png`), fullPage: true });
       }
-      await page.getByRole('button', { name: 'Tentar novamente' }).focus(); assert.ok(await page.getByRole('button').evaluate(el => getComputedStyle(el).outlineStyle !== 'none'));
-      await context.setOffline(false); await page.getByRole('button', { name: 'Tentar novamente' }).click();
+      const retry = page.getByRole('button', { name: 'Tentar novamente' });
+      await page.addScriptTag({ path: require.resolve('./tools/node_modules/axe-core/axe.min.js') });
+      observations.offlineAxe = await page.evaluate(async () => {
+        const report = await window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a','wcag2aa','wcag21aa'] } });
+        return { violations: report.violations, incomplete: report.incomplete };
+      });
+      assert.deepEqual(observations.offlineAxe.violations, [], 'Fallback offline deve passar sem exceção de contraste');
+      observations.offlineButton = await retry.evaluate(el => ({ foreground: getComputedStyle(el).color, background: getComputedStyle(el).backgroundColor }));
+      await retry.focus(); await page.keyboard.press('Shift+Tab'); await page.keyboard.press('Tab');
+      assert.ok(await retry.evaluate(el => el === document.activeElement && el.matches(':focus-visible') && getComputedStyle(el).outlineStyle !== 'none'));
+      await setOffline(false); await page.getByRole('button', { name: 'Tentar novamente' }).click();
       await page.getByRole('heading', { name: 'Resultado da busca' }).waitFor();
       assert.ok(page.url().includes('q=meier'));
     });
@@ -125,38 +148,38 @@ async function check(name, fn) { await fn(); results.push({ name, passed: true }
       assert.equal(await coldPage.getByRole('heading', { name: 'Vamos retomar quando houver conexão.' }).count(), 0); await cold.close();
     });
     await check('POST/API e RSC sem rede falham sem fallback, cache ou fila', async () => {
-      await context.setOffline(true);
+      await setOffline(true);
       const failures = await page.evaluate(async () => {
         const cases = [['/api/v1/qa-pwa', { method:'POST', body: 'qa-synthetic' }], ['/api/v1/qa-pwa', {}], ['/barbearias?_rsc=qa', { headers:{ RSC:'1' } }]];
         return Promise.all(cases.map(async ([url,options]) => { try { const response = await fetch(url,options); return { resolved:true, status:response.status }; } catch { return { resolved:false }; } }));
       });
       assert.ok(failures.every(f => !f.resolved));
-      await context.setOffline(false);
-      assert.deepEqual(await cacheContents(), { 'barberhub-pwa-v1': ['/pwa/icon-192.png','/pwa/offline.html'] });
+      await setOffline(false);
+      assert.deepEqual(await cacheContents(), { 'barberhub-pwa-v2': ['/pwa/icon-192.png','/pwa/offline.html'] });
     });
     await check('transição interna offline preserva busca e oferece recuperação', async () => {
-      await page.goto(`${base}/barbearias`); await context.setOffline(true);
+      await loadPage(page, `${base}/barbearias`); await setOffline(true);
       await page.getByRole('searchbox').fill('meier');
       await page.getByRole('button', { name: 'Buscar barbearias', exact: true }).click();
       await page.getByRole('heading', { name: 'Vamos retomar quando houver conexão.' }).waitFor();
       assert.ok(page.url().includes('q=meier'));
-      await context.setOffline(false); await page.getByRole('button', { name:'Tentar novamente' }).click();
+      await setOffline(false); await page.getByRole('button', { name:'Tentar novamente' }).click();
       await page.getByRole('heading', { name:'Resultado da busca' }).waitFor();
     });
     await check('catálogo, cliente, barbeiro, admin e superadmin nas quatro larguras', async () => {
       for (const width of [320,390,768,1440]) {
         await page.setViewportSize({ width, height:900 });
         for (const route of ['/barbearias','/cliente/agendamentos','/cliente/perfil','/cliente/ajuda','/barbeiro','/barbeiro/agenda','/barbeiro/historico','/barbeiro/perfil','/barbeiro/ajuda','/admin','/admin/agenda','/admin/clientes','/admin/servicos','/admin/barbeiros','/admin/configuracoes','/admin/relatorios','/admin/ajuda','/super-admin','/super-admin/barbearias','/super-admin/barbearias/demo-esquina']) {
-          const response = await page.goto(base + route); assert.equal(response.status(),200,`${route} ${width}`);
+          const response = await loadPage(page, base + route); assert.equal(response.status(),200,`${route} ${width}`);
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${route} ${width}`);
           assert.equal(await page.locator('h1').count(),1, route); assert.equal(await page.locator('main').count(),1,route);
         }
-        await page.goto(`${base}/barbearias`); await page.locator('[aria-labelledby=pwa-install-title]').waitFor();
+        await loadPage(page, `${base}/barbearias`); await page.locator('[aria-labelledby=pwa-install-title]').waitFor();
         await page.screenshot({ path:path.join(dir, `install-${width}.png`), fullPage:true });
       }
     });
     await check('drawer da conta: modal nativo, Tab, Escape e retorno ao gatilho', async () => {
-      await page.setViewportSize({ width:320,height:844 }); await page.goto(`${base}/admin`);
+      await page.setViewportSize({ width:320,height:844 }); await loadPage(page, `${base}/admin`);
       const trigger = page.getByRole('button',{name:'Abrir menu',exact:true}); await trigger.focus(); await page.keyboard.press('Enter');
       const dialog = page.getByRole('dialog',{name:'Menu da conta'}); await dialog.waitFor();
       for(let i=0;i<18;i++){await page.keyboard.press('Tab'); assert.ok(await dialog.evaluate(el => el.contains(document.activeElement) || document.activeElement === document.body));}
@@ -164,15 +187,20 @@ async function check(name, fn) { await fn(); results.push({ name, passed: true }
     });
     await check('zoom 200%, movimento reduzido e foco da nova interface', async () => {
       await page.setViewportSize({ width:1440,height:900 });
-      await page.goto(`${base}/barbearias`); await page.emulateMedia({ reducedMotion:'reduce' });
+      await loadPage(page, `${base}/barbearias`); await page.emulateMedia({ reducedMotion:'reduce' });
       await page.evaluate(() => {document.documentElement.style.zoom='2';});
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.evaluate(() => {document.documentElement.style.zoom='1';});
-      const control = page.locator('[aria-labelledby=pwa-install-title]').locator('button, summary').first(); await control.focus();
-      assert.ok(await control.evaluate(el => getComputedStyle(el).outlineStyle!=='none'));
+      const control = page.locator('[aria-labelledby=pwa-install-title]').locator('button, summary').first();
+      await control.focus(); await page.keyboard.press('Shift+Tab'); await page.keyboard.press('Tab');
+      assert.ok(await control.evaluate(el => el === document.activeElement && el.matches(':focus-visible') && getComputedStyle(el).outlineStyle!=='none'));
     });
     observations.finalCaches = await cacheContents(); observations.pageErrors = errors;
     assert.deepEqual(errors, []);
+  } catch (error) {
+    observations.failure = { message: error.message, url: page.url(), text: await page.locator('body').innerText().catch(() => '') };
+    await page.screenshot({ path: path.join(dir, 'failure.png'), fullPage: true }).catch(() => {});
+    throw error;
   } finally {
     fs.writeFileSync(path.join(dir,'browser-results.json'), JSON.stringify({ results, observations },null,2));
     await browser.close();

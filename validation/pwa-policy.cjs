@@ -56,14 +56,14 @@ function harness({ online = true, status = 200, workerOrigin = origin } = {}) {
   const h = harness();
   await h.life('install');
   await check('preparação persiste somente HTML offline e ícone permitido', () => {
-    assert.deepEqual([...h.storage.keys()], ['barberhub-pwa-v1']);
+    assert.deepEqual([...h.storage.keys()], ['barberhub-pwa-v2']);
     assert.deepEqual([...h.storage.values()][0].keys().toArray(), worker.pwaOfflineAssets.map(p => origin + p));
     assert.ok(h.calls.every(r => r.cache === 'no-store' && r.credentials === 'omit' && r.redirect === 'error'));
   });
   await check('ativação remove somente versões do próprio prefixo', async () => {
-    await h.caches.open('barberhub-pwa-v0'); await h.caches.open('msw-other');
+    await h.caches.open('barberhub-pwa-v0'); await h.caches.open('barberhub-pwa-v1'); await h.caches.open('msw-other');
     await h.life('activate');
-    assert.deepEqual([...h.storage.keys()], ['barberhub-pwa-v1', 'msw-other']);
+    assert.deepEqual([...h.storage.keys()], ['barberhub-pwa-v2', 'msw-other']);
   });
   await check('rede online não copia páginas, consultas ou dados', async () => {
     const response = await h.fetchEvent('/cliente/perfil?q=private'); assert.equal(await response.text(), 'network');

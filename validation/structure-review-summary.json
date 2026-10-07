@@ -1,0 +1,96 @@
+{
+  "dateLocal": "2026-10-07",
+  "scope": "Estrutura de fontes, configurações, scripts, documentação e evidências; internals de .git, node_modules e builds excluídos da classificação de arquivos órfãos",
+  "baselineProjectFiles": 746,
+  "baselineRawEvidenceFiles": 10132,
+  "removedFiles": 74,
+  "removedImages": 68,
+  "savedImageBytes": 4346962,
+  "removedEmptyDirectories": [
+    "frontend/src/features/public-auth/components",
+    "frontend/src/features/public-auth",
+    "frontend/src/features/public-booking/components",
+    "frontend/src/features/public-booking"
+  ],
+  "removedObsoleteFiles": [
+    "backend/teste.http",
+    "validation/headers-baseline.cjs"
+  ],
+  "consolidatedDocuments": [
+    {
+      "path": "docs/frontend/FRONTEND_CONSOLIDATION.md",
+      "sha256": "7467a342914aa3cf1d287ec62a7433e0c9c4963c0960bc21e9007f5146fa67ac",
+      "destination": "docs/frontend/VALIDATION_HISTORY.md#consolidacao-inicial",
+      "bodySha256": "d87709ca7eb63420551a253f6695a0a226d463ade329b94bf0b2bea2622cb257"
+    },
+    {
+      "path": "docs/frontend/FRONTEND_FOLLOWUP.md",
+      "sha256": "fc794db4826d80a286456f83ceda9e4253fedd4b933bfd4dd5205b038c45daba",
+      "destination": "docs/frontend/VALIDATION_HISTORY.md#acompanhamento",
+      "bodySha256": "356eca092a7bc5b776eeb8f09e41c952247a87e27edc588e11a0d329204b309e"
+    },
+    {
+      "path": "docs/frontend/FRONTEND_PENDING_REVIEW.md",
+      "sha256": "9d5cfec14f66bc9bfccbc3a84a275366f82e8fdaa2c03b2ae4cfef2a416d1ca6",
+      "destination": "docs/frontend/VALIDATION_HISTORY.md#revisao-final",
+      "bodySha256": "21ab6824156096e9ecdfe483d615e90e0f1d890c77863c7c5c4d9d51e731529e"
+    },
+    {
+      "path": "docs/frontend/API_FIRST.md",
+      "sha256": "76511134a9c3f17dae12fe18fa32c3ab1d9bc5a759f3bf0f3c0e19e0b58e0d31",
+      "destination": "docs/api/README.md",
+      "mode": "condensed"
+    }
+  ],
+  "changedExistingFiles": [
+    "docs/api/README.md",
+    "docs/frontend/FRONTEND_ROADMAP.md",
+    "docs/frontend/HEADERS_REVIEW.md",
+    "docs/frontend/PWA.md",
+    "docs/frontend/QA_ACCESSIBILITY.md",
+    "docs/frontend/TECHNICAL_CLOSURE.md",
+    "README.md",
+    "validation/frontend-pending-review-summary.json"
+  ],
+  "unexpectedRemovals": [],
+  "rawEvidenceMissing": 0,
+  "preservedSourceFiles": 277,
+  "changedSources": [],
+  "javaFilesReviewed": 19,
+  "missingLocalMarkdownLinks": [],
+  "missingLocalMarkdownAnchors": [],
+  "checks": [
+    {
+      "name": "lint",
+      "exit": 0,
+      "log": "validation/qa-runs/structure-review-2026-10-07/lint.log"
+    },
+    {
+      "name": "typecheck",
+      "exit": 0,
+      "log": "validation/qa-runs/structure-review-2026-10-07/typecheck.log"
+    },
+    {
+      "name": "rules",
+      "exit": 0,
+      "log": "validation/qa-runs/structure-review-2026-10-07/rules.log"
+    },
+    {
+      "name": "headers-visual",
+      "exit": 0,
+      "log": "validation/qa-runs/structure-review-2026-10-07/headers-visual.log"
+    }
+  ],
+  "fullBuildOrBrowserJourneysExecuted": false,
+  "staleQaBuild": {
+    "path": "frontend/.next-qa-cdd979c4-58f3-454e-9a25-7a3b2a27d3a8",
+    "removed": false,
+    "reason": "Automatic approval review rejected recursive deletion: blocked by policy"
+  },
+  "evidenceRoot": "validation/qa-runs/structure-review-2026-10-07/",
+  "imageAliases": "validation/evidence-aliases.json",
+  "history": "docs/frontend/VALIDATION_HISTORY.md",
+  "apiGuide": "docs/api/README.md",
+  "historicalVisualReportPreserved": true,
+  "newVisualReport": "validation/qa-runs/structure-review-2026-10-07/headers-visual-results-current.json"
+}

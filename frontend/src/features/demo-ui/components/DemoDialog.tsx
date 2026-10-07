@@ -50,9 +50,21 @@ export function DemoDialog({ open, onClose, title, description, children, tone =
         if (event.key !== "Tab") return
         const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex="0"]')]
           .filter((element) => element.checkVisibility() && element.tabIndex >= 0)
-        const first = controls[0], last = controls[controls.length - 1]
-        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
-        if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+        if (!controls.length) return
+        const current = controls.indexOf(document.activeElement as HTMLElement)
+        const next = event.shiftKey
+          ? (current <= 0 ? controls.length - 1 : current - 1)
+          : (current + 1) % controls.length
+        const active = controls[current]
+        // Campos mantêm a tabulação nativa, incluindo segmentos de data/hora.
+        // Links devem participar do percurso mesmo no padrão nativo do WebKit.
+        if (current < 0 || (event.shiftKey && current === 0) ||
+          (!event.shiftKey && current === controls.length - 1) ||
+          active?.tagName === "A" ||
+          (controls[next].tagName === "A" && active?.tagName !== "INPUT")) {
+          event.preventDefault()
+          controls[next].focus()
+        }
       }}
       aria-labelledby={titleId}
       aria-describedby={description ? descriptionId : undefined}

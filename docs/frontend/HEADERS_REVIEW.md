@@ -1,5 +1,13 @@
 # Revisão de headers — 2026-10-06
 
+A decisão posterior de 2026-10-07 mantém `sky-500` com texto `#07111C` nas
+ações primárias públicas, substituindo branco para corrigir o contraste.
+Hover, foco, movimento reduzido e navegação permanecem os mesmos.
+[Acompanhamento e novos testes](VALIDATION_HISTORY.md#acompanhamento).
+
+Complemento posterior de teclado no WebKit e preservação dos destinos/visual:
+[FRONTEND_PENDING_REVIEW.md](VALIDATION_HISTORY.md#revisao-final).
+
 Implementada após pedido explícito, orientada pela skill `interface-design`, ADR,
 roadmap e regras de autenticação existentes. A landing institucional é a decisão
 visual vigente e substitui a referência anterior ao header do barbeiro. Backend,
@@ -22,8 +30,13 @@ desenvolvimento já ativo em `localhost:3000`. Capturas em
 
 Screenshots complementam as medições; a interação inicial foi executada por
 mouse/teclado (abrir, Escape e ciclo da prévia). Não foram usados como prova
-isolada de funcionamento. O script `headers-baseline.cjs` registra a composição
-anterior; seu trecho de dropdown corresponde ao código antes desta revisão.
+isolada de funcionamento. O coletor histórico da composição anterior foi
+removido na limpeza de 2026-10-07: dependia do dropdown que já foi substituído
+e não fazia parte dos scripts ativos. As capturas e medições originais continuam
+preservadas; os testes atuais são os de headers, zoom e regressão visual.
+Capturas PNG idênticas compartilhadas entre rodadas possuem mapeamento em
+`validation/evidence-aliases.json`. Os dez arquivos usados como entrada pelo
+teste de regressão visual foram mantidos em seus caminhos originais.
 
 ## Implementação e compatibilidade
 

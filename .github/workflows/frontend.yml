@@ -1,0 +1,94 @@
+name: Frontend
+
+on:
+  pull_request:
+    paths: ['frontend/**', 'validation/**', 'docs/api/**', '.github/workflows/frontend.yml']
+  push:
+    paths: ['frontend/**', 'validation/**', 'docs/api/**', '.github/workflows/frontend.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frontend-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NEXT_TELEMETRY_DISABLED: '1'
+  NEXT_PUBLIC_API_MOCKING: disabled
+  BARBERHUB_PUBLIC_HOST: localhost
+
+jobs:
+  checks:
+    name: Lint, TypeScript, regras e build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: '24.21.0'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci --no-audit
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test:rules
+      - run: npm run build
+
+  browser:
+    name: Jornadas, acessibilidade e PWA (Chromium)
+    needs: checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: frontend
+    env:
+      TEST_SERVER: isolated
+      TEST_PUBLIC_HOST: localhost
+      TEST_BROWSER: chromium
+      # Chromium completo em new headless; suporta preferências reais de zoom.
+      PLAYWRIGHT_CHANNEL: chromium
+      TEST_OUTPUT: ../validation/qa-runs
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: '24.21.0'
+          cache: npm
+          cache-dependency-path: |
+            frontend/package-lock.json
+            validation/tools/package-lock.json
+      - run: npm ci --no-audit
+      - run: npm ci --no-audit
+        working-directory: validation/tools
+      - run: npx playwright install --with-deps chromium
+        working-directory: validation/tools
+      - name: Navegação, responsividade, teclado e axe
+        run: npm run test:qa:browser
+        env:
+          TEST_ENV: development
+          TEST_PORT: '3210'
+      - run: npm run build
+      - name: Regressão do build e PWA real em loopback
+        run: npm run test:qa:production
+        env:
+          TEST_ENV: production
+          TEST_PORT: '3211'
+      - name: Evidências e diagnósticos
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: frontend-qa-${{ github.run_id }}-${{ github.run_attempt }}
+          path: validation/qa-runs/
+          if-no-files-found: warn
+          retention-days: 14

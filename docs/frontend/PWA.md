@@ -1,5 +1,25 @@
 # PWA e acabamento transversal
 
+Estado atual confirmado em 2026-10-07: cache **v2**, botões com texto `#07111C`
+e abertura standalone real Edge automatizada comprovada. CI da revisão final
+`97cee8d917084d255f4d8112cbf9b876c41c2978` aprovado no
+[run 37642914180](https://github.com/T-J-Labs/barberhub/actions/runs/37642914180).
+Testes locais Chromium, Firefox e WebKit possuem recortes distintos registrados
+na revisão final; não certificam Safari real. O indicador “1” mantém 2,7059:1
+por decisão explícita, exigindo nova aprovação, medição e regressão visual para
+correção futura. Publicação/QA público **adiados para a etapa final**, por decisão
+de 2026-10-07, após as integrações com o backend estarem funcionando e validadas
+localmente. Ainda não há domínio ou site publicado. QA humano permanece pendente.
+[Evidências conferidas, auditoria e dados necessários](TECHNICAL_CLOSURE.md).
+
+Atualização em 2026-10-07: texto escuro sobre sky-500 aprovado pelo usuário,
+fallback atualizado e cache v2; nova regressão local de produção passou 19/19
+suítes, incluindo axe do fallback sem exceções. CI real Ubuntu passou e publicou
+artefato. A repetição posterior no Edge 154.0.4258.62, com janela real e perfil
+temporário, passou instalação, abertura standalone no catálogo e desinstalação.
+[Comandos e limitações atuais](VALIDATION_HISTORY.md#revisao-final).
+As medições e exceções de branco/sky-500 abaixo são registros históricos.
+
 Implementação em 2026-10-06. O catálogo, as contas e as áreas operacionais
 continuam demonstrações locais. OpenAPI mantém `paths: {}`; backend, banco,
 autenticação e contratos não foram alterados.
@@ -40,7 +60,7 @@ autorizado. O registro exige produção, contexto seguro e o domínio principal.
 Não substitui um worker diferente já registrado no escopo `/`, incluindo
 `public/mockServiceWorker.js` do MSW. Não remove registros de terceiros.
 
-O único cache próprio é **`barberhub-pwa-v1`**, contendo exatamente:
+O único cache próprio atual é **`barberhub-pwa-v2`**, contendo exatamente:
 
 | Recurso | Uso |
 | --- | --- |
@@ -97,7 +117,7 @@ Para alterar conteúdo offline ou ícones do cache, incrementar
 dados ou operações. Fechar abas pode descartar edições da aplicação como já
 ocorre hoje; o worker não força essa ação.
 
-## Verificação executada
+## Verificação histórica executada — 2026-10-06
 
 Windows, Node 24.21.0, Next 16.3.0 e Microsoft Edge **154.0.4258.53**.
 Produção local HTTP em `localhost:3110`, com `BARBERHUB_PUBLIC_HOST=localhost`.
@@ -147,7 +167,7 @@ de instalação/offline, prévia de ícones reduzidos e resumos de regressão. T
 não são apresentados como instalação real. A indisponibilidade no primeiro
 acesso offline sem preparação foi reproduzida: erro do navegador, sem fallback.
 
-## Acessibilidade e desempenho
+## Acessibilidade e desempenho — medições históricas de 2026-10-06
 
 Correções dirigidas, sem reformulação do Header:
 
@@ -277,7 +297,7 @@ desinstala o app desse perfil ao terminar. Perfis temporários de automação n�
 são versionados. O runtime é específico desta máquina; adapte o caminho para
 outro ambiente. A geração de ícones não faz parte do build normal.
 
-## Limitações restantes
+## Limitações da rodada histórica de 2026-10-06
 
 - Sem validação em Android/iOS reais, Safari/Firefox, domínio HTTPS publicado,
   leitor de tela real ou instalação manual pela UI nativa do navegador.
@@ -310,3 +330,32 @@ Referências de implementação:
 [manifesto no App Router](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest),
 [instalação após ação da pessoa](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeinstallprompt_event)
 e [ciclo de vida do worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers).
+
+## Regressão histórica — 2026-10-06 e início de 2026-10-07
+
+Instalação limpa isolada e novo build Next 16.3.8 passaram. `test:qa:production`
+na porta própria 3240 passou as 19 suítes, incluindo 15 grupos de PWA e quatro
+de lifecycle. Worker real em perfil temporário localhost; navegação/domínios
+com Host lógico sobre loopback não certificam publicação/TLS/DNS.
+
+Instalação adicional por CDP em perfis temporários: Chrome 154.0.8037.98 passou
+instalação, abertura real standalone em `/barbearias`, ausência de sessão/dados
+locais e desinstalação. Preferência standalone foi definida pelo QA. Edge
+154.0.4258.53 instalou/desinstalou, mas a abertura excedeu o timeout; não se
+alega janela standalone validada nesse navegador nesta rodada. Nenhum destes
+testes representa instalação manual humana ou teste Android/iOS.
+
+O CI inclui a regressão de worker/lifecycle no Chromium gerenciado; instalação
+nativa CDP fica fora do gate pelas limitações observadas. Workflow GitHub ainda
+não executado. Evidências, comandos e pendências em
+[FRONTEND_CONSOLIDATION.md](VALIDATION_HISTORY.md#consolidacao-inicial), preservando resultados
+históricos deste documento.
+
+Na reexecução estável com o executor final, Chromium gerenciado 145.0.7632.6
+completo passou novamente 15 grupos de PWA e quatro de lifecycle na porta
+3252, usando o mesmo build novo. O diagnóstico encontrou limitação da emulação
+`context.setOffline`: fetch do worker após reload ainda alcançava o servidor.
+O teste complementa a emulação bloqueando essas requisições de rede e registra
+URL/método/origem. Worker e cache são reais; nenhum HTML offline é injetado e
+nenhuma fonte da PWA foi modificada. Isso continua sendo emulação local de rede,
+sem certificar desconexão física ou instalação manual humana.

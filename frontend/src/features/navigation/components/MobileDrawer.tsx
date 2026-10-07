@@ -67,9 +67,15 @@ export function MobileDrawer({ id, label, isOpen, onClose, triggerRef, brandHref
     onKeyDown={event => {
       if (event.key !== "Tab") return
       const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),[tabindex="0"]')].filter(el => el.checkVisibility())
-      const first = controls[0], last = controls[controls.length - 1]
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
-      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+      if (!controls.length) return
+      // WebKit pode excluir links do Tab nativo. Percorrer explicitamente os
+      // controles do menu mantém todos acessíveis e o foco dentro do diálogo.
+      const current = controls.indexOf(document.activeElement as HTMLElement)
+      const next = event.shiftKey
+        ? (current <= 0 ? controls.length - 1 : current - 1)
+        : (current + 1) % controls.length
+      event.preventDefault()
+      controls[next].focus()
     }}
     className="fixed inset-y-0 left-0 m-0 h-dvh max-h-none w-[85%] max-w-sm border-0 border-r border-[#26384A] bg-[#07111C] p-0 text-white backdrop:bg-black/65 backdrop:backdrop-blur-sm"
   >

@@ -1,0 +1,717 @@
+{
+  "recordedUtc": "2026-10-07T15:39:29.2369870Z",
+  "dateLocal": "2026-10-07",
+  "supersedesPendingFrom": "validation/frontend-followup-summary.json",
+  "documentation": "docs/frontend/VALIDATION_HISTORY.md#revisao-final",
+  "evidenceRoot": "validation/qa-runs/pending-resolution-2026-10-07",
+  "publishedCodeCommit": "97cee8d917084d255f4d8112cbf9b876c41c2978",
+  "publishedBranch": "codex/frontend-pending-resolution",
+  "environments": {
+    "os": "Windows local",
+    "node": "24.21.0",
+    "playwright": "1.58.2",
+    "edge": "154.0.4258.62",
+    "firefox": "146.0.1",
+    "webkit": "26.0 / build 2248",
+    "remoteRunner": "Ubuntu 24.04"
+  },
+  "stages": {
+    "qaAccessibility": {
+      "localStatus": "PASS_WITH_RECORDED_LIMITATIONS",
+      "changes": [
+        "Percurso explícito dos controles no drawer para WebKit",
+        "Links de DemoDialog participam do percurso; segmentos date/time permanecem nativos",
+        "Comparação da amostra normaliza espaços/trim e verifica campos",
+        "Coletor usa identidade estável de elementos, sem reduzir a lista de controles",
+        "Timeout registrado; 20 minutos por suíte WebKit, 10 minutos nas outras engines"
+      ],
+      "headers": {
+        "firefox": 160,
+        "webkit": 160
+      },
+      "firefoxFinal": {
+        "groups": 70,
+        "failures": 0,
+        "audits": 110,
+        "axeViolations": 0,
+        "axeExceptions": 0,
+        "javascriptErrors": 0,
+        "browser": "146.0.1"
+      },
+      "webkitJourneys": {
+        "groups": 75,
+        "failures": 0,
+        "audits": 122,
+        "axeViolations": 0,
+        "axeExceptions": 0,
+        "javascriptErrors": 0,
+        "browser": "26.0"
+      },
+      "webkitQaRuntimeEquivalentTo": "fa2048c54e816b035a81a51f81b95de523805da7; coletor anterior à identidade estável, reteste final das 23 rotas abaixo",
+      "finalKeyboard": {
+        "firefox": {
+          "browser": "146.0.1",
+          "engine": "firefox",
+          "code": "97cee8d917084d255f4d8112cbf9b876c41c2978",
+          "sourceFingerprint": "3b6cfab641533e7c27974022215254e7b1fdd3a815e61f04fadc10d1c7112197",
+          "results": [
+            {
+              "route": "/",
+              "passed": true,
+              "controls": 15
+            },
+            {
+              "route": "/barbearias",
+              "passed": true,
+              "controls": 21
+            },
+            {
+              "route": "/login",
+              "passed": true,
+              "controls": 5
+            },
+            {
+              "route": "/cadastro",
+              "passed": true,
+              "controls": 8
+            },
+            {
+              "route": "/cliente/barbearias",
+              "passed": true,
+              "controls": 8
+            },
+            {
+              "route": "/cliente/agendamentos",
+              "passed": true,
+              "controls": 10
+            },
+            {
+              "route": "/cliente/perfil",
+              "passed": true,
+              "controls": 9
+            },
+            {
+              "route": "/cliente/ajuda",
+              "passed": true,
+              "controls": 18
+            },
+            {
+              "route": "/barbeiro",
+              "passed": true,
+              "controls": 10
+            },
+            {
+              "route": "/barbeiro/agenda",
+              "passed": true,
+              "controls": 10
+            },
+            {
+              "route": "/barbeiro/historico",
+              "passed": true,
+              "controls": 7
+            },
+            {
+              "route": "/barbeiro/perfil",
+              "passed": true,
+              "controls": 11
+            },
+            {
+              "route": "/barbeiro/ajuda",
+              "passed": true,
+              "controls": 16
+            },
+            {
+              "route": "/super-admin",
+              "passed": true,
+              "controls": 7
+            },
+            {
+              "route": "/super-admin/barbearias",
+              "passed": true,
+              "controls": 15
+            },
+            {
+              "route": "/admin",
+              "passed": true,
+              "controls": 10
+            },
+            {
+              "route": "/admin/agenda",
+              "passed": true,
+              "controls": 21
+            },
+            {
+              "route": "/admin/clientes",
+              "passed": true,
+              "controls": 27
+            },
+            {
+              "route": "/admin/servicos",
+              "passed": true,
+              "controls": 15
+            },
+            {
+              "route": "/admin/barbeiros",
+              "passed": true,
+              "controls": 13
+            },
+            {
+              "route": "/admin/configuracoes",
+              "passed": true,
+              "controls": 35
+            },
+            {
+              "route": "/admin/relatorios",
+              "passed": true,
+              "controls": 9
+            },
+            {
+              "route": "/admin/ajuda",
+              "passed": true,
+              "controls": 14
+            }
+          ],
+          "errors": [],
+          "started": "2026-10-07T15:17:39.641Z",
+          "limitations": [
+            "Produção própria 3261 com Host/HTTPS lógico sobre loopback",
+            "390x844 emulado; não certifica aparelho físico",
+            "Axe é executado para reproduzir o contexto; inconclusivos não são aprovados por este reteste de teclado"
+          ],
+          "endedFingerprint": "3b6cfab641533e7c27974022215254e7b1fdd3a815e61f04fadc10d1c7112197",
+          "passed": true,
+          "ended": "2026-10-07T15:18:36.241Z"
+        },
+        "webkit": {
+          "browser": "26.0",
+          "engine": "webkit",
+          "code": "97cee8d917084d255f4d8112cbf9b876c41c2978",
+          "sourceFingerprint": "3b6cfab641533e7c27974022215254e7b1fdd3a815e61f04fadc10d1c7112197",
+          "results": [
+            {
+              "route": "/",
+              "passed": true,
+              "controls": 1
+            },
+            {
+              "route": "/barbearias",
+              "passed": true,
+              "controls": 5
+            },
+            {
+              "route": "/login",
+              "passed": true,
+              "controls": 2
+            },
+            {
+              "route": "/cadastro",
+              "passed": true,
+              "controls": 2
+            },
+            {
+              "route": "/cliente/barbearias",
+              "passed": true,
+              "controls": 1
+            },
+            {
+              "route": "/cliente/agendamentos",
+              "passed": true,
+              "controls": 7
+            },
+            {
+              "route": "/cliente/perfil",
+              "passed": true,
+              "controls": 5
+            },
+            {
+              "route": "/cliente/ajuda",
+              "passed": true,
+              "controls": 9
+            },
+            {
+              "route": "/barbeiro",
+              "passed": true,
+              "controls": 6
+            },
+            {
+              "route": "/barbeiro/agenda",
+              "passed": true,
+              "controls": 7
+            },
+            {
+              "route": "/barbeiro/historico",
+              "passed": true,
+              "controls": 5
+            },
+            {
+              "route": "/barbeiro/perfil",
+              "passed": true,
+              "controls": 6
+            },
+            {
+              "route": "/barbeiro/ajuda",
+              "passed": true,
+              "controls": 8
+            },
+            {
+              "route": "/super-admin",
+              "passed": true,
+              "controls": 3
+            },
+            {
+              "route": "/super-admin/barbearias",
+              "passed": true,
+              "controls": 6
+            },
+            {
+              "route": "/admin",
+              "passed": true,
+              "controls": 5
+            },
+            {
+              "route": "/admin/agenda",
+              "passed": true,
+              "controls": 15
+            },
+            {
+              "route": "/admin/clientes",
+              "passed": true,
+              "controls": 14
+            },
+            {
+              "route": "/admin/servicos",
+              "passed": true,
+              "controls": 14
+            },
+            {
+              "route": "/admin/barbeiros",
+              "passed": true,
+              "controls": 12
+            },
+            {
+              "route": "/admin/configuracoes",
+              "passed": true,
+              "controls": 29
+            },
+            {
+              "route": "/admin/relatorios",
+              "passed": true,
+              "controls": 8
+            },
+            {
+              "route": "/admin/ajuda",
+              "passed": true,
+              "controls": 6
+            }
+          ],
+          "errors": [],
+          "started": "2026-10-07T15:17:23.294Z",
+          "limitations": [
+            "Produção própria 3261 com Host/HTTPS lógico sobre loopback",
+            "390x844 emulado; não certifica aparelho físico",
+            "Axe é executado para reproduzir o contexto; inconclusivos não são aprovados por este reteste de teclado"
+          ],
+          "endedFingerprint": "3b6cfab641533e7c27974022215254e7b1fdd3a815e61f04fadc10d1c7112197",
+          "passed": true,
+          "ended": "2026-10-07T15:18:18.195Z"
+        }
+      },
+      "incompleteReview": {
+        "historicalFirefox": {
+          "audits": 122,
+          "nodes": 483,
+          "technicalDispositions": {
+            "valid-reference-to-closed-native-dialog": 98,
+            "recorded-solid-colors-pass-conditional-paint-review": 384,
+            "recorded-solid-colors-fail-requires-live-verification": 1
+          },
+          "rawReport": "validation/qa-runs/pending-resolution-2026-10-07/axe-technical-review.json"
+        },
+        "currentFirefox": {
+          "audits": 110,
+          "nodes": 474,
+          "technicalDispositions": {
+            "valid-reference-to-closed-native-dialog": 89,
+            "recorded-solid-colors-pass-conditional-paint-review": 384,
+            "recorded-solid-colors-fail-requires-live-verification": 1
+          },
+          "rawReport": "validation/qa-runs/pending-resolution-2026-10-07/axe-review-firefox-final.json"
+        },
+        "currentWebkit": {
+          "audits": 122,
+          "nodes": 482,
+          "technicalDispositions": {
+            "valid-reference-to-closed-native-dialog": 98,
+            "recorded-solid-colors-pass-conditional-paint-review": 383,
+            "recorded-solid-colors-fail-requires-live-verification": 1
+          },
+          "rawReport": "validation/qa-runs/pending-resolution-2026-10-07/axe-review-webkit.json"
+        },
+        "currentProduction": {
+          "audits": 110,
+          "nodes": 473,
+          "technicalDispositions": {
+            "valid-reference-to-closed-native-dialog": 89,
+            "recorded-solid-colors-pass-conditional-paint-review": 383,
+            "recorded-solid-colors-fail-requires-live-verification": 1
+          },
+          "rawReport": "validation/qa-runs/pending-resolution-2026-10-07/axe-review-production-final.json"
+        },
+        "representativePaints": "validation/qa-runs/pending-resolution-2026-10-07/axe-live-paints.json",
+        "axeRawIncompletePreserved": true,
+        "fullWcagConformanceDeclared": false
+      }
+    },
+    "cleanBuildProduction": {
+      "status": "PASS",
+      "cleanInstallation": {
+        "frontend": true,
+        "validationTools": true,
+        "location": "Worktree próprio, sem reutilizar instalação/build pessoais"
+      },
+      "buildId": "NND6kNeSpwzvKCNhBcqCk",
+      "next": "16.3.8",
+      "lintPassed": true,
+      "typecheckPassed": true,
+      "rulesSuitesPassed": 10,
+      "finalLocalRun": {
+        "passed": true,
+        "code": "97cee8d917084d255f4d8112cbf9b876c41c2978",
+        "suites": 19,
+        "sourceFingerprint": "37dc5b11d2fce6d1725601a0e6132ca78c556660f917636e58670bf8e9d4421c",
+        "endedFingerprint": "37dc5b11d2fce6d1725601a0e6132ca78c556660f917636e58670bf8e9d4421c",
+        "serverStopped": true,
+        "rawReport": "validation/qa-runs/pending-resolution-2026-10-07/production-stable-identities/2026-10-07T15-20-43.112Z-production-HbV0z2/run.json"
+      },
+      "nativeEdgePwa": {
+        "headless": false,
+        "report": {
+          "base": "http://localhost:3261",
+          "browser": "154.0.4258.62",
+          "channel": "msedge",
+          "method": "PWA.install/launch em perfil temporário próprio",
+          "headless": false,
+          "installability": {
+            "installabilityErrors": []
+          },
+          "installed": true,
+          "browserDisplayMode": "standalone (preferência definida pelo QA)",
+          "launch": {
+            "targetId": "8DF864A551DC2A44900D1CA165CE99B4"
+          },
+          "targets": [
+            {
+              "targetId": "F50C94E0E57F7A2902195E0C774DF043",
+              "type": "service_worker",
+              "url": "http://localhost:3261/pwa-worker.js"
+            },
+            {
+              "targetId": "22A8498A4EE91D9794AF032AB16ECACD",
+              "type": "page",
+              "url": "http://localhost:3261/barbearias"
+            },
+            {
+              "targetId": "C2140FCEFCFB2DCB19D77327305EF572",
+              "type": "page",
+              "url": "about:blank"
+            },
+            {
+              "targetId": "6E5E4043827148817B1BF40E1682EDA3",
+              "type": "page",
+              "url": "http://localhost:3261/barbearias"
+            }
+          ],
+          "nativeEvaluation": {
+            "id": 1,
+            "result": {
+              "result": {
+                "type": "object",
+                "value": {
+                  "url": "http://localhost:3261/barbearias",
+                  "standalone": true,
+                  "installPanels": 0,
+                  "cookie": "",
+                  "localStorage": 0
+                }
+              }
+            }
+          },
+          "nativeWindow": {
+            "url": "http://localhost:3261/barbearias",
+            "standalone": true,
+            "installPanels": 0,
+            "cookie": "",
+            "localStorage": 0
+          },
+          "noSession": true,
+          "startUrl": "http://localhost:3261/barbearias",
+          "uninstalled": true
+        },
+        "humanManualInstallation": false
+      }
+    },
+    "githubActions": {
+      "status": "PASS_REAL_UBUNTU",
+      "validatedRemotely": true,
+      "runId": 37642914180,
+      "url": "https://github.com/T-J-Labs/barberhub/actions/runs/37642914180",
+      "commit": "97cee8d917084d255f4d8112cbf9b876c41c2978",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 112865953775,
+          "name": "Lint, TypeScript, regras e build",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm ci --no-audit",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm run lint",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm run typecheck",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm run test:rules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm run build",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112866547384,
+          "name": "Jornadas, acessibilidade e PWA (Chromium)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm ci --no-audit",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm ci --no-audit",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npx playwright install --with-deps chromium",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Navegação, responsividade, teclado e axe",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm run build",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Regressão do build e PWA real em loopback",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Evidências e diagnósticos",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 11494405661,
+          "name": "frontend-qa-37642914180-1",
+          "sizeBytes": 211578187,
+          "expired": false,
+          "expiresAt": "2026-10-21T15:32:10Z"
+        }
+      ],
+      "logsOrArtifactContentsDownloaded": false,
+      "mergeOrDeploymentPerformed": false,
+      "browserGate": "Chromium completo; Firefox/WebKit exercitados localmente"
+    }
+  },
+  "remaining": {
+    "visualDecision": {
+      "userDecision": "Manter o visual e registrar a pendência",
+      "changed": false,
+      "ratio": 2.7059003304716787,
+      "target": "Como funciona: indicador 1",
+      "background": "sky-500",
+      "foreground": "white"
+    },
+    "external": {
+      "manualHumanInstallation": "não executada",
+      "publishedDnsTls": "URL publicada não disponibilizada",
+      "physicalDevices": "não disponibilizados pelo usuário"
+    },
+    "recordedUtc": "2026-10-07T14:54:04.2962043Z",
+    "dependencies": {
+      "productionAlerts": 0,
+      "overrideCommitted": false,
+      "candidateNativeGlobAdapter": "rejeitado: lock não reproduzível com npm ci e resolução de pacote local ENOENT; removido integralmente",
+      "allHighAlerts": 5,
+      "chain": "braces -> micromatch -> fast-glob -> @next/eslint-plugin-next -> eslint-config-next"
+    },
+    "narrator": {
+      "status": "blocked",
+      "currentProcessAbsent": true,
+      "previousAttempt": "narrator-attempt.json",
+      "reason": "Janela em nível de integridade superior ao helper; anúncios reais não verificados"
+    },
+    "nvda": {
+      "status": "automatic-approval-rejected",
+      "downloadOrExecutionPerformed": false,
+      "reason": "blocked by policy",
+      "action": "Download e execução de NVDA 2026.2 portátil em pasta temporária própria"
+    }
+  },
+  "preservation": {
+    "personalPort3000Listening": false,
+    "head": "ee0fddfa13102b851c98d851bdb7e4296f8ddf28",
+    "recordedUtc": "2026-10-07T15:32:15.4453339Z",
+    "preserved": true,
+    "installedNext": "16.3.8",
+    "qaPortsListening": [],
+    "branch": "frontend/finalpatches",
+    "installedAxios": "1.20.0",
+    "backendChanges": [],
+    "lockSha256": "D0F77A1DA0540D78F1966BB10E42D2E84F04C252E93FB9BB23FECC043EC93FB1",
+    "envFiles": [
+      {
+        "name": ".env.example",
+        "sha256": "45443BA151D1E40147B988BE33D6440D48DDFDAE662A89117059BCCB8806D434"
+      }
+    ]
+  },
+  "sourceEquivalence": {
+    "recordedUtc": "2026-10-07T15:29:34.45Z",
+    "code": "97cee8d917084d255f4d8112cbf9b876c41c2978",
+    "files": 286,
+    "differences": [
+      {
+        "file": "frontend\\src\\lib\\api\\generated\\barberhub.ts",
+        "kind": "Orval generator version comment only"
+      },
+      {
+        "file": "frontend\\src\\lib\\api\\generated\\models\\index.ts",
+        "kind": "Orval generator version comment only"
+      },
+      {
+        "file": "frontend\\src\\lib\\api\\generated\\models\\tenantSubdomainParameter.ts",
+        "kind": "Orval generator version comment only"
+      },
+      {
+        "file": "frontend\\tests\\qa-rule-suites.mjs",
+        "kind": "line endings only"
+      },
+      {
+        "file": "frontend\\tests\\rules-runner.mjs",
+        "kind": "line endings only"
+      },
+      {
+        "file": "validation/qa-navigation.cjs",
+        "kind": "line endings only"
+      }
+    ],
+    "executableAndContractContentEqual": true
+  },
+  "worktree": {
+    "evidencePreservedInPersonalCheckout": true,
+    "confirmedUtc": "2026-10-07T15:39:29.1666816Z",
+    "archived": true,
+    "identityKey": "C:/Users/Felipe Tajima/.codex/worktrees/frontend-pending-resolution/barberhub",
+    "recoverableSnapshot": true,
+    "attachmentId": "01a11703-d232-7120-8be5-a32c4d899059",
+    "directoryRemoved": true
+  },
+  "historicalFailures": {
+    "webkitInitial": "validation/qa-runs/pending-resolution-2026-10-07/webkit/2026-10-07T06-04-40.144Z-browser-uq3yZ1/run.json",
+    "webkitRetestTimedOut": "validation/qa-runs/pending-resolution-2026-10-07/webkit-final/2026-10-07T14-42-02.667Z-browser-Xcim7V/run.json",
+    "firefoxBeforeIdentityFix": [
+      "firefox-journeys-final/results.json",
+      "firefox-journeys-retry/results.json"
+    ],
+    "overwrittenAsPass": false
+  },
+  "documentationCommit": "d3f105ba5e9c6c5ed38aa2301140c09ae8e6974b",
+  "documentationCommitContainsOnlyDocumentation": true
+}

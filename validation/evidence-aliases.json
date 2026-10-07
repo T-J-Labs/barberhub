@@ -1,0 +1,414 @@
+{
+  "dateLocal": "2026-10-07",
+  "reason": "Consolidação de cópias PNG byte a byte idênticas; contexto original preservado no mapeamento, relatórios brutos intactos",
+  "aliases": [
+    {
+      "removed": "validation/headers/client-adjustment/admin-1440.png",
+      "canonical": "validation/headers/after/admin-1440.png",
+      "sha256": "973a500a44c3bf1eea9e74eb1f9962a1e4dafa93f0950f4cbb9f7231b066e31b",
+      "bytes": 119420
+    },
+    {
+      "removed": "validation/headers/client-adjustment/admin-320.png",
+      "canonical": "validation/headers/after/admin-320.png",
+      "sha256": "f100aa22762738fbc939d0d92241206ec053ebafc51388a8e9ec43b6c1b89bb6",
+      "bytes": 40157
+    },
+    {
+      "removed": "validation/headers/client-adjustment/admin-390.png",
+      "canonical": "validation/headers/after/admin-390.png",
+      "sha256": "8cb8edf5f62a33f34d2d9529e7454b3ade4ceb84581a5cdae5b9e3c867208659",
+      "bytes": 41441
+    },
+    {
+      "removed": "validation/headers/client-adjustment/admin-768.png",
+      "canonical": "validation/headers/after/admin-768.png",
+      "sha256": "f128262fdd6fe9c3eae0d7be87bc1b767e7c1aa1d0d5c01f5b2da81b6f9586cf",
+      "bytes": 65769
+    },
+    {
+      "removed": "validation/headers/client-adjustment/admin-short.png",
+      "canonical": "validation/headers/after/admin-short.png",
+      "sha256": "efed7a544b89d8f2f2d3ea98d339d84b41b51a5bf9698a97a8b84e607af0d0ed",
+      "bytes": 9017
+    },
+    {
+      "removed": "validation/headers/client-adjustment/barber-1440.png",
+      "canonical": "validation/headers/after/barber-1440.png",
+      "sha256": "51ad4f2dda9a6eeb2b57ae96edc2df73079bab7ee9d005afa178aa2b86c07dfd",
+      "bytes": 78641
+    },
+    {
+      "removed": "validation/headers/client-adjustment/barber-320.png",
+      "canonical": "validation/headers/after/barber-320.png",
+      "sha256": "d1ae4428c6f86924dc80c3ed6dded893f80c3ba0dde61b0fa82340d258c19e69",
+      "bytes": 55187
+    },
+    {
+      "removed": "validation/headers/client-adjustment/barber-390.png",
+      "canonical": "validation/headers/after/barber-390.png",
+      "sha256": "ad6fb9d8739a7fbd56825bb1ae7b2dfd7a65d0359f0bb94674faed9f065a2d2d",
+      "bytes": 63834
+    },
+    {
+      "removed": "validation/headers/client-adjustment/barber-768.png",
+      "canonical": "validation/headers/after/barber-768.png",
+      "sha256": "f022c042bb87517ac91df03592071b4a68f65dd9b3c15ab2ba233a84ce917e87",
+      "bytes": 77158
+    },
+    {
+      "removed": "validation/headers/client-adjustment/barber-short.png",
+      "canonical": "validation/headers/after/barber-short.png",
+      "sha256": "d327dad8d79f174fd9105dff545f95e6f80883ab5a05ff52a0ba1a8cd2b584b1",
+      "bytes": 5322
+    },
+    {
+      "removed": "validation/headers/client-adjustment/booking-1440.png",
+      "canonical": "validation/headers/after/booking-1440.png",
+      "sha256": "19cb70fc7e8abff61894dbfed62de8110fc73b6ce05c09fce24e6dbef11d8c88",
+      "bytes": 67956
+    },
+    {
+      "removed": "validation/headers/client-adjustment/booking-320.png",
+      "canonical": "validation/headers/after/booking-320.png",
+      "sha256": "c43c6b1bb5096060022c68af49fc0bb15fad74a6deb6bf54a93d1ac51ec8ae8d",
+      "bytes": 51277
+    },
+    {
+      "removed": "validation/headers/client-adjustment/booking-390.png",
+      "canonical": "validation/headers/after/booking-390.png",
+      "sha256": "cfad4d0e281c560ae5bd55128a67d5d37b17c2430ca429feca5cdd03fc136925",
+      "bytes": 59756
+    },
+    {
+      "removed": "validation/headers/client-adjustment/booking-768.png",
+      "canonical": "validation/headers/after/booking-768.png",
+      "sha256": "7a567fc9525a5c2a3b6f5fb85a7083db25a04450b495239acedd4d22009ebb69",
+      "bytes": 62583
+    },
+    {
+      "removed": "validation/headers/client-adjustment/booking-short.png",
+      "canonical": "validation/headers/after/booking-short.png",
+      "sha256": "c54b8752187e8540dcaa9aa04d8e314f637c347d83edeb8490cc70ac54626db4",
+      "bytes": 6314
+    },
+    {
+      "removed": "validation/headers/client-adjustment/catalog-1440.png",
+      "canonical": "validation/headers/after/catalog-1440.png",
+      "sha256": "333904e4d87bbac3420c141e9ddfa2bb97f1b73dcc052b84c8032b39e780419b",
+      "bytes": 79286
+    },
+    {
+      "removed": "validation/headers/client-adjustment/catalog-320.png",
+      "canonical": "validation/headers/after/catalog-320.png",
+      "sha256": "fc4a1162ba7192b393aaba06f43d8c60dd10791f3300ad8b8bc3904b3dbca4d1",
+      "bytes": 47324
+    },
+    {
+      "removed": "validation/headers/client-adjustment/catalog-390.png",
+      "canonical": "validation/headers/after/catalog-390.png",
+      "sha256": "32a816e9495bc9e39176b017d15c7054a40ba0f8e2c8467f0c55a68eab9815c7",
+      "bytes": 49429
+    },
+    {
+      "removed": "validation/headers/client-adjustment/catalog-768.png",
+      "canonical": "validation/headers/after/catalog-768.png",
+      "sha256": "c2ebc4d6b55ec5a4401104a816a09b1e2c106178367908c7cdc5b1e774de4a65",
+      "bytes": 57470
+    },
+    {
+      "removed": "validation/headers/client-adjustment/client-1440.png",
+      "canonical": "validation/headers/after/client-1440.png",
+      "sha256": "599fc149458cd530f90f3ed66aebe66f47bb03822cdaf6f16f829a7200152a18",
+      "bytes": 86051
+    },
+    {
+      "removed": "validation/headers/client-adjustment/client-320.png",
+      "canonical": "validation/headers/after/client-320.png",
+      "sha256": "963b7df713fbd6fc2ea732889b2a0bf0ac15f756344cfcba1d0e12255e4778ad",
+      "bytes": 59755
+    },
+    {
+      "removed": "validation/headers/client-adjustment/client-390.png",
+      "canonical": "validation/headers/after/client-390.png",
+      "sha256": "8e6df9cb4a59d9ed07582bdbb42e2879c46a870f62664e1cb667580949ce86e0",
+      "bytes": 61660
+    },
+    {
+      "removed": "validation/headers/client-adjustment/client-768.png",
+      "canonical": "validation/headers/after/client-768.png",
+      "sha256": "0852c252d58cb5b6586169ac495ab109fa992bbd640d12dde5643ce23a517555",
+      "bytes": 81371
+    },
+    {
+      "removed": "validation/headers/client-adjustment/client-short.png",
+      "canonical": "validation/headers/after/client-short.png",
+      "sha256": "241f16ff3a561cfdccec9fb2ef9a92ad69561d2e274ca907000b90d400ac4387",
+      "bytes": 8616
+    },
+    {
+      "removed": "validation/headers/client-adjustment/landing-1440.png",
+      "canonical": "validation/headers/after/landing-1440.png",
+      "sha256": "3ab8ac6a59232c04689c7da7f710190d9605c5ceb0087155640718117cb6d627",
+      "bytes": 144492
+    },
+    {
+      "removed": "validation/headers/client-adjustment/landing-320.png",
+      "canonical": "validation/headers/after/landing-320.png",
+      "sha256": "2ff154de85097d4a118dbf2c45fad631e17b3e2e4772380f296e1f3dc7f2718d",
+      "bytes": 115661
+    },
+    {
+      "removed": "validation/headers/client-adjustment/landing-390.png",
+      "canonical": "validation/headers/after/landing-390.png",
+      "sha256": "d7e032f2d6bad8205f7f705185957f7264ee66c9fb621153b3a744640612675f",
+      "bytes": 130836
+    },
+    {
+      "removed": "validation/headers/client-adjustment/landing-768.png",
+      "canonical": "validation/headers/after/landing-768.png",
+      "sha256": "59cb6aa869325d43769d79514df8b677f11e5f3fd0323ad61e1c1d2dc30749b5",
+      "bytes": 174240
+    },
+    {
+      "removed": "validation/headers/client-adjustment/landing-mouse-fresh.png",
+      "canonical": "validation/headers/after/landing-menu-mouse.png",
+      "sha256": "6d26d201742f8956f5cc313f3f2743de31011756e635e5682759dd025643f6ce",
+      "bytes": 22443
+    },
+    {
+      "removed": "validation/headers/client-adjustment/login-1440.png",
+      "canonical": "validation/headers/after/login-1440.png",
+      "sha256": "96da428ffc5be8fc8c5a0edba353715386ac1bc8e601081d56fe1fab5d5781ce",
+      "bytes": 76487
+    },
+    {
+      "removed": "validation/headers/client-adjustment/login-320.png",
+      "canonical": "validation/headers/after/login-320.png",
+      "sha256": "0eb9f8c1614ffe9a81d5d64dd332acb6f9d3a561fcc479afe2d9adef4e554bd7",
+      "bytes": 46671
+    },
+    {
+      "removed": "validation/headers/client-adjustment/login-390.png",
+      "canonical": "validation/headers/after/login-390.png",
+      "sha256": "e884faa58e8eff3d96ac44c0ecfa6076eb9b6ae4a118fcaf2ab3e841edb1105e",
+      "bytes": 46550
+    },
+    {
+      "removed": "validation/headers/client-adjustment/login-768.png",
+      "canonical": "validation/headers/after/login-768.png",
+      "sha256": "b02f53d383518df9adf99bf26b3122c05dec63bca7a8f2e08daeca95006a4bb5",
+      "bytes": 47642
+    },
+    {
+      "removed": "validation/headers/after/public-profile-short.png",
+      "canonical": "validation/headers/after/login-short.png",
+      "sha256": "7dfadcf387baab536f97be407d10da1cce863728aad51d35d63393e3d4efedaf",
+      "bytes": 6299
+    },
+    {
+      "removed": "validation/headers/after/signup-short.png",
+      "canonical": "validation/headers/after/login-short.png",
+      "sha256": "7dfadcf387baab536f97be407d10da1cce863728aad51d35d63393e3d4efedaf",
+      "bytes": 6299
+    },
+    {
+      "removed": "validation/headers/client-adjustment/login-short.png",
+      "canonical": "validation/headers/after/login-short.png",
+      "sha256": "7dfadcf387baab536f97be407d10da1cce863728aad51d35d63393e3d4efedaf",
+      "bytes": 6299
+    },
+    {
+      "removed": "validation/headers/client-adjustment/public-profile-short.png",
+      "canonical": "validation/headers/after/login-short.png",
+      "sha256": "7dfadcf387baab536f97be407d10da1cce863728aad51d35d63393e3d4efedaf",
+      "bytes": 6299
+    },
+    {
+      "removed": "validation/headers/client-adjustment/signup-short.png",
+      "canonical": "validation/headers/after/login-short.png",
+      "sha256": "7dfadcf387baab536f97be407d10da1cce863728aad51d35d63393e3d4efedaf",
+      "bytes": 6299
+    },
+    {
+      "removed": "validation/headers/client-adjustment/public-profile-1440.png",
+      "canonical": "validation/headers/after/public-profile-1440.png",
+      "sha256": "dcb3be66fdee4f7fdcefd6526df317751c34377156e6fa0115d3ac5a039cdd73",
+      "bytes": 100483
+    },
+    {
+      "removed": "validation/headers/client-adjustment/public-profile-320.png",
+      "canonical": "validation/headers/after/public-profile-320.png",
+      "sha256": "d73d512cd0d403c4dd875124f21a14337f4d693bd143d79ce750bf712fea7b05",
+      "bytes": 47896
+    },
+    {
+      "removed": "validation/headers/client-adjustment/public-profile-390.png",
+      "canonical": "validation/headers/after/public-profile-390.png",
+      "sha256": "0c25932519479c8c3c31343db6a808a48e94eabbc7080a377021cc41d092b494",
+      "bytes": 51129
+    },
+    {
+      "removed": "validation/headers/client-adjustment/public-profile-768.png",
+      "canonical": "validation/headers/after/public-profile-768.png",
+      "sha256": "f98c8ced3dbf7064c061caf27ab62f1c3438b602d3835125776586d34f8fe9c7",
+      "bytes": 67274
+    },
+    {
+      "removed": "validation/headers/client-adjustment/public-profile-menu.png",
+      "canonical": "validation/headers/after/public-profile-menu.png",
+      "sha256": "1416dbf91509465bc2e958240d9ac58b4734f6784c227f1c312d25ad0a248437",
+      "bytes": 12605
+    },
+    {
+      "removed": "validation/headers/client-adjustment/signup-1440.png",
+      "canonical": "validation/headers/after/signup-1440.png",
+      "sha256": "20ce4491b817f8ca513ceeb931d72437d63623ed3d60567d0d9a5731a799af20",
+      "bytes": 103558
+    },
+    {
+      "removed": "validation/headers/client-adjustment/signup-320.png",
+      "canonical": "validation/headers/after/signup-320.png",
+      "sha256": "24bc2dca25637280f3482233596d5b7dce838f905eb2796efd7f097f8c4a7130",
+      "bytes": 50771
+    },
+    {
+      "removed": "validation/headers/client-adjustment/signup-390.png",
+      "canonical": "validation/headers/after/signup-390.png",
+      "sha256": "a9c7392af230c26ec1b9249ec91476088bf09a3bdb385b1949ada594d057dcaf",
+      "bytes": 57074
+    },
+    {
+      "removed": "validation/headers/client-adjustment/signup-768.png",
+      "canonical": "validation/headers/after/signup-768.png",
+      "sha256": "7c9023031c1aff42957e5367e0b41ca777db2ea716d09d3c8f954af4e7cf98fb",
+      "bytes": 63579
+    },
+    {
+      "removed": "validation/headers/client-adjustment/superadmin-1440.png",
+      "canonical": "validation/headers/after/superadmin-1440.png",
+      "sha256": "f06b1640616d1451ec5f3bb9118ff574692b0857094b1cf9e188206ff894d5ff",
+      "bytes": 70993
+    },
+    {
+      "removed": "validation/headers/client-adjustment/superadmin-320.png",
+      "canonical": "validation/headers/after/superadmin-320.png",
+      "sha256": "27b61234f0adcbe9c4f5d788589bfda7e34de58b839a843aa195d39ea4db22e6",
+      "bytes": 57283
+    },
+    {
+      "removed": "validation/headers/client-adjustment/superadmin-390.png",
+      "canonical": "validation/headers/after/superadmin-390.png",
+      "sha256": "377c676f648979e35abe6b9510ccb7f0d893426c221e4a4acb4dda104479e730",
+      "bytes": 60796
+    },
+    {
+      "removed": "validation/headers/client-adjustment/superadmin-768.png",
+      "canonical": "validation/headers/after/superadmin-768.png",
+      "sha256": "770128ebef0070ac6a7522e412fe9fe324028655a91f1ea2360cab8da9e7aafa",
+      "bytes": 70873
+    },
+    {
+      "removed": "validation/headers/client-adjustment/superadmin-short.png",
+      "canonical": "validation/headers/after/superadmin-short.png",
+      "sha256": "bf2bca52d0cf070452a8ef772fd8aa52b10991c4adff9e34b29f4cd7365ba8bd",
+      "bytes": 7019
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/help-barbeiro-1440.png",
+      "canonical": "validation/headers/profile-regression/help-barbeiro-1440.png",
+      "sha256": "cb1fe2631961aa2a9f4bb2bc997189f8cd85418f79fccf0ab8ccf27969f9f821",
+      "bytes": 118213
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/help-barbeiro-320.png",
+      "canonical": "validation/headers/profile-regression/help-barbeiro-320.png",
+      "sha256": "811ab53c55a77b6bc9e56429c6d16429aebd32663414d34ac3f251218b498400",
+      "bytes": 108821
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/help-barbeiro-390.png",
+      "canonical": "validation/headers/profile-regression/help-barbeiro-390.png",
+      "sha256": "cfad82e1de956cd004fd2e7b6f151fc73e3a429ceae7eaa835aebc735c591fa8",
+      "bytes": 105936
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/help-barbeiro-768.png",
+      "canonical": "validation/headers/profile-regression/help-barbeiro-768.png",
+      "sha256": "c8329c30a0b616884139ca8b243f53d01128298e3ba9a5b28ae47a3bf3f78390",
+      "bytes": 112501
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/help-cliente-1440.png",
+      "canonical": "validation/headers/profile-regression/help-cliente-1440.png",
+      "sha256": "53390d6cd6b69def16188fdbe812279abda83c0279bebbff456dc5d8655f6101",
+      "bytes": 131732
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/help-cliente-320.png",
+      "canonical": "validation/headers/profile-regression/help-cliente-320.png",
+      "sha256": "076bea92480d95be7e6d7d2d4bcacb558bbbf01a62db5e1333c3c91869675dfa",
+      "bytes": 120682
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/help-cliente-390.png",
+      "canonical": "validation/headers/profile-regression/help-cliente-390.png",
+      "sha256": "442c0ac477923b70419aacfe963911291ec8cfaefaee1a8ad930a72f68a74476",
+      "bytes": 116557
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/help-cliente-768.png",
+      "canonical": "validation/headers/profile-regression/help-cliente-768.png",
+      "sha256": "2bec1c1fb178b51ef8953d4e5a3be1d9b923010b25bbd38a2ef7bd98e91cb1d7",
+      "bytes": 123339
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/profile-barbeiro-390.png",
+      "canonical": "validation/headers/profile-regression/profile-barbeiro-390.png",
+      "sha256": "13e8963207264a53ae1afc5ad2b767483f02736ca418cae40425e839f5248e28",
+      "bytes": 134985
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/profile-barbeiro-768.png",
+      "canonical": "validation/headers/profile-regression/profile-barbeiro-768.png",
+      "sha256": "887f5a8f5be5f1b1025e4247936b66eb1e755967961ad99a149f9aec4e627ada",
+      "bytes": 126888
+    },
+    {
+      "removed": "validation/headers/client-adjustment/profile-regression/profile-cliente-320.png",
+      "canonical": "validation/headers/profile-regression/profile-cliente-320.png",
+      "sha256": "33f5e3afd2492f094e8527830fd033bf2246f244c61c5a5924847d80eae7d441",
+      "bytes": 117224
+    },
+    {
+      "removed": "validation/headers/zoom/booking-200.png",
+      "canonical": "validation/headers/zoom/login-200.png",
+      "sha256": "98f9d82159a3eec1594d49b763203f65151e050686fd0f82a44bf940931662ce",
+      "bytes": 7488
+    },
+    {
+      "removed": "validation/headers/zoom/catalog-200.png",
+      "canonical": "validation/headers/zoom/login-200.png",
+      "sha256": "98f9d82159a3eec1594d49b763203f65151e050686fd0f82a44bf940931662ce",
+      "bytes": 7488
+    },
+    {
+      "removed": "validation/headers/zoom/client-200.png",
+      "canonical": "validation/headers/zoom/login-200.png",
+      "sha256": "98f9d82159a3eec1594d49b763203f65151e050686fd0f82a44bf940931662ce",
+      "bytes": 7488
+    },
+    {
+      "removed": "validation/headers/zoom/public-profile-200.png",
+      "canonical": "validation/headers/zoom/login-200.png",
+      "sha256": "98f9d82159a3eec1594d49b763203f65151e050686fd0f82a44bf940931662ce",
+      "bytes": 7488
+    },
+    {
+      "removed": "validation/headers/zoom/signup-200.png",
+      "canonical": "validation/headers/zoom/login-200.png",
+      "sha256": "98f9d82159a3eec1594d49b763203f65151e050686fd0f82a44bf940931662ce",
+      "bytes": 7488
+    }
+  ]
+}

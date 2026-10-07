@@ -149,7 +149,7 @@ export function ReportsView({ appointments }: ReportsViewProps) {
           <section aria-labelledby="overview-title" className="mt-7">
             <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
               <h2 id="overview-title" className="text-lg font-semibold">Visão do período</h2>
-              <p className="text-xs text-slate-500">{filtered.length} {filtered.length === 1 ? "agendamento na seleção" : "agendamentos na seleção"}</p>
+              <p className="text-xs text-slate-400">{filtered.length} {filtered.length === 1 ? "agendamento na seleção" : "agendamentos na seleção"}</p>
             </div>
             <div className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
               <div className="rounded-xl border border-slate-800 bg-[#0b1a29] p-6 sm:p-7">
@@ -158,7 +158,7 @@ export function ReportsView({ appointments }: ReportsViewProps) {
                 <p className="mt-2 text-sm text-slate-400">de {filtered.length} agendamentos no período selecionado</p>
                 <figure className="mt-7">
                   <figcaption className="text-xs font-semibold text-slate-300">Como se distribuem os agendamentos</figcaption>
-                  <p className="mt-1 text-xs text-slate-500">Cada trecho da barra representa um status, proporcional ao total filtrado.</p>
+                  <p className="mt-1 text-xs text-slate-400">Cada trecho da barra representa um status, proporcional ao total filtrado.</p>
                   <div className="mt-3 flex h-2 overflow-hidden rounded-full bg-[#07111c]" aria-hidden="true">
                     {filtered.length > 0 && statusDistribution.map((item) => (
                       <span key={item.label} className={item.color} style={{ width: `${item.count / filtered.length * 100}%` }} />
@@ -169,7 +169,7 @@ export function ReportsView({ appointments }: ReportsViewProps) {
                       <li key={item.label} className="flex items-center gap-2 text-xs">
                         <span className={`size-2.5 shrink-0 rounded-sm ${item.color}`} aria-hidden="true" />
                         <span className="text-slate-300">{item.label}</span>
-                        <span className="ml-auto font-semibold tabular-nums text-white">{item.count} <span className="font-normal text-slate-500">({filtered.length > 0 ? Math.round(item.count / filtered.length * 100) : 0}%)</span></span>
+                        <span className="ml-auto font-semibold tabular-nums text-white">{item.count} <span className="font-normal text-slate-400">({filtered.length > 0 ? Math.round(item.count / filtered.length * 100) : 0}%)</span></span>
                       </li>
                     ))}
                   </ul>
@@ -231,7 +231,7 @@ function Metric({ label, value, detail, icon, tone }: { label: string; value: nu
     <div className="min-w-0 rounded-xl border border-slate-800 bg-[#0b1a29] p-4 sm:p-5">
       <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.08em] text-slate-400"><span className={tone === "warning" ? "text-amber-200" : "text-[#65d5ff]"} aria-hidden="true">{icon}</span>{label}</div>
       <p className={`mt-3 text-2xl font-semibold tabular-nums sm:text-3xl ${tone === "warning" ? "text-amber-200" : "text-white"}`}>{value}</p>
-      <p className="mt-1 text-xs leading-5 text-slate-500">{detail}</p>
+      <p className="mt-1 text-xs leading-5 text-slate-400">{detail}</p>
     </div>
   )
 }

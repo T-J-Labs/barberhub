@@ -1,6 +1,6 @@
 /** Sem bibliotecas de precache: esta lista é toda a persistência da PWA. */
 export const pwaCachePrefix = "barberhub-pwa-"
-export const pwaCacheVersion = "v1"
+export const pwaCacheVersion = "v2"
 export const pwaOfflineAssets = ["/pwa/offline.html", "/pwa/icon-192.png"] as const
 
 export function pwaWorkerSource(origin: string) {
