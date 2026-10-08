@@ -117,14 +117,23 @@ const families = [
         if (name === 'landing') {
           assert.equal(await drawer().getByRole('heading', { name: 'Menu', exact:true }).count(), 1);
           assert.equal(await drawer().locator('a').first().getAttribute('href'), '#produto');
-        } else assert.equal(new URL(await drawer().locator('a').first().getAttribute('href'), page.url()).pathname, expectedPath);
-        await drawer().locator('a').first().click();
-        await page.waitForURL(url => url.hostname === 'localhost' && url.pathname === expectedPath);
+          await drawer().locator('a').first().click();
+          await waitForURL(page, url => url.hostname === 'localhost' && url.pathname === expectedPath && url.hash === '#produto');
+        } else {
+          assert.equal(new URL(await drawer().locator('a').first().getAttribute('href'), page.url()).pathname, expectedPath);
+          // Mesmo na URL atual, a logo inicia uma navegação de documento.
+          // Esperar só a URL pode liberar o próximo goto antes desse carregamento.
+          await Promise.all([
+            page.waitForNavigation({ waitUntil: 'networkidle' }),
+            drawer().locator('a').first().click(),
+          ]);
+          await waitForURL(page, url => url.hostname === 'localhost' && url.pathname === expectedPath);
+        }
         await page.waitForFunction(() => !document.querySelector('dialog[open]') && document.body.style.overflow !== 'hidden');
       });
     }
     await check('landing: âncoras e estados ativos preservados por clique e scroll', async () => {
-      await page.goto(base); await page.setViewportSize({ width: 1440, height: 900 });
+      await loadPage(page, base); await page.setViewportSize({ width: 1440, height: 900 });
       for (const [label, id] of [['Produto','produto'],['Como funciona','como-funciona'],['Preço','preco'],['Dúvidas','duvidas']]) {
         await banner().getByRole('link', { name: label, exact: true }).click();
         await page.waitForFunction(id => document.querySelector(`header nav a[aria-current=location]`)?.getAttribute('href') === `#${id}`, id);
