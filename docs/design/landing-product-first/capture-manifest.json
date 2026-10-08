@@ -1,0 +1,202 @@
+{
+  "capturedAt": "2026-10-07T19:02:33.702Z",
+  "browser": "154.0.4258.62",
+  "environment": "Windows / Edge headless / frontend de desenvolvimento local existente :3000",
+  "interfaceMutations": false,
+  "toolingOnly": "Indicador nextjs-portal ocultado exclusivamente durante a captura; nenhum estilo ou elemento do produto alterado.",
+  "errors": [],
+  "captures": [
+    {
+      "file": "captures/agenda-desktop.png",
+      "url": "http://localhost:3000/admin/agenda",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Estado inicial; primeira data de junho de 2025; todos os filtros; nenhum registro novo.",
+      "clip": {
+        "x": 256,
+        "y": 473,
+        "width": 1168,
+        "height": 660
+      }
+    },
+    {
+      "file": "captures/agenda-mobile.png",
+      "url": "http://localhost:3000/admin/agenda",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Estado inicial; recorte da linha do tempo e atendimentos; todos os filtros.",
+      "clip": {
+        "x": 16,
+        "y": 1064,
+        "width": 358,
+        "height": 700
+      }
+    },
+    {
+      "file": "captures/profile-desktop.png",
+      "url": "http://demo-esquina.localhost:3000/",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Fixture pública demo-esquina; visitante; perfil e início dos serviços.",
+      "clip": {
+        "x": 24,
+        "y": 105,
+        "width": 1392,
+        "height": 860
+      }
+    },
+    {
+      "file": "captures/profile-mobile.png",
+      "url": "http://demo-esquina.localhost:3000/",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Fixture demo-esquina; visitante; recorte do nome, localização, apresentação e serviços; logo de iniciais acima do recorte.",
+      "clip": {
+        "x": 16,
+        "y": 435,
+        "width": 358,
+        "height": 840
+      }
+    },
+    {
+      "file": "captures/booking-desktop.png",
+      "url": "http://demo-esquina.localhost:3000/agendar",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Demonstração iniciada; etapa 1/5 Serviço; primeiro serviço marcado; sem avançar nem concluir.",
+      "clip": {
+        "x": 208,
+        "y": 105,
+        "width": 1024,
+        "height": 940
+      }
+    },
+    {
+      "file": "captures/booking-mobile.png",
+      "url": "http://demo-esquina.localhost:3000/agendar",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Demonstração iniciada; etapa 1/5 Serviço; primeiro serviço marcado; recorte de etapas, escolhas e ações.",
+      "clip": {
+        "x": 16,
+        "y": 345,
+        "width": 358,
+        "height": 780
+      }
+    },
+    {
+      "file": "captures/services-desktop.png",
+      "url": "http://localhost:3000/admin/servicos",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Estado inicial das fixtures administrativas; sem edições; amostra independente do perfil e do wizard.",
+      "clip": {
+        "x": 256,
+        "y": 129,
+        "width": 1168,
+        "height": 780
+      }
+    },
+    {
+      "file": "captures/services-mobile.png",
+      "url": "http://localhost:3000/admin/servicos",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Estado inicial das fixtures administrativas; sem edições; amostra independente do perfil e do wizard.",
+      "clip": {
+        "x": 16,
+        "y": 117,
+        "width": 358,
+        "height": 780
+      }
+    },
+    {
+      "file": "captures/team-desktop.png",
+      "url": "http://localhost:3000/admin/barbeiros",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Estado inicial das fixtures administrativas; sem edições; amostra independente do perfil e do wizard.",
+      "clip": {
+        "x": 256,
+        "y": 129,
+        "width": 1168,
+        "height": 780
+      }
+    },
+    {
+      "file": "captures/team-mobile.png",
+      "url": "http://localhost:3000/admin/barbeiros",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Estado inicial das fixtures administrativas; sem edições; amostra independente do perfil e do wizard.",
+      "clip": {
+        "x": 16,
+        "y": 117,
+        "width": 358,
+        "height": 780
+      }
+    },
+    {
+      "file": "captures/settings-desktop.png",
+      "url": "http://localhost:3000/admin/configuracoes",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Estado inicial das fixtures administrativas; sem edições; amostra independente do perfil e do wizard.",
+      "clip": {
+        "x": 512,
+        "y": 1406,
+        "width": 912,
+        "height": 726
+      }
+    },
+    {
+      "file": "captures/settings-mobile.png",
+      "url": "http://localhost:3000/admin/configuracoes",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Estado inicial das fixtures administrativas; sem edições; amostra independente do perfil e do wizard.",
+      "clip": {
+        "x": 16,
+        "y": 1983,
+        "width": 358,
+        "height": 900
+      }
+    }
+  ]
+}

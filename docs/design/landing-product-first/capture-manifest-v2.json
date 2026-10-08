@@ -1,0 +1,330 @@
+{
+  "capturedAt": "2026-10-07T19:23:34.877Z",
+  "browser": "154.0.4258.62",
+  "environment": "Windows / Edge headless / frontend de desenvolvimento existente :3000",
+  "toolingOnly": "Somente nextjs-portal oculto nas capturas.",
+  "productStylesChanged": false,
+  "errors": [],
+  "captures": [
+    {
+      "file": "captures-v2/agenda-720.png",
+      "url": "http://localhost:3000/admin/agenda",
+      "viewport": {
+        "width": 720,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Filtro Serviço: Corte + barba; dois atendimentos existentes completos; data inicial 24/06/2025; demais filtros iniciais.",
+      "clip": {
+        "x": 16,
+        "y": 582,
+        "width": 688,
+        "height": 710
+      }
+    },
+    {
+      "file": "captures-v2/agenda-390.png",
+      "url": "http://localhost:3000/admin/agenda",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Filtro Serviço: Barba completa; um atendimento existente completo; data inicial 24/06/2025; recorte da linha do tempo sem filtros; demais filtros iniciais.",
+      "clip": {
+        "x": 16,
+        "y": 1084,
+        "width": 358,
+        "height": 306
+      }
+    },
+    {
+      "file": "captures-v2/agenda-320.png",
+      "url": "http://localhost:3000/admin/agenda",
+      "viewport": {
+        "width": 320,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Filtro Serviço: Barba completa; um atendimento existente completo; data inicial 24/06/2025; recorte da linha do tempo sem filtros; demais filtros iniciais.",
+      "clip": {
+        "x": 16,
+        "y": 1128,
+        "width": 288,
+        "height": 334
+      }
+    },
+    {
+      "file": "captures-v2/agenda-full.png",
+      "url": "http://localhost:3000/admin/agenda",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Todos os filtros iniciais; agenda administrativa completa do exemplo, cinco atendimentos.",
+      "clip": {
+        "x": 256,
+        "y": 468,
+        "width": 1168,
+        "height": 632
+      }
+    },
+    {
+      "file": "captures-v2/profile-1060.png",
+      "url": "http://demo-esquina.localhost:3000/",
+      "viewport": {
+        "width": 1060,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Componente completo de apresentação do perfil público da fixture Esquina; visitante, sem edições.",
+      "clip": {
+        "x": 16,
+        "y": 201,
+        "width": 1028,
+        "height": 399
+      }
+    },
+    {
+      "file": "captures-v2/profile-390.png",
+      "url": "http://demo-esquina.localhost:3000/",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Componente completo de apresentação do perfil público da fixture Esquina; visitante, sem edições.",
+      "clip": {
+        "x": 16,
+        "y": 225,
+        "width": 358,
+        "height": 709
+      }
+    },
+    {
+      "file": "captures-v2/profile-320.png",
+      "url": "http://demo-esquina.localhost:3000/",
+      "viewport": {
+        "width": 320,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Componente completo de apresentação do perfil público da fixture Esquina; visitante, sem edições.",
+      "clip": {
+        "x": 16,
+        "y": 249,
+        "width": 288,
+        "height": 761
+      }
+    },
+    {
+      "file": "captures-v2/booking-service-390.png",
+      "url": "http://demo-esquina.localhost:3000/agendar",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Demonstração iniciada; etapa Serviço; Corte de cabelo marcado; etapa completa sem concluir reserva.",
+      "clip": {
+        "x": 16,
+        "y": 439,
+        "width": 358,
+        "height": 681
+      }
+    },
+    {
+      "file": "captures-v2/booking-professional-390.png",
+      "url": "http://demo-esquina.localhost:3000/agendar",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Demonstração iniciada; Corte de cabelo selecionado; etapa Profissional; sem profissional marcado e sem avançar.",
+      "clip": {
+        "x": 16,
+        "y": 439,
+        "width": 358,
+        "height": 483
+      }
+    },
+    {
+      "file": "captures-v2/booking-service-358.png",
+      "url": "http://demo-esquina.localhost:3000/agendar",
+      "viewport": {
+        "width": 358,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Demonstração iniciada; etapa Serviço; Corte de cabelo marcado; etapa completa sem concluir reserva.",
+      "clip": {
+        "x": 16,
+        "y": 463,
+        "width": 326,
+        "height": 713
+      }
+    },
+    {
+      "file": "captures-v2/booking-professional-358.png",
+      "url": "http://demo-esquina.localhost:3000/agendar",
+      "viewport": {
+        "width": 358,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Demonstração iniciada; Corte de cabelo selecionado; etapa Profissional; sem profissional marcado e sem avançar.",
+      "clip": {
+        "x": 16,
+        "y": 463,
+        "width": 326,
+        "height": 539
+      }
+    },
+    {
+      "file": "captures-v2/services-1024.png",
+      "url": "http://localhost:3000/admin/servicos",
+      "viewport": {
+        "width": 1024,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Lista completa das fixtures iniciais; sem edições ou filtros.",
+      "clip": {
+        "x": 16,
+        "y": 566,
+        "width": 992,
+        "height": 453
+      }
+    },
+    {
+      "file": "captures-v2/team-1024.png",
+      "url": "http://localhost:3000/admin/barbeiros",
+      "viewport": {
+        "width": 1024,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Lista completa das fixtures iniciais; sem edições ou filtros.",
+      "clip": {
+        "x": 16,
+        "y": 566,
+        "width": 992,
+        "height": 379
+      }
+    },
+    {
+      "file": "captures-v2/services-390.png",
+      "url": "http://localhost:3000/admin/servicos",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Lista completa das fixtures iniciais; sem edições ou filtros.",
+      "clip": {
+        "x": 16,
+        "y": 924,
+        "width": 358,
+        "height": 872
+      }
+    },
+    {
+      "file": "captures-v2/team-390.png",
+      "url": "http://localhost:3000/admin/barbeiros",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Lista completa das fixtures iniciais; sem edições ou filtros.",
+      "clip": {
+        "x": 16,
+        "y": 924,
+        "width": 358,
+        "height": 857
+      }
+    },
+    {
+      "file": "captures-v2/services-320.png",
+      "url": "http://localhost:3000/admin/servicos",
+      "viewport": {
+        "width": 320,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Lista completa das fixtures iniciais; sem edições ou filtros.",
+      "clip": {
+        "x": 16,
+        "y": 924,
+        "width": 288,
+        "height": 892
+      }
+    },
+    {
+      "file": "captures-v2/team-320.png",
+      "url": "http://localhost:3000/admin/barbeiros",
+      "viewport": {
+        "width": 320,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Lista completa das fixtures iniciais; sem edições ou filtros.",
+      "clip": {
+        "x": 16,
+        "y": 924,
+        "width": 288,
+        "height": 857
+      }
+    },
+    {
+      "file": "captures-v2/settings-1024.png",
+      "url": "http://localhost:3000/admin/configuracoes",
+      "viewport": {
+        "width": 1024,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Seção Funcionamento completa, sete dias e orientação final; valores iniciais, sem edições.",
+      "clip": {
+        "x": 272,
+        "y": 1707,
+        "width": 736,
+        "height": 726
+      }
+    },
+    {
+      "file": "captures-v2/settings-390.png",
+      "url": "http://localhost:3000/admin/configuracoes",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Seção Funcionamento completa, sete dias e orientação final; valores iniciais, sem edições.",
+      "clip": {
+        "x": 16,
+        "y": 1983,
+        "width": 358,
+        "height": 1146
+      }
+    },
+    {
+      "file": "captures-v2/settings-320.png",
+      "url": "http://localhost:3000/admin/configuracoes",
+      "viewport": {
+        "width": 320,
+        "height": 1100
+      },
+      "dpr": 1,
+      "state": "Seção Funcionamento completa, sete dias e orientação final; valores iniciais, sem edições.",
+      "clip": {
+        "x": 16,
+        "y": 2067,
+        "width": 288,
+        "height": 1146
+      }
+    }
+  ]
+}

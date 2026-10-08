@@ -110,32 +110,73 @@ const families = [
         }
       });
       await page.setViewportSize({ width: 390, height: 844 });
-      await check(`${name}: logo preservada no header e drawer`, async () => {
+      await check(`${name}: marca e destino do menu preservados no contexto`, async () => {
         const expectedPath = ['landing','login','signup','barber','admin','superadmin'].includes(name) ? '/' : '/barbearias';
         const brand = banner().locator('a').first(); assert.equal(new URL(await brand.getAttribute('href'), page.url()).pathname, expectedPath);
-        await open(); assert.equal(new URL(await drawer().locator('a').first().getAttribute('href'), page.url()).pathname, expectedPath);
-        // A logo também navega para a URL atual. Esperar o evento iniciado pelo
-        // clique evita que ele cancele o próximo goto no Firefox.
-        await Promise.all([
-          page.waitForNavigation({ waitUntil: 'networkidle' }),
-          drawer().locator('a').first().click(),
-        ]);
-        await waitForURL(page, url => url.hostname === 'localhost' && url.pathname === expectedPath);
+        await open();
+        if (name === 'landing') {
+          assert.equal(await drawer().getByRole('heading', { name: 'Menu', exact:true }).count(), 1);
+          assert.equal(await drawer().locator('a').first().getAttribute('href'), '#produto');
+          await drawer().locator('a').first().click();
+          await waitForURL(page, url => url.hostname === 'localhost' && url.pathname === expectedPath && url.hash === '#produto');
+        } else {
+          assert.equal(new URL(await drawer().locator('a').first().getAttribute('href'), page.url()).pathname, expectedPath);
+          // Mesmo na URL atual, a logo inicia uma navegação de documento.
+          // Esperar só a URL pode liberar o próximo goto antes desse carregamento.
+          await Promise.all([
+            page.waitForNavigation({ waitUntil: 'networkidle' }),
+            drawer().locator('a').first().click(),
+          ]);
+          await waitForURL(page, url => url.hostname === 'localhost' && url.pathname === expectedPath);
+        }
         await page.waitForFunction(() => !document.querySelector('dialog[open]') && document.body.style.overflow !== 'hidden');
       });
     }
     await check('landing: âncoras e estados ativos preservados por clique e scroll', async () => {
       await loadPage(page, base); await page.setViewportSize({ width: 1440, height: 900 });
-      for (const [label, id] of [['Produto','produto'],['Serviços','servicos'],['Planos','planos'],['Contato','contato'],['Início','inicio']]) {
+      for (const [label, id] of [['Produto','produto'],['Como funciona','como-funciona'],['Preço','preco'],['Dúvidas','duvidas']]) {
         await banner().getByRole('link', { name: label, exact: true }).click();
-        await page.waitForFunction(id => document.querySelector(`header nav a[aria-current=location]`)?.getAttribute('href') === `/#${id}`, id);
+        await page.waitForFunction(id => document.querySelector(`header nav a[aria-current=location]`)?.getAttribute('href') === `#${id}`, id);
       }
       await page.setViewportSize({ width: 390, height: 844 }); await open();
       await drawer().getByRole('link', { name: 'Produto', exact: true }).click(); await closed();
       await page.waitForFunction(() => location.hash === '#produto');
-      await page.locator('#planos').evaluate(el => el.scrollIntoView());
-      await open(); await page.waitForFunction(() => document.querySelector('dialog[open] a[aria-current=location]')?.textContent === 'Planos');
+      await page.locator('#preco').evaluate(el => el.scrollIntoView());
+      await open(); await page.waitForFunction(() => document.querySelector('dialog[open] a[aria-current=location]')?.textContent === 'Preço');
       await page.keyboard.press('Escape');
+    });
+    await check('landing: seleção acompanha rolagem rápida sem depender de uma nova interseção', async () => {
+      await loadPage(page, base);
+      for (let repeat = 0; repeat < 4; repeat++) {
+        await page.setViewportSize({ width: 1440, height: 900 });
+        for (const label of ['Preço', 'Dúvidas']) {
+          await banner().getByRole('link', { name: label, exact: true }).click();
+          await page.waitForFunction(label => document.querySelector('header nav a[aria-current=location]')?.textContent === label, label);
+        }
+        await page.setViewportSize({ width: 390, height: 844 }); await open();
+        // Duas mudanças no mesmo frame: o observer pode não ver Produto e
+        // manter Preço intersectando sem emitir outra entrada para essa seção.
+        await page.evaluate(() => {
+          document.querySelector('dialog[open] a[href="#produto"]').click();
+          document.getElementById('preco').scrollIntoView();
+        });
+        await closed(); await open();
+        await page.waitForFunction(() => document.querySelector('dialog[open] a[aria-current=location]')?.textContent === 'Preço');
+        assert.equal(await drawer().locator('a[aria-current=location]').count(), 1);
+        await page.keyboard.press('Escape'); await closed();
+      }
+    });
+    await check('landing: rolagem manual, retorno ao início e viewport baixa atualizam a seleção', async () => {
+      for (const [width, height] of [[320,241], [390,844], [768,900], [1440,900]]) {
+        await page.setViewportSize({ width, height });
+        for (const id of ['produto', 'como-funciona', 'preco', 'duvidas']) {
+          await page.locator(`#${id}`).evaluate(el => el.scrollIntoView());
+          await page.waitForFunction(id => document.querySelector('header nav a[aria-current=location]')?.getAttribute('href') === `#${id}`, id);
+        }
+        await page.locator('#inicio').evaluate(el => el.scrollIntoView());
+        await page.waitForFunction(() => !document.querySelector('header nav a[aria-current=location]'));
+      }
+      await page.setViewportSize({ width: 390, height: 844 });
     });
     await check('acesso: subdomínio → login → perfis/cadastro → retorno canônico', async () => {
       await loadPage(page, `http://demo-esquina.localhost:${port}/agendar`); await open();

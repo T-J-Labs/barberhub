@@ -1,5 +1,12 @@
 # Mockups da landing page pública
 
+**Referência vigente em 2026-10-07:** a [proposta institucional v2](landing-product-first/README_V2.md)
+foi aprovada e implementada. [Composição, capturas reais e QA](../frontend/INSTITUTIONAL_LANDING.md).
+Os SVGs e a descrição original abaixo ficam como histórico da identidade anterior.
+O novo header e o texto escuro sobre `sky-500` são exclusivos da landing, conforme
+solicitação explícita; botões públicos compartilhados mantêm texto branco e
+`catalogActionClass`. A revisão não altera a identidade das áreas operacionais.
+
 Este diretório contém a proposta visual da landing page institucional do
 BarberHub. Os arquivos são SVGs vetoriais, editáveis e preparados para
 importação no Penpot.
@@ -28,7 +35,8 @@ Os dois mockups da página utilizam grupos principais com os mesmos IDs:
 3. `servicos`: funcionalidades planejadas para o MVP.
 4. `como-funciona`: configuração da barbearia e fluxo conceitual do cliente.
 5. `diferenciais`: benefícios concretos para a operação.
-6. `planos`: apresentação sem preços ou condições comerciais inventadas.
+6. `preco`: plano único de R$ 40/mês por barbearia, escopo previsto do MVP,
+   contratação indisponível e ação para configuração demonstrativa.
 7. `contato`: canais conceituais, sem formulário funcional ou dados fictícios.
 8. `cta-final`: chamada consistente para **Registrar**.
 9. `footer`: navegação, autenticação e copyright.
@@ -42,7 +50,7 @@ O código existente é a fonte de verdade:
 
 - marca tipográfica **BARBERHUB**, com **BARBER** branco e **HUB** em
   `#0EA5E9`;
-- navegação, nesta ordem: **Início**, **Produto**, **Serviços**, **Planos** e
+- navegação, nesta ordem: **Início**, **Produto**, **Serviços**, **Preço** e
   **Contato**;
 - ações **Entrar** e **Criar conta** com aparência azul no desktop;
 - no mobile fechado, somente botão de menu e marca;
@@ -66,7 +74,7 @@ Admin mantém a sidebar desktop e o header sem sticky.
 - O BarberHub ainda está em desenvolvimento.
 - Os serviços são identificados como funcionalidades planejadas para o MVP.
 - Números no painel são marcados como demonstrativos.
-- Os detalhes comerciais dos planos permanecem em definição.
+- Preço aprovado: R$ 40/mês por barbearia; contratação ainda indisponível.
 - E-mail e WhatsApp são canais conceituais, sem endereços ou números inventados.
 - Nenhum formulário é apresentado como funcional.
 - O fluxo aprovado no ADR é:
@@ -134,9 +142,50 @@ são fallbacks.
 - Os CTAs **Registrar** representam conceitualmente a rota `/register`.
 - **Como funciona** representa a âncora `#como-funciona`.
 - Os links do header correspondem a `#inicio`, `#produto`, `#servicos`,
-  `#planos` e `#contato`.
+  `#preco` e `#contato`.
 - Antes da implementação, o conteúdo deve ser convertido em componentes
   mobile-first dentro de `src/features`, preservando Server Components quando
   não houver necessidade de interatividade.
 - Integrações somente poderão ser desenhadas após aprovação no contrato
   OpenAPI.
+
+## Preço aprovado — 2026-10-07
+
+Os wireframes desktop e mobile foram atualizados e conferidos visualmente antes
+da implementação. O SVG do drawer também usa **Preço**. Header e rodapé dos SVGs
+possuem links para os grupos de âncora; o drawer aponta para o SVG mobile.
+As seções seguintes foram apenas deslocadas para acomodar o conteúdo.
+
+A seção mantém superfície `#0D1722`, borda azul e tipografia existente: título e
+escopo à esquerda, preço e ação à direita no desktop; blocos empilhados no mobile.
+O título é **Um único plano para sua barbearia**, com **R$ 40/mês por barbearia**
+e o texto aprovado. A lista apresenta somente perfil público, serviços, equipe,
+funcionamento, agenda e agendamentos, sob **Funcionalidades previstas para o MVP**.
+Não há promessa de recursos futuros, limites de uso ou outras condições comerciais.
+
+**Contratação ainda indisponível** aparece junto de **Experimentar configuração**.
+O destino confirmado é `/onboarding/barbearia`, sem origem preselecionada:
+introdução com os dois exemplos existentes. O aviso associado ao link explica
+que a demonstração não contrata plano, cria conta/estabelecimento, concede acesso
+nem publica barbearia. Na página, `PlansSection` permanece Server Component,
+reutiliza `onboardingHref` e `catalogActionClass` (sky-500, texto branco, hover
+sem troca de azul, ampliação com respeito a movimento reduzido).
+A configuração compartilhada de navegação atualiza header, drawer e rodapé
+para `/#preco`; o restante da landing e seus CTAs foi preservado.
+
+### Verificação executada
+
+- ESLint e TypeScript passaram.
+- Edge/Playwright em desenvolvimento local (`localhost:3100`), em 320, 390,
+  768, 1024 e 1440px: conteúdo, seis itens, ausência de rolagem horizontal,
+  navegação até `#preco`, posição abaixo do header sticky e indicação ativa.
+- Menu mobile: abertura, fechamento ao selecionar Preço, desbloqueio de rolagem;
+  Escape e retorno de foco verificados em 390px.
+- Link da seção abriu a introdução do onboarding com os dois exemplos em todas
+  as cinco larguras; hover manteve a cor do botão e não causou overflow.
+- Capturas da seção em 390/1440px e dos wireframes mobile/desktop foram
+  inspecionadas visualmente; não houve erros JavaScript nas jornadas executadas.
+
+Escopo de QA: desenvolvimento local em Windows/Edge, sem novo build de produção,
+dispositivos reais, leitor de tela ou validação em domínio publicado. Não há
+pagamento, checkout, assinatura simulada, backend ou alteração de autenticação.

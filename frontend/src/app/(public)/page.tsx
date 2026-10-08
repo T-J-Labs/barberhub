@@ -1,29 +1,5 @@
-import { HeroSection } from "@/features/public-home/components/HeroSection";
-import { AudienceSection } from "@/features/public-home/components/AudienceSection";
-import { ProductSection } from "@/features/public-home/components/ProductSection";
-import { ServicesSection } from "@/features/public-home/components/ServicesSection";
-import { HowItWorksSection } from "@/features/public-home/components/HowItWorksSection";
-import { DifferentialsSection } from "@/features/public-home/components/DifferentialsSection";
-import { ContactSection } from "@/features/public-home/components/ContactSection";
-import { PlansSection } from "@/features/public-home/components/PlansSection";
-import { StartNowSection } from "@/features/public-home/components/StartNowSection";
-import { PublicFooter } from "@/features/navigation/components/public/PublicFooter";
+import { InstitutionalLanding } from "@/features/public-home/components/InstitutionalLanding"
 
 export default function Home() {
-  return (
-    <>
-      <main>
-      <HeroSection />
-      <AudienceSection />
-      <ProductSection />
-      <ServicesSection />
-      <HowItWorksSection />
-      <DifferentialsSection />
-      <PlansSection />
-      <ContactSection />
-      <StartNowSection />
-      </main>
-      <PublicFooter />
-    </>
-  );
+  return <InstitutionalLanding />
 }

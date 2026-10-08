@@ -127,21 +127,29 @@ fs.mkdirSync(artifactDir, { recursive: true });
       // Next Link supplied by the feature, using the same root presentation provider.
       await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
       await page.locator('dialog[open]').getByRole('link', { name: 'Perfil', exact: true }).click();
+      await waitForURL(page, `${base}/cliente/perfil`);
       await apply('Cláudia da Silva');
       await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
+      await page.locator('dialog[open]').waitFor({ state: 'visible' });
       assert.equal(await page.locator('dialog[open]').getByText('Cláudia da Silva', { exact: true }).count(), 1);
       await page.keyboard.press('Escape');
       await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
       await page.getByRole('link', { name: 'Ajuda', exact: true }).click();
+      // O drawer fecha também quando o pathname muda. Reabri-lo antes de a
+      // navegação terminar pode fazer essa mudança fechar o novo menu.
+      await waitForURL(page, `${base}/cliente/ajuda`);
       await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
+      await page.locator('dialog[open]').waitFor({ state: 'visible' });
       assert.equal(await page.locator('dialog[open]').getByText('Cláudia da Silva', { exact: true }).count(), 1);
       await page.keyboard.press('Escape');
       await page.getByRole('link', { name: /Editar nome demonstrativo/ }).click();
+      await waitForURL(page, `${base}/cliente/perfil`);
       await apply('Á'.repeat(300));
       for (const width of [320, 390, 768, 1440]) {
         await page.setViewportSize({ width, height: 900 });
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
         await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
+        await page.locator('dialog[open]').waitFor({ state: 'visible' });
         assert.equal(await page.locator('dialog[open]').getByText('Á'.repeat(300), { exact: true }).count(), 1);
         await page.keyboard.press('Escape');
       }

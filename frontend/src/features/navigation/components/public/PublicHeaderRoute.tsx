@@ -1,7 +1,8 @@
 "use client"
 
 import { useSelectedLayoutSegments } from "next/navigation"
-import { PublicHeader, type PublicHeaderContext } from "./PublicHeader"
+import type { PublicHeaderContext } from "./PublicHeader"
+import { InstitutionalHeader } from "@/features/public-home/components/InstitutionalHeader"
 import { usePathname } from "next/navigation"
 import { publicClientContext, type PlatformNavigation } from "@/features/auth/routing"
 import { ClientHeader } from "../authenticated/ClientHeader"
@@ -17,5 +18,5 @@ export function PublicHeaderRoute({ platform }: { platform: PlatformNavigation }
       ? segments.length > 1 ? "barbershop" : "catalog"
       : "public"
 
-  return context === "landing" ? <PublicHeader context={context} platform={platform} /> : <ClientHeader platformOrigin={platform.origin} context={clientContext} visitorAccessPlacement={context === "catalog" ? "center" : "footer"} />
+  return context === "landing" ? <InstitutionalHeader platform={platform} /> : <ClientHeader platformOrigin={platform.origin} context={clientContext} visitorAccessPlacement={context === "catalog" ? "center" : "footer"} />
 }

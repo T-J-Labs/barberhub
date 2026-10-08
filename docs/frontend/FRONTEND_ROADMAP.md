@@ -26,6 +26,15 @@ Plano registrado em 2026-10-05, conforme a orientação do usuário. Complementa
 
 ## 2. Estado atual — atualizado em 2026-10-07
 
+Landing atualizada mediante solicitação específica: preço aprovado de
+**R$ 40/mês por barbearia**, um único plano, com perfil público, serviços,
+equipe, funcionamento, agenda e agendamentos previstos para o MVP.
+Menu **Preço** → `/#preco`; **Experimentar configuração** →
+`/onboarding/barbearia`, demonstração sem contratação, conta, estabelecimento,
+acesso ou publicação. Contratação e Planos/assinaturas do superadmin continuam
+indisponíveis. Wireframes mobile/desktop e drawer atualizados antes do código.
+[Arquivos, verificações locais executadas e limites](../design/README.md#preço-aprovado--2026-10-07).
+Esta entrega não autoriza pagamentos, checkout ou novas funcionalidades.
 Pendências técnicas reclassificadas na seção 13 a partir das evidências brutas:
 ambiente pessoal atualizado, CI da revisão final aprovado, botões corrigidos,
 testes locais Chromium/Firefox/WebKit e Edge standalone automatizado comprovados.
@@ -744,6 +753,16 @@ concluídas **como apresentação/demonstração local**. A próxima ação é c
 QA manual e externo mediante disponibilidade de equipamentos/ambiente, não
 reimplementar telas concluídas. Integração real continua na seção 10.6.
 
+## 12. Landing institucional revisada — 2026-10-07
+
+Implementação solicitada explicitamente após aprovação da proposta visual v2.
+Hero com agenda real, presença pública, agendamento, operação com abas,
+configuração, plano único de R$ 40, FAQ e encerramento têm composições próprias.
+Capturas completas com enquadramentos responsivos e originais DPR 1/2, servidos
+em WebP sem perdas. Header e estilos novos ficam restritos à landing.
+Não altera catálogo, autenticação demonstrativa, domínios, áreas operacionais,
+providers, PWA ou backend. [Arquivos, QA executado e limitações](INSTITUTIONAL_LANDING.md).
+Esta entrega não autoriza novas funcionalidades nem conclui a QA externa pendente.
 ## 12. Consolidação final solicitada — 2026-10-06 e 2026-10-07
 
 Foi executado o complemento local de QA/acessibilidade, com Edge/Chrome,

@@ -73,12 +73,13 @@ function authLinks(response, shop, destination) {
   await check('caminho legado redireciona ao subdomínio', '/barbearias/demo-esquina', (response) => { assert.equal(response.status, 307); assert.equal(response.headers.location, `${tenantOrigin}/`); });
   await check('caminho explícito no subdomínio também usa sua raiz', '/barbearias/demo-esquina', (response) => { assert.equal(response.status, 307); assert.equal(response.headers.location, `${tenantOrigin}/`); }, productionHost ? `demo-esquina.${host}` : `demo-esquina.${host}:${port}`);
   await check('perfil no subdomínio usa links absolutos da plataforma', '/', (response) => { assert.equal(response.status, 200); authLinks(response, 'demo-esquina', `${tenantOrigin}/`); }, productionHost ? `demo-esquina.${host}` : `demo-esquina.${host}:${port}`);
-  await check('CTAs institucionais pré-selecionam Barbearia', '/', (response) => {
+  await check('CTAs institucionais distinguem configuração e cadastro de proprietário', '/', (response) => {
     assert.equal(response.status, 200);
     assert.doesNotMatch(response.body, /href="\/register"/);
-    assert.match(response.body, /Cadastrar minha barbearia/);
+    assert.match(response.body, /Experimentar configuração/);
+    assert(links(response.body).includes('/onboarding/barbearia'));
     assert(links(response.body).includes(`${origin}/cadastro?perfil=barbearia`));
-    assert.match(response.body, /O cadastro de barbearias ainda não está disponível/);
+    assert.match(response.body, /O acesso Google ainda está indisponível/);
   });
   await check('register legado preserva intenção institucional', '/register', (response) => { assert.equal(response.status, 307); assert.equal(response.headers.location, `${origin}/cadastro?perfil=barbearia`); });
   for (const profile of ['cliente', 'barbeiro', 'barbearia']) {

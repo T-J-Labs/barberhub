@@ -1,0 +1,370 @@
+{
+  "capturedAt": "2026-10-07T20:25:49.513Z",
+  "browser": "154.0.4258.62",
+  "performanceConditions": "Three fresh contexts at each width; DPR 1; CPU 4x; latency 40ms; download 1.5MiB/s; viewport height 900; local production builds; no Lighthouse or field metrics",
+  "performance": [
+    {
+      "width": 390,
+      "before": {
+        "lcp": 424,
+        "cls": 0,
+        "bytes": 226378,
+        "jsBytes": 160143,
+        "imageBytes": 3069
+      },
+      "after": {
+        "lcp": 504,
+        "cls": 0,
+        "bytes": 259200,
+        "jsBytes": 161396,
+        "imageBytes": 32882
+      }
+    },
+    {
+      "width": 1440,
+      "before": {
+        "lcp": 800,
+        "cls": 0,
+        "bytes": 226378,
+        "jsBytes": 160143,
+        "imageBytes": 3069
+      },
+      "after": {
+        "lcp": 692,
+        "cls": 0,
+        "bytes": 304866,
+        "jsBytes": 161396,
+        "imageBytes": 78548
+      }
+    }
+  ],
+  "regression": [
+    {
+      "name": "catalog",
+      "width": 390,
+      "unchanged": true
+    },
+    {
+      "name": "login",
+      "width": 390,
+      "unchanged": true
+    },
+    {
+      "name": "signup",
+      "width": 390,
+      "unchanged": true
+    },
+    {
+      "name": "client",
+      "width": 390,
+      "unchanged": true
+    },
+    {
+      "name": "barber",
+      "width": 390,
+      "unchanged": true
+    },
+    {
+      "name": "admin",
+      "width": 390,
+      "unchanged": true
+    },
+    {
+      "name": "superadmin",
+      "width": 390,
+      "unchanged": true
+    },
+    {
+      "name": "catalog",
+      "width": 1440,
+      "unchanged": true
+    },
+    {
+      "name": "login",
+      "width": 1440,
+      "unchanged": true
+    },
+    {
+      "name": "signup",
+      "width": 1440,
+      "unchanged": true
+    },
+    {
+      "name": "client",
+      "width": 1440,
+      "unchanged": true
+    },
+    {
+      "name": "barber",
+      "width": 1440,
+      "unchanged": true
+    },
+    {
+      "name": "admin",
+      "width": 1440,
+      "unchanged": true
+    },
+    {
+      "name": "superadmin",
+      "width": 1440,
+      "unchanged": true
+    }
+  ],
+  "development": {
+    "widths": [
+      320,
+      390,
+      768,
+      1024,
+      1440
+    ],
+    "errors": [],
+    "accessibility": [
+      {
+        "width": 320,
+        "violations": 0
+      },
+      {
+        "width": 390,
+        "violations": 0
+      },
+      {
+        "width": 768,
+        "violations": 0
+      },
+      {
+        "width": 1024,
+        "violations": 0
+      },
+      {
+        "width": 1440,
+        "violations": 0
+      }
+    ],
+    "retina": [
+      {
+        "width": 390,
+        "dpr": 2,
+        "currentSrc": "http://localhost:3000/landing/agenda-390@2x.webp"
+      }
+    ],
+    "navigation": "CTA de configuração sem origem; perfil público canônico; cadastro de proprietário com Google indisponível: cliques executados em desenvolvimento"
+  },
+  "production": {
+    "widths": [
+      320,
+      390,
+      768,
+      1024,
+      1440
+    ],
+    "errors": [],
+    "accessibility": [
+      {
+        "width": 320,
+        "violations": 0
+      },
+      {
+        "width": 390,
+        "violations": 0
+      },
+      {
+        "width": 768,
+        "violations": 0
+      },
+      {
+        "width": 1024,
+        "violations": 0
+      },
+      {
+        "width": 1440,
+        "violations": 0
+      }
+    ],
+    "retina": [
+      {
+        "width": 390,
+        "dpr": 2,
+        "currentSrc": "http://localhost:3132/landing/agenda-390@2x.webp"
+      }
+    ]
+  },
+  "beforeSamples": [
+    {
+      "width": 390,
+      "run": 1,
+      "lcp": 640,
+      "cls": 0,
+      "ttfb": 21.700000047683716,
+      "bytes": 226378,
+      "jsBytes": 160143,
+      "imageBytes": 3069,
+      "imageRequests": [
+        "http://localhost:3130/images/landing/hero-dashboard-preview.svg",
+        "http://localhost:3130/images/landing/product-dashboard-preview.svg"
+      ]
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "lcp": 424,
+      "cls": 0,
+      "ttfb": 11.5,
+      "bytes": 226378,
+      "jsBytes": 160143,
+      "imageBytes": 3069,
+      "imageRequests": [
+        "http://localhost:3130/images/landing/hero-dashboard-preview.svg",
+        "http://localhost:3130/images/landing/product-dashboard-preview.svg"
+      ]
+    },
+    {
+      "width": 390,
+      "run": 3,
+      "lcp": 376,
+      "cls": 0,
+      "ttfb": 13.199999809265137,
+      "bytes": 226379,
+      "jsBytes": 160143,
+      "imageBytes": 3069,
+      "imageRequests": [
+        "http://localhost:3130/images/landing/hero-dashboard-preview.svg",
+        "http://localhost:3130/images/landing/product-dashboard-preview.svg"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "lcp": 816,
+      "cls": 0,
+      "ttfb": 14.099999904632568,
+      "bytes": 226377,
+      "jsBytes": 160143,
+      "imageBytes": 3069,
+      "imageRequests": [
+        "http://localhost:3130/images/landing/hero-dashboard-preview.svg",
+        "http://localhost:3130/images/landing/product-dashboard-preview.svg"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "lcp": 800,
+      "cls": 0,
+      "ttfb": 12.899999856948853,
+      "bytes": 226378,
+      "jsBytes": 160143,
+      "imageBytes": 3069,
+      "imageRequests": [
+        "http://localhost:3130/images/landing/hero-dashboard-preview.svg",
+        "http://localhost:3130/images/landing/product-dashboard-preview.svg"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 3,
+      "lcp": 728,
+      "cls": 0,
+      "ttfb": 10.599999904632568,
+      "bytes": 226381,
+      "jsBytes": 160143,
+      "imageBytes": 3069,
+      "imageRequests": [
+        "http://localhost:3130/images/landing/hero-dashboard-preview.svg",
+        "http://localhost:3130/images/landing/product-dashboard-preview.svg"
+      ]
+    }
+  ],
+  "afterSamples": [
+    {
+      "width": 390,
+      "run": 1,
+      "lcp": 516,
+      "cls": 0,
+      "ttfb": 26.399999856948853,
+      "bytes": 259200,
+      "jsBytes": 161396,
+      "imageBytes": 32882,
+      "imageRequests": [
+        "http://localhost:3132/landing/agenda-390.webp",
+        "http://localhost:3132/landing/profile-390.webp"
+      ]
+    },
+    {
+      "width": 390,
+      "run": 2,
+      "lcp": 484,
+      "cls": 0,
+      "ttfb": 35.89999985694885,
+      "bytes": 259200,
+      "jsBytes": 161396,
+      "imageBytes": 32882,
+      "imageRequests": [
+        "http://localhost:3132/landing/agenda-390.webp",
+        "http://localhost:3132/landing/profile-390.webp"
+      ]
+    },
+    {
+      "width": 390,
+      "run": 3,
+      "lcp": 504,
+      "cls": 0,
+      "ttfb": 31.5,
+      "bytes": 259200,
+      "jsBytes": 161396,
+      "imageBytes": 32882,
+      "imageRequests": [
+        "http://localhost:3132/landing/agenda-390.webp",
+        "http://localhost:3132/landing/profile-390.webp"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 1,
+      "lcp": 504,
+      "cls": 0,
+      "ttfb": 26.09999990463257,
+      "bytes": 304866,
+      "jsBytes": 161396,
+      "imageBytes": 78548,
+      "imageRequests": [
+        "http://localhost:3132/landing/agenda-720.webp",
+        "http://localhost:3132/landing/profile-1060.webp",
+        "http://localhost:3132/landing/booking-professional-390.webp",
+        "http://localhost:3132/landing/booking-service-390.webp"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 2,
+      "lcp": 828,
+      "cls": 0,
+      "ttfb": 25.100000143051147,
+      "bytes": 304866,
+      "jsBytes": 161396,
+      "imageBytes": 78548,
+      "imageRequests": [
+        "http://localhost:3132/landing/agenda-720.webp",
+        "http://localhost:3132/landing/profile-1060.webp",
+        "http://localhost:3132/landing/booking-service-390.webp",
+        "http://localhost:3132/landing/booking-professional-390.webp"
+      ]
+    },
+    {
+      "width": 1440,
+      "run": 3,
+      "lcp": 692,
+      "cls": 0,
+      "ttfb": 25.40000009536743,
+      "bytes": 304866,
+      "jsBytes": 161396,
+      "imageBytes": 78548,
+      "imageRequests": [
+        "http://localhost:3132/landing/agenda-720.webp",
+        "http://localhost:3132/landing/profile-1060.webp",
+        "http://localhost:3132/landing/booking-service-390.webp",
+        "http://localhost:3132/landing/booking-professional-390.webp"
+      ]
+    }
+  ]
+}

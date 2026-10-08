@@ -32,13 +32,14 @@ parte desta alteração. O ensaio não modifica fixtures públicas, administrati
 Google ou rascunhos; usa apenas memória React, sem localStorage, cache privado,
 sincronização ou retomada. Sair/recarregar desmonta o fluxo e descarta os dados.
 
-## Rotas e três entradas
+## Rotas e entradas
 
 | Entrada | Destino/comportamento |
 | --- | --- |
 | Cadastro com perfil Barbearia | **Experimentar configuração** → `/onboarding/barbearia?origem=cadastro`; Google continua desabilitado. |
 | Detalhes de rascunho do superadmin | **Ver demonstração do onboarding** → `/onboarding/barbearia?origem=superadmin`; não leva ID ou dados do rascunho. |
 | Acesso direto | `/onboarding/barbearia`; escolha entre os mesmos dois exemplos. |
+| Landing, seção Preço (2026-10-07) | **Experimentar configuração** → `/onboarding/barbearia`, mesma introdução do acesso direto. Preço aprovado de R$ 40/mês por barbearia; contratação ainda indisponível. Não contrata, cria conta/estabelecimento, concede acesso ou publica. |
 
 Origem aceita somente `cadastro` e `superadmin`. Valores desconhecidos/repetidos
 abrem a introdução sem seleção. É intenção de apresentação, nunca papel ou

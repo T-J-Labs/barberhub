@@ -43,6 +43,7 @@ function assertCompactHeader(body) {
   const header = publicHeader(body)
   assert(!header.includes('aria-label="Navegação principal"'), "Institutional navigation belongs only to the platform landing")
   assert(!header.includes('id="public-navigation"'), "The institutional drawer must not appear on a profile or catalog")
+  assert(!header.includes('id="institutional-menu"'), "The landing drawer must not appear on a profile or catalog")
   const accessLinks = [...header.matchAll(/href="([^"]+)"/g)].map(match => new URL(match[1].replaceAll("&amp;", "&"), origin))
   for (const route of ["/login", "/cadastro"]) assert(accessLinks.some(url => url.origin === origin && url.pathname === route), `Acesso ${route} no domínio principal`)
 }
@@ -50,8 +51,9 @@ function assertCompactHeader(body) {
 test("platform landing and catalog render without redirects", async () => {
   const landing = await request(authority, "/")
   assert.equal(landing.status, 200)
-  assert.match(landing.body, /Organize sua barbearia/)
-  assert(publicHeader(landing.body).includes('aria-label="Navegação principal"'))
+  assert.match(landing.body, /Sua barbearia/)
+  assert.match(landing.body, /Sua agenda/)
+  assert(publicHeader(landing.body).includes('aria-label="Navegação institucional"'))
   const catalog = await request(authority, "/barbearias")
   assert.equal(catalog.status, 200)
   assert.equal(catalog.location, undefined)
