@@ -150,3 +150,27 @@ direto não cria sessão. A ajuda explica a criação do vínculo após primeiro
 agendamento real confirmado e o filtro combinado com busca. As fixtures são
 vínculos fictícios prontos, independentes do wizard, cancelamento e superadmin.
 [Escopo e QA](CLIENT_BARBERSHOPS.md).
+
+## Sincronização do QA de navegação — 2026-10-08
+
+O PR 22 revelou uma condição de corrida no teste da prévia do cliente:
+`profile-help-browser.cjs` reabria o menu imediatamente após clicar em Ajuda,
+antes de a navegação interna terminar. A mudança posterior de pathname fecha
+o drawer por comportamento previsto, fazendo a contagem do nome no diálogo
+aberto retornar zero. O nome demonstrativo permanecia no DOM; não houve perda
+do estado do perfil. Um diagnóstico local com resposta de navegação retida
+reproduziu o fechamento e confirmou o menu aberto com o nome preservado quando
+a reabertura aguarda o destino.
+
+O teste agora aguarda as URLs de Perfil/Ajuda e o diálogo visível antes de
+inspecionar o nome. As asserções originais continuam; não foram adicionadas
+tentativas automáticas nem ampliados os timeouts. Aplicação, backend, banco,
+domínios e persistência não foram alterados neste ajuste.
+
+Executados localmente em Chromium, com desenvolvimento na porta 3227:
+suíte completa de perfil/ajuda aprovada, sem erros JavaScript, e verificação
+de sintaxe com `node --check validation/profile-help-browser.cjs`. Evidências
+locais ignoradas pelo Git em `validation/qa-runs/pr22-profile-final/` e
+diagnóstico em `validation/qa-runs/pr22-profile-navigation-probe.cjs`.
+O resultado remoto desta alteração deve ser conferido no PR; aprovação local
+não substitui CI, leitor de tela ou dispositivos físicos.
