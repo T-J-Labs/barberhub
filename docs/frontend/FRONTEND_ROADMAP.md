@@ -1,5 +1,15 @@
 # Próximas entregas do frontend — sem depender do backend
 
+## Integração real — planejamento registrado em 2026-10-08
+
+As integrações futuras têm documento próprio em
+[Integração frontend/backend — entregas pequenas e harness](../integration/ROADMAP.md).
+Ele separa H00–H24, dependências, contratos, ambiente isolado e critérios de aceite.
+Nenhuma entrega integrada foi implementada por esse registro; a próxima execução
+recomendada é H00. Este documento continua sendo o histórico/estado das entregas
+independentes de backend, sem reabrir telas concluídas ou declarar QA humano
+concluído. Planejamento não autoriza implementação, banco ou publicação.
+
 Plano registrado em 2026-10-05, conforme a orientação do usuário. Complementa o
 [plano da experiência do cliente](CLIENT_EXPERIENCE.md) e o
 [ADR](../architecture/ADR.md), sem alterar os contratos ou decisões de autorização.

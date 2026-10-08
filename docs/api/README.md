@@ -1,5 +1,12 @@
 # Contrato da API
 
+Para a sequência de integração real, consultar o
+[roadmap de integração e harness](../integration/ROADMAP.md). Ele organiza
+entregas pequenas, dependências e testes, sem substituir o OpenAPI ou aprovar
+operações automaticamente. A primeira entrega é H00: decisões e contratos
+iniciais. As entregas estão planejadas; não confundir código existente com
+operação contratada e pronta para consumo.
+
 `openapi.yaml` é a fonte de verdade compartilhada por frontend e backend. Ele
 descreve o endereço de cada operação, dados de entrada, respostas e erros antes
 da implementação.

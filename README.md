@@ -315,6 +315,11 @@ Não se declara conformidade integral de acessibilidade.
 
 ## Contrato da API
 
+O [plano de integração frontend/backend](docs/integration/ROADMAP.md) organiza
+as próximas entregas H00–H24, contratos, dependências, harness e critérios de
+aceite. Está planejado, não implementado; começa por decisões de identidade,
+segurança e ambiente isolado. Não autoriza mudanças de banco ou publicação.
+
 O arquivo [docs/api/openapi.yaml](docs/api/openapi.yaml) é a fonte de verdade
 compartilhada entre frontend e backend. Novas operações devem ser acordadas e
 adicionadas ao contrato antes da implementação.
@@ -333,6 +338,7 @@ conhecer o processo completo.
 
 ## Documentação
 
+- [Integração frontend/backend por entregas e harness](docs/integration/ROADMAP.md)
 - [Decisões arquiteturais](docs/architecture/ADR.md)
 - [Processo de evolução da API](docs/api/README.md)
 - [Contrato OpenAPI](docs/api/openapi.yaml)

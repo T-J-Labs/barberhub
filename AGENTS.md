@@ -9,6 +9,12 @@ Antes de sugerir ou implementar alterações, leia:
 - `docs/architecture/ADR.md`
 - `README.md`
 
+Para planejar ou implementar integração frontend/backend, leia também
+`docs/integration/ROADMAP.md`: entregas H00–H24, dependências, cartões de execução
+e harness. O plano não autoriza executar etapas automaticamente, alterar banco,
+migrações ou infraestrutura, nem publicar. Operações continuam exigindo contrato
+aprovado em `docs/api/openapi.yaml`; código existente não é contrato aprovado.
+
 Para análise, planejamento ou implementação de frontend, leia também:
 
 - `docs/frontend/FRONTEND_ROADMAP.md`: prioridades, escopo demonstrativo,
