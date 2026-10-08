@@ -157,7 +157,7 @@ try {
     await check(`wizard ${width}px: teclado, invalidação, conflito, clique repetido e recuperação`, async () => {
       await startBooking('conflict')
       await button('Continuar').click()
-      assert.equal(await page.getByRole('radio').first().evaluate(el => el === document.activeElement), true)
+      await focused(page.getByRole('radio').first())
       await page.keyboard.press('Space')
       await button('Continuar').click()
       for (let i = 0; i < 3; i++) { await chooseRadio(); await button('Continuar').click() }
@@ -169,7 +169,7 @@ try {
       await button('Concluir demonstração').evaluate(el => { el.click(); el.click() })
       await page.getByRole('alert').filter({ hasText: 'Conflito demonstrativo' }).waitFor()
       assert.equal(await page.locator('input:checked').count(), 0)
-      assert.equal(await page.locator('h1').evaluate(el => el === document.activeElement), true)
+      await focused(page.getByRole('heading', { level: 1 }))
       await geometry(`conflict-${width}`)
       if (width === 390) await audit('wizard conflito')
       await chooseRadio(); await button('Continuar').click()
