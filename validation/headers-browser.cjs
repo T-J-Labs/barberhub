@@ -145,6 +145,39 @@ const families = [
       await open(); await page.waitForFunction(() => document.querySelector('dialog[open] a[aria-current=location]')?.textContent === 'Preço');
       await page.keyboard.press('Escape');
     });
+    await check('landing: seleção acompanha rolagem rápida sem depender de uma nova interseção', async () => {
+      await loadPage(page, base);
+      for (let repeat = 0; repeat < 4; repeat++) {
+        await page.setViewportSize({ width: 1440, height: 900 });
+        for (const label of ['Preço', 'Dúvidas']) {
+          await banner().getByRole('link', { name: label, exact: true }).click();
+          await page.waitForFunction(label => document.querySelector('header nav a[aria-current=location]')?.textContent === label, label);
+        }
+        await page.setViewportSize({ width: 390, height: 844 }); await open();
+        // Duas mudanças no mesmo frame: o observer pode não ver Produto e
+        // manter Preço intersectando sem emitir outra entrada para essa seção.
+        await page.evaluate(() => {
+          document.querySelector('dialog[open] a[href="#produto"]').click();
+          document.getElementById('preco').scrollIntoView();
+        });
+        await closed(); await open();
+        await page.waitForFunction(() => document.querySelector('dialog[open] a[aria-current=location]')?.textContent === 'Preço');
+        assert.equal(await drawer().locator('a[aria-current=location]').count(), 1);
+        await page.keyboard.press('Escape'); await closed();
+      }
+    });
+    await check('landing: rolagem manual, retorno ao início e viewport baixa atualizam a seleção', async () => {
+      for (const [width, height] of [[320,241], [390,844], [768,900], [1440,900]]) {
+        await page.setViewportSize({ width, height });
+        for (const id of ['produto', 'como-funciona', 'preco', 'duvidas']) {
+          await page.locator(`#${id}`).evaluate(el => el.scrollIntoView());
+          await page.waitForFunction(id => document.querySelector('header nav a[aria-current=location]')?.getAttribute('href') === `#${id}`, id);
+        }
+        await page.locator('#inicio').evaluate(el => el.scrollIntoView());
+        await page.waitForFunction(() => !document.querySelector('header nav a[aria-current=location]'));
+      }
+      await page.setViewportSize({ width: 390, height: 844 });
+    });
     await check('acesso: subdomínio → login → perfis/cadastro → retorno canônico', async () => {
       await loadPage(page, `http://demo-esquina.localhost:${port}/agendar`); await open();
       const href = new URL(await drawer().getByRole('link', { name: 'Entrar', exact: true }).getAttribute('href'));

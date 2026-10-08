@@ -12,26 +12,56 @@ export function InstitutionalHeader({
 }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
+  const header = useRef<HTMLElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
   const close = useCallback(() => setOpen(false), []);
   const links = institutionalLinks(platform);
+  const updateActiveSection = useCallback(() => {
+    // Use the final viewport, not only intersection transitions: a quick jump
+    // can leave the same section intersecting and never notify the observer.
+    const firstSection = document.querySelector(institutionalNavigation[0].href);
+    const anchorOffset = firstSection
+      ? parseFloat(getComputedStyle(firstSection).scrollMarginTop) || 0
+      : 0;
+    const activationLine = Math.min(
+      window.innerHeight - 1,
+      Math.max(
+        (header.current?.getBoundingClientRect().bottom ?? 0) + 16,
+        anchorOffset,
+      ) + 1,
+    );
+    let current = "";
+    for (const item of institutionalNavigation) {
+      const section = document.querySelector(item.href);
+      if (section && section.getBoundingClientRect().top <= activationLine)
+        current = item.href;
+    }
+    setActive(current);
+  }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries)
-          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
-      },
-      { rootMargin: "-100px 0px -60% 0px" },
-    );
+    let frame = 0;
+    function scheduleUpdate() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    }
+    const observer = new ResizeObserver(scheduleUpdate);
     for (const item of institutionalNavigation) {
       const section = document.querySelector(item.href);
       if (section) observer.observe(section);
     }
-    return () => observer.disconnect();
-  }, []);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    scheduleUpdate();
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, [updateActiveSection]);
 
   // Same native dialog/focus/body-lock behavior as the shared drawer; its styles stay untouched.
   useEffect(() => {
@@ -85,7 +115,7 @@ export function InstitutionalHeader({
       >
         Ir para o conteúdo
       </a>
-      <header className={`${styles.theme} ${styles["site-header"]}`}>
+      <header ref={header} className={`${styles.theme} ${styles["site-header"]}`}>
         <div className={`${styles.wrap} ${styles["header-row"]}`}>
           <button
             ref={trigger}
@@ -94,7 +124,10 @@ export function InstitutionalHeader({
             aria-label="Abrir menu"
             aria-controls="institutional-menu"
             aria-expanded={open}
-            onClick={() => setOpen(true)}
+            onClick={() => {
+              updateActiveSection();
+              setOpen(true);
+            }}
           >
             <span />
             <span />

@@ -152,3 +152,30 @@ Leitores de tela reais, Safari/Firefox, dispositivos físicos, DNS/TLS externo e
 contraste manual integral das interfaces dentro das capturas não foram
 certificados. axe verifica a página e seus textos vivos, não textos rasterizados.
 As limitações demonstrativas e a QA externa geral permanecem em vigor.
+
+## Correção do estado ativo no header — 2026-10-08
+
+O log do CI identificou timeout ao esperar “Preço” ativo no menu mobile.
+Foi reproduzido localmente navegando para Produto e rolando para Preço no
+mesmo frame: Preço permanecia intersectando, sem uma nova entrada do
+`IntersectionObserver`, enquanto o clique tinha selecionado Produto.
+Uma execução remota passava e outra falhava no mesmo commit; a aprovação
+isolada não demonstrava estabilidade dessa transição.
+
+O header passou a resolver a seção atual pela geometria das âncoras, pelo
+header sticky e pelo `scroll-margin-top` responsivo. Rolagem, resize e mudanças
+de tamanho das seções agendam atualização por `requestAnimationFrame`;
+abrir o menu também recalcula a seleção. Listeners e observers são removidos
+ao desmontar. Nenhum estilo, domínio ou navegação operacional foi alterado.
+
+A regressão em `validation/headers-browser.cjs` preserva o caso original e
+adiciona quatro repetições do salto no mesmo frame, rolagem sem clique,
+retorno ao início e larguras 320/390/768/1440px, incluindo altura de 241px.
+Não houve aumento de timeout, retry de aprovação ou remoção de assertions.
+QA local desta correção: ESLint, TypeScript e build novo pela CLI Next passaram.
+A suíte completa de headers passou nas 162 verificações, incluindo as novas
+regressões, sem erros JavaScript. Windows/Chromium 145.0.7632.6; desenvolvimento
+isolado na porta 3228. Evidência temporária em
+`validation/qa-runs/pr22-scroll-complete/results.json` (ignorada pelo Git).
+O reproducer com CPU 8x, que falhava antes da correção, também terminou sem
+falhas depois. Isso não substitui leitor de tela, dispositivo físico ou QA público.
