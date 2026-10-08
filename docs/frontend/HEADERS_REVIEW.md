@@ -1,5 +1,49 @@
 # Revisão de headers — 2026-10-06
 
+## Restauração do header institucional — 2026-10-08
+
+Complemento solicitado no mesmo dia: somente as opções do menu institucional
+foram adaptadas à landing atual — Produto → `/#produto`, Como funciona →
+`/#como-funciona`, Preço → `/#preco` e Dúvidas → `/#duvidas`, no desktop e no
+drawer. A lista institucional tem configuração própria para preservar os links
+do rodapé compartilhado. Aparência, marca, ações e estrutura permanecem iguais.
+O menu descrito no registro de restauração abaixo é o estado anterior a este complemento.
+Neste complemento, ESLint, TypeScript e as 162 verificações de headers passaram
+no mesmo ambiente local Edge/porta 3238, sem erros JavaScript. Evidência:
+`validation/qa-runs/2026-10-08T15-01-00.089Z-headers-browser-usr3QR/results.json`.
+Não houve novo build ou QA externo neste ajuste restrito aos itens do menu.
+
+Por solicitação explícita, a landing voltou ao estilo anterior ao redesign:
+`InstitutionalHeader` compõe `PublicHeader`, com `HeaderBrand`, `Container`,
+`PublicMobileMenu`, `MobileDrawer` e os estilos públicos compartilhados.
+Menu: Início, Produto, Serviços, Preço e Contato. Mobile mantém marca central,
+controle de 44px à esquerda e acesso no rodapé do drawer. Desktop mantém
+marca à esquerda, navegação central e Entrar/Criar conta à direita.
+Criar conta preserva `/cadastro?perfil=barbearia`; o atalho para conteúdo
+continua visível ao receber foco, acima do header sticky.
+
+A seleção ativa conserva a correção de rolagem rápida, recalcula ao abrir o
+menu e observa resize das seções. Contato fica ativo quando o rodapé curto
+é alcançado no fim da página. Âncoras internas usam links HTML nativos para
+preservar a ordem entre clique e rolagem no mesmo frame; destinos de acesso
+mantêm Next Link. O menu próprio antigo deixou de ser usado. Conteúdo da
+landing, áreas operacionais, domínios, backend e contrato não foram alterados.
+
+Verificações executadas em Windows/Edge 154.0.4258.62, desenvolvimento local
+na porta 3238: ESLint, TypeScript e 162 verificações da suíte de headers
+passaram, sem erros JavaScript. Landing passou em 320/390/768/1024/1440px,
+com zero violações axe WCAG A/AA detectadas, capturas responsivas e navegação
+preservadas. Capturas desktop/mobile e drawer foram inspecionadas visualmente;
+o atalho para conteúdo foi conferido por teclado, visibilidade e foco no main.
+Build de produção isolado pela CLI Next passou, sem executar a geração OpenAPI.
+
+Evidências locais ignoradas pelo Git:
+`validation/qa-runs/2026-10-08T14-54-45.044Z-headers-browser-HMWolU/results.json`
+e `validation/qa-runs/landing/browser-3238/results.json`.
+Não houve nova execução em produção no navegador, zoom nativo, leitor de
+tela, dispositivos físicos ou domínio público. Os resultados abaixo são
+históricos e não substituem essas pendências.
+
 A decisão posterior de 2026-10-07 mantém `sky-500` com texto `#07111C` nas
 ações primárias públicas, substituindo branco para corrigir o contraste.
 Hover, foco, movimento reduzido e navegação permanecem os mesmos.

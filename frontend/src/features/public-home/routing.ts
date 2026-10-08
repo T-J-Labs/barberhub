@@ -29,10 +29,3 @@ export function institutionalLinks(
     booking: example ? new URL("/agendar", example).href : null,
   };
 }
-
-export const institutionalNavigation = [
-  { href: "#produto", label: "Produto" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#preco", label: "Preço" },
-  { href: "#duvidas", label: "Dúvidas" },
-] as const;

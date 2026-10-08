@@ -3,9 +3,11 @@
 **Referência vigente em 2026-10-07:** a [proposta institucional v2](landing-product-first/README_V2.md)
 foi aprovada e implementada. [Composição, capturas reais e QA](../frontend/INSTITUTIONAL_LANDING.md).
 Os SVGs e a descrição original abaixo ficam como histórico da identidade anterior.
-O novo header e o texto escuro sobre `sky-500` são exclusivos da landing, conforme
-solicitação explícita; botões públicos compartilhados mantêm texto branco e
-`catalogActionClass`. A revisão não altera a identidade das áreas operacionais.
+Em 2026-10-08, o header da landing voltou ao padrão compartilhado anterior,
+conforme solicitação explícita: marca, controles, navegação e drawer da feature
+`navigation`. Botões primários públicos usam texto escuro sobre `sky-500` e
+`catalogActionClass`, conforme a decisão de contraste de 2026-10-07.
+A revisão não altera a identidade das áreas operacionais.
 
 Este diretório contém a proposta visual da landing page institucional do
 BarberHub. Os arquivos são SVGs vetoriais, editáveis e preparados para

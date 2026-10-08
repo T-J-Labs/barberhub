@@ -115,10 +115,10 @@ const families = [
         const brand = banner().locator('a').first(); assert.equal(new URL(await brand.getAttribute('href'), page.url()).pathname, expectedPath);
         await open();
         if (name === 'landing') {
-          assert.equal(await drawer().getByRole('heading', { name: 'Menu', exact:true }).count(), 1);
-          assert.equal(await drawer().locator('a').first().getAttribute('href'), '#produto');
+          assert.equal(await drawer().getAttribute('aria-label'), 'Menu principal');
+          assert.equal(new URL(await drawer().locator('a').first().getAttribute('href'), page.url()).pathname, expectedPath);
           await drawer().locator('a').first().click();
-          await waitForURL(page, url => url.hostname === 'localhost' && url.pathname === expectedPath && url.hash === '#produto');
+          await waitForURL(page, url => url.hostname === 'localhost' && url.pathname === expectedPath && url.hash === '');
         } else {
           assert.equal(new URL(await drawer().locator('a').first().getAttribute('href'), page.url()).pathname, expectedPath);
           // Mesmo na URL atual, a logo inicia uma navegação de documento.
@@ -136,7 +136,7 @@ const families = [
       await loadPage(page, base); await page.setViewportSize({ width: 1440, height: 900 });
       for (const [label, id] of [['Produto','produto'],['Como funciona','como-funciona'],['Preço','preco'],['Dúvidas','duvidas']]) {
         await banner().getByRole('link', { name: label, exact: true }).click();
-        await page.waitForFunction(id => document.querySelector(`header nav a[aria-current=location]`)?.getAttribute('href') === `#${id}`, id);
+        await page.waitForFunction(id => document.querySelector(`header nav a[aria-current=location]`)?.getAttribute('href') === `/#${id}`, id);
       }
       await page.setViewportSize({ width: 390, height: 844 }); await open();
       await drawer().getByRole('link', { name: 'Produto', exact: true }).click(); await closed();
@@ -157,7 +157,7 @@ const families = [
         // Duas mudanças no mesmo frame: o observer pode não ver Produto e
         // manter Preço intersectando sem emitir outra entrada para essa seção.
         await page.evaluate(() => {
-          document.querySelector('dialog[open] a[href="#produto"]').click();
+          document.querySelector('dialog[open] a[href="/#produto"]').click();
           document.getElementById('preco').scrollIntoView();
         });
         await closed(); await open();
@@ -171,10 +171,10 @@ const families = [
         await page.setViewportSize({ width, height });
         for (const id of ['produto', 'como-funciona', 'preco', 'duvidas']) {
           await page.locator(`#${id}`).evaluate(el => el.scrollIntoView());
-          await page.waitForFunction(id => document.querySelector('header nav a[aria-current=location]')?.getAttribute('href') === `#${id}`, id);
+          await page.waitForFunction(id => document.querySelector('header nav a[aria-current=location]')?.getAttribute('href') === `/#${id}`, id);
         }
         await page.locator('#inicio').evaluate(el => el.scrollIntoView());
-        await page.waitForFunction(() => !document.querySelector('header nav a[aria-current=location]'));
+        await page.waitForFunction(() => document.querySelector('header nav a[aria-current=location]')?.textContent === 'Produto');
       }
       await page.setViewportSize({ width: 390, height: 844 });
     });

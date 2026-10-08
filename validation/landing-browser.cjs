@@ -69,6 +69,7 @@ fs.mkdirSync(dir, { recursive: true });
         assert.equal(await trigger.evaluate(el => el === document.activeElement), true);
         await trigger.click(); await drawer.getByRole('link', { name: 'Preço', exact: true }).click();
         await page.waitForFunction(() => !document.querySelector('dialog[open]'));
+        await page.waitForFunction(() => location.hash === '#preco');
         assert.equal(await page.evaluate(() => location.hash), '#preco');
       }
       const axe = require.resolve('axe-core/axe.min.js', { paths: [path.join(__dirname, 'tools')] });
