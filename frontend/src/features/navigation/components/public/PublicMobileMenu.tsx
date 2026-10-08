@@ -24,7 +24,7 @@ export function PublicMobileMenu({ isOpen, navigation, onClose, activeHref, logi
     </>}>
     <ul className="space-y-2">
       {navigation.map(item => <li key={item.href}>
-        <Link href={item.href} aria-current={item.href === activeHref ? "location" : undefined} className={publicNavigationClass(item.href === activeHref)} onClick={onClose}>{item.label}</Link>
+        <a href={item.href} aria-current={item.href === activeHref ? "location" : undefined} className={publicNavigationClass(item.href === activeHref)} onClick={onClose}>{item.label}</a>
       </li>)}
     </ul>
   </MobileDrawer>

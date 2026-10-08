@@ -26,6 +26,10 @@ Plano registrado em 2026-10-05, conforme a orientação do usuário. Complementa
 
 ## 2. Estado atual — atualizado em 2026-10-07
 
+Ajuste solicitado em 2026-10-08: header institucional restaurado ao padrão
+compartilhado anterior ao redesign, sem nova entrega funcional.
+[Escopo e verificações](HEADERS_REVIEW.md#restauração-do-header-institucional--2026-10-08).
+
 Landing atualizada mediante solicitação específica: preço aprovado de
 **R$ 40/mês por barbearia**, um único plano, com perfil público, serviços,
 equipe, funcionamento, agenda e agendamentos previstos para o MVP.

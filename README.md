@@ -36,6 +36,8 @@ confirmada ou liberação explícita. [ADR](docs/architecture/ADR.md),
 
 Headers seguem a landing, com drawer compartilhado e sidebar desktop admin
 preservada. [Navegação e revisão](docs/frontend/HEADERS_REVIEW.md).
+Em 2026-10-08, o header institucional voltou ao padrão compartilhado anterior
+ao redesign; o conteúdo da nova landing foi preservado.
 Ambiente pessoal: Next 16.3.8/Axios 1.20.0. Instalação limpa isolada, build e
 produção local passaram; CI da revisão de código
 `97cee8d917084d255f4d8112cbf9b876c41c2978` aprovado nos dois jobs:

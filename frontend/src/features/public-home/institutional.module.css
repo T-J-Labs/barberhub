@@ -1539,7 +1539,7 @@
   position: absolute;
   top: 8px;
   left: 24px;
-  z-index: 20;
+  z-index: 40;
   padding: 12px 20px;
   background: var(--landing-action);
   color: var(--landing-base);

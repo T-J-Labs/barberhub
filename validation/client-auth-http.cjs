@@ -79,7 +79,8 @@ function authLinks(response, shop, destination) {
     assert.match(response.body, /Experimentar configuração/);
     assert(links(response.body).includes('/onboarding/barbearia'));
     assert(links(response.body).includes(`${origin}/cadastro?perfil=barbearia`));
-    assert.match(response.body, /O acesso Google ainda está indisponível/);
+    assert.match(response.body, /O acesso com\s+Google ainda está indisponível/);
+    assert.match(response.body, /escolher um perfil não cria\s+conta nem concede permissões/);
   });
   await check('register legado preserva intenção institucional', '/register', (response) => { assert.equal(response.status, 307); assert.equal(response.headers.location, `${origin}/cadastro?perfil=barbearia`); });
   for (const profile of ['cliente', 'barbeiro', 'barbearia']) {

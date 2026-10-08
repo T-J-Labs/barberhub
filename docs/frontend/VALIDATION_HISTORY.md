@@ -11,6 +11,36 @@ estarem funcionando e validadas localmente, conforme a decisão posterior.
 - [Acompanhamento](#acompanhamento)
 - [Revisão final](#revisao-final)
 
+## Correção do QA de produção após o ajuste do header — 2026-10-08
+
+O log do GitHub fornecido pelo usuário registrou três falhas no agregador:
+`public-routing-http` esperava o nome acessível do header institucional antigo;
+`client-auth-http` esperava um aviso que estava no drawer antigo; a jornada do
+wizard em 390px recebeu `false` em uma asserção booleana imediata.
+
+Os testes HTTP agora conferem o header compartilhado aprovado, o drawer e os
+quatro destinos institucionais atuais, além do aviso Google existente na FAQ e
+da ausência de criação de conta/permissões. A jornada aguarda o foco esperado
+após a validação e o conflito, reutilizando `focused`, com o mesmo timeout.
+O código de agendamento aplica foco por `requestAnimationFrame` e `useEffect`;
+ler imediatamente não garante que essa etapa de renderização ocorreu.
+Um reproducer em 390px, com clique e leitura no mesmo frame, confirmou foco
+ainda no botão e depois no radio; evidência local em
+`validation/qa-runs/ci-focus-same-frame.json`. Dez cliques normais com CPU 8x
+passaram localmente; isso não reproduziu a intermitência exata do runner Linux.
+Nenhuma interface, regra, backend ou contrato foi alterado nesta correção.
+
+Validação executada: ESLint e build novo isolado pela CLI Next, incluindo
+TypeScript, passaram. `npm run test:qa:production` passou nas 19 suítes,
+com fontes estáveis, em Windows/Edge 154.0.4258.62, porta 3241, Host localhost
+e HTTPS lógico simulado sobre transporte loopback. Inclui 27 testes HTTP
+compartilhados, 48 de auth, wizard nas quatro larguras, axe, PWA, zoom e ciclo
+de atualização do worker. Evidência:
+`validation/qa-runs/2026-10-08T15-41-26.704Z-production-3vV72a/run.json`.
+O build não executou geração OpenAPI. A nova execução do GitHub/Linux não foi
+realizada nesta sessão; dispositivos físicos, leitor de tela e DNS/TLS público
+continuam fora desta validação local.
+
 <a id="consolidacao-inicial"></a>
 
 ## Consolidação inicial — 2026-10-06 e início de 2026-10-07

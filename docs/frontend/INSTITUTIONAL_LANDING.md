@@ -1,5 +1,12 @@
 # Landing institucional — implementação da revisão 2
 
+Atualização de 08/10/2026: por solicitação explícita, o header voltou à composição
+compartilhada anterior ao redesign, com Início, Produto, Serviços, Preço e Contato.
+Marca, ações e drawer reutilizam a feature `navigation`; Criar conta mantém
+`perfil=barbearia` e o atalho para o conteúdo permanece. Conteúdo e capturas da
+landing foram preservados. [Implementação e QA deste ajuste](HEADERS_REVIEW.md#restauração-do-header-institucional--2026-10-08).
+As descrições do header próprio e seus testes abaixo registram a revisão histórica.
+
 07/10/2026. Implementação autorizada pelo usuário após a proposta visual revista,
 com atenção explícita à qualidade das imagens das funcionalidades. Referência:
 [frontend-design e direção da revisão](../design/landing-product-first/REVISION_2.md),

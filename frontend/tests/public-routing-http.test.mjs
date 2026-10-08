@@ -53,7 +53,12 @@ test("platform landing and catalog render without redirects", async () => {
   assert.equal(landing.status, 200)
   assert.match(landing.body, /Sua barbearia/)
   assert.match(landing.body, /Sua agenda/)
-  assert(publicHeader(landing.body).includes('aria-label="Navegação institucional"'))
+  const header = publicHeader(landing.body)
+  assert(header.includes('aria-label="Navegação principal"'))
+  assert(header.includes('id="public-navigation"'))
+  for (const [label, anchor] of [["Produto", "produto"], ["Como funciona", "como-funciona"], ["Preço", "preco"], ["Dúvidas", "duvidas"]]) {
+    assert.match(header, new RegExp(`<a\\b[^>]*href="/#${anchor}"[^>]*>${label}</a>`))
+  }
   const catalog = await request(authority, "/barbearias")
   assert.equal(catalog.status, 200)
   assert.equal(catalog.location, undefined)
